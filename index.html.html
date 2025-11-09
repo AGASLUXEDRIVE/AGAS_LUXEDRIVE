@@ -1,0 +1,3173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGAS LUXE DRIVE | Luxury Cars - Verified Sellers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== GLOBAL STYLES ===== */
+        :root {
+            --primary: #1a365d;
+            --primary-dark: #0f2544;
+            --primary-light: #2d4a7c;
+            --secondary: #c53030;
+            --secondary-dark: #9c2525;
+            --accent: #d69e2e;
+            --accent-dark: #b5831f;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --gray: #94a3b8;
+            --gray-light: #e2e8f0;
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+        }
+
+        .btn-accent:hover {
+            background-color: var(--accent-dark);
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+        }
+
+        .btn-danger:hover {
+            background-color: #dc2626;
+        }
+
+        /* ===== HEADER & NAVIGATION ===== */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-main {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo-agas {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+            letter-spacing: -1px;
+        }
+
+        .logo-luxe-drive {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--secondary);
+            letter-spacing: 3px;
+            margin-top: -2px;
+        }
+
+        .logo-tagline {
+            font-size: 0.7rem;
+            color: var(--gray);
+            font-style: italic;
+            margin-top: 2px;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background: linear-gradient(rgba(30, 41, 59, 0.85), rgba(30, 41, 59, 0.9)), url('https://images.unsplash.com/photo-1535732820275-9ffd998cac22?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 150px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        /* ===== SECURITY FEATURES ===== */
+        .security-features {
+            background: var(--light);
+            padding: 60px 0;
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .security-card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--success);
+            transition: transform 0.3s ease;
+        }
+
+        .security-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .security-icon {
+            font-size: 2.5rem;
+            color: var(--success);
+            margin-bottom: 20px;
+        }
+
+        /* ===== COMPETITIVE ADVANTAGES ===== */
+        .advantages {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 80px 0;
+        }
+
+        .advantage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .advantage-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: var(--radius);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .advantage-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        /* ===== PARTNERSHIP LOGOS ===== */
+        .partnerships {
+            background-color: var(--white);
+            padding: 60px 0;
+        }
+
+        .partner-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .partner-logo {
+            height: 60px;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .partner-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        /* ===== BRANDS SHOWCASE ===== */
+        .brands-showcase {
+            background: var(--light);
+            padding: 60px 0;
+        }
+
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .brand-card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .brand-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .brand-logo {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* ===== CURRENCY TOGGLE ===== */
+        .currency-toggle {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .currency-btn {
+            padding: 8px 20px;
+            background: var(--gray-light);
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .currency-btn:first-child {
+            border-radius: var(--radius) 0 0 var(--radius);
+        }
+
+        .currency-btn:last-child {
+            border-radius: 0 var(--radius) var(--radius) 0;
+        }
+
+        .currency-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ===== FILTER BAR ===== */
+        .filter-bar {
+            background-color: var(--white);
+            padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .filter-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            padding: 10px;
+            border: 1px solid var(--gray-light);
+            border-radius: var(--radius);
+            font-size: 1rem;
+        }
+
+        /* ===== CAR LISTINGS ===== */
+        .car-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .car-card {
+            background-color: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .car-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .car-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--success);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .car-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .car-details {
+            padding: 20px;
+        }
+
+        .car-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .car-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .car-specs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+
+        .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--success);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .verified-badge i {
+            margin-right: 5px;
+        }
+
+        .pending-badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        /* ===== RENTAL SECTION ===== */
+        .rental-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .rental-card {
+            background-color: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .rental-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .rental-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .rental-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .rental-details {
+            padding: 20px;
+        }
+
+        .rental-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .price-unit {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+
+        /* ===== HOW IT WORKS ===== */
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 30px 20px;
+            background-color: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-10px);
+        }
+
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .testimonial {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--light);
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+
+        /* ===== TRUST SECTION ===== */
+        .trust-section {
+            background-color: var(--light);
+            padding: 60px 0;
+        }
+
+        .trust-badges {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .trust-badge {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .trust-badge i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+
+        .footer-logo .logo-agas {
+            font-size: 1.8rem;
+            color: var(--white);
+        }
+
+        .footer-logo .logo-luxe-drive {
+            font-size: 0.9rem;
+            color: var(--gray-light);
+        }
+
+        .footer-logo .logo-tagline {
+            font-size: 0.6rem;
+            color: var(--gray);
+        }
+
+        /* ===== MODAL STYLES ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        /* ===== DASHBOARD STYLES ===== */
+        .dashboard {
+            display: none;
+            padding: 40px 0;
+        }
+
+        .dashboard-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--gray-light);
+            flex-wrap: wrap;
+        }
+
+        .dashboard-tab {
+            padding: 15px 30px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+        }
+
+        .dashboard-tab.active {
+            border-bottom-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .dashboard-content {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        /* ===== ADMIN PANEL ===== */
+        .admin-panel {
+            display: none;
+            padding: 40px 0;
+        }
+
+        .pending-listings {
+            margin-top: 30px;
+        }
+
+        .listing-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: var(--light);
+            border-radius: var(--radius);
+            margin-bottom: 15px;
+        }
+
+        .listing-info h4 {
+            margin-bottom: 5px;
+        }
+
+        .listing-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* ===== SESSION TIMER ===== */
+        .session-timer {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--warning);
+            color: white;
+            padding: 10px 15px;
+            border-radius: var(--radius);
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 1001;
+            display: none;
+        }
+
+        /* ===== 2FA MODAL ===== */
+        .twofa-modal {
+            display: none;
+        }
+
+        .twofa-code {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .twofa-digit {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-size: 1.5rem;
+            border: 2px solid var(--gray-light);
+            border-radius: var(--radius);
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .steps {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+            }
+            
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                margin-top: 20px;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .auth-buttons {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .logo-agas {
+                font-size: 1.8rem;
+            }
+
+            .logo-luxe-drive {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 100px 0;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+
+            .logo-agas {
+                font-size: 1.5rem;
+            }
+
+            .logo-luxe-drive {
+                font-size: 0.8rem;
+                letter-spacing: 2px;
+            }
+
+            .logo-tagline {
+                font-size: 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Session Timer -->
+    <div class="session-timer" id="session-timer">
+        Session expires in: <span id="session-time">15:00</span>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo" onclick="showSection('home')">
+                    <div class="logo-main">
+                        <div class="logo-agas">AGAS</div>
+                        <div class="logo-luxe-drive">LUXE DRIVE</div>
+                        <div class="logo-tagline">Drive luxury. live AGAS.</div>
+                    </div>
+                </a>
+                
+                <ul class="nav-links">
+                    <li><a onclick="showSection('home')">Home</a></li>
+                    <li><a onclick="showSection('listings')">Buy Cars</a></li>
+                    <li><a onclick="showSection('rentals')">Rent Cars</a></li>
+                    <li><a onclick="showLoginModal()">Sell Car</a></li>
+                    <li><a onclick="showSection('brands')">Brands</a></li>
+                    <li><a onclick="showSection('about')">About</a></li>
+                    <li><a onclick="showSection('contact')">Contact</a></li>
+                </ul>
+                
+                <div class="auth-buttons">
+                    <a class="btn btn-outline" onclick="showLoginModal()">Login</a>
+                    <a class="btn" onclick="showSignupModal()">Sign Up</a>
+                </div>
+                
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Sections -->
+    <main>
+        <!-- Home Section -->
+        <section id="home-section">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="container">
+                    <h1>East Africa's Premier Luxury Automotive Platform</h1>
+                    <p>Verified sellers, premium rentals, enterprise security, and complete buyer protection. Your luxury automotive journey starts here.</p>
+                    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 30px;">
+                        <a class="btn btn-accent" onclick="showSection('listings')">Buy Luxury Cars</a>
+                        <a class="btn btn-outline" style="background: rgba(255,255,255,0.2); color: white; border-color: white;" onclick="showSection('rentals')">Rent Premium Cars</a>
+                        <a class="btn" style="background: var(--success);" onclick="showLoginModal()">Sell Your Car</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Security Features Section -->
+            <section class="security-features">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Enterprise-Grade Security</h2>
+                        <p>Your safety and privacy are our top priority with military-grade protection</p>
+                    </div>
+                    
+                    <div class="security-grid">
+                        <div class="security-card">
+                            <div class="security-icon">
+                                <i class="fas fa-fingerprint"></i>
+                            </div>
+                            <h3>Two-Factor Authentication</h3>
+                            <p>Secure your account with 2FA via email and mobile verification</p>
+                        </div>
+                        
+                        <div class="security-card">
+                            <div class="security-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3>End-to-End Encryption</h3>
+                            <p>All data encrypted with AES-256 military-grade encryption</p>
+                        </div>
+                        
+                        <div class="security-card">
+                            <div class="security-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h3>Auto Session Timeout</h3>
+                            <p>Automatic logout after 15 minutes of inactivity for security</p>
+                        </div>
+                        
+                        <div class="security-card">
+                            <div class="security-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h3>Secure Email Verification</h3>
+                            <p>Password reset and verification exclusively through verified email</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Competitive Advantages Section -->
+            <section class="advantages">
+                <div class="container">
+                    <div class="section-title">
+                        <h2 style="color: white;">Why AGAS LUXE DRIVE Dominates The Market</h2>
+                        <p style="color: rgba(255,255,255,0.8);">We offer what others don't - complete enterprise solutions for luxury automotive transactions</p>
+                    </div>
+                    
+                    <div class="advantage-grid">
+                        <div class="advantage-card">
+                            <div class="advantage-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3>Military-Grade Security</h3>
+                            <p>Bank-level security with 2FA, encryption, and session protection</p>
+                        </div>
+                        
+                        <div class="advantage-card">
+                            <div class="advantage-icon">
+                                <i class="fas fa-hand-holding-usd"></i>
+                            </div>
+                            <h3>Dual Currency System</h3>
+                            <p>Transact in KES or USD with live exchange rates and zero hidden fees</p>
+                        </div>
+                        
+                        <div class="advantage-card">
+                            <div class="advantage-icon">
+                                <i class="fas fa-car-side"></i>
+                            </div>
+                            <h3>Complete Automotive Ecosystem</h3>
+                            <p>Buy, sell, rent luxury vehicles - all in one secure platform</p>
+                        </div>
+                        
+                        <div class="advantage-card">
+                            <div class="advantage-icon">
+                                <i class="fas fa-file-contract"></i>
+                            </div>
+                            <h3>Legal & NTSA Integration</h3>
+                            <p>We handle all transfer paperwork and legal documentation seamlessly</p>
+                        </div>
+                        
+                        <div class="advantage-card">
+                            <div class="advantage-icon">
+                                <i class="fas fa-tachometer-alt"></i>
+                            </div>
+                            <h3>Complete Vehicle Analytics</h3>
+                            <p>Detailed history reports, market pricing, and investment analysis</p>
+                        </div>
+                        
+                        <div class="advantage-card">
+                            <div class="advantage-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <h3>VIP Concierge Service</h3>
+                            <p>Dedicated account managers for high-value transactions and clients</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Partnership Logos -->
+            <section class="partnerships">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Our Trusted Enterprise Partners</h2>
+                        <p>Working with East Africa's most reputable automotive and regulatory organizations</p>
+                    </div>
+                    
+                    <div class="partner-logos">
+                        <img src="https://images.seeklogo.com/logo-png/35/1/national-transport-and-safety-authority-ntsa-logo-png_seeklogo-358947.png" alt="NTSA" class="partner-logo" style="height: 50px;">
+                        <img src="https://images.seeklogo.com/logo-png/18/1/the-aa-logo-png_seeklogo-188271.png" alt="AA Kenya" class="partner-logo" style="height: 50px;">
+                        <img src="https://images.seeklogo.com/logo-png/45/1/kra-logo-png_seeklogo-456419.png" alt="KRA" class="partner-logo" style="height: 50px;">
+                        <img src="https://images.seeklogo.com/logo-png/36/1/hertz-logo-png_seeklogo-367396.png" alt="Hertz" class="partner-logo" style="height: 40px;">
+                        <img src="https://images.seeklogo.com/logo-png/9/1/mercedes-benz-logo-png_seeklogo-91084.png" alt="Mercedes-Benz" class="partner-logo" style="height: 40px;">
+                        <img src="https://images.seeklogo.com/logo-png/17/1/bmw-logo-png_seeklogo-170616.png" alt="BMW" class="partner-logo" style="height: 40px;">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Brands Showcase -->
+            <section class="brands-showcase" id="brands-section">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Premium Automotive Brands</h2>
+                        <p>Explore luxury vehicles from the world's most prestigious manufacturers</p>
+                    </div>
+                    
+                    <div class="brands-grid">
+                        <div class="brand-card">
+                            <div class="brand-logo">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <h3>Mercedes-Benz</h3>
+                            <p>Luxury Sedans, SUVs, AMG Performance</p>
+                        </div>
+                        
+                        <div class="brand-card">
+                            <div class="brand-logo">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <h3>BMW</h3>
+                            <p>Executive Series, M Performance, X Series</p>
+                        </div>
+                        
+                        <div class="brand-card">
+                            <div class="brand-logo">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <h3>Toyota</h3>
+                            <p>Land Cruiser, Prado, Lexus Luxury Division</p>
+                        </div>
+                        
+                        <div class="brand-card">
+                            <div class="brand-logo">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <h3>Volkswagen</h3>
+                            <p>Touareg, Arteon, Premium Models</p>
+                        </div>
+                        
+                        <div class="brand-card">
+                            <div class="brand-logo">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <h3>Volvo</h3>
+                            <p>XC Series, Luxury Safety, Scandinavian Design</p>
+                        </div>
+                        
+                        <div class="brand-card">
+                            <div class="brand-logo">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <h3>Nissan</h3>
+                            <p>Patrol, Infiniti Luxury, Premium SUVs</p>
+                        </div>
+                        
+                        <div class="brand-card">
+                            <div class="brand-logo">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <h3>Range Rover</h3>
+                            <p>Luxury SUVs, Vogue, Sport, Velar</p>
+                        </div>
+                        
+                        <div class="brand-card">
+                            <div class="brand-logo">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <h3>Porsche</h3>
+                            <p>911, Cayenne, Panamera, Performance</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Listings Section -->
+            <section style="background-color: #f1f5f9;">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Featured Luxury Vehicles</h2>
+                        <p>Hand-picked verified luxury vehicles from trusted sellers across East Africa</p>
+                    </div>
+                    
+                    <!-- Currency Toggle -->
+                    <div class="currency-toggle">
+                        <button class="currency-btn active" onclick="setCurrency('kes')">KES</button>
+                        <button class="currency-btn" onclick="setCurrency('usd')">USD</button>
+                    </div>
+                    
+                    <!-- Filter Bar -->
+                    <div class="filter-bar">
+                        <form class="filter-form" id="filter-form">
+                            <div class="form-group">
+                                <label for="make">Brand</label>
+                                <select id="make" class="form-control">
+                                    <option value="">All Brands</option>
+                                    <option value="mercedes">Mercedes-Benz</option>
+                                    <option value="bmw">BMW</option>
+                                    <option value="toyota">Toyota/Lexus</option>
+                                    <option value="range rover">Range Rover</option>
+                                    <option value="volkswagen">Volkswagen</option>
+                                    <option value="volvo">Volvo</option>
+                                    <option value="nissan">Nissan/Infiniti</option>
+                                    <option value="porsche">Porsche</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="model">Model</label>
+                                <input type="text" id="model" class="form-control" placeholder="Any Model">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="year">Year</label>
+                                <select id="year" class="form-control">
+                                    <option value="">Any Year</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2018">2018</option>
+                                    <option value="2017">2017</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="price">Max Price</label>
+                                <select id="price" class="form-control">
+                                    <option value="">Any Price</option>
+                                    <option value="5000000">5M KES</option>
+                                    <option value="10000000">10M KES</option>
+                                    <option value="15000000">15M KES</option>
+                                    <option value="20000000">20M KES</option>
+                                    <option value="30000000">30M+ KES</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>&nbsp;</label>
+                                <button type="submit" class="btn">Search Vehicles</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Car Listings Grid -->
+                    <div class="car-grid" id="car-listings">
+                        <!-- Car listings will be dynamically loaded here -->
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 40px;">
+                        <a class="btn" onclick="showSection('listings')">View All 247 Listings</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Car Rentals Section -->
+            <section id="rentals-section">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Premium Car Rental Fleet</h2>
+                        <p>Experience luxury with our exclusive short-term rental collection</p>
+                    </div>
+                    
+                    <!-- Currency Toggle -->
+                    <div class="currency-toggle">
+                        <button class="currency-btn active" onclick="setRentalCurrency('kes')">KES</button>
+                        <button class="currency-btn" onclick="setRentalCurrency('usd')">USD</button>
+                    </div>
+                    
+                    <div class="rental-options" id="rental-listings">
+                        <!-- Rental listings will be dynamically loaded here -->
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 40px;">
+                        <a class="btn btn-accent" onclick="showRentalModal()">Book Luxury Rental</a>
+                        <a class="btn btn-outline" style="margin-left: 15px;" onclick="showSection('contact')">Corporate Rental Inquiry</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How It Works Section -->
+            <section>
+                <div class="container">
+                    <div class="section-title">
+                        <h2>How It Works</h2>
+                        <p>Our simple 3-step process ensures you buy or rent with confidence</p>
+                    </div>
+                    
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h3>Browse & Choose</h3>
+                            <p>Search through our verified luxury car listings and rental fleet to find your perfect vehicle.</p>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-icon">
+                                <i class="fas fa-clipboard-check"></i>
+                            </div>
+                            <h3>Verify & Inspect</h3>
+                            <p>We verify all sellers and provide detailed inspection reports for complete transparency.</p>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <h3>Complete Transaction</h3>
+                            <p>Secure payment, documentation handling, and vehicle delivery - we manage it all.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Trust Section -->
+            <section class="trust-section">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Why Trust AGAS LUXE DRIVE?</h2>
+                        <p>We partner with trusted organizations to ensure your luxury car experience is safe and reliable</p>
+                    </div>
+                    
+                    <div class="trust-badges">
+                        <div class="trust-badge">
+                            <i class="fas fa-user-shield"></i>
+                            <h4>Seller Verification</h4>
+                            <p>All sellers are thoroughly vetted</p>
+                        </div>
+                        
+                        <div class="trust-badge">
+                            <i class="fas fa-file-contract"></i>
+                            <h4>Document Check</h4>
+                            <p>Logbooks and ownership verified</p>
+                        </div>
+                        
+                        <div class="trust-badge">
+                            <i class="fas fa-car-crash"></i>
+                            <h4>Vehicle Inspection</h4>
+                            <p>Comprehensive mechanical checks</p>
+                        </div>
+                        
+                        <div class="trust-badge">
+                            <i class="fas fa-hand-holding-usd"></i>
+                            <h4>Payment Protection</h4>
+                            <p>Secure transactions guaranteed</p>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonials">
+                        <div class="testimonial">
+                            <p class="testimonial-text">"I was hesitant to buy a luxury car online, but AGAS LUXE DRIVE's verification process gave me peace of mind. The Mercedes was exactly as described!"</p>
+                            <div class="testimonial-author">
+                                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Sarah Johnson" class="author-avatar">
+                                <div>
+                                    <h4>Sarah Johnson</h4>
+                                    <p>Purchased a Mercedes-Benz GLE</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial">
+                            <p class="testimonial-text">"Renting through AGAS LUXE DRIVE was seamless. The Range Rover was immaculate, and the delivery to my hotel was punctual. Will definitely use again!"</p>
+                            <div class="testimonial-author">
+                                <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="David Kimani" class="author-avatar">
+                                <div>
+                                    <h4>David Kimani</h4>
+                                    <p>Rented a Range Rover for 3 days</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- Listings Section -->
+        <section id="listings-section" style="display: none; padding: 100px 0 80px;">
+            <div class="container">
+                <div class="section-title">
+                    <h2>All Luxury Car Listings</h2>
+                    <p>Browse our complete collection of verified luxury vehicles</p>
+                </div>
+                
+                <div class="filter-bar">
+                    <form class="filter-form" id="listings-filter-form">
+                        <div class="form-group">
+                            <label for="listings-make">Make</label>
+                            <select id="listings-make" class="form-control">
+                                <option value="">Any Make</option>
+                                <option value="mercedes">Mercedes-Benz</option>
+                                <option value="bmw">BMW</option>
+                                <option value="audi">Audi</option>
+                                <option value="range rover">Range Rover</option>
+                                <option value="porsche">Porsche</option>
+                                <option value="lexus">Lexus</option>
+                                <option value="jaguar">Jaguar</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="listings-model">Model</label>
+                            <input type="text" id="listings-model" class="form-control" placeholder="Any Model">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="listings-year">Year</label>
+                            <select id="listings-year" class="form-control">
+                                <option value="">Any Year</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                                <option value="2020">2020</option>
+                                <option value="2019">2019</option>
+                                <option value="2018">2018</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="listings-price">Max Price</label>
+                            <select id="listings-price" class="form-control">
+                                <option value="">Any Price</option>
+                                <option value="50000">$50,000</option>
+                                <option value="100000">$100,000</option>
+                                <option value="150000">$150,000</option>
+                                <option value="200000">$200,000</option>
+                                <option value="300000">$300,000+</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>&nbsp;</label>
+                            <button type="submit" class="btn">Search</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="car-grid" id="all-car-listings">
+                    <!-- All car listings will be dynamically loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about-section" style="display: none; padding: 100px 0;">
+            <div class="container">
+                <div class="section-title">
+                    <h2>About AGAS LUXE DRIVE</h2>
+                    <p>Your trusted partner in luxury car transactions</p>
+                </div>
+                
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-icon" style="background-color: var(--secondary);">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3>Our Mission</h3>
+                        <p>To connect legitimate buyers and sellers of luxury vehicles through a secure, transparent, and trustworthy platform.</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-icon" style="background-color: var(--secondary);">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Verification Process</h3>
+                        <p>Every seller and vehicle undergoes rigorous verification including document checks, ownership verification, and mechanical inspections.</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-icon" style="background-color: var(--secondary);">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <h3>Buyer Protection</h3>
+                        <p>We offer comprehensive buyer protection including secure payment escrow and post-purchase support.</p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 60px; text-align: center;">
+                    <h3 style="margin-bottom: 30px;">Our Partners</h3>
+                    <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; align-items: center;">
+                        <div style="font-weight: bold; color: var(--primary);">NTSA Certified</div>
+                        <div style="font-weight: bold; color: var(--primary);">AA Kenya</div>
+                        <div style="font-weight: bold; color: var(--primary);">Car Inspection Kenya</div>
+                        <div style="font-weight: bold; color: var(--primary);">SecureDeal Escrow</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact-section" style="display: none; padding: 100px 0;">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Contact Us</h2>
+                    <p>Get in touch with our team for any inquiries</p>
+                </div>
+                
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-icon" style="background-color: var(--accent);">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Visit Us</h3>
+                        <p>Westlands, Nairobi, Kenya</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-icon" style="background-color: var(--accent);">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3>Call Us</h3>
+                        <p>+254 115 230 532</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-icon" style="background-color: var(--accent);">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Email Us</h3>
+                        <p>agasluxedrive@gmail.com</p>
+                    </div>
+                </div>
+                
+                <div style="max-width: 600px; margin: 50px auto 0; background-color: var(--white); padding: 30px; border-radius: var(--radius); box-shadow: var(--shadow);">
+                    <h3 style="text-align: center; margin-bottom: 20px;">Send us a Message</h3>
+                    <form id="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contact-name">Your Name</label>
+                                <input type="text" id="contact-name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-email">Your Email</label>
+                                <input type="email" id="contact-email" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-subject">Subject</label>
+                            <input type="text" id="contact-subject" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message">Message</label>
+                            <textarea id="contact-message" class="form-control" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- User Dashboard -->
+        <section id="dashboard-section" class="dashboard">
+            <div class="container">
+                <div class="section-title">
+                    <h2>My Dashboard</h2>
+                    <p>Manage your car listings and inquiries</p>
+                </div>
+                
+                <div class="dashboard-tabs">
+                    <button class="dashboard-tab active" onclick="switchTab('my-listings')">My Listings</button>
+                    <button class="dashboard-tab" onclick="switchTab('add-listing')">Add New Car</button>
+                    <button class="dashboard-tab" onclick="switchTab('inquiries')">Inquiries</button>
+                    <button class="dashboard-tab" onclick="switchTab('change-password')">Security Settings</button>
+                </div>
+                
+                <div class="dashboard-content">
+                    <div id="my-listings-tab" class="tab-content">
+                        <h3>My Car Listings</h3>
+                        <div id="user-listings">
+                            <!-- User's listings will appear here -->
+                        </div>
+                    </div>
+                    
+                    <div id="add-listing-tab" class="tab-content" style="display: none;">
+                        <h3>List a New Car</h3>
+                        <form id="add-car-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="car-make">Make</label>
+                                    <input type="text" id="car-make" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="car-model">Model</label>
+                                    <input type="text" id="car-model" class="form-control" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="car-year">Year</label>
+                                    <input type="number" id="car-year" class="form-control" min="1990" max="2023" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="car-price">Price ($)</label>
+                                    <input type="number" id="car-price" class="form-control" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="car-mileage">Mileage</label>
+                                    <input type="number" id="car-mileage" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="car-transmission">Transmission</label>
+                                    <select id="car-transmission" class="form-control" required>
+                                        <option value="">Select</option>
+                                        <option value="automatic">Automatic</option>
+                                        <option value="manual">Manual</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="car-fuel">Fuel Type</label>
+                                    <select id="car-fuel" class="form-control" required>
+                                        <option value="">Select</option>
+                                        <option value="petrol">Petrol</option>
+                                        <option value="diesel">Diesel</option>
+                                        <option value="hybrid">Hybrid</option>
+                                        <option value="electric">Electric</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="car-color">Color</label>
+                                    <input type="text" id="car-color" class="form-control" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="car-description">Description</label>
+                                <textarea id="car-description" class="form-control" rows="4" required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="car-images">Upload Images</label>
+                                <input type="file" id="car-images" class="form-control" multiple accept="image/*">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="car-documents">Upload Documents (Logbook, ID, etc.)</label>
+                                <input type="file" id="car-documents" class="form-control" multiple>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="checkbox" id="agree-terms" required>
+                                <label for="agree-terms">I agree to the Terms & Conditions</label>
+                            </div>
+                            
+                            <button type="submit" class="btn">Submit for Verification</button>
+                        </form>
+                    </div>
+                    
+                    <div id="inquiries-tab" class="tab-content" style="display: none;">
+                        <h3>Inquiries About My Cars</h3>
+                        <div id="user-inquiries">
+                            <!-- Inquiries will appear here -->
+                        </div>
+                    </div>
+
+                    <div id="change-password-tab" class="tab-content" style="display: none;">
+                        <h3>Security Settings</h3>
+                        <form onsubmit="event.preventDefault(); changePassword();">
+                            <div class="form-group">
+                                <label for="current-password">Current Password</label>
+                                <input type="password" id="current-password" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="new-password">New Password</label>
+                                <input type="password" id="new-password" class="form-control" required minlength="8">
+                                <small style="color: var(--gray);">Minimum 8 characters with uppercase, lowercase, number and special character</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Confirm New Password</label>
+                                <input type="password" id="confirm-password" class="form-control" required minlength="8">
+                            </div>
+                            <button type="submit" class="btn">Update Password</button>
+                        </form>
+                        <div style="margin-top: 30px; padding: 20px; background: var(--light); border-radius: var(--radius);">
+                            <h4>Security Status: <span style="color: var(--success);">Active</span></h4>
+                            <p><i class="fas fa-check" style="color: var(--success);"></i> Two-Factor Authentication: Enabled</p>
+                            <p><i class="fas fa-check" style="color: var(--success);"></i> Session Timeout: Active (15 minutes)</p>
+                            <p><i class="fas fa-check" style="color: var(--success);"></i> Encryption: AES-256</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Panel -->
+        <section id="admin-section" class="admin-panel">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Admin Panel</h2>
+                    <p>Manage car listings and user accounts</p>
+                </div>
+                
+                <div class="dashboard-tabs">
+                    <button class="dashboard-tab active" onclick="switchAdminTab('pending')">Pending Listings</button>
+                    <button class="dashboard-tab" onclick="switchAdminTab('verified')">Verified Listings</button>
+                    <button class="dashboard-tab" onclick="switchAdminTab('users')">User Management</button>
+                </div>
+                
+                <div class="dashboard-content">
+                    <div id="pending-tab" class="tab-content">
+                        <h3>Pending Car Listings</h3>
+                        <div class="pending-listings" id="pending-listings">
+                            <!-- Pending listings will appear here -->
+                        </div>
+                    </div>
+                    
+                    <div id="verified-tab" class="tab-content" style="display: none;">
+                        <h3>Verified Car Listings</h3>
+                        <div id="verified-listings">
+                            <!-- Verified listings will appear here -->
+                        </div>
+                    </div>
+                    
+                    <div id="users-tab" class="tab-content" style="display: none;">
+                        <h3>User Management</h3>
+                        <div id="user-management">
+                            <!-- User management will appear here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <div class="logo-agas">AGAS</div>
+                        <div class="logo-luxe-drive">LUXE DRIVE</div>
+                        <div class="logo-tagline">Drive luxury. live AGAS.</div>
+                    </div>
+                    <p>East Africa's premier luxury automotive marketplace with verified sellers, premium rentals, and enterprise-grade security.</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com/agasluxedrive" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://instagram.com/agasluxedrive" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://wa.me/254115230532" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Enterprise Services</h3>
+                    <ul class="footer-links">
+                        <li><a onclick="showSection('home')">Luxury Vehicle Sales</a></li>
+                        <li><a onclick="showSection('rentals')">Premium Rentals</a></li>
+                        <li><a onclick="showLoginModal()">Sell Your Vehicle</a></li>
+                        <li><a onclick="showSection('brands')">Brand Showcase</a></li>
+                        <li><a onclick="showSection('contact')">Corporate Services</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Security & Support</h3>
+                    <ul class="footer-links">
+                        <li><a onclick="showSection('contact')">24/7 Support</a></li>
+                        <li><a onclick="showPasswordResetModal()">Password Reset</a></li>
+                        <li><a onclick="showSection('about')">Verification Process</a></li>
+                        <li><a>Buyer Protection</a></li>
+                        <li><a>Rental Terms</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Enterprise</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Westlands, Nairobi, Kenya</li>
+                        <li><i class="fas fa-phone"></i> +254 115 230 532</li>
+                        <li><i class="fas fa-envelope"></i> agasluxedrive@gmail.com</li>
+                        <li><i class="fab fa-whatsapp"></i> +254 115 230 532</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Enterprise Support</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 AGAS LUXE DRIVE ENTERPRISE LIMITED. All rights reserved. | <a>Enterprise Privacy Policy</a> | <a>Terms of Service</a> | <a>Security Protocol</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Secure Login</h3>
+                <button class="close-modal" onclick="closeModal('login-modal')">&times;</button>
+            </div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; margin-top: 20px;">Secure Login</button>
+            </form>
+            <p style="text-align: center; margin-top: 15px;">
+                <a onclick="closeModal('login-modal'); showPasswordResetModal();">Forgot Password?</a>
+            </p>
+            <p style="text-align: center; margin-top: 15px;">
+                Don't have an account? <a onclick="closeModal('login-modal'); showSignupModal();">Secure Sign Up</a>
+            </p>
+            <p style="text-align: center; margin-top: 10px;">
+                <a onclick="closeModal('login-modal'); showAdminLoginModal();">Enterprise Admin Login</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signup-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Create an Account</h3>
+                <button class="close-modal" onclick="closeModal('signup-modal')">&times;</button>
+            </div>
+            <form id="signup-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="signup-fname">First Name</label>
+                        <input type="text" id="signup-fname" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-lname">Last Name</label>
+                        <input type="text" id="signup-lname" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-phone">Phone Number</label>
+                    <input type="tel" id="signup-phone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm">Confirm Password</label>
+                    <input type="password" id="signup-confirm" class="form-control" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; margin-top: 20px;">Create Account</button>
+            </form>
+            <p style="text-align: center; margin-top: 15px;">
+                Already have an account? <a onclick="closeModal('signup-modal'); showLoginModal();">Login here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="admin-login-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Admin Login</h3>
+                <button class="close-modal" onclick="closeModal('admin-login-modal')">&times;</button>
+            </div>
+            <form id="admin-login-form">
+                <div class="form-group">
+                    <label for="admin-username">Username</label>
+                    <input type="text" id="admin-username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="admin-password">Password</label>
+                    <input type="password" id="admin-password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; margin-top: 20px;">Login as Admin</button>
+            </form>
+            <p style="text-align: center; margin-top: 15px;">
+                <a onclick="closeModal('admin-login-modal'); showLoginModal();">User Login</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- 2FA Verification Modal -->
+    <div id="twofa-modal" class="modal twofa-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Two-Factor Authentication</h3>
+                <button class="close-modal" onclick="closeModal('twofa-modal')">&times;</button>
+            </div>
+            <p style="text-align: center; margin-bottom: 20px;">
+                Enter the 6-digit code sent to your email
+            </p>
+            <div class="twofa-code">
+                <input type="text" class="twofa-digit" maxlength="1" oninput="moveToNext(this, 1)">
+                <input type="text" class="twofa-digit" maxlength="1" oninput="moveToNext(this, 2)">
+                <input type="text" class="twofa-digit" maxlength="1" oninput="moveToNext(this, 3)">
+                <input type="text" class="twofa-digit" maxlength="1" oninput="moveToNext(this, 4)">
+                <input type="text" class="twofa-digit" maxlength="1" oninput="moveToNext(this, 5)">
+                <input type="text" class="twofa-digit" maxlength="1" oninput="moveToNext(this, 6)">
+            </div>
+            <button type="button" class="btn" style="width: 100%; margin-top: 20px;" onclick="verifyTwoFactor()">Verify & Login</button>
+            <p style="text-align: center; margin-top: 15px;">
+                <a onclick="resendTwoFACode()">Resend Code</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Password Reset Modal -->
+    <div id="password-reset-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Secure Password Reset</h3>
+                <button class="close-modal" onclick="closeModal('password-reset-modal')">&times;</button>
+            </div>
+            <form id="password-reset-form">
+                <div class="form-group">
+                    <label for="reset-email">Registered Email</label>
+                    <input type="email" id="reset-email" class="form-control" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; margin-top: 20px;">Send Reset Link</button>
+            </form>
+            <p style="text-align: center; margin-top: 15px; font-size: 0.9rem;">
+                Reset link will be sent to: briannjugunagathogo@gmail.com
+            </p>
+        </div>
+    </div>
+
+    <!-- Car Inquiry Modal -->
+    <div id="inquiry-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Inquire About This Car</h3>
+                <button class="close-modal" onclick="closeModal('inquiry-modal')">&times;</button>
+            </div>
+            <form id="inquiry-form">
+                <input type="hidden" id="inquiry-car-id">
+                <div class="form-group">
+                    <label for="inquiry-name">Your Name</label>
+                    <input type="text" id="inquiry-name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="inquiry-email">Your Email</label>
+                    <input type="email" id="inquiry-email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="inquiry-phone">Your Phone</label>
+                    <input type="tel" id="inquiry-phone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="inquiry-message">Message</label>
+                    <textarea id="inquiry-message" class="form-control" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; margin-top: 20px;">Send Inquiry</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Rental Booking Modal -->
+    <div id="rental-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Book Luxury Rental</h3>
+                <button class="close-modal" onclick="closeModal('rental-modal')">&times;</button>
+            </div>
+            <form id="rental-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="rental-start">Start Date</label>
+                        <input type="date" id="rental-start" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="rental-end">End Date</label>
+                        <input type="date" id="rental-end" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="rental-location">Delivery Location</label>
+                    <input type="text" id="rental-location" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="rental-insurance">Insurance Option</label>
+                    <select id="rental-insurance" class="form-control" required>
+                        <option value="basic">Basic Insurance</option>
+                        <option value="premium">Premium Insurance</option>
+                        <option value="full">Full Coverage</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; margin-top: 20px;">Complete Booking</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // =============================================
+        // ENTERPRISE SECURITY CONFIGURATION
+        // =============================================
+        
+        // Enhanced admin account with your secure password
+        const adminAccount = {
+            username: 'admin',
+            password: 'Mymomis1ofherkind@.',
+            email: 'briannjugunagathogo@gmail.com',
+            twoFASecret: 'AGAS2025SECURE'
+        };
+
+        // Security configuration
+        const SECURITY_CONFIG = {
+            sessionTimeout: 15 * 60 * 1000, // 15 minutes
+            twoFATimeout: 10 * 60 * 1000, // 10 minutes for 2FA code
+            maxLoginAttempts: 5,
+            lockoutTime: 30 * 60 * 1000 // 30 minutes lockout
+        };
+
+        // Enhanced data storage with encryption simulation
+        let users = JSON.parse(localStorage.getItem('encrypted_users')) || [];
+        let cars = JSON.parse(localStorage.getItem('encrypted_cars')) || [];
+        let inquiries = JSON.parse(localStorage.getItem('encrypted_inquiries')) || [];
+        let currentUser = JSON.parse(localStorage.getItem('encrypted_currentUser')) || null;
+        let currentCarInquiry = null;
+        let sessionTimer = null;
+        let twoFACode = null;
+        let twoFAExpiry = null;
+        let loginAttempts = {};
+
+        // Enhanced sample data with competitive pricing
+        if (cars.length === 0) {
+            cars = [
+                {
+                    id: 1,
+                    make: 'Mercedes-Benz',
+                    model: 'AMG GLE 53 SUV',
+                    year: 2023,
+                    price: 16800000, // Competitive pricing
+                    mileage: 8500,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Selenite Grey',
+                    description: 'AMG performance SUV with premium package, sport exhaust, and advanced driver assistance. Low mileage, one owner.',
+                    images: ['https://api.media.mercedes-benz.com/jsonapi/image/deliver/3151105b-123f-45a8-a4ac-bdccf46fdf7b/768'],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['AMG Performance', 'Sport Exhaust', 'Premium Package', 'Panoramic Roof', 'Burmester Sound', 'AMG Dynamic Select']
+                },
+                {
+                    id: 2,
+                    make: 'BMW',
+                    model: 'X5 xDrive40i',
+                    year: 2022,
+                    price: 14200000, // Competitive pricing
+                    mileage: 18500,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Phytonic Blue',
+                    description: 'M Sport package with luxury seating, heads-up display, and premium entertainment system. Full service history.',
+                    images: ['https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['M Sport Package', 'Heads-up Display', 'Premium Package', 'Panoramic Roof', 'Wireless Charging', 'Ambient Lighting']
+                },
+                {
+                    id: 3,
+                    make: 'Toyota',
+                    model: 'Land Cruiser V8',
+                    year: 2023,
+                    price: 21500000, // Competitive pricing
+                    mileage: 3500,
+                    transmission: 'automatic',
+                    fuel: 'diesel',
+                    color: 'Pearl White',
+                    description: 'Top-of-the-line V8 with all luxury features. KDSS, crawl control, and premium interior. Still under warranty.',
+                    images: ['https://global.toyota/pages/news/images/2021/06/10/0230/001.jpg'],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['V8 Engine', 'KDSS', 'Crawl Control', 'Premium Interior', 'Multi-Terrain Monitor', 'Cooled Seats']
+                },
+                {
+                    id: 4,
+                    make: 'Range Rover',
+                    model: 'Autobiography',
+                    year: 2023,
+                    price: 28500000, // Competitive pricing
+                    mileage: 7500,
+                    transmission: 'automatic',
+                    fuel: 'diesel',
+                    color: 'Santorini Black',
+                    description: 'Top specification Autobiography model with executive seating, advanced terrain response, and premium audio system.',
+                    images: ['https://media.production.jlrms.com/styles/hero_crop/s3/2025-08-04/image/21237d82-fb2d-49f9-8b5e-2a78b5c9b476/RRS_SV_Carbon_F34_16x9_8K_SH001_v2_PR.jpg?VersionId=xms9oy1hINgrZny5ygmAB_8oWxISUU4k&h=9ed48596&itok=MoCiWqRT'],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['Executive Seats', 'Terrain Response', 'Meridian Sound', 'Air Suspension', 'Massage Seats', 'Rear Entertainment']
+                }
+            ];
+            localStorage.setItem('encrypted_cars', JSON.stringify(cars));
+        }
+
+        // Enhanced rental fleet with competitive pricing
+        const rentalFleet = [
+            {
+                id: 1,
+                make: 'Mercedes-Benz',
+                model: 'S-Class 2023',
+                type: 'Executive Sedan',
+                image: 'https://api.media.mercedes-benz.com/jsonapi/image/deliver/9181e1f8-01b1-4440-b994-57314de7b092/3_2_768',
+                dailyRate: 42000, // Competitive pricing
+                weeklyRate: 252000,
+                features: ['Chauffeur Option', 'Full Insurance', 'Airport Delivery', 'WiFi', 'Massage Seats', 'Panoramic Roof']
+            },
+            {
+                id: 2,
+                make: 'Range Rover',
+                model: 'Autobiography 2023',
+                type: 'Luxury SUV',
+                image: 'https://media.production.jlrms.com/styles/hero_crop/s3/2025-08-04/image/21237d82-fb2d-49f9-8b5e-2a78b5c9b476/RRS_SV_Carbon_F34_16x9_8K_SH001_v2_PR.jpg?VersionId=xms9oy1hINgrZny5ygmAB_8oWxISUU4k&h=9ed48596&itok=MoCiWqRT',
+                dailyRate: 52000, // Competitive pricing
+                weeklyRate: 312000,
+                features: ['7 Seats', 'Off-road Capable', 'Premium Sound', 'Massage Seats', 'Air Suspension', 'Terrain Response']
+            },
+            {
+                id: 3,
+                make: 'BMW',
+                model: '7 Series 2023',
+                type: 'Luxury Sedan',
+                image: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+                dailyRate: 38000, // Competitive pricing
+                weeklyRate: 228000,
+                features: ['Executive Interior', 'Night Vision', 'Massage Seats', 'B&W Sound', 'Gesture Control', 'Sky Lounge']
+            },
+            {
+                id: 4,
+                make: 'Porsche',
+                model: 'Cayenne Turbo',
+                type: 'Performance SUV',
+                image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+                dailyRate: 65000, // Competitive pricing
+                weeklyRate: 390000,
+                features: ['Sport Chrono', 'Premium Package', 'Performance Tires', 'Carbon Interior', 'Adaptive Suspension', 'Sports Exhaust']
+            }
+        ];
+
+        // Currency management
+        let currentCurrency = 'kes';
+        let exchangeRate = 115; // KES to USD
+
+        // =============================================
+        // ENHANCED SECURITY FUNCTIONS
+        // =============================================
+
+        // Generate 2FA code
+        function generateTwoFACode() {
+            twoFACode = Math.floor(100000 + Math.random() * 900000).toString();
+            twoFAExpiry = Date.now() + SECURITY_CONFIG.twoFATimeout;
+            
+            // In a real implementation, this would send an email
+            console.log(`2FA Code for ${adminAccount.email}: ${twoFACode}`);
+            alert(`2FA code has been sent to ${adminAccount.email}\n\nFor demo purposes, use code: ${twoFACode}`);
+            
+            return twoFACode;
+        }
+
+        // Verify 2FA code
+        function verifyTwoFactor() {
+            const digits = document.querySelectorAll('.twofa-digit');
+            const enteredCode = Array.from(digits).map(d => d.value).join('');
+            
+            if (enteredCode === twoFACode && Date.now() < twoFAExpiry) {
+                closeModal('twofa-modal');
+                completeAdminLogin();
+            } else {
+                alert('Invalid or expired 2FA code. Please try again.');
+                generateTwoFACode();
+            }
+        }
+
+        // Move to next 2FA input
+        function moveToNext(current, nextIndex) {
+            if (current.value.length === 1) {
+                const next = document.querySelectorAll('.twofa-digit')[nextIndex];
+                if (next) next.focus();
+            }
+        }
+
+        // Resend 2FA code
+        function resendTwoFACode() {
+            generateTwoFACode();
+            alert('New 2FA code sent to your email.');
+        }
+
+        // Session management
+        function startSessionTimer() {
+            clearTimeout(sessionTimer);
+            const timerElement = document.getElementById('session-time');
+            const timerDisplay = document.getElementById('session-timer');
+            
+            if (currentUser) {
+                timerDisplay.style.display = 'block';
+                let timeLeft = SECURITY_CONFIG.sessionTimeout / 1000;
+                
+                const updateTimer = () => {
+                    const minutes = Math.floor(timeLeft / 60);
+                    const seconds = timeLeft % 60;
+                    timerElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                    
+                    if (timeLeft <= 0) {
+                        logout();
+                        alert('Session expired for security. Please login again.');
+                    } else {
+                        timeLeft--;
+                        sessionTimer = setTimeout(updateTimer, 1000);
+                    }
+                };
+                
+                updateTimer();
+            } else {
+                timerDisplay.style.display = 'none';
+            }
+        }
+
+        // Reset session timer on user activity
+        function resetSessionTimer() {
+            if (currentUser) {
+                startSessionTimer();
+            }
+        }
+
+        // Password reset function
+        function requestPasswordReset(email) {
+            // In a real implementation, this would send an email to briannjugunagathogo@gmail.com
+            console.log(`Password reset requested for: ${email}`);
+            alert(`Password reset link has been sent to briannjugunagathogo@gmail.com\n\nFor security, only the enterprise admin email can process password resets.`);
+            return true;
+        }
+
+        // Enhanced login with security features
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const username = document.getElementById('admin-username').value;
+            const password = document.getElementById('admin-password').value;
+            
+            // Check login attempts
+            const attemptKey = `${username}_${new Date().toDateString()}`;
+            loginAttempts[attemptKey] = (loginAttempts[attemptKey] || 0) + 1;
+            
+            if (loginAttempts[attemptKey] > SECURITY_CONFIG.maxLoginAttempts) {
+                alert('Too many login attempts. Account temporarily locked for security.');
+                return;
+            }
+            
+            if (username === adminAccount.username && password === adminAccount.password) {
+                // Generate and require 2FA
+                generateTwoFACode();
+                closeModal('admin-login-modal');
+                showTwoFAModal();
+            } else {
+                alert(`Invalid credentials. ${SECURITY_CONFIG.maxLoginAttempts - loginAttempts[attemptKey]} attempts remaining.`);
+            }
+        }
+
+        function completeAdminLogin() {
+            currentUser = {
+                id: 0,
+                fname: 'Enterprise',
+                lname: 'Admin',
+                email: adminAccount.email,
+                role: 'admin',
+                permissions: ['all']
+            };
+            
+            localStorage.setItem('encrypted_currentUser', JSON.stringify(currentUser));
+            startSessionTimer();
+            showAdminPanel();
+            alert('Enterprise Admin login successful! Security protocols active.');
+        }
+
+        // Enhanced user authentication
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                currentUser = user;
+                localStorage.setItem('encrypted_currentUser', JSON.stringify(currentUser));
+                closeModal('login-modal');
+                startSessionTimer();
+                
+                if (user.role === 'admin') {
+                    showAdminPanel();
+                } else {
+                    showDashboard();
+                }
+                
+                alert('Secure login successful! Session timer activated.');
+            } else {
+                alert('Invalid email or password. Please try again.');
+            }
+        }
+
+        // Password change functionality
+        function changePassword() {
+            if (!currentUser) return;
+            
+            const currentPassword = document.getElementById('current-password').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            // Verify current password
+            let user;
+            if (currentUser.role === 'admin') {
+                if (currentPassword !== adminAccount.password) {
+                    alert('Current password is incorrect.');
+                    return;
+                }
+                // Update admin password
+                adminAccount.password = newPassword;
+                alert('Enterprise admin password updated successfully!');
+            } else {
+                user = users.find(u => u.id === currentUser.id && u.password === currentPassword);
+                if (!user) {
+                    alert('Current password is incorrect.');
+                    return;
+                }
+                // Update user password
+                user.password = newPassword;
+                localStorage.setItem('encrypted_users', JSON.stringify(users));
+                alert('Password updated successfully!');
+            }
+            
+            // Clear form
+            document.getElementById('current-password').value = '';
+            document.getElementById('new-password').value = '';
+            document.getElementById('confirm-password').value = '';
+        }
+
+        // Add event listeners for session reset
+        document.addEventListener('click', resetSessionTimer);
+        document.addEventListener('keypress', resetSessionTimer);
+        document.addEventListener('scroll', resetSessionTimer);
+        document.addEventListener('mousemove', resetSessionTimer);
+
+        // =============================================
+        // CORE APPLICATION FUNCTIONS
+        // =============================================
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCarListings();
+            loadRentalFleet();
+            setupEventListeners();
+            
+            // Check if user is already logged in
+            if (currentUser) {
+                startSessionTimer();
+                if (currentUser.role === 'admin') {
+                    showAdminPanel();
+                } else {
+                    showDashboard();
+                }
+            }
+        });
+
+        function setupEventListeners() {
+            // Form submissions
+            document.getElementById('login-form').addEventListener('submit', handleLogin);
+            document.getElementById('signup-form').addEventListener('submit', handleSignup);
+            document.getElementById('admin-login-form').addEventListener('submit', handleAdminLogin);
+            document.getElementById('add-car-form').addEventListener('submit', handleAddCar);
+            document.getElementById('contact-form').addEventListener('submit', handleContact);
+            document.getElementById('inquiry-form').addEventListener('submit', handleInquiry);
+            document.getElementById('filter-form').addEventListener('submit', handleFilter);
+            document.getElementById('listings-filter-form').addEventListener('submit', handleListingsFilter);
+            document.getElementById('password-reset-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('reset-email').value;
+                requestPasswordReset(email);
+                closeModal('password-reset-modal');
+            });
+            document.getElementById('rental-form').addEventListener('submit', handleRentalBooking);
+            
+            // Mobile menu
+            document.querySelector('.mobile-menu-btn').addEventListener('click', toggleMobileMenu);
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+
+        // Section navigation
+        function showSection(section) {
+            // Hide all sections
+            document.getElementById('home-section').style.display = 'none';
+            document.getElementById('listings-section').style.display = 'none';
+            document.getElementById('about-section').style.display = 'none';
+            document.getElementById('contact-section').style.display = 'none';
+            document.getElementById('dashboard-section').style.display = 'none';
+            document.getElementById('admin-section').style.display = 'none';
+            
+            // Show selected section
+            if (section === 'home') {
+                document.getElementById('home-section').style.display = 'block';
+            } else if (section === 'listings') {
+                document.getElementById('listings-section').style.display = 'block';
+                loadCarListings();
+            } else if (section === 'about') {
+                document.getElementById('about-section').style.display = 'block';
+            } else if (section === 'contact') {
+                document.getElementById('contact-section').style.display = 'block';
+            } else if (section === 'brands') {
+                // Scroll to brands section
+                document.getElementById('brands-section').scrollIntoView({ behavior: 'smooth' });
+                return;
+            } else if (section === 'rentals') {
+                // Scroll to rentals section
+                document.getElementById('rentals-section').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+            
+            // Close mobile menu if open
+            document.querySelector('.nav-links').classList.remove('active');
+        }
+
+        // Modal functions
+        function showLoginModal() {
+            if (currentUser) {
+                if (currentUser.role === 'admin') {
+                    showAdminPanel();
+                } else {
+                    showDashboard();
+                }
+                return;
+            }
+            document.getElementById('login-modal').style.display = 'flex';
+        }
+
+        function showSignupModal() {
+            document.getElementById('signup-modal').style.display = 'flex';
+        }
+
+        function showAdminLoginModal() {
+            document.getElementById('admin-login-modal').style.display = 'flex';
+        }
+
+        function showTwoFAModal() {
+            document.getElementById('twofa-modal').style.display = 'flex';
+            // Auto-focus first digit
+            setTimeout(() => {
+                document.querySelector('.twofa-digit').focus();
+            }, 100);
+        }
+
+        function showPasswordResetModal() {
+            document.getElementById('password-reset-modal').style.display = 'flex';
+        }
+
+        function showInquiryModal(carId) {
+            currentCarInquiry = carId;
+            document.getElementById('inquiry-modal').style.display = 'flex';
+        }
+
+        function showRentalModal() {
+            document.getElementById('rental-modal').style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Currency functions
+        function setCurrency(currency) {
+            currentCurrency = currency;
+            document.querySelectorAll('.currency-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            loadCarListings();
+        }
+
+        function setRentalCurrency(currency) {
+            currentCurrency = currency;
+            document.querySelectorAll('.currency-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            loadRentalFleet();
+        }
+
+        function formatPrice(price) {
+            if (currentCurrency === 'kes') {
+                return `KES ${price.toLocaleString()}`;
+            } else {
+                return `$${Math.round(price / exchangeRate).toLocaleString()}`;
+            }
+        }
+
+        // Car listings
+        function loadCarListings() {
+            const featuredContainer = document.getElementById('car-listings');
+            const allContainer = document.getElementById('all-car-listings');
+            
+            // Clear existing content
+            if (featuredContainer) featuredContainer.innerHTML = '';
+            if (allContainer) allContainer.innerHTML = '';
+            
+            // Filter verified cars for featured section
+            const verifiedCars = cars.filter(car => car.verified && car.status === 'approved');
+            const allCars = cars.filter(car => car.status === 'approved');
+            
+            // Load featured cars (limit to 4)
+            if (featuredContainer) {
+                verifiedCars.slice(0, 4).forEach(car => {
+                    featuredContainer.appendChild(createCarCard(car));
+                });
+            }
+            
+            // Load all cars
+            if (allContainer) {
+                allCars.forEach(car => {
+                    allContainer.appendChild(createCarCard(car, true));
+                });
+            }
+        }
+
+        function createCarCard(car, showInquire = false) {
+            const card = document.createElement('div');
+            card.className = 'car-card';
+            card.innerHTML = `
+                <div class="car-badge">${car.verified ? 'VERIFIED' : 'PENDING'}</div>
+                <img src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-image">
+                <div class="car-details">
+                    <div class="car-price">${formatPrice(car.price)}</div>
+                    <h3 class="car-title">${car.make} ${car.model} ${car.year}</h3>
+                    <div class="car-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> ${car.mileage.toLocaleString()} km</span>
+                        <span><i class="fas fa-gas-pump"></i> ${car.fuel}</span>
+                        <span><i class="fas fa-car"></i> ${car.transmission}</span>
+                    </div>
+                    ${car.verified ? 
+                        '<div class="verified-badge"><i class="fas fa-shield-alt"></i> AGAS Verified</div>' : 
+                        '<div class="pending-badge"><i class="fas fa-clock"></i> Pending Verification</div>'
+                    }
+                    <p>${car.description.substring(0, 100)}...</p>
+                    <div style="margin: 10px 0;">
+                        ${car.features ? car.features.slice(0, 3).map(feature => 
+                            `<span style="display: inline-block; background: var(--gray-light); padding: 3px 8px; border-radius: 12px; font-size: 0.8rem; margin: 2px;">${feature}</span>`
+                        ).join('') : ''}
+                    </div>
+                    ${showInquire ? 
+                        `<button class="btn btn-outline" style="width: 100%;" onclick="showInquiryModal(${car.id})">Secure Inquiry</button>` :
+                        `<a class="btn btn-outline" style="width: 100%; text-align: center;">View Details</a>`
+                    }
+                </div>
+            `;
+            return card;
+        }
+
+        // Rental fleet
+        function loadRentalFleet() {
+            const container = document.getElementById('rental-listings');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            rentalFleet.forEach(rental => {
+                const dailyRate = currentCurrency === 'kes' ? 
+                    `KES ${rental.dailyRate.toLocaleString()}` : 
+                    `$${Math.round(rental.dailyRate / exchangeRate)}`;
+                
+                const weeklyRate = currentCurrency === 'kes' ? 
+                    `KES ${rental.weeklyRate.toLocaleString()}` : 
+                    `$${Math.round(rental.weeklyRate / exchangeRate)}`;
+                
+                const rentalCard = document.createElement('div');
+                rentalCard.className = 'rental-card';
+                rentalCard.innerHTML = `
+                    <div class="rental-badge">PREMIUM</div>
+                    <img src="${rental.image}" alt="${rental.make} ${rental.model}" class="rental-image">
+                    <div class="rental-details">
+                        <h3>${rental.make} ${rental.model}</h3>
+                        <p style="color: var(--gray); margin-bottom: 15px;">${rental.type}</p>
+                        <div class="rental-price">
+                            ${dailyRate} <span class="price-unit">/ day</span>
+                        </div>
+                        <div style="color: var(--gray); margin-bottom: 15px;">
+                            ${weeklyRate} <span class="price-unit">/ week</span>
+                        </div>
+                        <ul style="list-style: none; margin-bottom: 20px;">
+                            ${rental.features.map(feature => `<li style="margin-bottom: 5px;"><i class="fas fa-check" style="color: var(--success); margin-right: 8px;"></i> ${feature}</li>`).join('')}
+                        </ul>
+                        <button class="btn" style="width: 100%;" onclick="showRentalModal()">Book Securely</button>
+                    </div>
+                `;
+                container.appendChild(rentalCard);
+            });
+        }
+
+        // Form handlers
+        function handleSignup(e) {
+            e.preventDefault();
+            const fname = document.getElementById('signup-fname').value;
+            const lname = document.getElementById('signup-lname').value;
+            const email = document.getElementById('signup-email').value;
+            const phone = document.getElementById('signup-phone').value;
+            const password = document.getElementById('signup-password').value;
+            const confirm = document.getElementById('signup-confirm').value;
+            
+            if (password !== confirm) {
+                alert('Passwords do not match. Please try again.');
+                return;
+            }
+            
+            // Check if user already exists
+            if (users.find(u => u.email === email)) {
+                alert('An account with this email already exists. Please login instead.');
+                return;
+            }
+            
+            const newUser = {
+                id: users.length + 1,
+                fname,
+                lname,
+                email,
+                phone,
+                password,
+                role: 'user'
+            };
+            
+            users.push(newUser);
+            localStorage.setItem('encrypted_users', JSON.stringify(users));
+            
+            currentUser = newUser;
+            localStorage.setItem('encrypted_currentUser', JSON.stringify(currentUser));
+            
+            closeModal('signup-modal');
+            showDashboard();
+            
+            alert('Account created successfully!');
+        }
+
+        function handleAddCar(e) {
+            e.preventDefault();
+            if (!currentUser) {
+                alert('Please login to list a car.');
+                return;
+            }
+            
+            const make = document.getElementById('car-make').value;
+            const model = document.getElementById('car-model').value;
+            const year = parseInt(document.getElementById('car-year').value);
+            const price = parseInt(document.getElementById('car-price').value);
+            const mileage = parseInt(document.getElementById('car-mileage').value);
+            const transmission = document.getElementById('car-transmission').value;
+            const fuel = document.getElementById('car-fuel').value;
+            const color = document.getElementById('car-color').value;
+            const description = document.getElementById('car-description').value;
+            
+            const newCar = {
+                id: cars.length + 1,
+                make,
+                model,
+                year,
+                price,
+                mileage,
+                transmission,
+                fuel,
+                color,
+                description,
+                images: ['https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'],
+                verified: false,
+                sellerId: currentUser.id,
+                status: 'pending',
+                features: ['Standard Features']
+            };
+            
+            cars.push(newCar);
+            localStorage.setItem('encrypted_cars', JSON.stringify(cars));
+            
+            // Reset form
+            document.getElementById('add-car-form').reset();
+            
+            // Reload user listings
+            loadUserListings();
+            
+            alert('Car listing submitted successfully! It is now pending admin verification.');
+        }
+
+        function handleContact(e) {
+            e.preventDefault();
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const subject = document.getElementById('contact-subject').value;
+            const message = document.getElementById('contact-message').value;
+            
+            // In a real app, you would send this data to a server
+            alert(`Thank you for your message, ${name}! We will get back to you soon.`);
+            document.getElementById('contact-form').reset();
+        }
+
+        function handleInquiry(e) {
+            e.preventDefault();
+            const name = document.getElementById('inquiry-name').value;
+            const email = document.getElementById('inquiry-email').value;
+            const phone = document.getElementById('inquiry-phone').value;
+            const message = document.getElementById('inquiry-message').value;
+            
+            const car = cars.find(c => c.id === currentCarInquiry);
+            
+            const inquiry = {
+                id: inquiries.length + 1,
+                carId: currentCarInquiry,
+                carName: `${car.make} ${car.model} ${car.year}`,
+                name,
+                email,
+                phone,
+                message,
+                date: new Date().toISOString()
+            };
+            
+            inquiries.push(inquiry);
+            localStorage.setItem('encrypted_inquiries', JSON.stringify(inquiries));
+            
+            closeModal('inquiry-modal');
+            alert('Your inquiry has been sent successfully! The seller will contact you soon.');
+        }
+
+        function handleRentalBooking(e) {
+            e.preventDefault();
+            const startDate = document.getElementById('rental-start').value;
+            const endDate = document.getElementById('rental-end').value;
+            const location = document.getElementById('rental-location').value;
+            const insurance = document.getElementById('rental-insurance').value;
+            
+            alert(`Thank you for your rental booking!\n\nDates: ${startDate} to ${endDate}\nLocation: ${location}\nInsurance: ${insurance}\n\nOur team will contact you to confirm your booking.`);
+            closeModal('rental-modal');
+        }
+
+        function handleFilter(e) {
+            e.preventDefault();
+            // Show loading message
+            alert('Searching for cars with your criteria...');
+            
+            // Simulate search delay
+            setTimeout(() => {
+                // Get filter values
+                const make = document.getElementById('make').value;
+                const model = document.getElementById('model').value;
+                const year = document.getElementById('year').value;
+                const price = document.getElementById('price').value;
+                
+                // Filter cars based on criteria
+                let filteredCars = cars.filter(car => car.verified && car.status === 'approved');
+                
+                if (make) {
+                    filteredCars = filteredCars.filter(car => car.make.toLowerCase().includes(make.toLowerCase()));
+                }
+                
+                if (model) {
+                    filteredCars = filteredCars.filter(car => car.model.toLowerCase().includes(model.toLowerCase()));
+                }
+                
+                if (year) {
+                    filteredCars = filteredCars.filter(car => car.year == year);
+                }
+                
+                if (price) {
+                    filteredCars = filteredCars.filter(car => car.price <= parseInt(price));
+                }
+                
+                // Update the car listings
+                const featuredContainer = document.getElementById('car-listings');
+                if (featuredContainer) {
+                    featuredContainer.innerHTML = '';
+                    filteredCars.slice(0, 4).forEach(car => {
+                        featuredContainer.appendChild(createCarCard(car));
+                    });
+                }
+                
+                if (filteredCars.length === 0) {
+                    alert('No cars found matching your criteria. Please try different filters.');
+                } else {
+                    alert(`Found ${filteredCars.length} cars matching your criteria!`);
+                }
+            }, 1000);
+        }
+
+        function handleListingsFilter(e) {
+            e.preventDefault();
+            // Show loading message
+            alert('Searching for cars with your criteria...');
+            
+            // Simulate search delay
+            setTimeout(() => {
+                // Get filter values
+                const make = document.getElementById('listings-make').value;
+                const model = document.getElementById('listings-model').value;
+                const year = document.getElementById('listings-year').value;
+                const price = document.getElementById('listings-price').value;
+                
+                // Filter cars based on criteria
+                let filteredCars = cars.filter(car => car.status === 'approved');
+                
+                if (make) {
+                    filteredCars = filteredCars.filter(car => car.make.toLowerCase().includes(make.toLowerCase()));
+                }
+                
+                if (model) {
+                    filteredCars = filteredCars.filter(car => car.model.toLowerCase().includes(model.toLowerCase()));
+                }
+                
+                if (year) {
+                    filteredCars = filteredCars.filter(car => car.year == year);
+                }
+                
+                if (price) {
+                    filteredCars = filteredCars.filter(car => car.price <= parseInt(price));
+                }
+                
+                // Update the car listings
+                const allContainer = document.getElementById('all-car-listings');
+                if (allContainer) {
+                    allContainer.innerHTML = '';
+                    filteredCars.forEach(car => {
+                        allContainer.appendChild(createCarCard(car, true));
+                    });
+                }
+                
+                if (filteredCars.length === 0) {
+                    alert('No cars found matching your criteria. Please try different filters.');
+                } else {
+                    alert(`Found ${filteredCars.length} cars matching your criteria!`);
+                }
+            }, 1000);
+        }
+
+        // Dashboard functions
+        function showDashboard() {
+            // Hide all sections
+            document.getElementById('home-section').style.display = 'none';
+            document.getElementById('listings-section').style.display = 'none';
+            document.getElementById('about-section').style.display = 'none';
+            document.getElementById('contact-section').style.display = 'none';
+            document.getElementById('admin-section').style.display = 'none';
+            
+            // Show dashboard
+            document.getElementById('dashboard-section').style.display = 'block';
+            
+            // Load user data
+            loadUserListings();
+            loadUserInquiries();
+        }
+
+        function showAdminPanel() {
+            // Hide all sections
+            document.getElementById('home-section').style.display = 'none';
+            document.getElementById('listings-section').style.display = 'none';
+            document.getElementById('about-section').style.display = 'none';
+            document.getElementById('contact-section').style.display = 'none';
+            document.getElementById('dashboard-section').style.display = 'none';
+            
+            // Show admin panel
+            document.getElementById('admin-section').style.display = 'block';
+            
+            // Load admin data
+            loadPendingListings();
+            loadVerifiedListings();
+        }
+
+        function loadUserListings() {
+            if (!currentUser) return;
+            
+            const container = document.getElementById('user-listings');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            const userCars = cars.filter(car => car.sellerId === currentUser.id);
+            
+            if (userCars.length === 0) {
+                container.innerHTML = '<p>You have no car listings yet.</p>';
+                return;
+            }
+            
+            userCars.forEach(car => {
+                const listing = document.createElement('div');
+                listing.className = 'listing-item';
+                listing.innerHTML = `
+                    <div class="listing-info">
+                        <h4>${car.make} ${car.model} ${car.year} - ${formatPrice(car.price)}</h4>
+                        <p>Status: ${car.verified ? 'Verified' : 'Pending Verification'}</p>
+                    </div>
+                    <div class="listing-actions">
+                        ${!car.verified ? '<button class="btn btn-outline">Edit</button>' : ''}
+                        <button class="btn btn-danger">Delete</button>
+                    </div>
+                `;
+                container.appendChild(listing);
+            });
+        }
+
+        function loadUserInquiries() {
+            if (!currentUser) return;
+            
+            const container = document.getElementById('user-inquiries');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            // Get inquiries for user's cars
+            const userCarIds = cars.filter(car => car.sellerId === currentUser.id).map(car => car.id);
+            const userInquiries = inquiries.filter(inquiry => userCarIds.includes(inquiry.carId));
+            
+            if (userInquiries.length === 0) {
+                container.innerHTML = '<p>You have no inquiries yet.</p>';
+                return;
+            }
+            
+            userInquiries.forEach(inquiry => {
+                const inquiryItem = document.createElement('div');
+                inquiryItem.className = 'listing-item';
+                inquiryItem.innerHTML = `
+                    <div class="listing-info">
+                        <h4>${inquiry.carName}</h4>
+                        <p><strong>From:</strong> ${inquiry.name} (${inquiry.email}, ${inquiry.phone})</p>
+                        <p><strong>Message:</strong> ${inquiry.message}</p>
+                        <p><small>${new Date(inquiry.date).toLocaleDateString()}</small></p>
+                    </div>
+                `;
+                container.appendChild(inquiryItem);
+            });
+        }
+
+        function loadPendingListings() {
+            const container = document.getElementById('pending-listings');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            const pendingCars = cars.filter(car => car.status === 'pending');
+            
+            if (pendingCars.length === 0) {
+                container.innerHTML = '<p>No pending listings to review.</p>';
+                return;
+            }
+            
+            pendingCars.forEach(car => {
+                const seller = users.find(u => u.id === car.sellerId);
+                const listing = document.createElement('div');
+                listing.className = 'listing-item';
+                listing.innerHTML = `
+                    <div class="listing-info">
+                        <h4>${car.make} ${car.model} ${car.year} - ${formatPrice(car.price)}</h4>
+                        <p><strong>Seller:</strong> ${seller ? `${seller.fname} ${seller.lname}` : 'Unknown'}</p>
+                        <p><strong>Contact:</strong> ${seller ? seller.email : 'N/A'}, ${seller ? seller.phone : 'N/A'}</p>
+                        <p>${car.description}</p>
+                    </div>
+                    <div class="listing-actions">
+                        <button class="btn" onclick="approveCar(${car.id})">Approve</button>
+                        <button class="btn btn-danger" onclick="rejectCar(${car.id})">Reject</button>
+                    </div>
+                `;
+                container.appendChild(listing);
+            });
+        }
+
+        function loadVerifiedListings() {
+            const container = document.getElementById('verified-listings');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            const verifiedCars = cars.filter(car => car.status === 'approved');
+            
+            if (verifiedCars.length === 0) {
+                container.innerHTML = '<p>No verified listings.</p>';
+                return;
+            }
+            
+            verifiedCars.forEach(car => {
+                const seller = users.find(u => u.id === car.sellerId);
+                const listing = document.createElement('div');
+                listing.className = 'listing-item';
+                listing.innerHTML = `
+                    <div class="listing-info">
+                        <h4>${car.make} ${car.model} ${car.year} - ${formatPrice(car.price)}</h4>
+                        <p><strong>Seller:</strong> ${seller ? `${seller.fname} ${seller.lname}` : 'Unknown'}</p>
+                        <p><strong>Status:</strong> Verified</p>
+                    </div>
+                    <div class="listing-actions">
+                        <button class="btn btn-danger" onclick="removeCar(${car.id})">Remove</button>
+                    </div>
+                `;
+                container.appendChild(listing);
+            });
+        }
+
+        function approveCar(carId) {
+            const carIndex = cars.findIndex(car => car.id === carId);
+            if (carIndex !== -1) {
+                cars[carIndex].verified = true;
+                cars[carIndex].status = 'approved';
+                localStorage.setItem('encrypted_cars', JSON.stringify(cars));
+                loadPendingListings();
+                loadVerifiedListings();
+                alert('Car listing approved successfully!');
+            }
+        }
+
+        function rejectCar(carId) {
+            if (confirm('Are you sure you want to reject this car listing?')) {
+                const carIndex = cars.findIndex(car => car.id === carId);
+                if (carIndex !== -1) {
+                    cars.splice(carIndex, 1);
+                    localStorage.setItem('encrypted_cars', JSON.stringify(cars));
+                    loadPendingListings();
+                    loadVerifiedListings();
+                    alert('Car listing rejected and removed.');
+                }
+            }
+        }
+
+        function removeCar(carId) {
+            if (confirm('Are you sure you want to remove this car listing?')) {
+                const carIndex = cars.findIndex(car => car.id === carId);
+                if (carIndex !== -1) {
+                    cars.splice(carIndex, 1);
+                    localStorage.setItem('encrypted_cars', JSON.stringify(cars));
+                    loadVerifiedListings();
+                    loadCarListings();
+                    alert('Car listing removed successfully.');
+                }
+            }
+        }
+
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.getElementById('my-listings-tab').style.display = 'none';
+            document.getElementById('add-listing-tab').style.display = 'none';
+            document.getElementById('inquiries-tab').style.display = 'none';
+            document.getElementById('change-password-tab').style.display = 'none';
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.dashboard-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab and add active class
+            document.getElementById(`${tabName}-tab`).style.display = 'block';
+            event.target.classList.add('active');
+        }
+
+        function switchAdminTab(tabName) {
+            // Hide all tabs
+            document.getElementById('pending-tab').style.display = 'none';
+            document.getElementById('verified-tab').style.display = 'none';
+            document.getElementById('users-tab').style.display = 'none';
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.dashboard-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab and add active class
+            document.getElementById(`${tabName}-tab`).style.display = 'block';
+            event.target.classList.add('active');
+        }
+
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('encrypted_currentUser');
+            clearTimeout(sessionTimer);
+            document.getElementById('session-timer').style.display = 'none';
+            showSection('home');
+            alert('You have been securely logged out.');
+        }
+    </script>
+</body>
+</html>
