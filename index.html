@@ -345,6 +345,7 @@
             text-align: center;
             box-shadow: var(--shadow);
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .brand-card:hover {
@@ -1025,7 +1026,7 @@
                     <li><a onclick="showSection('listings')">Buy Cars</a></li>
                     <li><a onclick="showSection('rentals')">Rent Cars</a></li>
                     <li><a onclick="showLoginModal()">Sell Car</a></li>
-                    <li><a onclick="showSection('brands')">Brands</a></li>
+                    <li><a onclick="showBrandGallery()">Brands</a></li>
                     <li><a onclick="showSection('about')">About</a></li>
                     <li><a onclick="showSection('contact')">Contact</a></li>
                 </ul>
@@ -1191,7 +1192,7 @@
                     </div>
                     
                     <div class="brands-grid">
-                        <div class="brand-card">
+                        <div class="brand-card" onclick="filterByBrand('mercedes')">
                             <div class="brand-logo">
                                 <i class="fas fa-car"></i>
                             </div>
@@ -1199,7 +1200,7 @@
                             <p>Luxury Sedans, SUVs, AMG Performance</p>
                         </div>
                         
-                        <div class="brand-card">
+                        <div class="brand-card" onclick="filterByBrand('bmw')">
                             <div class="brand-logo">
                                 <i class="fas fa-car"></i>
                             </div>
@@ -1207,7 +1208,7 @@
                             <p>Executive Series, M Performance, X Series</p>
                         </div>
                         
-                        <div class="brand-card">
+                        <div class="brand-card" onclick="filterByBrand('toyota')">
                             <div class="brand-logo">
                                 <i class="fas fa-car"></i>
                             </div>
@@ -1215,7 +1216,7 @@
                             <p>Land Cruiser, Prado, Lexus Luxury Division</p>
                         </div>
                         
-                        <div class="brand-card">
+                        <div class="brand-card" onclick="filterByBrand('volkswagen')">
                             <div class="brand-logo">
                                 <i class="fas fa-car"></i>
                             </div>
@@ -1223,7 +1224,7 @@
                             <p>Touareg, Arteon, Premium Models</p>
                         </div>
                         
-                        <div class="brand-card">
+                        <div class="brand-card" onclick="filterByBrand('volvo')">
                             <div class="brand-logo">
                                 <i class="fas fa-car"></i>
                             </div>
@@ -1231,7 +1232,7 @@
                             <p>XC Series, Luxury Safety, Scandinavian Design</p>
                         </div>
                         
-                        <div class="brand-card">
+                        <div class="brand-card" onclick="filterByBrand('nissan')">
                             <div class="brand-logo">
                                 <i class="fas fa-car"></i>
                             </div>
@@ -1239,7 +1240,7 @@
                             <p>Patrol, Infiniti Luxury, Premium SUVs</p>
                         </div>
                         
-                        <div class="brand-card">
+                        <div class="brand-card" onclick="filterByBrand('range rover')">
                             <div class="brand-logo">
                                 <i class="fas fa-car"></i>
                             </div>
@@ -1247,7 +1248,7 @@
                             <p>Luxury SUVs, Vogue, Sport, Velar</p>
                         </div>
                         
-                        <div class="brand-card">
+                        <div class="brand-card" onclick="filterByBrand('porsche')">
                             <div class="brand-logo">
                                 <i class="fas fa-car"></i>
                             </div>
@@ -1259,7 +1260,7 @@
             </section>
 
             <!-- Featured Listings Section -->
-            <section style="background-color: #f1f5f9;">
+            <section style="background-color: #f1f5f9;" id="featured-vehicles">
                 <div class="container">
                     <div class="section-title">
                         <h2>Featured Luxury Vehicles</h2>
@@ -1359,7 +1360,7 @@
                     
                     <div style="text-align: center; margin-top: 40px;">
                         <a class="btn btn-accent" onclick="showRentalModal()">Book Luxury Rental</a>
-                        <a class="btn btn-outline" style="margin-left: 15px;" onclick="showSection('contact')">Corporate Rental Inquiry</a>
+                        <a class="btn btn-outline" style="margin-left: 15px;" onclick="showCorporateServicesModal()">Corporate Rental Inquiry</a>
                     </div>
                 </div>
             </section>
@@ -1524,6 +1525,90 @@
                 
                 <div class="car-grid" id="all-car-listings">
                     <!-- All car listings will be dynamically loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Brand Gallery Section -->
+        <section id="brand-gallery-section" style="display: none; padding: 100px 0;">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Luxury Brand Gallery</h2>
+                    <p>Explore our exclusive collection of premium automotive brands</p>
+                </div>
+                
+                <div class="brands-grid">
+                    <div class="brand-card" onclick="filterByBrand('mercedes')">
+                        <div class="brand-logo">
+                            <i class="fas fa-car" style="color: #00a6a6;"></i>
+                        </div>
+                        <h3>Mercedes-Benz</h3>
+                        <p>German Engineering Excellence</p>
+                        <div style="margin-top: 15px;">
+                            <span class="btn btn-outline" style="padding: 5px 15px; font-size: 0.8rem;">View 24 Models</span>
+                        </div>
+                    </div>
+                    
+                    <div class="brand-card" onclick="filterByBrand('bmw')">
+                        <div class="brand-logo">
+                            <i class="fas fa-car" style="color: #0066b1;"></i>
+                        </div>
+                        <h3>BMW</h3>
+                        <p>Ultimate Driving Machines</p>
+                        <div style="margin-top: 15px;">
+                            <span class="btn btn-outline" style="padding: 5px 15px; font-size: 0.8rem;">View 18 Models</span>
+                        </div>
+                    </div>
+                    
+                    <div class="brand-card" onclick="filterByBrand('range rover')">
+                        <div class="brand-logo">
+                            <i class="fas fa-car" style="color: #004225;"></i>
+                        </div>
+                        <h3>Range Rover</h3>
+                        <p>British Luxury & Capability</p>
+                        <div style="margin-top: 15px;">
+                            <span class="btn btn-outline" style="padding: 5px 15px; font-size: 0.8rem;">View 12 Models</span>
+                        </div>
+                    </div>
+                    
+                    <div class="brand-card" onclick="filterByBrand('porsche')">
+                        <div class="brand-logo">
+                            <i class="fas fa-car" style="color: #cc0000;"></i>
+                        </div>
+                        <h3>Porsche</h3>
+                        <p>Performance & Precision</p>
+                        <div style="margin-top: 15px;">
+                            <span class="btn btn-outline" style="padding: 5px 15px; font-size: 0.8rem;">View 8 Models</span>
+                        </div>
+                    </div>
+                    
+                    <div class="brand-card" onclick="filterByBrand('lexus')">
+                        <div class="brand-logo">
+                            <i class="fas fa-car" style="color: #1a1a1a;"></i>
+                        </div>
+                        <h3>Lexus</h3>
+                        <p>Japanese Refinement</p>
+                        <div style="margin-top: 15px;">
+                            <span class="btn btn-outline" style="padding: 5px 15px; font-size: 0.8rem;">View 15 Models</span>
+                        </div>
+                    </div>
+                    
+                    <div class="brand-card" onclick="filterByBrand('audi')">
+                        <div class="brand-logo">
+                            <i class="fas fa-car" style="color: #bb0000;"></i>
+                        </div>
+                        <h3>Audi</h3>
+                        <p>Vorsprung durch Technik</p>
+                        <div style="margin-top: 15px;">
+                            <span class="btn btn-outline" style="padding: 5px 15px; font-size: 0.8rem;">View 20 Models</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 50px;">
+                    <h3>Can't Find Your Preferred Brand?</h3>
+                    <p style="max-width: 600px; margin: 15px auto;">We continuously expand our luxury brand portfolio. Contact us for special requests or exclusive brand inquiries.</p>
+                    <a class="btn btn-accent" onclick="showSection('contact')">Request Special Brand</a>
                 </div>
             </div>
         </section>
@@ -1838,11 +1923,11 @@
                 <div class="footer-column">
                     <h3>Enterprise Services</h3>
                     <ul class="footer-links">
-                        <li><a onclick="showSection('home')">Luxury Vehicle Sales</a></li>
-                        <li><a onclick="showSection('rentals')">Premium Rentals</a></li>
+                        <li><a onclick="showSection('home'); setTimeout(() => document.getElementById('featured-vehicles').scrollIntoView({ behavior: 'smooth' }), 100);">Luxury Vehicle Sales</a></li>
+                        <li><a onclick="showLoginModal()">Premium Rentals</a></li>
                         <li><a onclick="showLoginModal()">Sell Your Vehicle</a></li>
-                        <li><a onclick="showSection('brands')">Brand Showcase</a></li>
-                        <li><a onclick="showSection('contact')">Corporate Services</a></li>
+                        <li><a onclick="showBrandGallery()">Brand Showcase</a></li>
+                        <li><a onclick="showCorporateServicesModal()">Corporate Services</a></li>
                     </ul>
                 </div>
                 
@@ -1968,6 +2053,9 @@
             <p style="text-align: center; margin-top: 15px;">
                 <a onclick="closeModal('admin-login-modal'); showLoginModal();">User Login</a>
             </p>
+            <p style="text-align: center; margin-top: 10px; font-size: 0.8rem; color: var(--gray);">
+                <a onclick="showAdminPasswordResetInfo()" style="cursor: pointer;">Admin Password Reset</a>
+            </p>
         </div>
     </div>
 
@@ -2011,8 +2099,43 @@
                 <button type="submit" class="btn" style="width: 100%; margin-top: 20px;">Send Reset Link</button>
             </form>
             <p style="text-align: center; margin-top: 15px; font-size: 0.9rem;">
-                Reset link will be sent to: briannjugunagathogo@gmail.com
+                Reset link will be sent to your registered email address
             </p>
+        </div>
+    </div>
+
+    <!-- Corporate Services Modal -->
+    <div id="corporate-services-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Corporate Services</h3>
+                <button class="close-modal" onclick="closeModal('corporate-services-modal')">&times;</button>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <h4 style="color: var(--primary); margin-bottom: 15px;">Enterprise Solutions for Your Business</h4>
+                <div style="display: grid; gap: 15px;">
+                    <div style="padding: 15px; background: var(--light); border-radius: var(--radius);">
+                        <h5><i class="fas fa-car" style="color: var(--primary); margin-right: 10px;"></i> Corporate Fleet Management</h5>
+                        <p>Complete fleet solutions with maintenance, insurance, and replacement services</p>
+                    </div>
+                    <div style="padding: 15px; background: var(--light); border-radius: var(--radius);">
+                        <h5><i class="fas fa-user-tie" style="color: var(--primary); margin-right: 10px;"></i> Executive Vehicle Program</h5>
+                        <p>Premium vehicles for your executive team with chauffeur services available</p>
+                    </div>
+                    <div style="padding: 15px; background: var(--light); border-radius: var(--radius);">
+                        <h5><i class="fas fa-handshake" style="color: var(--primary); margin-right: 10px;"></i> Client Transportation</h5>
+                        <p>Luxury transportation services for your VIP clients and business partners</p>
+                    </div>
+                    <div style="padding: 15px; background: var(--light); border-radius: var(--radius);">
+                        <h5><i class="fas fa-chart-line" style="color: var(--primary); margin-right: 10px;"></i> Custom Leasing Programs</h5>
+                        <p>Flexible leasing options tailored to your business needs and budget</p>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <p>Contact our corporate team for customized solutions</p>
+                <a class="btn" onclick="closeModal('corporate-services-modal'); showSection('contact');">Contact Corporate Team</a>
+            </div>
         </div>
     </div>
 
@@ -2121,7 +2244,7 @@
                     make: 'Mercedes-Benz',
                     model: 'AMG GLE 53 SUV',
                     year: 2023,
-                    price: 16800000, // Competitive pricing
+                    price: 16800000,
                     mileage: 8500,
                     transmission: 'automatic',
                     fuel: 'petrol',
@@ -2138,7 +2261,7 @@
                     make: 'BMW',
                     model: 'X5 xDrive40i',
                     year: 2022,
-                    price: 14200000, // Competitive pricing
+                    price: 14200000,
                     mileage: 18500,
                     transmission: 'automatic',
                     fuel: 'petrol',
@@ -2155,7 +2278,7 @@
                     make: 'Toyota',
                     model: 'Land Cruiser V8',
                     year: 2023,
-                    price: 21500000, // Competitive pricing
+                    price: 21500000,
                     mileage: 3500,
                     transmission: 'automatic',
                     fuel: 'diesel',
@@ -2172,7 +2295,7 @@
                     make: 'Range Rover',
                     model: 'Autobiography',
                     year: 2023,
-                    price: 28500000, // Competitive pricing
+                    price: 28500000,
                     mileage: 7500,
                     transmission: 'automatic',
                     fuel: 'diesel',
@@ -2196,7 +2319,7 @@
                 model: 'S-Class 2023',
                 type: 'Executive Sedan',
                 image: 'https://api.media.mercedes-benz.com/jsonapi/image/deliver/9181e1f8-01b1-4440-b994-57314de7b092/3_2_768',
-                dailyRate: 42000, // Competitive pricing
+                dailyRate: 42000,
                 weeklyRate: 252000,
                 features: ['Chauffeur Option', 'Full Insurance', 'Airport Delivery', 'WiFi', 'Massage Seats', 'Panoramic Roof']
             },
@@ -2206,7 +2329,7 @@
                 model: 'Autobiography 2023',
                 type: 'Luxury SUV',
                 image: 'https://media.production.jlrms.com/styles/hero_crop/s3/2025-08-04/image/21237d82-fb2d-49f9-8b5e-2a78b5c9b476/RRS_SV_Carbon_F34_16x9_8K_SH001_v2_PR.jpg?VersionId=xms9oy1hINgrZny5ygmAB_8oWxISUU4k&h=9ed48596&itok=MoCiWqRT',
-                dailyRate: 52000, // Competitive pricing
+                dailyRate: 52000,
                 weeklyRate: 312000,
                 features: ['7 Seats', 'Off-road Capable', 'Premium Sound', 'Massage Seats', 'Air Suspension', 'Terrain Response']
             },
@@ -2216,7 +2339,7 @@
                 model: '7 Series 2023',
                 type: 'Luxury Sedan',
                 image: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-                dailyRate: 38000, // Competitive pricing
+                dailyRate: 38000,
                 weeklyRate: 228000,
                 features: ['Executive Interior', 'Night Vision', 'Massage Seats', 'B&W Sound', 'Gesture Control', 'Sky Lounge']
             },
@@ -2226,7 +2349,7 @@
                 model: 'Cayenne Turbo',
                 type: 'Performance SUV',
                 image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-                dailyRate: 65000, // Competitive pricing
+                dailyRate: 65000,
                 weeklyRate: 390000,
                 features: ['Sport Chrono', 'Premium Package', 'Performance Tires', 'Carbon Interior', 'Adaptive Suspension', 'Sports Exhaust']
             }
@@ -2319,10 +2442,15 @@
 
         // Password reset function
         function requestPasswordReset(email) {
-            // In a real implementation, this would send an email to briannjugunagathogo@gmail.com
+            // In a real implementation, this would send an email to the user's registered email
             console.log(`Password reset requested for: ${email}`);
-            alert(`Password reset link has been sent to briannjugunagathogo@gmail.com\n\nFor security, only the enterprise admin email can process password resets.`);
+            alert(`Password reset link has been sent to ${email}\n\nPlease check your email to reset your password.`);
             return true;
+        }
+
+        // Admin password reset info
+        function showAdminPasswordResetInfo() {
+            alert('For admin password reset, please contact system administrator or use the enterprise recovery process.');
         }
 
         // Enhanced login with security features
@@ -2487,6 +2615,7 @@
             // Hide all sections
             document.getElementById('home-section').style.display = 'none';
             document.getElementById('listings-section').style.display = 'none';
+            document.getElementById('brand-gallery-section').style.display = 'none';
             document.getElementById('about-section').style.display = 'none';
             document.getElementById('contact-section').style.display = 'none';
             document.getElementById('dashboard-section').style.display = 'none';
@@ -2498,22 +2627,51 @@
             } else if (section === 'listings') {
                 document.getElementById('listings-section').style.display = 'block';
                 loadCarListings();
+            } else if (section === 'rentals') {
+                document.getElementById('home-section').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('rentals-section').scrollIntoView({ behavior: 'smooth' });
+                }, 100);
             } else if (section === 'about') {
                 document.getElementById('about-section').style.display = 'block';
             } else if (section === 'contact') {
                 document.getElementById('contact-section').style.display = 'block';
-            } else if (section === 'brands') {
-                // Scroll to brands section
-                document.getElementById('brands-section').scrollIntoView({ behavior: 'smooth' });
-                return;
-            } else if (section === 'rentals') {
-                // Scroll to rentals section
-                document.getElementById('rentals-section').scrollIntoView({ behavior: 'smooth' });
-                return;
             }
             
             // Close mobile menu if open
             document.querySelector('.nav-links').classList.remove('active');
+        }
+
+        // Brand gallery function
+        function showBrandGallery() {
+            // Hide all sections
+            document.getElementById('home-section').style.display = 'none';
+            document.getElementById('listings-section').style.display = 'none';
+            document.getElementById('about-section').style.display = 'none';
+            document.getElementById('contact-section').style.display = 'none';
+            document.getElementById('dashboard-section').style.display = 'none';
+            document.getElementById('admin-section').style.display = 'none';
+            
+            // Show brand gallery
+            document.getElementById('brand-gallery-section').style.display = 'block';
+            
+            // Close mobile menu if open
+            document.querySelector('.nav-links').classList.remove('active');
+        }
+
+        // Filter by brand function
+        function filterByBrand(brand) {
+            showSection('home');
+            setTimeout(() => {
+                document.getElementById('make').value = brand;
+                document.getElementById('filter-form').dispatchEvent(new Event('submit'));
+                document.getElementById('featured-vehicles').scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+
+        // Corporate services modal
+        function showCorporateServicesModal() {
+            document.getElementById('corporate-services-modal').style.display = 'flex';
         }
 
         // Modal functions
@@ -2933,6 +3091,7 @@
             // Hide all sections
             document.getElementById('home-section').style.display = 'none';
             document.getElementById('listings-section').style.display = 'none';
+            document.getElementById('brand-gallery-section').style.display = 'none';
             document.getElementById('about-section').style.display = 'none';
             document.getElementById('contact-section').style.display = 'none';
             document.getElementById('admin-section').style.display = 'none';
@@ -2949,6 +3108,7 @@
             // Hide all sections
             document.getElementById('home-section').style.display = 'none';
             document.getElementById('listings-section').style.display = 'none';
+            document.getElementById('brand-gallery-section').style.display = 'none';
             document.getElementById('about-section').style.display = 'none';
             document.getElementById('contact-section').style.display = 'none';
             document.getElementById('dashboard-section').style.display = 'none';
