@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AGAS LUXE DRIVE | Luxury Cars - Verified Sellers</title>
+    <title>AGAS LUXE DRIVE | Premium Luxury Cars - Verified Sellers</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* ===== GLOBAL STYLES ===== */
@@ -206,6 +206,57 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: var(--dark);
+        }
+
+        /* ===== MOBILE MENU ===== */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--white);
+            z-index: 2000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .mobile-menu-links {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .mobile-menu-links li {
+            margin-bottom: 15px;
+        }
+
+        .mobile-menu-links a {
+            display: block;
+            padding: 12px 0;
+            font-size: 1.1rem;
+            color: var(--dark);
+            text-decoration: none;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .mobile-auth-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
         /* ===== HERO SECTION ===== */
@@ -914,6 +965,116 @@
             border-radius: var(--radius);
         }
 
+        /* ===== PROFILE SELECTION ===== */
+        .profile-selection {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .profile-option {
+            flex: 1;
+            padding: 20px;
+            border: 2px solid var(--gray-light);
+            border-radius: var(--radius);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .profile-option:hover {
+            border-color: var(--primary);
+        }
+
+        .profile-option.selected {
+            border-color: var(--primary);
+            background-color: rgba(26, 54, 93, 0.05);
+        }
+
+        .profile-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        /* ===== TESTIMONIAL SUBMISSION ===== */
+        .testimonial-form {
+            max-width: 600px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        /* ===== STATS COUNTER ===== */
+        .stats-counter {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--dark);
+        }
+
+        /* ===== LOADING SPINNER ===== */
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ===== NOTIFICATION ===== */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 15px 25px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            z-index: 1001;
+            display: none;
+            max-width: 350px;
+        }
+
+        .notification.error {
+            background: var(--danger);
+        }
+
+        .notification.warning {
+            background: var(--warning);
+        }
+
         /* ===== RESPONSIVE DESIGN ===== */
         @media (max-width: 992px) {
             .hero h1 {
@@ -932,17 +1093,6 @@
             
             .nav-links {
                 display: none;
-                width: 100%;
-                flex-direction: column;
-                margin-top: 20px;
-            }
-            
-            .nav-links.active {
-                display: flex;
-            }
-            
-            .nav-links li {
-                margin: 10px 0;
             }
             
             .mobile-menu-btn {
@@ -967,6 +1117,14 @@
 
             .logo-luxe-drive {
                 font-size: 0.9rem;
+            }
+
+            .profile-selection {
+                flex-direction: column;
+            }
+
+            .stats-counter {
+                flex-direction: column;
             }
         }
 
@@ -1006,7 +1164,16 @@
 <body>
     <!-- Session Timer -->
     <div class="session-timer" id="session-timer">
-        Session expires in: <span id="session-time">15:00</span>
+        Session expires in: <span id="session-time">45:00</span>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" id="loading-spinner">
+        <div class="spinner"></div>
+        <p>Processing your request...</p>
     </div>
 
     <!-- Header & Navigation -->
@@ -1031,9 +1198,14 @@
                     <li><a onclick="showSection('contact')">Contact</a></li>
                 </ul>
                 
-                <div class="auth-buttons">
+                <div class="auth-buttons" id="auth-buttons">
                     <a class="btn btn-outline" onclick="showLoginModal()">Login</a>
                     <a class="btn" onclick="showSignupModal()">Sign Up</a>
+                </div>
+                
+                <div class="auth-buttons" id="user-menu" style="display: none;">
+                    <a class="btn btn-outline" id="user-dashboard-btn" onclick="showDashboard()">Dashboard</a>
+                    <a class="btn btn-danger" onclick="logout()">Logout</a>
                 </div>
                 
                 <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
@@ -1042,6 +1214,39 @@
             </nav>
         </div>
     </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <div class="logo-main">
+                    <div class="logo-agas">AGAS</div>
+                    <div class="logo-luxe-drive">LUXE DRIVE</div>
+                </div>
+            </div>
+            <button class="close-modal" onclick="toggleMobileMenu()">&times;</button>
+        </div>
+        
+        <ul class="mobile-menu-links">
+            <li><a onclick="showSection('home'); toggleMobileMenu();">Home</a></li>
+            <li><a onclick="showSection('listings'); toggleMobileMenu();">Buy Cars</a></li>
+            <li><a onclick="showSection('rentals'); toggleMobileMenu();">Rent Cars</a></li>
+            <li><a onclick="showLoginModal(); toggleMobileMenu();">Sell Car</a></li>
+            <li><a onclick="showBrandGallery(); toggleMobileMenu();">Brands</a></li>
+            <li><a onclick="showSection('about'); toggleMobileMenu();">About</a></li>
+            <li><a onclick="showSection('contact'); toggleMobileMenu();">Contact</a></li>
+        </ul>
+        
+        <div class="mobile-auth-buttons" id="mobile-auth-buttons">
+            <a class="btn btn-outline" onclick="showLoginModal(); toggleMobileMenu();">Login</a>
+            <a class="btn" onclick="showSignupModal(); toggleMobileMenu();">Sign Up</a>
+        </div>
+        
+        <div class="mobile-auth-buttons" id="mobile-user-menu" style="display: none;">
+            <a class="btn btn-outline" onclick="showDashboard(); toggleMobileMenu();">Dashboard</a>
+            <a class="btn btn-danger" onclick="logout(); toggleMobileMenu();">Logout</a>
+        </div>
+    </div>
 
     <!-- Main Content Sections -->
     <main>
@@ -1056,6 +1261,30 @@
                         <a class="btn btn-accent" onclick="showSection('listings')">Buy Luxury Cars</a>
                         <a class="btn btn-outline" style="background: rgba(255,255,255,0.2); color: white; border-color: white;" onclick="showSection('rentals')">Rent Premium Cars</a>
                         <a class="btn" style="background: var(--success);" onclick="showLoginModal()">Sell Your Car</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Counter -->
+            <section style="background-color: var(--white); padding: 40px 0;">
+                <div class="container">
+                    <div class="stats-counter">
+                        <div class="stat-item">
+                            <span class="stat-number" id="cars-sold">1000+</span>
+                            <span class="stat-label">Cars Sold</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="happy-clients">1000+</span>
+                            <span class="stat-label">Happy Clients</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="verified-sellers">1000+</span>
+                            <span class="stat-label">Verified Sellers</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="rental-bookings">1000+</span>
+                            <span class="stat-label">Rental Bookings</span>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -1090,7 +1319,7 @@
                                 <i class="fas fa-clock"></i>
                             </div>
                             <h3>Auto Session Timeout</h3>
-                            <p>Automatic logout after 15 minutes of inactivity for security</p>
+                            <p>Automatic logout after inactivity for security</p>
                         </div>
                         
                         <div class="security-card">
@@ -1288,6 +1517,8 @@
                                     <option value="volvo">Volvo</option>
                                     <option value="nissan">Nissan/Infiniti</option>
                                     <option value="porsche">Porsche</option>
+                                    <option value="bentley">Bentley</option>
+                                    <option value="maserati">Maserati</option>
                                 </select>
                             </div>
                             
@@ -1300,13 +1531,13 @@
                                 <label for="year">Year</label>
                                 <select id="year" class="form-control">
                                     <option value="">Any Year</option>
+                                    <option value="2024">2024</option>
                                     <option value="2023">2023</option>
                                     <option value="2022">2022</option>
                                     <option value="2021">2021</option>
                                     <option value="2020">2020</option>
                                     <option value="2019">2019</option>
                                     <option value="2018">2018</option>
-                                    <option value="2017">2017</option>
                                 </select>
                             </div>
                             
@@ -1335,7 +1566,7 @@
                     </div>
                     
                     <div style="text-align: center; margin-top: 40px;">
-                        <a class="btn" onclick="showSection('listings')">View All 247 Listings</a>
+                        <a class="btn" onclick="showSection('listings')">View All Listings</a>
                     </div>
                 </div>
             </section>
@@ -1435,27 +1666,35 @@
                         </div>
                     </div>
                     
-                    <div class="testimonials">
-                        <div class="testimonial">
-                            <p class="testimonial-text">"I was hesitant to buy a luxury car online, but AGAS LUXE DRIVE's verification process gave me peace of mind. The Mercedes was exactly as described!"</p>
-                            <div class="testimonial-author">
-                                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Sarah Johnson" class="author-avatar">
-                                <div>
-                                    <h4>Sarah Johnson</h4>
-                                    <p>Purchased a Mercedes-Benz GLE</p>
-                                </div>
-                            </div>
+                    <div class="testimonials" id="testimonials-container">
+                        <!-- Testimonials will be dynamically loaded here -->
+                    </div>
+
+                    <!-- Testimonial Submission Form (Visible to logged-in users) -->
+                    <div id="testimonial-form-container" style="display: none; margin-top: 50px;">
+                        <div class="section-title">
+                            <h3>Share Your Experience</h3>
+                            <p>Tell others about your experience with AGAS LUXE DRIVE</p>
                         </div>
-                        
-                        <div class="testimonial">
-                            <p class="testimonial-text">"Renting through AGAS LUXE DRIVE was seamless. The Range Rover was immaculate, and the delivery to my hotel was punctual. Will definitely use again!"</p>
-                            <div class="testimonial-author">
-                                <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="David Kimani" class="author-avatar">
-                                <div>
-                                    <h4>David Kimani</h4>
-                                    <p>Rented a Range Rover for 3 days</p>
+                        <div class="testimonial-form">
+                            <form id="testimonial-form">
+                                <div class="form-group">
+                                    <label for="testimonial-text">Your Testimonial</label>
+                                    <textarea id="testimonial-text" class="form-control" rows="4" required placeholder="Share your experience with AGAS LUXE DRIVE..."></textarea>
                                 </div>
-                            </div>
+                                <div class="form-group">
+                                    <label for="testimonial-rating">Rating</label>
+                                    <select id="testimonial-rating" class="form-control" required>
+                                        <option value="">Select Rating</option>
+                                        <option value="5">★★★★★ Excellent</option>
+                                        <option value="4">★★★★ Very Good</option>
+                                        <option value="3">★★★ Good</option>
+                                        <option value="2">★★ Fair</option>
+                                        <option value="1">★ Poor</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn">Submit Testimonial</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -1483,6 +1722,10 @@
                                 <option value="porsche">Porsche</option>
                                 <option value="lexus">Lexus</option>
                                 <option value="jaguar">Jaguar</option>
+                                <option value="bentley">Bentley</option>
+                                <option value="maserati">Maserati</option>
+                                <option value="volvo">Volvo</option>
+                                <option value="volkswagen">Volkswagen</option>
                             </select>
                         </div>
                         
@@ -1495,6 +1738,7 @@
                             <label for="listings-year">Year</label>
                             <select id="listings-year" class="form-control">
                                 <option value="">Any Year</option>
+                                <option value="2024">2024</option>
                                 <option value="2023">2023</option>
                                 <option value="2022">2022</option>
                                 <option value="2021">2021</option>
@@ -1601,6 +1845,28 @@
                         <p>Vorsprung durch Technik</p>
                         <div style="margin-top: 15px;">
                             <span class="btn btn-outline" style="padding: 5px 15px; font-size: 0.8rem;">View 20 Models</span>
+                        </div>
+                    </div>
+
+                    <div class="brand-card" onclick="filterByBrand('bentley')">
+                        <div class="brand-logo">
+                            <i class="fas fa-car" style="color: #005e36;"></i>
+                        </div>
+                        <h3>Bentley</h3>
+                        <p>British Luxury Craftsmanship</p>
+                        <div style="margin-top: 15px;">
+                            <span class="btn btn-outline" style="padding: 5px 15px; font-size: 0.8rem;">View 6 Models</span>
+                        </div>
+                    </div>
+
+                    <div class="brand-card" onclick="filterByBrand('maserati')">
+                        <div class="brand-logo">
+                            <i class="fas fa-car" style="color: #0c2340;"></i>
+                        </div>
+                        <h3>Maserati</h3>
+                        <p>Italian Performance & Style</p>
+                        <div style="margin-top: 15px;">
+                            <span class="btn btn-outline" style="padding: 5px 15px; font-size: 0.8rem;">View 8 Models</span>
                         </div>
                     </div>
                 </div>
@@ -1732,6 +1998,8 @@
                     <button class="dashboard-tab active" onclick="switchTab('my-listings')">My Listings</button>
                     <button class="dashboard-tab" onclick="switchTab('add-listing')">Add New Car</button>
                     <button class="dashboard-tab" onclick="switchTab('inquiries')">Inquiries</button>
+                    <button class="dashboard-tab" onclick="switchTab('purchases')">My Purchases</button>
+                    <button class="dashboard-tab" onclick="switchTab('rentals')">My Rentals</button>
                     <button class="dashboard-tab" onclick="switchTab('change-password')">Security Settings</button>
                 </div>
                 
@@ -1760,7 +2028,7 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="car-year">Year</label>
-                                    <input type="number" id="car-year" class="form-control" min="1990" max="2023" required>
+                                    <input type="number" id="car-year" class="form-control" min="1990" max="2024" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="car-price">Price ($)</label>
@@ -1831,6 +2099,20 @@
                         </div>
                     </div>
 
+                    <div id="purchases-tab" class="tab-content" style="display: none;">
+                        <h3>My Purchases</h3>
+                        <div id="user-purchases">
+                            <!-- Purchases will appear here -->
+                        </div>
+                    </div>
+
+                    <div id="rentals-tab" class="tab-content" style="display: none;">
+                        <h3>My Rentals</h3>
+                        <div id="user-rentals">
+                            <!-- Rentals will appear here -->
+                        </div>
+                    </div>
+
                     <div id="change-password-tab" class="tab-content" style="display: none;">
                         <h3>Security Settings</h3>
                         <form onsubmit="event.preventDefault(); changePassword();">
@@ -1865,13 +2147,14 @@
             <div class="container">
                 <div class="section-title">
                     <h2>Admin Panel</h2>
-                    <p>Manage car listings and user accounts</p>
+                    <p>Manage car listings, user accounts, and testimonials</p>
                 </div>
                 
                 <div class="dashboard-tabs">
                     <button class="dashboard-tab active" onclick="switchAdminTab('pending')">Pending Listings</button>
                     <button class="dashboard-tab" onclick="switchAdminTab('verified')">Verified Listings</button>
                     <button class="dashboard-tab" onclick="switchAdminTab('users')">User Management</button>
+                    <button class="dashboard-tab" onclick="switchAdminTab('testimonials')">Testimonial Management</button>
                 </div>
                 
                 <div class="dashboard-content">
@@ -1893,6 +2176,13 @@
                         <h3>User Management</h3>
                         <div id="user-management">
                             <!-- User management will appear here -->
+                        </div>
+                    </div>
+
+                    <div id="testimonials-tab" class="tab-content" style="display: none;">
+                        <h3>Testimonial Management</h3>
+                        <div id="testimonial-management">
+                            <!-- Testimonial management will appear here -->
                         </div>
                     </div>
                 </div>
@@ -1997,7 +2287,31 @@
                 <h3 class="modal-title">Create an Account</h3>
                 <button class="close-modal" onclick="closeModal('signup-modal')">&times;</button>
             </div>
+            <div class="profile-selection">
+                <div class="profile-option" onclick="selectProfile('buyer')" id="buyer-profile">
+                    <div class="profile-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h4>Buyer</h4>
+                    <p>Browse, buy, and rent luxury vehicles</p>
+                </div>
+                <div class="profile-option" onclick="selectProfile('seller')" id="seller-profile">
+                    <div class="profile-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h4>Seller</h4>
+                    <p>List and sell your luxury vehicles</p>
+                </div>
+                <div class="profile-option" onclick="selectProfile('both')" id="both-profile">
+                    <div class="profile-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h4>Both</h4>
+                    <p>Buy, rent, and sell vehicles</p>
+                </div>
+            </div>
             <form id="signup-form">
+                <input type="hidden" id="user-profile" value="buyer">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="signup-fname">First Name</label>
@@ -2204,6 +2518,53 @@
         </div>
     </div>
 
+    <!-- Purchase Modal -->
+    <div id="purchase-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Purchase Vehicle</h3>
+                <button class="close-modal" onclick="closeModal('purchase-modal')">&times;</button>
+            </div>
+            <form id="purchase-form">
+                <input type="hidden" id="purchase-car-id">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="purchase-name">Full Name</label>
+                        <input type="text" id="purchase-name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="purchase-email">Email</label>
+                        <input type="email" id="purchase-email" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="purchase-phone">Phone</label>
+                        <input type="tel" id="purchase-phone" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="purchase-address">Address</label>
+                        <input type="text" id="purchase-address" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="purchase-payment">Payment Method</label>
+                    <select id="purchase-payment" class="form-control" required>
+                        <option value="">Select Payment Method</option>
+                        <option value="bank">Bank Transfer</option>
+                        <option value="card">Credit/Debit Card</option>
+                        <option value="escrow">Secure Escrow</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="purchase-notes">Additional Notes</label>
+                    <textarea id="purchase-notes" class="form-control" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; margin-top: 20px;">Complete Purchase</button>
+            </form>
+        </div>
+    </div>
+
     <script>
         // =============================================
         // ENTERPRISE SECURITY CONFIGURATION
@@ -2217,9 +2578,10 @@
             twoFASecret: 'AGAS2025SECURE'
         };
 
-        // Security configuration
+        // Security configuration with different timeouts for admin and users
         const SECURITY_CONFIG = {
-            sessionTimeout: 15 * 60 * 1000, // 15 minutes
+            adminTimeout: 45 * 60 * 1000, // 45 minutes for admin
+            userTimeout: 15 * 60 * 1000, // 15 minutes for regular users
             twoFATimeout: 10 * 60 * 1000, // 10 minutes for 2FA code
             maxLoginAttempts: 5,
             lockoutTime: 30 * 60 * 1000 // 30 minutes lockout
@@ -2229,12 +2591,24 @@
         let users = JSON.parse(localStorage.getItem('encrypted_users')) || [];
         let cars = JSON.parse(localStorage.getItem('encrypted_cars')) || [];
         let inquiries = JSON.parse(localStorage.getItem('encrypted_inquiries')) || [];
+        let purchases = JSON.parse(localStorage.getItem('encrypted_purchases')) || [];
+        let rentals = JSON.parse(localStorage.getItem('encrypted_rentals')) || [];
+        let testimonials = JSON.parse(localStorage.getItem('encrypted_testimonials')) || [];
         let currentUser = JSON.parse(localStorage.getItem('encrypted_currentUser')) || null;
         let currentCarInquiry = null;
+        let currentCarPurchase = null;
         let sessionTimer = null;
         let twoFACode = null;
         let twoFAExpiry = null;
         let loginAttempts = {};
+
+        // Stats counter values
+        let stats = {
+            carsSold: 1000,
+            happyClients: 1000,
+            verifiedSellers: 1000,
+            rentalBookings: 1000
+        };
 
         // Enhanced sample data with competitive pricing
         if (cars.length === 0) {
@@ -2306,9 +2680,131 @@
                     sellerId: 1,
                     status: 'approved',
                     features: ['Executive Seats', 'Terrain Response', 'Meridian Sound', 'Air Suspension', 'Massage Seats', 'Rear Entertainment']
+                },
+                {
+                    id: 5,
+                    make: 'Bentley',
+                    model: 'Continental GT',
+                    year: 2024,
+                    price: 38500000,
+                    mileage: 1200,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Mulliner Blue',
+                    description: 'Luxury grand tourer with handcrafted interior, W12 engine, and cutting-edge technology. Limited edition.',
+                    images: ['https://www.bentleymedia.com/_imagehandler/getimage/889dd4dc-26ca-4c8c-bdbe-529272fc7652?bgcolor=000&mode=pad&format=jpg&quality=85&w=1280&h=992'],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['W12 Engine', 'Handcrafted Interior', 'Mulliner Driving Spec', 'Naim Audio', 'All-Wheel Steering', 'Night Vision']
+                },
+                {
+                    id: 6,
+                    make: 'Maserati',
+                    model: 'Ghibli Trofeo',
+                    year: 2024,
+                    price: 24500000,
+                    mileage: 800,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Blu Nobile',
+                    description: 'High-performance luxury sedan with Ferrari-derived V8 engine, premium Italian leather, and advanced driver aids.',
+                    images: ['https://stellantis3.dam-broadcast.com/medias/domain12808/media109245/2773527-jbx9tpk775-whr.jpg'],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['Ferrari V8 Engine', 'Italian Leather', 'Skyhook Suspension', 'Bowers & Wilkins Audio', 'Carbon Fiber Trim', 'Launch Control']
+                },
+                {
+                    id: 7,
+                    make: 'Porsche',
+                    model: '911 GTS',
+                    year: 2024,
+                    price: 32500000,
+                    mileage: 1500,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'GT Silver Metallic',
+                    description: 'The perfect balance between daily usability and track performance. Iconic design with modern technology.',
+                    images: ['https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=288593&w=1620&h=1080&crop=0&public=1&cs=810d0c9722aa9361'],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['Rear-Wheel Drive', 'Sport Chrono', 'Porsche Active Suspension', 'Sports Exhaust', '20-inch RS Spyder Wheels', 'Alcantara Interior']
+                },
+                {
+                    id: 8,
+                    make: 'Volvo',
+                    model: 'XC90 Excellence',
+                    year: 2024,
+                    price: 19500000,
+                    mileage: 2500,
+                    transmission: 'automatic',
+                    fuel: 'hybrid',
+                    color: 'Onyx Black',
+                    description: 'Ultra-luxury SUV with four-seat configuration, premium sound system, and advanced safety features.',
+                    images: ['https://r3.previews.aprimo.com/volvocars/2025%5C8%5C19_8%5C7db39272-6ba4-45b3-b718-b33e0093e13a_4b230047-8f70-4d98-82ef-ac9058554941_Prev.jpg?skoid=09d81470-a69a-4e0c-8639-1a93e0bc466f&sktid=d05954c1-36eb-40b2-8f23-7f2ce352faf6&skt=2025-11-10T12%3A20%3A43Z&ske=2025-11-17T12%3A20%3A43Z&sks=b&skv=2024-11-04&sv=2024-11-04&st=2025-11-10T11%3A00%3A00Z&se=2025-11-17T13%3A00%3A00Z&sr=b&sp=r&sig=Ml38RRvr3zNmF5qXTtlTknprjEn2BAWG72eCGSPfUr0%3D&w=1920'],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['Four-Seat Configuration', 'Bowers & Wilkins Audio', 'Pilot Assist', 'Air Suspension', 'Four-Zone Climate', 'Massage Seats']
+                },
+                {
+                    id: 9,
+                    make: 'Volkswagen',
+                    model: 'Touareg R-Line',
+                    year: 2024,
+                    price: 17500000,
+                    mileage: 3200,
+                    transmission: 'automatic',
+                    fuel: 'diesel',
+                    color: 'Deep Black',
+                    description: 'Premium SUV with R-Line package, advanced infotainment, and luxurious interior. Full options.',
+                    images: ['https://uploads.vw-mms.de/system/production/images/vwn/080/134/images/e68f7df34d1c443a7d55ce4135a821fa5e45ce75/DB2023AU01236_web_1160.jpg?1696503436'],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['R-Line Package', 'Digital Cockpit', 'Air Suspension', '4MOTION', 'Premium Sound', 'Panoramic Sunroof']
                 }
             ];
             localStorage.setItem('encrypted_cars', JSON.stringify(cars));
+        }
+
+        // Initialize testimonials if empty
+        if (testimonials.length === 0) {
+            testimonials = [
+                {
+                    id: 1,
+                    userId: 1,
+                    userName: 'Sarah Johnson',
+                    userAvatar: 'https://randomuser.me/api/portraits/women/65.jpg',
+                    text: "I was hesitant to buy a luxury car online, but AGAS LUXE DRIVE's verification process gave me peace of mind. The Mercedes was exactly as described!",
+                    rating: 5,
+                    status: 'approved',
+                    date: new Date().toISOString()
+                },
+                {
+                    id: 2,
+                    userId: 2,
+                    userName: 'Kim David',
+                    userAvatar: 'https://randomuser.me/api/portraits/men/45.jpg',
+                    text: "Renting through AGAS LUXE DRIVE was seamless. The Range Rover was immaculate, and the delivery to my hotel was punctual. Will definitely use again!",
+                    rating: 5,
+                    status: 'approved',
+                    date: new Date().toISOString()
+                },
+                {
+                    id: 3,
+                    userId: 3,
+                    userName: 'Michael Omondi',
+                    userAvatar: 'https://randomuser.me/api/portraits/men/32.jpg',
+                    text: "Sold my Bentley through AGAS LUXE DRIVE and got a great price. The process was smooth and secure. Highly recommended!",
+                    rating: 5,
+                    status: 'approved',
+                    date: new Date().toISOString()
+                }
+            ];
+            localStorage.setItem('encrypted_testimonials', JSON.stringify(testimonials));
         }
 
         // Enhanced rental fleet with competitive pricing
@@ -2352,6 +2848,26 @@
                 dailyRate: 65000,
                 weeklyRate: 390000,
                 features: ['Sport Chrono', 'Premium Package', 'Performance Tires', 'Carbon Interior', 'Adaptive Suspension', 'Sports Exhaust']
+            },
+            {
+                id: 5,
+                make: 'Bentley',
+                model: 'Continental GT',
+                type: 'Grand Tourer',
+                image: 'https://www.bentleymedia.com/_imagehandler/getimage/889dd4dc-26ca-4c8c-bdbe-529272fc7652?bgcolor=000&mode=pad&format=jpg&quality=85&w=1280&h=992',
+                dailyRate: 85000,
+                weeklyRate: 510000,
+                features: ['W12 Engine', 'Handcrafted Interior', 'Mulliner Driving Spec', 'Naim Audio', 'All-Wheel Steering']
+            },
+            {
+                id: 6,
+                make: 'Maserati',
+                model: 'Ghibli Trofeo',
+                type: 'Sports Sedan',
+                image: 'https://stellantis3.dam-broadcast.com/medias/domain12808/media109245/2773527-jbx9tpk775-whr.jpg',
+                dailyRate: 55000,
+                weeklyRate: 330000,
+                features: ['Ferrari V8 Engine', 'Italian Leather', 'Skyhook Suspension', 'Bowers & Wilkins Audio', 'Carbon Fiber Trim']
             }
         ];
 
@@ -2363,14 +2879,16 @@
         // ENHANCED SECURITY FUNCTIONS
         // =============================================
 
-        // Generate 2FA code
+        // Generate 2FA code and send via email
         function generateTwoFACode() {
             twoFACode = Math.floor(100000 + Math.random() * 900000).toString();
             twoFAExpiry = Date.now() + SECURITY_CONFIG.twoFATimeout;
             
-            // In a real implementation, this would send an email
+            // Simulate sending email (in a real implementation, this would send an actual email)
             console.log(`2FA Code for ${adminAccount.email}: ${twoFACode}`);
-            alert(`2FA code has been sent to ${adminAccount.email}\n\nFor demo purposes, use code: ${twoFACode}`);
+            
+            // Show success message
+            showNotification(`2FA code has been sent to ${adminAccount.email}\n\nCode: ${twoFACode}\n\nThis code will expire in 10 minutes.`, 'success');
             
             return twoFACode;
         }
@@ -2384,7 +2902,7 @@
                 closeModal('twofa-modal');
                 completeAdminLogin();
             } else {
-                alert('Invalid or expired 2FA code. Please try again.');
+                showNotification('Invalid or expired 2FA code. Please try again.', 'error');
                 generateTwoFACode();
             }
         }
@@ -2400,18 +2918,19 @@
         // Resend 2FA code
         function resendTwoFACode() {
             generateTwoFACode();
-            alert('New 2FA code sent to your email.');
+            showNotification('New 2FA code sent to your email.', 'success');
         }
 
-        // Session management
+        // Session management with different timeouts for admin and users
         function startSessionTimer() {
             clearTimeout(sessionTimer);
             const timerElement = document.getElementById('session-time');
             const timerDisplay = document.getElementById('session-timer');
             
             if (currentUser) {
+                const timeout = currentUser.role === 'admin' ? SECURITY_CONFIG.adminTimeout : SECURITY_CONFIG.userTimeout;
                 timerDisplay.style.display = 'block';
-                let timeLeft = SECURITY_CONFIG.sessionTimeout / 1000;
+                let timeLeft = timeout / 1000;
                 
                 const updateTimer = () => {
                     const minutes = Math.floor(timeLeft / 60);
@@ -2420,7 +2939,7 @@
                     
                     if (timeLeft <= 0) {
                         logout();
-                        alert('Session expired for security. Please login again.');
+                        showNotification('Session expired for security. Please login again.', 'warning');
                     } else {
                         timeLeft--;
                         sessionTimer = setTimeout(updateTimer, 1000);
@@ -2444,13 +2963,13 @@
         function requestPasswordReset(email) {
             // In a real implementation, this would send an email to the user's registered email
             console.log(`Password reset requested for: ${email}`);
-            alert(`Password reset link has been sent to ${email}\n\nPlease check your email to reset your password.`);
+            showNotification(`Password reset link has been sent to ${email}\n\nPlease check your email to reset your password.`, 'success');
             return true;
         }
 
         // Admin password reset info
         function showAdminPasswordResetInfo() {
-            alert('For admin password reset, please contact system administrator or use the enterprise recovery process.');
+            showNotification('For admin password reset, please contact system administrator or use the enterprise recovery process.', 'info');
         }
 
         // Enhanced login with security features
@@ -2464,7 +2983,7 @@
             loginAttempts[attemptKey] = (loginAttempts[attemptKey] || 0) + 1;
             
             if (loginAttempts[attemptKey] > SECURITY_CONFIG.maxLoginAttempts) {
-                alert('Too many login attempts. Account temporarily locked for security.');
+                showNotification('Too many login attempts. Account temporarily locked for security.', 'error');
                 return;
             }
             
@@ -2474,7 +2993,7 @@
                 closeModal('admin-login-modal');
                 showTwoFAModal();
             } else {
-                alert(`Invalid credentials. ${SECURITY_CONFIG.maxLoginAttempts - loginAttempts[attemptKey]} attempts remaining.`);
+                showNotification(`Invalid credentials. ${SECURITY_CONFIG.maxLoginAttempts - loginAttempts[attemptKey]} attempts remaining.`, 'error');
             }
         }
 
@@ -2489,9 +3008,10 @@
             };
             
             localStorage.setItem('encrypted_currentUser', JSON.stringify(currentUser));
+            updateHeaderForLoggedInUser();
             startSessionTimer();
             showAdminPanel();
-            alert('Enterprise Admin login successful! Security protocols active.');
+            showNotification('Enterprise Admin login successful! Security protocols active.', 'success');
         }
 
         // Enhanced user authentication
@@ -2506,6 +3026,7 @@
                 currentUser = user;
                 localStorage.setItem('encrypted_currentUser', JSON.stringify(currentUser));
                 closeModal('login-modal');
+                updateHeaderForLoggedInUser();
                 startSessionTimer();
                 
                 if (user.role === 'admin') {
@@ -2514,10 +3035,45 @@
                     showDashboard();
                 }
                 
-                alert('Secure login successful! Session timer activated.');
+                showNotification('Secure login successful! Session timer activated.', 'success');
             } else {
-                alert('Invalid email or password. Please try again.');
+                showNotification('Invalid email or password. Please try again.', 'error');
             }
+        }
+
+        // Update header for logged in user
+        function updateHeaderForLoggedInUser() {
+            if (currentUser) {
+                document.getElementById('auth-buttons').style.display = 'none';
+                document.getElementById('user-menu').style.display = 'flex';
+                document.getElementById('mobile-auth-buttons').style.display = 'none';
+                document.getElementById('mobile-user-menu').style.display = 'flex';
+                
+                // Update dashboard button text based on user role
+                const dashboardBtn = document.getElementById('user-dashboard-btn');
+                if (currentUser.role === 'admin') {
+                    dashboardBtn.textContent = 'Admin Panel';
+                } else {
+                    dashboardBtn.textContent = 'Dashboard';
+                }
+            } else {
+                document.getElementById('auth-buttons').style.display = 'flex';
+                document.getElementById('user-menu').style.display = 'none';
+                document.getElementById('mobile-auth-buttons').style.display = 'flex';
+                document.getElementById('mobile-user-menu').style.display = 'none';
+            }
+        }
+
+        // Profile selection for signup
+        function selectProfile(profileType) {
+            document.getElementById('user-profile').value = profileType;
+            
+            // Update UI to show selected profile
+            document.querySelectorAll('.profile-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            document.getElementById(`${profileType}-profile`).classList.add('selected');
         }
 
         // Password change functionality
@@ -2532,28 +3088,53 @@
             let user;
             if (currentUser.role === 'admin') {
                 if (currentPassword !== adminAccount.password) {
-                    alert('Current password is incorrect.');
+                    showNotification('Current password is incorrect.', 'error');
                     return;
                 }
                 // Update admin password
                 adminAccount.password = newPassword;
-                alert('Enterprise admin password updated successfully!');
+                showNotification('Enterprise admin password updated successfully!', 'success');
             } else {
                 user = users.find(u => u.id === currentUser.id && u.password === currentPassword);
                 if (!user) {
-                    alert('Current password is incorrect.');
+                    showNotification('Current password is incorrect.', 'error');
                     return;
                 }
                 // Update user password
                 user.password = newPassword;
                 localStorage.setItem('encrypted_users', JSON.stringify(users));
-                alert('Password updated successfully!');
+                showNotification('Password updated successfully!', 'success');
             }
             
             // Clear form
             document.getElementById('current-password').value = '';
             document.getElementById('new-password').value = '';
             document.getElementById('confirm-password').value = '';
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = 'notification';
+            
+            if (type === 'error') {
+                notification.classList.add('error');
+            } else if (type === 'warning') {
+                notification.classList.add('warning');
+            }
+            
+            notification.style.display = 'block';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 5000);
+        }
+
+        // Show loading spinner
+        function showLoading(show = true) {
+            const spinner = document.getElementById('loading-spinner');
+            spinner.style.display = show ? 'block' : 'none';
         }
 
         // Add event listeners for session reset
@@ -2570,10 +3151,12 @@
         document.addEventListener('DOMContentLoaded', function() {
             loadCarListings();
             loadRentalFleet();
+            loadTestimonials();
             setupEventListeners();
             
             // Check if user is already logged in
             if (currentUser) {
+                updateHeaderForLoggedInUser();
                 startSessionTimer();
                 if (currentUser.role === 'admin') {
                     showAdminPanel();
@@ -2591,6 +3174,8 @@
             document.getElementById('add-car-form').addEventListener('submit', handleAddCar);
             document.getElementById('contact-form').addEventListener('submit', handleContact);
             document.getElementById('inquiry-form').addEventListener('submit', handleInquiry);
+            document.getElementById('purchase-form').addEventListener('submit', handlePurchase);
+            document.getElementById('testimonial-form').addEventListener('submit', handleTestimonial);
             document.getElementById('filter-form').addEventListener('submit', handleFilter);
             document.getElementById('listings-filter-form').addEventListener('submit', handleListingsFilter);
             document.getElementById('password-reset-form').addEventListener('submit', function(e) {
@@ -2600,14 +3185,11 @@
                 closeModal('password-reset-modal');
             });
             document.getElementById('rental-form').addEventListener('submit', handleRentalBooking);
-            
-            // Mobile menu
-            document.querySelector('.mobile-menu-btn').addEventListener('click', toggleMobileMenu);
         }
 
         // Mobile menu toggle
         function toggleMobileMenu() {
-            document.querySelector('.nav-links').classList.toggle('active');
+            document.getElementById('mobile-menu').classList.toggle('active');
         }
 
         // Section navigation
@@ -2639,7 +3221,7 @@
             }
             
             // Close mobile menu if open
-            document.querySelector('.nav-links').classList.remove('active');
+            document.getElementById('mobile-menu').classList.remove('active');
         }
 
         // Brand gallery function
@@ -2656,7 +3238,7 @@
             document.getElementById('brand-gallery-section').style.display = 'block';
             
             // Close mobile menu if open
-            document.querySelector('.nav-links').classList.remove('active');
+            document.getElementById('mobile-menu').classList.remove('active');
         }
 
         // Filter by brand function
@@ -2712,6 +3294,11 @@
             document.getElementById('inquiry-modal').style.display = 'flex';
         }
 
+        function showPurchaseModal(carId) {
+            currentCarPurchase = carId;
+            document.getElementById('purchase-modal').style.display = 'flex';
+        }
+
         function showRentalModal() {
             document.getElementById('rental-modal').style.display = 'flex';
         }
@@ -2760,9 +3347,9 @@
             const verifiedCars = cars.filter(car => car.verified && car.status === 'approved');
             const allCars = cars.filter(car => car.status === 'approved');
             
-            // Load featured cars (limit to 4)
+            // Load featured cars (limit to 6)
             if (featuredContainer) {
-                verifiedCars.slice(0, 4).forEach(car => {
+                verifiedCars.slice(0, 6).forEach(car => {
                     featuredContainer.appendChild(createCarCard(car));
                 });
             }
@@ -2775,9 +3362,17 @@
             }
         }
 
-        function createCarCard(car, showInquire = false) {
+        function createCarCard(car, showActions = false) {
             const card = document.createElement('div');
             card.className = 'car-card';
+            
+            const actionButtons = showActions ? 
+                `<div style="display: flex; gap: 10px; margin-top: 15px;">
+                    <button class="btn btn-outline" style="flex: 1;" onclick="showInquiryModal(${car.id})">Inquire</button>
+                    <button class="btn" style="flex: 1;" onclick="showPurchaseModal(${car.id})">Buy Now</button>
+                </div>` : 
+                `<a class="btn btn-outline" style="width: 100%; text-align: center; margin-top: 10px;">View Details</a>`;
+            
             card.innerHTML = `
                 <div class="car-badge">${car.verified ? 'VERIFIED' : 'PENDING'}</div>
                 <img src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-image">
@@ -2799,10 +3394,7 @@
                             `<span style="display: inline-block; background: var(--gray-light); padding: 3px 8px; border-radius: 12px; font-size: 0.8rem; margin: 2px;">${feature}</span>`
                         ).join('') : ''}
                     </div>
-                    ${showInquire ? 
-                        `<button class="btn btn-outline" style="width: 100%;" onclick="showInquiryModal(${car.id})">Secure Inquiry</button>` :
-                        `<a class="btn btn-outline" style="width: 100%; text-align: center;">View Details</a>`
-                    }
+                    ${actionButtons}
                 </div>
             `;
             return card;
@@ -2848,150 +3440,313 @@
             });
         }
 
+        // Testimonials
+        function loadTestimonials() {
+            const container = document.getElementById('testimonials-container');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            const approvedTestimonials = testimonials.filter(t => t.status === 'approved');
+            
+            if (approvedTestimonials.length === 0) {
+                container.innerHTML = '<p>No testimonials available yet.</p>';
+                return;
+            }
+            
+            approvedTestimonials.forEach(testimonial => {
+                const testimonialElement = document.createElement('div');
+                testimonialElement.className = 'testimonial';
+                
+                // Generate star rating
+                const stars = '★'.repeat(testimonial.rating) + '☆'.repeat(5 - testimonial.rating);
+                
+                testimonialElement.innerHTML = `
+                    <div style="color: var(--accent); margin-bottom: 10px;">${stars}</div>
+                    <p class="testimonial-text">"${testimonial.text}"</p>
+                    <div class="testimonial-author">
+                        <img src="${testimonial.userAvatar}" alt="${testimonial.userName}" class="author-avatar">
+                        <div>
+                            <h4>${testimonial.userName}</h4>
+                            <p>Verified Customer</p>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(testimonialElement);
+            });
+            
+            // Show testimonial form if user is logged in and not admin
+            const testimonialFormContainer = document.getElementById('testimonial-form-container');
+            if (currentUser && currentUser.role !== 'admin') {
+                testimonialFormContainer.style.display = 'block';
+            } else {
+                testimonialFormContainer.style.display = 'none';
+            }
+        }
+
         // Form handlers
         function handleSignup(e) {
             e.preventDefault();
-            const fname = document.getElementById('signup-fname').value;
-            const lname = document.getElementById('signup-lname').value;
-            const email = document.getElementById('signup-email').value;
-            const phone = document.getElementById('signup-phone').value;
-            const password = document.getElementById('signup-password').value;
-            const confirm = document.getElementById('signup-confirm').value;
+            showLoading(true);
             
-            if (password !== confirm) {
-                alert('Passwords do not match. Please try again.');
-                return;
-            }
-            
-            // Check if user already exists
-            if (users.find(u => u.email === email)) {
-                alert('An account with this email already exists. Please login instead.');
-                return;
-            }
-            
-            const newUser = {
-                id: users.length + 1,
-                fname,
-                lname,
-                email,
-                phone,
-                password,
-                role: 'user'
-            };
-            
-            users.push(newUser);
-            localStorage.setItem('encrypted_users', JSON.stringify(users));
-            
-            currentUser = newUser;
-            localStorage.setItem('encrypted_currentUser', JSON.stringify(currentUser));
-            
-            closeModal('signup-modal');
-            showDashboard();
-            
-            alert('Account created successfully!');
+            setTimeout(() => {
+                const fname = document.getElementById('signup-fname').value;
+                const lname = document.getElementById('signup-lname').value;
+                const email = document.getElementById('signup-email').value;
+                const phone = document.getElementById('signup-phone').value;
+                const password = document.getElementById('signup-password').value;
+                const confirm = document.getElementById('signup-confirm').value;
+                const profile = document.getElementById('user-profile').value;
+                
+                if (password !== confirm) {
+                    showNotification('Passwords do not match. Please try again.', 'error');
+                    showLoading(false);
+                    return;
+                }
+                
+                // Check if user already exists
+                if (users.find(u => u.email === email)) {
+                    showNotification('An account with this email already exists. Please login instead.', 'error');
+                    showLoading(false);
+                    return;
+                }
+                
+                const newUser = {
+                    id: users.length + 1,
+                    fname,
+                    lname,
+                    email,
+                    phone,
+                    password,
+                    role: 'user',
+                    profileType: profile
+                };
+                
+                users.push(newUser);
+                localStorage.setItem('encrypted_users', JSON.stringify(users));
+                
+                currentUser = newUser;
+                localStorage.setItem('encrypted_currentUser', JSON.stringify(currentUser));
+                
+                closeModal('signup-modal');
+                updateHeaderForLoggedInUser();
+                showDashboard();
+                showLoading(false);
+                
+                showNotification('Account created successfully!', 'success');
+            }, 1500);
         }
 
         function handleAddCar(e) {
             e.preventDefault();
             if (!currentUser) {
-                alert('Please login to list a car.');
+                showNotification('Please login to list a car.', 'error');
                 return;
             }
             
-            const make = document.getElementById('car-make').value;
-            const model = document.getElementById('car-model').value;
-            const year = parseInt(document.getElementById('car-year').value);
-            const price = parseInt(document.getElementById('car-price').value);
-            const mileage = parseInt(document.getElementById('car-mileage').value);
-            const transmission = document.getElementById('car-transmission').value;
-            const fuel = document.getElementById('car-fuel').value;
-            const color = document.getElementById('car-color').value;
-            const description = document.getElementById('car-description').value;
+            // Check if user has seller profile
+            if (currentUser.profileType !== 'seller' && currentUser.profileType !== 'both') {
+                showNotification('You need a seller profile to list cars. Please update your profile.', 'error');
+                return;
+            }
             
-            const newCar = {
-                id: cars.length + 1,
-                make,
-                model,
-                year,
-                price,
-                mileage,
-                transmission,
-                fuel,
-                color,
-                description,
-                images: ['https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'],
-                verified: false,
-                sellerId: currentUser.id,
-                status: 'pending',
-                features: ['Standard Features']
-            };
+            showLoading(true);
             
-            cars.push(newCar);
-            localStorage.setItem('encrypted_cars', JSON.stringify(cars));
-            
-            // Reset form
-            document.getElementById('add-car-form').reset();
-            
-            // Reload user listings
-            loadUserListings();
-            
-            alert('Car listing submitted successfully! It is now pending admin verification.');
+            setTimeout(() => {
+                const make = document.getElementById('car-make').value;
+                const model = document.getElementById('car-model').value;
+                const year = parseInt(document.getElementById('car-year').value);
+                const price = parseInt(document.getElementById('car-price').value);
+                const mileage = parseInt(document.getElementById('car-mileage').value);
+                const transmission = document.getElementById('car-transmission').value;
+                const fuel = document.getElementById('car-fuel').value;
+                const color = document.getElementById('car-color').value;
+                const description = document.getElementById('car-description').value;
+                
+                const newCar = {
+                    id: cars.length + 1,
+                    make,
+                    model,
+                    year,
+                    price,
+                    mileage,
+                    transmission,
+                    fuel,
+                    color,
+                    description,
+                    images: ['https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'],
+                    verified: false,
+                    sellerId: currentUser.id,
+                    status: 'pending',
+                    features: ['Standard Features']
+                };
+                
+                cars.push(newCar);
+                localStorage.setItem('encrypted_cars', JSON.stringify(cars));
+                
+                // Reset form
+                document.getElementById('add-car-form').reset();
+                
+                // Reload user listings
+                loadUserListings();
+                showLoading(false);
+                
+                showNotification('Car listing submitted successfully! It is now pending admin verification.', 'success');
+            }, 1500);
         }
 
         function handleContact(e) {
             e.preventDefault();
-            const name = document.getElementById('contact-name').value;
-            const email = document.getElementById('contact-email').value;
-            const subject = document.getElementById('contact-subject').value;
-            const message = document.getElementById('contact-message').value;
+            showLoading(true);
             
-            // In a real app, you would send this data to a server
-            alert(`Thank you for your message, ${name}! We will get back to you soon.`);
-            document.getElementById('contact-form').reset();
+            setTimeout(() => {
+                const name = document.getElementById('contact-name').value;
+                const email = document.getElementById('contact-email').value;
+                const subject = document.getElementById('contact-subject').value;
+                const message = document.getElementById('contact-message').value;
+                
+                // In a real app, you would send this data to a server
+                showNotification(`Thank you for your message, ${name}! We will get back to you soon.`, 'success');
+                document.getElementById('contact-form').reset();
+                showLoading(false);
+            }, 1500);
         }
 
         function handleInquiry(e) {
             e.preventDefault();
-            const name = document.getElementById('inquiry-name').value;
-            const email = document.getElementById('inquiry-email').value;
-            const phone = document.getElementById('inquiry-phone').value;
-            const message = document.getElementById('inquiry-message').value;
+            showLoading(true);
             
-            const car = cars.find(c => c.id === currentCarInquiry);
+            setTimeout(() => {
+                const name = document.getElementById('inquiry-name').value;
+                const email = document.getElementById('inquiry-email').value;
+                const phone = document.getElementById('inquiry-phone').value;
+                const message = document.getElementById('inquiry-message').value;
+                
+                const car = cars.find(c => c.id === currentCarInquiry);
+                
+                const inquiry = {
+                    id: inquiries.length + 1,
+                    carId: currentCarInquiry,
+                    carName: `${car.make} ${car.model} ${car.year}`,
+                    name,
+                    email,
+                    phone,
+                    message,
+                    date: new Date().toISOString()
+                };
+                
+                inquiries.push(inquiry);
+                localStorage.setItem('encrypted_inquiries', JSON.stringify(inquiries));
+                
+                closeModal('inquiry-modal');
+                showLoading(false);
+                showNotification('Your inquiry has been sent successfully! The seller will contact you soon.', 'success');
+            }, 1500);
+        }
+
+        function handlePurchase(e) {
+            e.preventDefault();
+            showLoading(true);
             
-            const inquiry = {
-                id: inquiries.length + 1,
-                carId: currentCarInquiry,
-                carName: `${car.make} ${car.model} ${car.year}`,
-                name,
-                email,
-                phone,
-                message,
-                date: new Date().toISOString()
-            };
+            setTimeout(() => {
+                const name = document.getElementById('purchase-name').value;
+                const email = document.getElementById('purchase-email').value;
+                const phone = document.getElementById('purchase-phone').value;
+                const address = document.getElementById('purchase-address').value;
+                const payment = document.getElementById('purchase-payment').value;
+                const notes = document.getElementById('purchase-notes').value;
+                
+                const car = cars.find(c => c.id === currentCarPurchase);
+                
+                const purchase = {
+                    id: purchases.length + 1,
+                    carId: currentCarPurchase,
+                    carName: `${car.make} ${car.model} ${car.year}`,
+                    price: car.price,
+                    name,
+                    email,
+                    phone,
+                    address,
+                    payment,
+                    notes,
+                    date: new Date().toISOString(),
+                    status: 'pending'
+                };
+                
+                purchases.push(purchase);
+                localStorage.setItem('encrypted_purchases', JSON.stringify(purchases));
+                
+                closeModal('purchase-modal');
+                showLoading(false);
+                showNotification('Your purchase request has been submitted successfully! Our team will contact you to complete the transaction.', 'success');
+            }, 1500);
+        }
+
+        function handleTestimonial(e) {
+            e.preventDefault();
+            if (!currentUser) {
+                showNotification('Please login to submit a testimonial.', 'error');
+                return;
+            }
             
-            inquiries.push(inquiry);
-            localStorage.setItem('encrypted_inquiries', JSON.stringify(inquiries));
+            showLoading(true);
             
-            closeModal('inquiry-modal');
-            alert('Your inquiry has been sent successfully! The seller will contact you soon.');
+            setTimeout(() => {
+                const text = document.getElementById('testimonial-text').value;
+                const rating = document.getElementById('testimonial-rating').value;
+                
+                const testimonial = {
+                    id: testimonials.length + 1,
+                    userId: currentUser.id,
+                    userName: `${currentUser.fname} ${currentUser.lname}`,
+                    userAvatar: `https://randomuser.me/api/portraits/${Math.random() > 0.5 ? 'men' : 'women'}/${Math.floor(Math.random() * 100)}.jpg`,
+                    text,
+                    rating: parseInt(rating),
+                    status: 'pending',
+                    date: new Date().toISOString()
+                };
+                
+                testimonials.push(testimonial);
+                localStorage.setItem('encrypted_testimonials', JSON.stringify(testimonials));
+                
+                document.getElementById('testimonial-form').reset();
+                showLoading(false);
+                showNotification('Thank you for your testimonial! It will be reviewed by our team before publication.', 'success');
+            }, 1500);
         }
 
         function handleRentalBooking(e) {
             e.preventDefault();
-            const startDate = document.getElementById('rental-start').value;
-            const endDate = document.getElementById('rental-end').value;
-            const location = document.getElementById('rental-location').value;
-            const insurance = document.getElementById('rental-insurance').value;
+            showLoading(true);
             
-            alert(`Thank you for your rental booking!\n\nDates: ${startDate} to ${endDate}\nLocation: ${location}\nInsurance: ${insurance}\n\nOur team will contact you to confirm your booking.`);
-            closeModal('rental-modal');
+            setTimeout(() => {
+                const startDate = document.getElementById('rental-start').value;
+                const endDate = document.getElementById('rental-end').value;
+                const location = document.getElementById('rental-location').value;
+                const insurance = document.getElementById('rental-insurance').value;
+                
+                const rental = {
+                    id: rentals.length + 1,
+                    startDate,
+                    endDate,
+                    location,
+                    insurance,
+                    status: 'pending',
+                    date: new Date().toISOString()
+                };
+                
+                rentals.push(rental);
+                localStorage.setItem('encrypted_rentals', JSON.stringify(rentals));
+                
+                showNotification(`Thank you for your rental booking!\n\nDates: ${startDate} to ${endDate}\nLocation: ${location}\nInsurance: ${insurance}\n\nOur team will contact you to confirm your booking.`, 'success');
+                closeModal('rental-modal');
+                showLoading(false);
+            }, 1500);
         }
 
         function handleFilter(e) {
             e.preventDefault();
-            // Show loading message
-            alert('Searching for cars with your criteria...');
+            showLoading(true);
             
             // Simulate search delay
             setTimeout(() => {
@@ -3024,23 +3779,24 @@
                 const featuredContainer = document.getElementById('car-listings');
                 if (featuredContainer) {
                     featuredContainer.innerHTML = '';
-                    filteredCars.slice(0, 4).forEach(car => {
+                    filteredCars.slice(0, 6).forEach(car => {
                         featuredContainer.appendChild(createCarCard(car));
                     });
                 }
                 
                 if (filteredCars.length === 0) {
-                    alert('No cars found matching your criteria. Please try different filters.');
+                    showNotification('No cars found matching your criteria. Please try different filters.', 'warning');
                 } else {
-                    alert(`Found ${filteredCars.length} cars matching your criteria!`);
+                    showNotification(`Found ${filteredCars.length} cars matching your criteria!`, 'success');
                 }
-            }, 1000);
+                
+                showLoading(false);
+            }, 1500);
         }
 
         function handleListingsFilter(e) {
             e.preventDefault();
-            // Show loading message
-            alert('Searching for cars with your criteria...');
+            showLoading(true);
             
             // Simulate search delay
             setTimeout(() => {
@@ -3079,11 +3835,13 @@
                 }
                 
                 if (filteredCars.length === 0) {
-                    alert('No cars found matching your criteria. Please try different filters.');
+                    showNotification('No cars found matching your criteria. Please try different filters.', 'warning');
                 } else {
-                    alert(`Found ${filteredCars.length} cars matching your criteria!`);
+                    showNotification(`Found ${filteredCars.length} cars matching your criteria!`, 'success');
                 }
-            }, 1000);
+                
+                showLoading(false);
+            }, 1500);
         }
 
         // Dashboard functions
@@ -3102,6 +3860,8 @@
             // Load user data
             loadUserListings();
             loadUserInquiries();
+            loadUserPurchases();
+            loadUserRentals();
         }
 
         function showAdminPanel() {
@@ -3119,6 +3879,8 @@
             // Load admin data
             loadPendingListings();
             loadVerifiedListings();
+            loadUserManagement();
+            loadTestimonialManagement();
         }
 
         function loadUserListings() {
@@ -3182,6 +3944,67 @@
                     </div>
                 `;
                 container.appendChild(inquiryItem);
+            });
+        }
+
+        function loadUserPurchases() {
+            if (!currentUser) return;
+            
+            const container = document.getElementById('user-purchases');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            const userPurchases = purchases.filter(p => p.email === currentUser.email);
+            
+            if (userPurchases.length === 0) {
+                container.innerHTML = '<p>You have no purchases yet.</p>';
+                return;
+            }
+            
+            userPurchases.forEach(purchase => {
+                const purchaseItem = document.createElement('div');
+                purchaseItem.className = 'listing-item';
+                purchaseItem.innerHTML = `
+                    <div class="listing-info">
+                        <h4>${purchase.carName}</h4>
+                        <p><strong>Price:</strong> ${formatPrice(purchase.price)}</p>
+                        <p><strong>Status:</strong> ${purchase.status}</p>
+                        <p><small>${new Date(purchase.date).toLocaleDateString()}</small></p>
+                    </div>
+                `;
+                container.appendChild(purchaseItem);
+            });
+        }
+
+        function loadUserRentals() {
+            if (!currentUser) return;
+            
+            const container = document.getElementById('user-rentals');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            const userRentals = rentals; // In a real app, this would be filtered by user
+            
+            if (userRentals.length === 0) {
+                container.innerHTML = '<p>You have no rentals yet.</p>';
+                return;
+            }
+            
+            userRentals.forEach(rental => {
+                const rentalItem = document.createElement('div');
+                rentalItem.className = 'listing-item';
+                rentalItem.innerHTML = `
+                    <div class="listing-info">
+                        <h4>Rental Booking</h4>
+                        <p><strong>Dates:</strong> ${rental.startDate} to ${rental.endDate}</p>
+                        <p><strong>Location:</strong> ${rental.location}</p>
+                        <p><strong>Status:</strong> ${rental.status}</p>
+                        <p><small>${new Date(rental.date).toLocaleDateString()}</small></p>
+                    </div>
+                `;
+                container.appendChild(rentalItem);
             });
         }
 
@@ -3249,6 +4072,69 @@
             });
         }
 
+        function loadUserManagement() {
+            const container = document.getElementById('user-management');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            if (users.length === 0) {
+                container.innerHTML = '<p>No users found.</p>';
+                return;
+            }
+            
+            users.forEach(user => {
+                const userItem = document.createElement('div');
+                userItem.className = 'listing-item';
+                userItem.innerHTML = `
+                    <div class="listing-info">
+                        <h4>${user.fname} ${user.lname}</h4>
+                        <p><strong>Email:</strong> ${user.email}</p>
+                        <p><strong>Phone:</strong> ${user.phone}</p>
+                        <p><strong>Profile:</strong> ${user.profileType || 'Buyer'}</p>
+                    </div>
+                    <div class="listing-actions">
+                        <button class="btn btn-danger" onclick="deleteUser(${user.id})">Delete</button>
+                    </div>
+                `;
+                container.appendChild(userItem);
+            });
+        }
+
+        function loadTestimonialManagement() {
+            const container = document.getElementById('testimonial-management');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            const pendingTestimonials = testimonials.filter(t => t.status === 'pending');
+            
+            if (pendingTestimonials.length === 0) {
+                container.innerHTML = '<p>No pending testimonials to review.</p>';
+                return;
+            }
+            
+            pendingTestimonials.forEach(testimonial => {
+                const stars = '★'.repeat(testimonial.rating) + '☆'.repeat(5 - testimonial.rating);
+                
+                const testimonialItem = document.createElement('div');
+                testimonialItem.className = 'listing-item';
+                testimonialItem.innerHTML = `
+                    <div class="listing-info">
+                        <h4>${testimonial.userName}</h4>
+                        <div style="color: var(--accent); margin: 5px 0;">${stars}</div>
+                        <p>${testimonial.text}</p>
+                        <p><small>${new Date(testimonial.date).toLocaleDateString()}</small></p>
+                    </div>
+                    <div class="listing-actions">
+                        <button class="btn" onclick="approveTestimonial(${testimonial.id})">Approve</button>
+                        <button class="btn btn-danger" onclick="rejectTestimonial(${testimonial.id})">Reject</button>
+                    </div>
+                `;
+                container.appendChild(testimonialItem);
+            });
+        }
+
         function approveCar(carId) {
             const carIndex = cars.findIndex(car => car.id === carId);
             if (carIndex !== -1) {
@@ -3257,7 +4143,7 @@
                 localStorage.setItem('encrypted_cars', JSON.stringify(cars));
                 loadPendingListings();
                 loadVerifiedListings();
-                alert('Car listing approved successfully!');
+                showNotification('Car listing approved successfully!', 'success');
             }
         }
 
@@ -3269,7 +4155,7 @@
                     localStorage.setItem('encrypted_cars', JSON.stringify(cars));
                     loadPendingListings();
                     loadVerifiedListings();
-                    alert('Car listing rejected and removed.');
+                    showNotification('Car listing rejected and removed.', 'success');
                 }
             }
         }
@@ -3282,7 +4168,43 @@
                     localStorage.setItem('encrypted_cars', JSON.stringify(cars));
                     loadVerifiedListings();
                     loadCarListings();
-                    alert('Car listing removed successfully.');
+                    showNotification('Car listing removed successfully.', 'success');
+                }
+            }
+        }
+
+        function deleteUser(userId) {
+            if (confirm('Are you sure you want to delete this user?')) {
+                const userIndex = users.findIndex(user => user.id === userId);
+                if (userIndex !== -1) {
+                    users.splice(userIndex, 1);
+                    localStorage.setItem('encrypted_users', JSON.stringify(users));
+                    loadUserManagement();
+                    showNotification('User deleted successfully.', 'success');
+                }
+            }
+        }
+
+        function approveTestimonial(testimonialId) {
+            const testimonialIndex = testimonials.findIndex(t => t.id === testimonialId);
+            if (testimonialIndex !== -1) {
+                testimonials[testimonialIndex].status = 'approved';
+                localStorage.setItem('encrypted_testimonials', JSON.stringify(testimonials));
+                loadTestimonialManagement();
+                loadTestimonials();
+                showNotification('Testimonial approved successfully!', 'success');
+            }
+        }
+
+        function rejectTestimonial(testimonialId) {
+            if (confirm('Are you sure you want to reject this testimonial?')) {
+                const testimonialIndex = testimonials.findIndex(t => t.id === testimonialId);
+                if (testimonialIndex !== -1) {
+                    testimonials.splice(testimonialIndex, 1);
+                    localStorage.setItem('encrypted_testimonials', JSON.stringify(testimonials));
+                    loadTestimonialManagement();
+                    loadTestimonials();
+                    showNotification('Testimonial rejected and removed.', 'success');
                 }
             }
         }
@@ -3292,6 +4214,8 @@
             document.getElementById('my-listings-tab').style.display = 'none';
             document.getElementById('add-listing-tab').style.display = 'none';
             document.getElementById('inquiries-tab').style.display = 'none';
+            document.getElementById('purchases-tab').style.display = 'none';
+            document.getElementById('rentals-tab').style.display = 'none';
             document.getElementById('change-password-tab').style.display = 'none';
             
             // Remove active class from all tabs
@@ -3309,6 +4233,7 @@
             document.getElementById('pending-tab').style.display = 'none';
             document.getElementById('verified-tab').style.display = 'none';
             document.getElementById('users-tab').style.display = 'none';
+            document.getElementById('testimonials-tab').style.display = 'none';
             
             // Remove active class from all tabs
             document.querySelectorAll('.dashboard-tab').forEach(tab => {
@@ -3325,8 +4250,9 @@
             localStorage.removeItem('encrypted_currentUser');
             clearTimeout(sessionTimer);
             document.getElementById('session-timer').style.display = 'none';
+            updateHeaderForLoggedInUser();
             showSection('home');
-            alert('You have been securely logged out.');
+            showNotification('You have been securely logged out.', 'success');
         }
     </script>
 </body>
