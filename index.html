@@ -1224,6 +1224,171 @@
             color: var(--primary);
         }
 
+        /* ===== USER BADGE SYSTEM ===== */
+        .user-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .badge-new {
+            background-color: var(--gray-light);
+            color: var(--dark);
+        }
+
+        .badge-bronze {
+            background-color: #cd7f32;
+            color: white;
+        }
+
+        .badge-silver {
+            background-color: #c0c0c0;
+            color: var(--dark);
+        }
+
+        .badge-gold {
+            background-color: #ffd700;
+            color: var(--dark);
+        }
+
+        .badge-platinum {
+            background-color: #e5e4e2;
+            color: var(--dark);
+        }
+
+        .badge-verified-buyer {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .badge-verified-seller {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .badge-corporate {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        /* ===== RATING SYSTEM ===== */
+        .rating-stars {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .star {
+            color: var(--gray-light);
+            font-size: 0.9rem;
+        }
+
+        .star.filled {
+            color: var(--warning);
+        }
+
+        .two-way-rating {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .rating-card {
+            background: var(--light);
+            padding: 15px;
+            border-radius: var(--radius);
+        }
+
+        .rating-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .rating-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rating-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .rating-content {
+            font-style: italic;
+        }
+
+        /* ===== ID VERIFICATION ===== */
+        .id-verification {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .country-select {
+            flex: 0 0 120px;
+        }
+
+        .id-input {
+            flex: 1;
+        }
+
+        /* ===== DASHBOARD NAVIGATION ===== */
+        .dashboard-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .dashboard-nav h2 {
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .dashboard-nav-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb .separator {
+            color: var(--gray);
+        }
+
         /* ===== RESPONSIVE DESIGN ===== */
         @media (max-width: 992px) {
             .hero h1 {
@@ -1301,6 +1466,25 @@
             .profile-selection {
                 flex-direction: column;
                 align-items: center;
+            }
+
+            .id-verification {
+                flex-direction: column;
+            }
+
+            .country-select {
+                flex: 1;
+            }
+
+            .dashboard-nav {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .dashboard-nav-actions {
+                width: 100%;
+                justify-content: space-between;
             }
         }
 
@@ -1390,7 +1574,10 @@
                 <div class="user-menu" id="user-menu" style="display: none;">
                     <div class="user-info">
                         <div class="user-avatar" id="user-avatar">U</div>
-                        <span id="user-name">User</span>
+                        <div>
+                            <span id="user-name">User</span>
+                            <div id="user-badges"></div>
+                        </div>
                     </div>
                     <a class="btn btn-outline" onclick="logout()">Logout</a>
                 </div>
@@ -1719,6 +1906,96 @@
                     <div style="text-align: center; margin-top: 40px;">
                         <a class="btn btn-accent" onclick="showRentalModal()">Book Luxury Rental</a>
                         <a class="btn btn-outline" style="margin-left: 15px;" onclick="showCorporateServicesModal()">Corporate Rental Inquiry</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Two-Way Rating System Section -->
+            <section style="background-color: var(--light);">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Two-Way Rating System</h2>
+                        <p>Build trust through mutual feedback between buyers and sellers</p>
+                    </div>
+                    
+                    <div class="two-way-rating">
+                        <div class="rating-card">
+                            <div class="rating-header">
+                                <div class="rating-user">
+                                    <div class="rating-avatar">BJ</div>
+                                    <div>
+                                        <strong>Brian J.</strong>
+                                        <div class="rating-stars">
+                                            <span class="star filled">★</span>
+                                            <span class="star filled">★</span>
+                                            <span class="star filled">★</span>
+                                            <span class="star filled">★</span>
+                                            <span class="star">★</span>
+                                            <span>(4.5)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="user-badge badge-verified-buyer">Verified Buyer</span>
+                                    <span class="user-badge badge-platinum">Platinum Seller</span>
+                                </div>
+                            </div>
+                            <div class="rating-content">
+                                "The seller was extremely professional and the car was exactly as described. The verification process gave me confidence in the transaction."
+                            </div>
+                        </div>
+                        
+                        <div class="rating-card">
+                            <div class="rating-header">
+                                <div class="rating-user">
+                                    <div class="rating-avatar">SA</div>
+                                    <div>
+                                        <strong>Sarah A.</strong>
+                                        <div class="rating-stars">
+                                            <span class="star filled">★</span>
+                                            <span class="star filled">★</span>
+                                            <span class="star filled">★</span>
+                                            <span class="star filled">★</span>
+                                            <span class="star filled">★</span>
+                                            <span>(5.0)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="user-badge badge-verified-seller">Verified Seller</span>
+                                    <span class="user-badge badge-gold">Gold Seller</span>
+                                </div>
+                            </div>
+                            <div class="rating-content">
+                                "As a first-time seller, the platform made the process smooth. The buyer verification ensured I was dealing with serious inquiries only."
+                            </div>
+                        </div>
+                        
+                        <div class="rating-card">
+                            <div class="rating-header">
+                                <div class="rating-user">
+                                    <div class="rating-avatar">MK</div>
+                                    <div>
+                                        <strong>Michael K.</strong>
+                                        <div class="rating-stars">
+                                            <span class="star filled">★</span>
+                                            <span class="star filled">★</span>
+                                            <span class="star filled">★</span>
+                                            <span class="star filled">★</span>
+                                            <span class="star">★</span>
+                                            <span>(4.0)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="user-badge badge-verified-buyer">Verified Buyer</span>
+                                    <span class="user-badge badge-corporate">Corporate Account</span>
+                                </div>
+                            </div>
+                            <div class="rating-content">
+                                "The rental process was seamless. The car was delivered on time and in perfect condition. Will definitely use again for business trips."
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -2053,8 +2330,7 @@
                 
                 <div style="max-width: 600px; margin: 50px auto 0; background-color: var(--white); padding: 30px; border-radius: var(--radius); box-shadow: var(--shadow);">
                     <h3 style="text-align: center; margin-bottom: 20px;">Send us a Message</h3>
-                    <form id="contact-form" action="https://formspree.io/f/xjkjreek" method="POST">
-                        <input type="hidden" name="_subject" value="New Contact Form Submission - AGAS LUXE DRIVE">
+                    <form id="contact-form">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="contact-name">Your Name</label>
@@ -2082,9 +2358,11 @@
         <!-- Buyer Dashboard -->
         <section id="buyer-dashboard" class="dashboard">
             <div class="container">
-                <div class="section-title">
+                <div class="dashboard-nav">
                     <h2>Buyer Dashboard</h2>
-                    <p>Manage your car inquiries and rental bookings</p>
+                    <div class="dashboard-nav-actions">
+                        <a class="btn btn-outline" onclick="showSection('home')">Back to Home</a>
+                    </div>
                 </div>
                 
                 <div class="dashboard-stats">
@@ -2100,17 +2378,25 @@
                         <div class="stat-value" id="buyer-testimonials">0</div>
                         <div class="stat-label">Testimonials</div>
                     </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="buyer-ratings">0</div>
+                        <div class="stat-label">Ratings Given</div>
+                    </div>
                 </div>
                 
                 <div class="dashboard-tabs">
                     <button class="dashboard-tab active" onclick="switchBuyerTab('inquiries')">My Inquiries</button>
                     <button class="dashboard-tab" onclick="switchBuyerTab('rentals')">Rental Bookings</button>
                     <button class="dashboard-tab" onclick="switchBuyerTab('testimonials')">My Testimonials</button>
+                    <button class="dashboard-tab" onclick="switchBuyerTab('ratings')">My Ratings</button>
                     <button class="dashboard-tab" onclick="switchBuyerTab('profile')">Profile Settings</button>
                 </div>
                 
                 <div class="dashboard-content">
                     <div id="inquiries-tab" class="tab-content active">
+                        <div class="breadcrumb">
+                            <a onclick="switchBuyerTab('inquiries')">My Inquiries</a>
+                        </div>
                         <h3>My Car Inquiries</h3>
                         <div id="buyer-inquiries-list">
                             <!-- Buyer inquiries will appear here -->
@@ -2118,6 +2404,9 @@
                     </div>
                     
                     <div id="rentals-tab" class="tab-content">
+                        <div class="breadcrumb">
+                            <a onclick="switchBuyerTab('rentals')">My Rental Bookings</a>
+                        </div>
                         <h3>My Rental Bookings</h3>
                         <div id="buyer-rentals-list">
                             <!-- Buyer rentals will appear here -->
@@ -2125,14 +2414,16 @@
                     </div>
                     
                     <div id="testimonials-tab" class="tab-content">
+                        <div class="breadcrumb">
+                            <a onclick="switchBuyerTab('testimonials')">My Testimonials</a>
+                        </div>
                         <h3>My Testimonials</h3>
                         <div id="buyer-testimonials-list">
                             <!-- Buyer testimonials will appear here -->
                         </div>
                         <div style="margin-top: 20px;">
                             <h4>Add New Testimonial</h4>
-                            <form id="testimonial-form" action="https://formspree.io/f/xjkjreek" method="POST">
-                                <input type="hidden" name="_subject" value="New Testimonial - AGAS LUXE DRIVE">
+                            <form id="testimonial-form">
                                 <div class="form-group">
                                     <label for="testimonial-title">Title</label>
                                     <input type="text" id="testimonial-title" class="form-control" name="title" required>
@@ -2146,7 +2437,20 @@
                         </div>
                     </div>
                     
+                    <div id="ratings-tab" class="tab-content">
+                        <div class="breadcrumb">
+                            <a onclick="switchBuyerTab('ratings')">My Ratings</a>
+                        </div>
+                        <h3>My Ratings</h3>
+                        <div id="buyer-ratings-list">
+                            <!-- Buyer ratings will appear here -->
+                        </div>
+                    </div>
+                    
                     <div id="profile-tab" class="tab-content">
+                        <div class="breadcrumb">
+                            <a onclick="switchBuyerTab('profile')">Profile Settings</a>
+                        </div>
                         <h3>Profile Settings</h3>
                         <form id="buyer-profile-form">
                             <div class="form-row">
@@ -2167,6 +2471,27 @@
                                 <label for="buyer-phone">Phone Number</label>
                                 <input type="tel" id="buyer-phone" class="form-control" required>
                             </div>
+                            
+                            <div class="form-group">
+                                <label>ID Verification</label>
+                                <div class="id-verification">
+                                    <div class="form-group country-select">
+                                        <select id="buyer-country" class="form-control" required>
+                                            <option value="">Country</option>
+                                            <option value="KE">Kenya</option>
+                                            <option value="TZ">Tanzania</option>
+                                            <option value="UG">Uganda</option>
+                                            <option value="RW">Rwanda</option>
+                                            <option value="ET">Ethiopia</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group id-input">
+                                        <input type="text" id="buyer-id" class="form-control" placeholder="ID Number" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
                             <div class="form-group">
                                 <label for="buyer-address">Address</label>
                                 <textarea id="buyer-address" class="form-control" rows="3"></textarea>
@@ -2200,9 +2525,11 @@
         <!-- Seller Dashboard -->
         <section id="seller-dashboard" class="dashboard">
             <div class="container">
-                <div class="section-title">
+                <div class="dashboard-nav">
                     <h2>Seller Dashboard</h2>
-                    <p>Manage your car listings and inquiries</p>
+                    <div class="dashboard-nav-actions">
+                        <a class="btn btn-outline" onclick="showSection('home')">Back to Home</a>
+                    </div>
                 </div>
                 
                 <div class="dashboard-stats">
@@ -2218,6 +2545,10 @@
                         <div class="stat-value" id="seller-sales">0</div>
                         <div class="stat-label">Cars Sold</div>
                     </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="seller-ratings">0</div>
+                        <div class="stat-label">Ratings Received</div>
+                    </div>
                 </div>
                 
                 <div class="dashboard-tabs">
@@ -2226,11 +2557,15 @@
                     <button class="dashboard-tab" onclick="switchSellerTab('rental-listings')">My Rentals</button>
                     <button class="dashboard-tab" onclick="switchSellerTab('add-rental')">Add Rental</button>
                     <button class="dashboard-tab" onclick="switchSellerTab('inquiries')">Inquiries</button>
+                    <button class="dashboard-tab" onclick="switchSellerTab('ratings')">Ratings</button>
                     <button class="dashboard-tab" onclick="switchSellerTab('profile')">Company Profile</button>
                 </div>
                 
                 <div class="dashboard-content">
                     <div id="my-listings-tab" class="tab-content active">
+                        <div class="breadcrumb">
+                            <a onclick="switchSellerTab('my-listings')">My Car Listings</a>
+                        </div>
                         <h3>My Car Listings</h3>
                         <div id="seller-listings-list">
                             <!-- Seller's listings will appear here -->
@@ -2238,9 +2573,11 @@
                     </div>
                     
                     <div id="add-listing-tab" class="tab-content">
+                        <div class="breadcrumb">
+                            <a onclick="switchSellerTab('add-listing')">List a New Car</a>
+                        </div>
                         <h3>List a New Car</h3>
-                        <form id="add-car-form" action="https://formspree.io/f/xjkjreek" method="POST">
-                            <input type="hidden" name="_subject" value="New Car Listing - AGAS LUXE DRIVE">
+                        <form id="add-car-form">
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="car-make">Make</label>
@@ -2360,6 +2697,9 @@
                     </div>
                     
                     <div id="rental-listings-tab" class="tab-content">
+                        <div class="breadcrumb">
+                            <a onclick="switchSellerTab('rental-listings')">My Rental Listings</a>
+                        </div>
                         <h3>My Rental Listings</h3>
                         <div id="seller-rental-listings">
                             <!-- Seller's rental listings will appear here -->
@@ -2367,9 +2707,11 @@
                     </div>
                     
                     <div id="add-rental-tab" class="tab-content">
+                        <div class="breadcrumb">
+                            <a onclick="switchSellerTab('add-rental')">Add a Car for Rental</a>
+                        </div>
                         <h3>Add a Car for Rental</h3>
-                        <form id="add-rental-form" action="https://formspree.io/f/xjkjreek" method="POST">
-                            <input type="hidden" name="_subject" value="New Rental Listing - AGAS LUXE DRIVE">
+                        <form id="add-rental-form">
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="rental-make">Make</label>
@@ -2437,13 +2779,29 @@
                     </div>
                     
                     <div id="inquiries-tab" class="tab-content">
+                        <div class="breadcrumb">
+                            <a onclick="switchSellerTab('inquiries')">Inquiries About My Cars</a>
+                        </div>
                         <h3>Inquiries About My Cars</h3>
                         <div id="seller-inquiries-list">
                             <!-- Inquiries will appear here -->
                         </div>
                     </div>
 
+                    <div id="ratings-tab" class="tab-content">
+                        <div class="breadcrumb">
+                            <a onclick="switchSellerTab('ratings')">Ratings Received</a>
+                        </div>
+                        <h3>Ratings Received</h3>
+                        <div id="seller-ratings-list">
+                            <!-- Ratings will appear here -->
+                        </div>
+                    </div>
+
                     <div id="profile-tab" class="tab-content">
+                        <div class="breadcrumb">
+                            <a onclick="switchSellerTab('profile')">Company Profile</a>
+                        </div>
                         <h3>Company Profile</h3>
                         <form id="seller-profile-form">
                             <div class="form-row">
@@ -2474,6 +2832,27 @@
                                 <label for="seller-phone">Phone Number</label>
                                 <input type="tel" id="seller-phone" class="form-control" required>
                             </div>
+                            
+                            <div class="form-group">
+                                <label>ID Verification</label>
+                                <div class="id-verification">
+                                    <div class="form-group country-select">
+                                        <select id="seller-country" class="form-control" required>
+                                            <option value="">Country</option>
+                                            <option value="KE">Kenya</option>
+                                            <option value="TZ">Tanzania</option>
+                                            <option value="UG">Uganda</option>
+                                            <option value="RW">Rwanda</option>
+                                            <option value="ET">Ethiopia</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group id-input">
+                                        <input type="text" id="seller-id" class="form-control" placeholder="ID Number" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
                             <div class="form-group">
                                 <label for="seller-address">Company Address</label>
                                 <textarea id="seller-address" class="form-control" rows="3" required></textarea>
@@ -2492,9 +2871,11 @@
         <!-- Admin Panel -->
         <section id="admin-section" class="admin-panel">
             <div class="container">
-                <div class="section-title">
+                <div class="dashboard-nav">
                     <h2>Enterprise Admin Panel</h2>
-                    <p>Manage all platform activities and ensure quality control</p>
+                    <div class="dashboard-nav-actions">
+                        <a class="btn btn-outline" onclick="showSection('home')">Back to Home</a>
+                    </div>
                 </div>
                 
                 <div class="admin-office">
@@ -2530,18 +2911,30 @@
                     <button class="dashboard-tab" onclick="switchAdminTab('verified')">Verified Listings</button>
                     <button class="dashboard-tab" onclick="switchAdminTab('rentals')">Rental Management</button>
                     <button class="dashboard-tab" onclick="switchAdminTab('users')">User Management</button>
+                    <button class="dashboard-tab" onclick="switchAdminTab('testimonials')">Testimonials</button>
                     <button class="dashboard-tab" onclick="switchAdminTab('reports')">Analytics & Reports</button>
                 </div>
                 
                 <div class="dashboard-content">
                     <div id="pending-tab" class="tab-content active">
+                        <div class="breadcrumb">
+                            <a onclick="switchAdminTab('pending')">Pending Approvals</a>
+                        </div>
                         <h3>Pending Car Listings</h3>
                         <div class="pending-listings" id="pending-listings">
                             <!-- Pending listings will appear here -->
                         </div>
+                        
+                        <h3 style="margin-top: 30px;">Pending Rental Listings</h3>
+                        <div class="pending-listings" id="pending-rentals">
+                            <!-- Pending rentals will appear here -->
+                        </div>
                     </div>
                     
                     <div id="verified-tab" class="tab-content">
+                        <div class="breadcrumb">
+                            <a onclick="switchAdminTab('verified')">Verified Listings</a>
+                        </div>
                         <h3>Verified Car Listings</h3>
                         <div id="verified-listings">
                             <!-- Verified listings will appear here -->
@@ -2549,6 +2942,9 @@
                     </div>
                     
                     <div id="rentals-tab" class="tab-content">
+                        <div class="breadcrumb">
+                            <a onclick="switchAdminTab('rentals')">Rental Management</a>
+                        </div>
                         <h3>Rental Management</h3>
                         <div id="rental-management">
                             <!-- Rental management will appear here -->
@@ -2556,39 +2952,55 @@
                     </div>
                     
                     <div id="users-tab" class="tab-content">
+                        <div class="breadcrumb">
+                            <a onclick="switchAdminTab('users')">User Management</a>
+                        </div>
                         <h3>User Management</h3>
                         <div id="user-management">
                             <!-- User management will appear here -->
                         </div>
                     </div>
 
+                    <div id="testimonials-tab" class="tab-content">
+                        <div class="breadcrumb">
+                            <a onclick="switchAdminTab('testimonials')">Testimonial Approvals</a>
+                        </div>
+                        <h3>Testimonial Approvals</h3>
+                        <div id="testimonial-approvals">
+                            <!-- Testimonial approvals will appear here -->
+                        </div>
+                    </div>
+
                     <div id="reports-tab" class="tab-content">
+                        <div class="breadcrumb">
+                            <a onclick="switchAdminTab('reports')">Analytics & Reports</a>
+                        </div>
                         <h3>Analytics & Reports</h3>
                         <div class="dashboard-stats">
                             <div class="stat-card">
-                                <div class="stat-value">247</div>
+                                <div class="stat-value" id="report-listings">0</div>
                                 <div class="stat-label">Total Listings</div>
                             </div>
                             <div class="stat-card">
-                                <div class="stat-value">156</div>
+                                <div class="stat-value" id="report-verified">0</div>
                                 <div class="stat-label">Verified Listings</div>
                             </div>
                             <div class="stat-card">
-                                <div class="stat-value">89</div>
+                                <div class="stat-value" id="report-rentals">0</div>
                                 <div class="stat-label">Active Rentals</div>
                             </div>
                             <div class="stat-card">
-                                <div class="stat-value">42</div>
+                                <div class="stat-value" id="report-pending">0</div>
                                 <div class="stat-label">Pending Approvals</div>
                             </div>
                         </div>
                         <div style="margin-top: 30px;">
                             <h4>Platform Performance</h4>
                             <div style="background: var(--light); padding: 20px; border-radius: var(--radius);">
-                                <p><strong>Monthly Growth:</strong> +15% new listings</p>
-                                <p><strong>User Engagement:</strong> 78% active users</p>
-                                <p><strong>Approval Rate:</strong> 92% of listings approved</p>
-                                <p><strong>Customer Satisfaction:</strong> 4.8/5 stars</p>
+                                <p><strong>Monthly Growth:</strong> <span id="growth-rate">+15%</span> new listings</p>
+                                <p><strong>User Engagement:</strong> <span id="engagement-rate">78%</span> active users</p>
+                                <p><strong>Approval Rate:</strong> <span id="approval-rate">92%</span> of listings approved</p>
+                                <p><strong>Customer Satisfaction:</strong> <span id="satisfaction-rate">4.8/5</span> stars</p>
                             </div>
                         </div>
                     </div>
@@ -2733,8 +3145,7 @@
                 <h3 class="modal-title">Create Buyer Account</h3>
                 <button class="close-modal" onclick="closeModal('buyer-signup-modal')">&times;</button>
             </div>
-            <form id="buyer-signup-form" action="https://formspree.io/f/xjkjreek" method="POST">
-                <input type="hidden" name="_subject" value="New Buyer Account - AGAS LUXE DRIVE">
+            <form id="buyer-signup-form">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="buyer-signup-fname">First Name</label>
@@ -2753,6 +3164,27 @@
                     <label for="buyer-signup-phone">Phone Number</label>
                     <input type="tel" id="buyer-signup-phone" class="form-control" name="phone" required>
                 </div>
+                
+                <div class="form-group">
+                    <label>ID Verification</label>
+                    <div class="id-verification">
+                        <div class="form-group country-select">
+                            <select id="buyer-signup-country" class="form-control" required>
+                                <option value="">Country</option>
+                                <option value="KE">Kenya</option>
+                                <option value="TZ">Tanzania</option>
+                                <option value="UG">Uganda</option>
+                                <option value="RW">Rwanda</option>
+                                <option value="ET">Ethiopia</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group id-input">
+                            <input type="text" id="buyer-signup-id" class="form-control" placeholder="ID Number" required>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="form-group">
                     <label for="buyer-signup-password">Password</label>
                     <input type="password" id="buyer-signup-password" class="form-control" required>
@@ -2782,8 +3214,7 @@
                 <h3 class="modal-title">Create Seller Account</h3>
                 <button class="close-modal" onclick="closeModal('seller-signup-modal')">&times;</button>
             </div>
-            <form id="seller-signup-form" action="https://formspree.io/f/xjkjreek" method="POST">
-                <input type="hidden" name="_subject" value="New Seller Account - AGAS LUXE DRIVE">
+            <form id="seller-signup-form">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="seller-company-name">Company Name</label>
@@ -2812,6 +3243,27 @@
                     <label for="seller-signup-phone">Phone Number</label>
                     <input type="tel" id="seller-signup-phone" class="form-control" name="phone" required>
                 </div>
+                
+                <div class="form-group">
+                    <label>ID Verification</label>
+                    <div class="id-verification">
+                        <div class="form-group country-select">
+                            <select id="seller-signup-country" class="form-control" required>
+                                <option value="">Country</option>
+                                <option value="KE">Kenya</option>
+                                <option value="TZ">Tanzania</option>
+                                <option value="UG">Uganda</option>
+                                <option value="RW">Rwanda</option>
+                                <option value="ET">Ethiopia</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group id-input">
+                            <input type="text" id="seller-signup-id" class="form-control" placeholder="ID Number" required>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="form-group">
                     <label for="seller-signup-password">Password</label>
                     <input type="password" id="seller-signup-password" class="form-control" required>
@@ -2893,8 +3345,7 @@
                 <h3 class="modal-title">Secure Password Reset</h3>
                 <button class="close-modal" onclick="closeModal('password-reset-modal')">&times;</button>
             </div>
-            <form id="password-reset-form" action="https://formspree.io/f/xjkjreek" method="POST">
-                <input type="hidden" name="_subject" value="Password Reset Request - AGAS LUXE DRIVE">
+            <form id="password-reset-form">
                 <div class="form-group">
                     <label for="reset-email">Registered Email</label>
                     <input type="email" id="reset-email" class="form-control" name="email" required>
@@ -2971,8 +3422,7 @@
                 <h3 class="modal-title">Inquire About This Car</h3>
                 <button class="close-modal" onclick="closeModal('inquiry-modal')">&times;</button>
             </div>
-            <form id="inquiry-form" action="https://formspree.io/f/xjkjreek" method="POST">
-                <input type="hidden" name="_subject" value="Car Inquiry - AGAS LUXE DRIVE">
+            <form id="inquiry-form">
                 <input type="hidden" id="inquiry-car-id" name="car_id">
                 <div class="form-group">
                     <label for="inquiry-name">Your Name</label>
@@ -3015,8 +3465,7 @@
                 <h3 class="modal-title">Book Luxury Rental</h3>
                 <button class="close-modal" onclick="closeModal('rental-modal')">&times;</button>
             </div>
-            <form id="rental-form" action="https://formspree.io/f/xjkjreek" method="POST">
-                <input type="hidden" name="_subject" value="Rental Booking - AGAS LUXE DRIVE">
+            <form id="rental-form">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="rental-start">Start Date</label>
@@ -3203,6 +3652,8 @@
         let rentals = JSON.parse(localStorage.getItem('encrypted_rentals')) || [];
         let testimonials = JSON.parse(localStorage.getItem('encrypted_testimonials')) || [];
         let rentalFleet = JSON.parse(localStorage.getItem('encrypted_rentalFleet')) || [];
+        let ratings = JSON.parse(localStorage.getItem('encrypted_ratings')) || [];
+        let transactions = JSON.parse(localStorage.getItem('encrypted_transactions')) || [];
         let currentUser = JSON.parse(localStorage.getItem('encrypted_currentUser')) || null;
         let currentCarInquiry = null;
         let sessionTimer = null;
@@ -3327,7 +3778,8 @@
                     weeklyRate: 252000,
                     features: ['Chauffeur Option', 'Full Insurance', 'Airport Delivery', 'WiFi', 'Massage Seats', 'Panoramic Roof'],
                     available: true,
-                    sellerId: 0 // Admin user
+                    sellerId: 0, // Admin user
+                    status: 'approved'
                 },
                 {
                     id: 2,
@@ -3339,7 +3791,8 @@
                     weeklyRate: 312000,
                     features: ['7 Seats', 'Off-road Capable', 'Premium Sound', 'Massage Seats', 'Air Suspension', 'Terrain Response'],
                     available: true,
-                    sellerId: 0
+                    sellerId: 0,
+                    status: 'approved'
                 },
                 {
                     id: 3,
@@ -3351,7 +3804,8 @@
                     weeklyRate: 228000,
                     features: ['Executive Interior', 'Night Vision', 'Massage Seats', 'B&W Sound', 'Gesture Control', 'Sky Lounge'],
                     available: true,
-                    sellerId: 0
+                    sellerId: 0,
+                    status: 'approved'
                 },
                 {
                     id: 4,
@@ -3363,7 +3817,8 @@
                     weeklyRate: 390000,
                     features: ['Sport Chrono', 'Premium Package', 'Performance Tires', 'Carbon Interior', 'Adaptive Suspension', 'Sports Exhaust'],
                     available: true,
-                    sellerId: 0
+                    sellerId: 0,
+                    status: 'approved'
                 }
             ];
             localStorage.setItem('encrypted_rentalFleet', JSON.stringify(rentalFleet));
@@ -3385,10 +3840,12 @@
 
         // EmailJS Configuration with your details
         const EMAILJS_CONFIG = {
-            serviceId: 'service_tl3qbv9',
+            serviceId: 'service_8oy4ofi',
             otpTemplateId: 'template_b87lmml',
             resetTemplateId: 'template_5vxqxtq',
-            bulkTemplateId: 'template_bulk_notifications', // You'll need to create this template
+            contactTemplateId: 'template_contact_form',
+            inquiryTemplateId: 'template_inquiry_form',
+            bulkTemplateId: 'template_bulk_notifications',
             fromEmail: 'agasluxedrive@gmail.com',
             fromName: 'AGAS LUXE DRIVE'
         };
@@ -3477,6 +3934,61 @@
                 console.error('Failed to send password reset email:', error);
                 showNotification('Password reset service temporarily unavailable. Please try again later or contact support.', 'error');
                 return { success: false, message: 'Failed to send password reset email' };
+            }
+        }
+
+        async function sendContactEmail(name, email, subject, message) {
+            try {
+                const templateParams = {
+                    from_name: name,
+                    from_email: email,
+                    subject: subject,
+                    message: message,
+                    to_email: EMAILJS_CONFIG.fromEmail,
+                    company_name: 'AGAS LUXE DRIVE',
+                    timestamp: new Date().toLocaleString()
+                };
+
+                const response = await emailjs.send(
+                    EMAILJS_CONFIG.serviceId,
+                    EMAILJS_CONFIG.contactTemplateId,
+                    templateParams
+                );
+
+                console.log('Contact email sent successfully:', response);
+                return { success: true, message: 'Message sent successfully' };
+            } catch (error) {
+                console.error('Failed to send contact email:', error);
+                return { success: false, message: 'Failed to send message. Please try again later.' };
+            }
+        }
+
+        async function sendInquiryEmail(carId, name, email, phone, message) {
+            try {
+                const car = cars.find(c => c.id === carId);
+                const templateParams = {
+                    car_name: `${car.make} ${car.model} ${car.year}`,
+                    car_price: formatPrice(car.price),
+                    inquirer_name: name,
+                    inquirer_email: email,
+                    inquirer_phone: phone,
+                    message: message,
+                    to_email: EMAILJS_CONFIG.fromEmail,
+                    company_name: 'AGAS LUXE DRIVE',
+                    timestamp: new Date().toLocaleString()
+                };
+
+                const response = await emailjs.send(
+                    EMAILJS_CONFIG.serviceId,
+                    EMAILJS_CONFIG.inquiryTemplateId,
+                    templateParams
+                );
+
+                console.log('Inquiry email sent successfully:', response);
+                return { success: true, message: 'Inquiry sent successfully' };
+            } catch (error) {
+                console.error('Failed to send inquiry email:', error);
+                return { success: false, message: 'Failed to send inquiry. Please try again later.' };
             }
         }
 
@@ -3772,6 +4284,7 @@
             const userMenu = document.getElementById('user-menu');
             const userAvatar = document.getElementById('user-avatar');
             const userName = document.getElementById('user-name');
+            const userBadges = document.getElementById('user-badges');
             
             if (currentUser) {
                 authButtons.style.display = 'none';
@@ -3781,12 +4294,55 @@
                 if (currentUser.role === 'admin') {
                     userAvatar.textContent = 'A';
                     userName.textContent = 'Admin';
+                    userBadges.innerHTML = '<span class="user-badge badge-corporate">Enterprise Admin</span>';
                 } else if (currentUser.role === 'seller') {
                     userAvatar.textContent = currentUser.companyName ? currentUser.companyName.charAt(0) : 'S';
                     userName.textContent = currentUser.companyName || 'Seller';
+                    
+                    // Add seller badges
+                    let badgeHTML = '';
+                    if (currentUser.verifiedSeller) {
+                        badgeHTML += '<span class="user-badge badge-verified-seller">Verified Seller</span>';
+                    }
+                    
+                    // Add seller level badge
+                    const salesCount = currentUser.salesCount || 0;
+                    if (salesCount >= 50) {
+                        badgeHTML += '<span class="user-badge badge-platinum">Platinum Seller</span>';
+                    } else if (salesCount >= 20) {
+                        badgeHTML += '<span class="user-badge badge-gold">Gold Seller</span>';
+                    } else if (salesCount >= 10) {
+                        badgeHTML += '<span class="user-badge badge-silver">Silver Seller</span>';
+                    } else if (salesCount >= 5) {
+                        badgeHTML += '<span class="user-badge badge-bronze">Bronze Seller</span>';
+                    } else {
+                        badgeHTML += '<span class="user-badge badge-new">New Seller</span>';
+                    }
+                    
+                    userBadges.innerHTML = badgeHTML;
                 } else {
                     userAvatar.textContent = currentUser.fname ? currentUser.fname.charAt(0) : 'B';
                     userName.textContent = currentUser.fname || 'Buyer';
+                    
+                    // Add buyer badges
+                    let badgeHTML = '';
+                    if (currentUser.verifiedBuyer) {
+                        badgeHTML += '<span class="user-badge badge-verified-buyer">Verified Buyer</span>';
+                    }
+                    
+                    // Add buyer level based on purchases
+                    const purchaseCount = currentUser.purchaseCount || 0;
+                    if (purchaseCount >= 10) {
+                        badgeHTML += '<span class="user-badge badge-platinum">Platinum Buyer</span>';
+                    } else if (purchaseCount >= 5) {
+                        badgeHTML += '<span class="user-badge badge-gold">Gold Buyer</span>';
+                    } else if (purchaseCount >= 2) {
+                        badgeHTML += '<span class="user-badge badge-silver">Silver Buyer</span>';
+                    } else if (purchaseCount >= 1) {
+                        badgeHTML += '<span class="user-badge badge-bronze">Bronze Buyer</span>';
+                    }
+                    
+                    userBadges.innerHTML = badgeHTML;
                 }
             } else {
                 authButtons.style.display = 'flex';
@@ -3827,6 +4383,8 @@
             const lname = document.getElementById('buyer-signup-lname').value;
             const email = document.getElementById('buyer-signup-email').value;
             const phone = document.getElementById('buyer-signup-phone').value;
+            const country = document.getElementById('buyer-signup-country').value;
+            const idNumber = document.getElementById('buyer-signup-id').value;
             const password = document.getElementById('buyer-signup-password').value;
             const confirm = document.getElementById('buyer-signup-confirm').value;
             
@@ -3847,9 +4405,13 @@
                 lname,
                 email,
                 phone,
+                country,
+                idNumber,
                 password,
                 role: 'buyer',
                 address: '',
+                verifiedBuyer: false,
+                purchaseCount: 0,
                 createdAt: new Date().toISOString()
             };
             
@@ -3878,6 +4440,8 @@
             const lname = document.getElementById('seller-signup-lname').value;
             const email = document.getElementById('seller-signup-email').value;
             const phone = document.getElementById('seller-signup-phone').value;
+            const country = document.getElementById('seller-signup-country').value;
+            const idNumber = document.getElementById('seller-signup-id').value;
             const password = document.getElementById('seller-signup-password').value;
             const confirm = document.getElementById('seller-signup-confirm').value;
             
@@ -3900,10 +4464,14 @@
                 lname,
                 email,
                 phone,
+                country,
+                idNumber,
                 password,
                 role: 'seller',
                 address: '',
                 companyDescription: '',
+                verifiedSeller: false,
+                salesCount: 0,
                 createdAt: new Date().toISOString()
             };
             
@@ -4371,6 +4939,60 @@
         }
 
         // Form handlers
+        function handleContact(e) {
+            e.preventDefault();
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const subject = document.getElementById('contact-subject').value;
+            const message = document.getElementById('contact-message').value;
+            
+            // Send email via EmailJS
+            sendContactEmail(name, email, subject, message)
+                .then(result => {
+                    if (result.success) {
+                        showNotification(`Thank you for your message, ${name}! We will get back to you soon.`, 'success');
+                        document.getElementById('contact-form').reset();
+                    } else {
+                        showNotification(result.message, 'error');
+                    }
+                });
+        }
+
+        function handleInquiry(e) {
+            e.preventDefault();
+            const name = document.getElementById('inquiry-name').value;
+            const email = document.getElementById('inquiry-email').value;
+            const phone = document.getElementById('inquiry-phone').value;
+            const message = document.getElementById('inquiry-message').value;
+            
+            const car = cars.find(c => c.id === currentCarInquiry);
+            
+            // Send inquiry via EmailJS
+            sendInquiryEmail(currentCarInquiry, name, email, phone, message)
+                .then(result => {
+                    if (result.success) {
+                        const inquiry = {
+                            id: inquiries.length + 1,
+                            carId: currentCarInquiry,
+                            carName: `${car.make} ${car.model} ${car.year}`,
+                            name,
+                            email,
+                            phone,
+                            message,
+                            date: new Date().toISOString()
+                        };
+                        
+                        inquiries.push(inquiry);
+                        localStorage.setItem('encrypted_inquiries', JSON.stringify(inquiries));
+                        
+                        closeModal('inquiry-modal');
+                        showNotification('Your inquiry has been sent successfully! The seller will contact you soon.', 'success');
+                    } else {
+                        showNotification(result.message, 'error');
+                    }
+                });
+        }
+
         function handleAddCar(e) {
             e.preventDefault();
             if (!currentUser) {
@@ -4456,7 +5078,8 @@
                 features,
                 description,
                 available: true,
-                sellerId: currentUser.id
+                sellerId: currentUser.id,
+                status: 'pending'
             };
             
             rentalFleet.push(newRental);
@@ -4544,7 +5167,8 @@
                 features,
                 description,
                 available: true,
-                sellerId: 0
+                sellerId: 0,
+                status: 'approved'
             };
             
             rentalFleet.push(newRental);
@@ -4559,45 +5183,6 @@
             
             showNotification('Rental car added successfully!', 'success');
             closeModal('admin-add-rental-modal');
-        }
-
-        function handleContact(e) {
-            e.preventDefault();
-            const name = document.getElementById('contact-name').value;
-            const email = document.getElementById('contact-email').value;
-            const subject = document.getElementById('contact-subject').value;
-            const message = document.getElementById('contact-message').value;
-            
-            // In a real app, you would send this data to a server
-            showNotification(`Thank you for your message, ${name}! We will get back to you soon.`, 'success');
-            document.getElementById('contact-form').reset();
-        }
-
-        function handleInquiry(e) {
-            e.preventDefault();
-            const name = document.getElementById('inquiry-name').value;
-            const email = document.getElementById('inquiry-email').value;
-            const phone = document.getElementById('inquiry-phone').value;
-            const message = document.getElementById('inquiry-message').value;
-            
-            const car = cars.find(c => c.id === currentCarInquiry);
-            
-            const inquiry = {
-                id: inquiries.length + 1,
-                carId: currentCarInquiry,
-                carName: `${car.make} ${car.model} ${car.year}`,
-                name,
-                email,
-                phone,
-                message,
-                date: new Date().toISOString()
-            };
-            
-            inquiries.push(inquiry);
-            localStorage.setItem('encrypted_inquiries', JSON.stringify(inquiries));
-            
-            closeModal('inquiry-modal');
-            showNotification('Your inquiry has been sent successfully! The seller will contact you soon.', 'success');
         }
 
         function handleTestimonial(e) {
@@ -4756,6 +5341,8 @@
             const lname = document.getElementById('buyer-lname').value;
             const email = document.getElementById('buyer-email').value;
             const phone = document.getElementById('buyer-phone').value;
+            const country = document.getElementById('buyer-country').value;
+            const idNumber = document.getElementById('buyer-id').value;
             const address = document.getElementById('buyer-address').value;
             
             // Update user data
@@ -4765,6 +5352,8 @@
                 users[userIndex].lname = lname;
                 users[userIndex].email = email;
                 users[userIndex].phone = phone;
+                users[userIndex].country = country;
+                users[userIndex].idNumber = idNumber;
                 users[userIndex].address = address;
                 
                 localStorage.setItem('encrypted_users', JSON.stringify(users));
@@ -4808,6 +5397,8 @@
             const lname = document.getElementById('seller-lname').value;
             const email = document.getElementById('seller-email').value;
             const phone = document.getElementById('seller-phone').value;
+            const country = document.getElementById('seller-country').value;
+            const idNumber = document.getElementById('seller-id').value;
             const address = document.getElementById('seller-address').value;
             const companyDescription = document.getElementById('company-description').value;
             
@@ -4820,6 +5411,8 @@
                 users[userIndex].lname = lname;
                 users[userIndex].email = email;
                 users[userIndex].phone = phone;
+                users[userIndex].country = country;
+                users[userIndex].idNumber = idNumber;
                 users[userIndex].address = address;
                 users[userIndex].companyDescription = companyDescription;
                 
@@ -4850,6 +5443,7 @@
             loadBuyerInquiries();
             loadBuyerRentals();
             loadBuyerTestimonials();
+            loadBuyerRatings();
             populateBuyerProfile();
         }
 
@@ -4870,6 +5464,7 @@
             loadSellerListings();
             loadSellerRentals();
             loadSellerInquiries();
+            loadSellerRatings();
             populateSellerProfile();
         }
 
@@ -4891,6 +5486,7 @@
             loadVerifiedListings();
             loadRentalManagement();
             loadUserManagement();
+            loadTestimonialApprovals();
             updateAdminStats();
         }
 
@@ -4901,6 +5497,8 @@
             document.getElementById('buyer-lname').value = currentUser.lname || '';
             document.getElementById('buyer-email').value = currentUser.email || '';
             document.getElementById('buyer-phone').value = currentUser.phone || '';
+            document.getElementById('buyer-country').value = currentUser.country || '';
+            document.getElementById('buyer-id').value = currentUser.idNumber || '';
             document.getElementById('buyer-address').value = currentUser.address || '';
         }
 
@@ -4913,6 +5511,8 @@
             document.getElementById('seller-lname').value = currentUser.lname || '';
             document.getElementById('seller-email').value = currentUser.email || '';
             document.getElementById('seller-phone').value = currentUser.phone || '';
+            document.getElementById('seller-country').value = currentUser.country || '';
+            document.getElementById('seller-id').value = currentUser.idNumber || '';
             document.getElementById('seller-address').value = currentUser.address || '';
             document.getElementById('company-description').value = currentUser.companyDescription || '';
         }
@@ -5012,6 +5612,44 @@
                     </div>
                 `;
                 container.appendChild(testimonialItem);
+            });
+        }
+
+        function loadBuyerRatings() {
+            if (!currentUser) return;
+            
+            const container = document.getElementById('buyer-ratings-list');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            const buyerRatings = ratings.filter(rating => rating.fromUserId === currentUser.id);
+            
+            // Update stats
+            document.getElementById('buyer-ratings').textContent = buyerRatings.length;
+            
+            if (buyerRatings.length === 0) {
+                container.innerHTML = '<p>You have not given any ratings yet.</p>';
+                return;
+            }
+            
+            buyerRatings.forEach(rating => {
+                const ratingItem = document.createElement('div');
+                ratingItem.className = 'listing-item';
+                ratingItem.innerHTML = `
+                    <div class="listing-info">
+                        <h4>Rating for ${rating.toUserName}</h4>
+                        <div class="rating-stars">
+                            ${Array(5).fill().map((_, i) => 
+                                `<span class="star ${i < rating.rating ? 'filled' : ''}">★</span>`
+                            ).join('')}
+                            <span>(${rating.rating}.0)</span>
+                        </div>
+                        <p>${rating.comment}</p>
+                        <p><small>${new Date(rating.date).toLocaleDateString()}</small></p>
+                    </div>
+                `;
+                container.appendChild(ratingItem);
             });
         }
 
@@ -5124,6 +5762,44 @@
             });
         }
 
+        function loadSellerRatings() {
+            if (!currentUser) return;
+            
+            const container = document.getElementById('seller-ratings-list');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            const sellerRatings = ratings.filter(rating => rating.toUserId === currentUser.id);
+            
+            // Update stats
+            document.getElementById('seller-ratings').textContent = sellerRatings.length;
+            
+            if (sellerRatings.length === 0) {
+                container.innerHTML = '<p>You have not received any ratings yet.</p>';
+                return;
+            }
+            
+            sellerRatings.forEach(rating => {
+                const ratingItem = document.createElement('div');
+                ratingItem.className = 'listing-item';
+                ratingItem.innerHTML = `
+                    <div class="listing-info">
+                        <h4>Rating from ${rating.fromUserName}</h4>
+                        <div class="rating-stars">
+                            ${Array(5).fill().map((_, i) => 
+                                `<span class="star ${i < rating.rating ? 'filled' : ''}">★</span>`
+                            ).join('')}
+                            <span>(${rating.rating}.0)</span>
+                        </div>
+                        <p>${rating.comment}</p>
+                        <p><small>${new Date(rating.date).toLocaleDateString()}</small></p>
+                    </div>
+                `;
+                container.appendChild(ratingItem);
+            });
+        }
+
         function loadPendingListings() {
             const container = document.getElementById('pending-listings');
             if (!container) return;
@@ -5136,7 +5812,7 @@
             document.getElementById('admin-pending').textContent = pendingCars.length;
             
             if (pendingCars.length === 0) {
-                container.innerHTML = '<p>No pending listings to review.</p>';
+                container.innerHTML = '<p>No pending car listings to review.</p>';
                 return;
             }
             
@@ -5284,12 +5960,69 @@
             });
         }
 
+        function loadTestimonialApprovals() {
+            const container = document.getElementById('testimonial-approvals');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            const pendingTestimonials = testimonials.filter(testimonial => !testimonial.approved);
+            
+            if (pendingTestimonials.length === 0) {
+                container.innerHTML = '<p>No pending testimonials to review.</p>';
+                return;
+            }
+            
+            pendingTestimonials.forEach(testimonial => {
+                const testimonialItem = document.createElement('div');
+                testimonialItem.className = 'listing-item';
+                testimonialItem.innerHTML = `
+                    <div class="listing-info">
+                        <h4>${testimonial.title}</h4>
+                        <p><strong>By:</strong> ${testimonial.userName}</p>
+                        <p>${testimonial.content}</p>
+                        <p><small>${new Date(testimonial.date).toLocaleDateString()}</small></p>
+                    </div>
+                    <div class="listing-actions">
+                        <button class="btn" onclick="approveTestimonial(${testimonial.id})">Approve</button>
+                        <button class="btn btn-danger" onclick="rejectTestimonial(${testimonial.id})">Reject</button>
+                    </div>
+                `;
+                container.appendChild(testimonialItem);
+            });
+        }
+
         function updateAdminStats() {
-            // These would be calculated from actual data in a real app
-            document.getElementById('admin-listings').textContent = cars.filter(car => car.status === 'approved').length;
-            document.getElementById('admin-pending').textContent = cars.filter(car => car.status === 'pending').length;
-            document.getElementById('admin-users').textContent = users.length;
-            document.getElementById('admin-rentals').textContent = rentalFleet.length;
+            // Calculate real statistics
+            const totalListings = cars.filter(car => car.status === 'approved').length;
+            const pendingApprovals = cars.filter(car => car.status === 'pending').length + 
+                                    rentalFleet.filter(rental => rental.status === 'pending').length +
+                                    testimonials.filter(testimonial => !testimonial.approved).length;
+            const totalUsers = users.length;
+            const activeRentals = rentalFleet.length;
+            
+            // Update stats
+            document.getElementById('admin-listings').textContent = totalListings;
+            document.getElementById('admin-pending').textContent = pendingApprovals;
+            document.getElementById('admin-users').textContent = totalUsers;
+            document.getElementById('admin-rentals').textContent = activeRentals;
+            
+            // Update report stats
+            document.getElementById('report-listings').textContent = totalListings;
+            document.getElementById('report-verified').textContent = cars.filter(car => car.verified).length;
+            document.getElementById('report-rentals').textContent = activeRentals;
+            document.getElementById('report-pending').textContent = pendingApprovals;
+            
+            // Calculate platform performance metrics
+            const monthlyGrowth = Math.round((totalListings / 100) * 15); // Simulated growth
+            const userEngagement = Math.round((users.filter(u => u.lastLogin && new Date(u.lastLogin) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)).length / users.length) * 100);
+            const approvalRate = Math.round(((totalListings) / (totalListings + pendingApprovals)) * 100);
+            
+            // Update performance metrics
+            document.getElementById('growth-rate').textContent = `+${monthlyGrowth}%`;
+            document.getElementById('engagement-rate').textContent = `${userEngagement}%`;
+            document.getElementById('approval-rate').textContent = `${approvalRate}%`;
+            document.getElementById('satisfaction-rate').textContent = '4.8/5';
         }
 
         function approveCar(carId) {
@@ -5363,6 +6096,28 @@
                     localStorage.setItem('encrypted_rentalFleet', JSON.stringify(rentalFleet));
                     loadSellerRentals();
                     showNotification('Rental listing deleted successfully.', 'success');
+                }
+            }
+        }
+
+        function approveTestimonial(testimonialId) {
+            const testimonialIndex = testimonials.findIndex(t => t.id === testimonialId);
+            if (testimonialIndex !== -1) {
+                testimonials[testimonialIndex].approved = true;
+                localStorage.setItem('encrypted_testimonials', JSON.stringify(testimonials));
+                loadTestimonialApprovals();
+                showNotification('Testimonial approved successfully!', 'success');
+            }
+        }
+
+        function rejectTestimonial(testimonialId) {
+            if (confirm('Are you sure you want to reject this testimonial?')) {
+                const testimonialIndex = testimonials.findIndex(t => t.id === testimonialId);
+                if (testimonialIndex !== -1) {
+                    testimonials.splice(testimonialIndex, 1);
+                    localStorage.setItem('encrypted_testimonials', JSON.stringify(testimonials));
+                    loadTestimonialApprovals();
+                    showNotification('Testimonial rejected and removed.', 'success');
                 }
             }
         }
@@ -5561,6 +6316,7 @@
             document.getElementById('inquiries-tab').classList.remove('active');
             document.getElementById('rentals-tab').classList.remove('active');
             document.getElementById('testimonials-tab').classList.remove('active');
+            document.getElementById('ratings-tab').classList.remove('active');
             document.getElementById('profile-tab').classList.remove('active');
             
             // Remove active class from all tabs
@@ -5580,6 +6336,7 @@
             document.getElementById('rental-listings-tab').classList.remove('active');
             document.getElementById('add-rental-tab').classList.remove('active');
             document.getElementById('inquiries-tab').classList.remove('active');
+            document.getElementById('ratings-tab').classList.remove('active');
             document.getElementById('profile-tab').classList.remove('active');
             
             // Remove active class from all tabs
@@ -5598,6 +6355,7 @@
             document.getElementById('verified-tab').classList.remove('active');
             document.getElementById('rentals-tab').classList.remove('active');
             document.getElementById('users-tab').classList.remove('active');
+            document.getElementById('testimonials-tab').classList.remove('active');
             document.getElementById('reports-tab').classList.remove('active');
             
             // Remove active class from all tabs
