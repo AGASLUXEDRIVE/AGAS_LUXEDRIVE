@@ -1536,6 +1536,13 @@
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- SEO meta & structured data -->
+<meta name="description" content="AGAS LUXE DRIVE — East Africa's premium luxury automotive marketplace. Buy, sell, and rent verified luxury vehicles.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"AutoDealer","name":"AGAS LUXE DRIVE","url":"/","description":"Premium luxury vehicle marketplace in East Africa."}
+</script>
+
 </head>
 <body>
     <!-- Session Timer -->
@@ -3067,6 +3074,48 @@
     </div>
   </div>
 </section>
+
+    <!-- Testimonials (admin-managed) -->
+    <section id="testimonials-section" style="padding:40px 0; background:var(--light);">
+      <div class="container">
+        <div class="section-title"><h2>What Our Clients Say</h2><p>Verified feedback from our customers</p></div>
+        <div id="testimonials-output" style="max-width:900px;margin:0 auto;"></div>
+      </div>
+    </section>
+    <script>
+    // Render testimonials from localStorage (or API)
+    (function(){
+      function render(){
+        const el=document.getElementById('testimonials-output'); if(!el) return;
+        const items=JSON.parse(localStorage.getItem('agas_testimonials')||'[]');
+        if(!items.length){ el.innerHTML='<p style="text-align:center;color:#666">Testimonials coming soon.</p>'; return; }
+        el.innerHTML = items.map(t=>`<div style="background:#fff;padding:15px;border-radius:8px;margin-bottom:10px;"><strong>${t.name||'Anonymous'}</strong><p>${t.text}</p></div>`).join('');
+      }
+      document.addEventListener('DOMContentLoaded', render);
+    })();
+    </script>
+    
+
+<section id="admin-rentals-section" style="display:none; padding:40px 0; background:#fff;">
+  <div class="container">
+    <div class="section-title"><h2>Manage Rentals</h2><p>Edit, Add or Delete rentals</p></div>
+    <div style="max-width:1000px;margin:0 auto;">
+      <div style="margin-bottom:12px;"><button class="btn" id="btn-refresh-rentals">Refresh</button> <button class="btn btn-accent" id="btn-add-rental">Add Rental</button></div>
+      <div id="rentals-list" style="background:#f8fafc;padding:12px;border-radius:8px;"></div>
+    </div>
+  </div>
+</section>
+
+<section id="admin-testimonials-section" style="display:none; padding:40px 0; background:#fff;">
+  <div class="container">
+    <div class="section-title"><h2>Manage Testimonials</h2><p>Add or remove client testimonials (no photos)</p></div>
+    <div style="max-width:800px;margin:0 auto;">
+      <div style="margin-bottom:12px;"><button class="btn" id="btn-refresh-testimonials">Refresh</button> <button class="btn btn-accent" id="btn-add-testimonial">Add Testimonial</button></div>
+      <div id="testimonials-list" style="background:#f8fafc;padding:12px;border-radius:8px;"></div>
+    </div>
+  </div>
+</section>
+
 </main>
 
     <!-- Footer -->
