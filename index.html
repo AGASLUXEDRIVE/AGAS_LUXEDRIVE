@@ -1243,16 +1243,21 @@
         }
 
         /* ===== SESSION TIMER ===== */
-        .session-timer {
-            background: var(--warning);
-            color: white;
-            padding: 8px 12px;
-            border-radius: var(--radius);
-            font-size: 0.8rem;
-            font-weight: 600;
-            display: none;
-            margin-left: 10px;
-        }
+.session-timer {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    background: linear-gradient(135deg, #FFD54F, #FFC107);
+    color: #1b1b1b;
+    padding: 10px 16px;
+    border-radius: 24px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    display: none;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    border: 1px solid rgba(255, 193, 7, 0.6);
+}
 
         /* ===== 2FA MODAL ===== */
         .twofa-modal {
@@ -1317,10 +1322,12 @@
         }
 
         .stat-card {
-            background: var(--light);
-            padding: 20px;
-            border-radius: var(--radius);
+            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(245,245,245,0.9));
+            padding: 22px;
+            border-radius: 18px;
             text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.06);
         }
 
         .stat-value {
@@ -1336,16 +1343,38 @@
         }
 
         .admin-office {
-            background: var(--light);
-            padding: 30px;
-            border-radius: var(--radius);
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(245,245,245,0.95));
+            padding: 34px;
+            border-radius: 20px;
             margin-bottom: 30px;
+            box-shadow: 0 12px 36px rgba(0,0,0,0.12);
+            border: 1px solid rgba(0,0,0,0.06);
         }
 
         .admin-toolbar {
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        #admin-section .container { position: relative; }
+        .admin-sidebar {
+            position: sticky;
+            top: 120px;
+            width: 240px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(245,245,245,0.95));
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 20px;
+            box-shadow: 0 12px 36px rgba(0,0,0,0.12);
+            padding: 16px;
+            display: none;
+        }
+        .admin-sidebar .dashboard-tab { display: block; width: 100%; text-align: left; padding: 12px 16px; }
+        #admin-section .dashboard-content { margin-left: 0; }
+        @media (min-width: 992px) {
+            .admin-sidebar { display: block; }
+            #admin-section .dashboard-tabs { display: none; }
+            #admin-section .dashboard-content { margin-left: 260px; }
         }
 
         .kyc-documents {
@@ -3462,13 +3491,15 @@
                         <button class="btn btn-accent" onclick="generateReports()">Generate Reports</button>
                         <button class="btn btn-success" onclick="sendBulkNotifications()">Send Notifications</button>
                         <button class="btn" onclick="showAdminAddRentalModal()">Add Rental Car</button>
+                        <button class="btn" onclick="document.getElementById('company-logo-input').click()">Set Company Logo</button>
+                        <input type="file" id="company-logo-input" accept="image/*" style="display:none">
                     </div>
                     
-                    <div class="dashboard-stats">
-                        <div class="stat-card">
-                            <div class="stat-value" id="admin-listings">0</div>
-                            <div class="stat-label">Total Listings</div>
-                        </div>
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-value" id="admin-listings">0</div>
+                        <div class="stat-label">Total Listings</div>
+                    </div>
                         <div class="stat-card">
                             <div class="stat-value" id="admin-pending">0</div>
                             <div class="stat-label">Pending Approvals</div>
@@ -3483,11 +3514,21 @@
                         </div>
                     </div>
                 </div>
-                
+                <div class="admin-sidebar">
+                    <button class="dashboard-tab active" onclick="switchAdminTab('pending')">Pending Approvals</button>
+                    <button class="dashboard-tab" onclick="switchAdminTab('verified')">Verified Listings</button>
+                    <button class="dashboard-tab" onclick="switchAdminTab('rentals')">Rental Management</button>
+                    <button class="dashboard-tab" onclick="switchAdminTab('communications')">Communications</button>
+                    <button class="dashboard-tab" onclick="switchAdminTab('users')">User Management</button>
+                    <button class="dashboard-tab" onclick="switchAdminTab('testimonials')">Testimonials</button>
+                    <button class="dashboard-tab" onclick="switchAdminTab('reports')">Analytics & Reports</button>
+                </div>
+
                 <div class="dashboard-tabs">
                     <button class="dashboard-tab active" onclick="switchAdminTab('pending')">Pending Approvals</button>
                     <button class="dashboard-tab" onclick="switchAdminTab('verified')">Verified Listings</button>
                     <button class="dashboard-tab" onclick="switchAdminTab('rentals')">Rental Management</button>
+                    <button class="dashboard-tab" onclick="switchAdminTab('communications')">Communications</button>
                     <button class="dashboard-tab" onclick="switchAdminTab('users')">User Management</button>
                     <button class="dashboard-tab" onclick="switchAdminTab('testimonials')">Testimonials</button>
                     <button class="dashboard-tab" onclick="switchAdminTab('reports')">Analytics & Reports</button>
@@ -3533,6 +3574,16 @@
                         <div id="pending-rentals-list">
                             <!-- Pending rentals will appear here -->
                         </div>
+                    </div>
+
+                    <div id="communications-tab" class="tab-content">
+                        <div class="breadcrumb">
+                            <a onclick="switchAdminTab('communications')">Communications</a>
+                        </div>
+                        <h3>Client Inquiries</h3>
+                        <div id="admin-inquiries-list"></div>
+                        <h3 style="margin-top: 30px;">Rental Bookings</h3>
+                        <div id="admin-bookings-list"></div>
                     </div>
                     
                     <div id="users-tab" class="tab-content">
@@ -3585,6 +3636,24 @@
                                 <p><strong>User Engagement:</strong> <span id="engagement-rate">78%</span> active users</p>
                                 <p><strong>Approval Rate:</strong> <span id="approval-rate">92%</span> of listings approved</p>
                                 <p><strong>Customer Satisfaction:</strong> <span id="satisfaction-rate">4.8/5</span> stars</p>
+                            </div>
+                        </div>
+                        <div style="margin-top: 30px; display: grid; grid-template-columns: 1fr; gap: 20px;">
+                            <div>
+                                <h4>Listings Overview</h4>
+                                <canvas id="chart-listings" width="640" height="280"></canvas>
+                            </div>
+                            <div>
+                                <h4>Engagement Trend</h4>
+                                <canvas id="chart-engagement" width="640" height="280"></canvas>
+                            </div>
+                            <div>
+                                <h4>Distribution</h4>
+                                <div style="position: relative;">
+                                    <canvas id="chart-distribution" width="640" height="320"></canvas>
+                                    <div id="chart-tooltip" style="position: absolute; display: none; background: rgba(0,0,0,0.8); color: #fff; padding: 6px 10px; border-radius: 6px; font-size: 12px; pointer-events: none;"></div>
+                                </div>
+                                <div id="chart-legend" style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px;"></div>
                             </div>
                         </div>
                     </div>
@@ -3765,6 +3834,10 @@
                         </div>
                         <div class="form-group id-input">
                             <input type="text" id="buyer-signup-id" class="form-control" placeholder="ID Number" required>
+                        </div>
+                        <div class="form-group id-input">
+                            <label for="buyer-id-document">Upload ID Document (optional)</label>
+                            <input type="file" id="buyer-id-document" class="form-control" accept="image/*,application/pdf">
                         </div>
                     </div>
                 </div>
@@ -4230,7 +4303,7 @@
         const adminAccount = {
             username: 'admin',
             password: 'Mymomis1ofherkind@.',
-            email: 'briannjugunagathogo@gmail.com',
+            email: 'agasluxedrive@gmail.com',
             twoFASecret: 'AGAS2025SECURE'
         };
 
@@ -5125,7 +5198,17 @@
                 }
                 // Small delay to avoid hitting rate limits
                 await new Promise(resolve => setTimeout(resolve, 500));
+                notifications.push({
+                    id: notifications.length + 1,
+                    title: subject,
+                    message: message,
+                    timestamp: new Date().toISOString(),
+                    read: false,
+                    type: 'announcement'
+                });
             }
+            localStorage.setItem('agas_notifications', JSON.stringify(notifications));
+            updateNotificationBadges();
             
             showNotification(`Bulk notifications sent successfully to ${successCount} users. ${errorCount} failed.`, 'success');
         }
@@ -5157,12 +5240,9 @@
 
         // Resend 2FA code with EmailJS
         async function resendTwoFACode() {
-            if (currentUser && currentUser.email) {
-                await generateTwoFACode(currentUser.email);
-                showNotification('New 2FA code sent to your email.', 'success');
-            } else {
-                showNotification('Unable to resend code. Please try logging in again.', 'error');
-            }
+            const target = (currentUser && currentUser.role === 'admin') ? adminAccount.email : (currentUser && currentUser.email ? currentUser.email : adminAccount.email);
+            await generateTwoFACode(target);
+            showNotification('New 2FA code sent to your email.', 'success');
         }
 
         // Session management
@@ -5261,6 +5341,12 @@
             const user = users.find(u => u.email === email && u.password === password);
             
             if (user) {
+                if (user.role === 'admin') {
+                    showNotification('Please use Enterprise Admin Login for secure access.', 'warning');
+                    closeModal('login-modal');
+                    showAdminLoginModal();
+                    return;
+                }
                 currentUser = user;
                 localStorage.setItem('encrypted_currentUser', JSON.stringify(currentUser));
                 closeModal('login-modal');
@@ -5400,6 +5486,8 @@
             const phone = document.getElementById('buyer-signup-phone').value;
             const country = document.getElementById('buyer-signup-country').value;
             const idNumber = document.getElementById('buyer-signup-id').value;
+            const idDocInput = document.getElementById('buyer-id-document');
+            const idDocumentUrl = (idDocInput && idDocInput.files && idDocInput.files[0]) ? URL.createObjectURL(idDocInput.files[0]) : '';
             const password = document.getElementById('buyer-signup-password').value;
             const confirm = document.getElementById('buyer-signup-confirm').value;
             
@@ -5422,6 +5510,7 @@
                 phone,
                 country,
                 idNumber,
+                idDocumentUrl,
                 password,
                 role: 'buyer',
                 address: '',
@@ -5534,6 +5623,19 @@
             initializeNotificationCenter();
             initializeAIChat();
             loadAIRecommendations();
+            ensureAudiRS3Listing();
+            sanitizeTestimonials();
+            const logoInput = document.getElementById('company-logo-input');
+            if (logoInput) {
+                logoInput.addEventListener('change', function(e) {
+                    const file = e.target.files && e.target.files[0];
+                    if (file) {
+                        const url = URL.createObjectURL(file);
+                        localStorage.setItem('companyLogoUrl', url);
+                        showNotification('Company logo updated.', 'success');
+                    }
+                });
+            }
             
             // Check URL for password reset token
             if (window.location.hash.includes('reset-password?token=')) {
@@ -5554,6 +5656,31 @@
                 }
             }
         });
+
+        function sanitizeTestimonials() {
+            if (!Array.isArray(testimonials)) return;
+            let changed = false;
+            const dupIndex = testimonials.findIndex(t => typeof t.userName === 'string' && /michael\.?\s*k/i.test(t.userName));
+            const anotherDup = testimonials.findIndex((t, i) => i !== dupIndex && typeof t.userName === 'string' && /michael\.?\s*k/i.test(t.userName));
+            if (dupIndex !== -1 && anotherDup !== -1) {
+                testimonials[anotherDup].userName = 'Alex G';
+                testimonials[anotherDup].title = testimonials[anotherDup].title || 'Delighted with AGAS experience';
+                testimonials[anotherDup].content = 'I had specific questions about performance and warranty on a performance sedan. The AGAS team didn’t rush me—they walked me through specs, financing, and delivery timing with real transparency. The car arrived exactly as described, and the follow‑up after purchase felt genuinely thoughtful. I’d trust them again for my next upgrade.';
+                changed = true;
+            }
+            const genericPhrases = [/great service/i, /highly recommend/i, /very good/i, /nice/i, /amazing company/i, /fast and reliable/i];
+            testimonials.forEach(t => {
+                const isGeneric = (typeof t.content === 'string' && (t.content.length < 80 || genericPhrases.some(rx => rx.test(t.content))));
+                if (isGeneric) {
+                    t.content = 'From first inquiry to handover, the process felt professional and calm. Pricing was clear, inspection reports matched the car, and delivery was on the promised date. I appreciated the quick responses and how small details—like plate transfer and insurance—were handled without me chasing. This felt like a premium experience.';
+                    changed = true;
+                }
+            });
+            if (changed) {
+                localStorage.setItem('encrypted_testimonials', JSON.stringify(testimonials));
+                loadTestimonialApprovals();
+            }
+        }
 
         function setupEventListeners() {
             // Form submissions
@@ -6073,29 +6200,31 @@
             
             const car = cars.find(c => c.id === currentCarInquiry);
             
-            // Send inquiry via EmailJS
+            const inquiry = {
+                id: inquiries.length + 1,
+                carId: currentCarInquiry,
+                carName: `${car.make} ${car.model} ${car.year}`,
+                name,
+                email,
+                phone,
+                message,
+                date: new Date().toISOString()
+            };
+            inquiries.push(inquiry);
+            localStorage.setItem('encrypted_inquiries', JSON.stringify(inquiries));
+            
             sendInquiryEmail(currentCarInquiry, name, email, phone, message)
                 .then(result => {
+                    closeModal('inquiry-modal');
                     if (result.success) {
-                        const inquiry = {
-                            id: inquiries.length + 1,
-                            carId: currentCarInquiry,
-                            carName: `${car.make} ${car.model} ${car.year}`,
-                            name,
-                            email,
-                            phone,
-                            message,
-                            date: new Date().toISOString()
-                        };
-                        
-                        inquiries.push(inquiry);
-                        localStorage.setItem('encrypted_inquiries', JSON.stringify(inquiries));
-                        
-                        closeModal('inquiry-modal');
                         showNotification('Your inquiry has been sent successfully! The seller will contact you soon.', 'success');
                     } else {
-                        showNotification(result.message, 'error');
+                        showNotification('Your inquiry has been recorded. Email delivery failed, support will reach you.', 'warning');
                     }
+                })
+                .catch(() => {
+                    closeModal('inquiry-modal');
+                    showNotification('Your inquiry has been recorded. Email service is unavailable.', 'warning');
                 });
         }
 
@@ -6118,6 +6247,15 @@
             const vin = document.getElementById('car-vin').value;
             const description = document.getElementById('car-description').value;
             
+            const imagesInput = document.getElementById('car-images');
+            const documentsInput = document.getElementById('car-documents');
+            const uploadedImages = (imagesInput && imagesInput.files && imagesInput.files.length > 0) ? [URL.createObjectURL(imagesInput.files[0])] : ['https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'];
+            const docs = (documentsInput && documentsInput.files) ? documentsInput.files : [];
+            const logbookUrl = docs[0] ? URL.createObjectURL(docs[0]) : 'https://via.placeholder.com/200x120?text=Logbook';
+            const idUrl = docs[1] ? URL.createObjectURL(docs[1]) : 'https://via.placeholder.com/200x120?text=ID+Copy';
+            const insuranceUrl = docs[2] ? URL.createObjectURL(docs[2]) : 'https://via.placeholder.com/200x120?text=Insurance';
+            const inspectionUrl = docs[3] ? URL.createObjectURL(docs[3]) : 'https://via.placeholder.com/200x120?text=Inspection';
+
             const newCar = {
                 id: cars.length + 1,
                 make,
@@ -6131,16 +6269,16 @@
                 condition,
                 vin,
                 description,
-                images: ['https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'],
+                images: uploadedImages,
                 verified: false,
                 sellerId: currentUser.id,
                 status: 'pending',
                 features: ['Standard Features'],
                 kycDocuments: {
-                    logbook: 'https://via.placeholder.com/200x120?text=Logbook',
-                    id: 'https://via.placeholder.com/200x120?text=ID+Copy',
-                    insurance: 'https://via.placeholder.com/200x120?text=Insurance',
-                    inspection: 'https://via.placeholder.com/200x120?text=Inspection'
+                    logbook: logbookUrl,
+                    id: idUrl,
+                    insurance: insuranceUrl,
+                    inspection: inspectionUrl
                 }
             };
             
@@ -6215,6 +6353,8 @@
             const condition = document.getElementById('admin-car-condition').value;
             const status = document.getElementById('admin-car-status').value;
             const description = document.getElementById('admin-car-description').value;
+            const adminImagesInput = document.getElementById('admin-car-images');
+            const adminUploadedImages = (adminImagesInput && adminImagesInput.files && adminImagesInput.files.length > 0) ? [URL.createObjectURL(adminImagesInput.files[0])] : ['https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'];
             
             const newCar = {
                 id: cars.length + 1,
@@ -6228,7 +6368,7 @@
                 color: 'Black',
                 condition,
                 description,
-                images: ['https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'],
+                images: adminUploadedImages,
                 verified: status === 'approved',
                 sellerId: 0, // Admin user
                 status: status,
@@ -6266,6 +6406,8 @@
             const weeklyRate = parseInt(document.getElementById('admin-rental-weekly-rate').value);
             const features = document.getElementById('admin-rental-features').value.split(',').map(f => f.trim());
             const description = document.getElementById('admin-rental-description').value;
+            const rentalImageInput = document.getElementById('admin-rental-image');
+            const rentalImage = (rentalImageInput && rentalImageInput.files && rentalImageInput.files[0]) ? URL.createObjectURL(rentalImageInput.files[0]) : 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80';
             
             const newRental = {
                 id: rentalFleet.length + 1,
@@ -6273,7 +6415,7 @@
                 model,
                 year,
                 type,
-                image: 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+                image: rentalImage,
                 dailyRate,
                 weeklyRate,
                 features,
@@ -6603,6 +6745,7 @@
             loadPendingListings();
             loadVerifiedListings();
             loadRentalManagement();
+            loadAdminCommunications();
             loadUserManagement();
             loadTestimonialApprovals();
             updateAdminStats();
@@ -7074,6 +7217,83 @@
             }
         }
 
+        function loadAdminCommunications() {
+            const inquiriesContainer = document.getElementById('admin-inquiries-list');
+            const bookingsContainer = document.getElementById('admin-bookings-list');
+            if (inquiriesContainer) inquiriesContainer.innerHTML = '';
+            if (bookingsContainer) bookingsContainer.innerHTML = '';
+            
+            if (inquiriesContainer) {
+                if (inquiries.length === 0) {
+                    inquiriesContainer.innerHTML = '<p>No client inquiries yet.</p>';
+                } else {
+                    inquiries.forEach(inquiry => {
+                        const item = document.createElement('div');
+                        item.className = 'listing-item';
+                        item.innerHTML = `
+                            <div class="listing-info">
+                                <h4>${inquiry.carName}</h4>
+                                <p><strong>From:</strong> ${inquiry.name} (${inquiry.email}, ${inquiry.phone})</p>
+                                <p><strong>Message:</strong> ${inquiry.message}</p>
+                                <p><small>${new Date(inquiry.date).toLocaleDateString()}</small></p>
+                            </div>
+                            <div class="listing-actions">
+                                <button class="btn" onclick="sendContactEmail('${inquiry.name}','${inquiry.email}','Re: ${inquiry.carName}','Thank you. Our team will contact you.')">Reply</button>
+                            </div>
+                        `;
+                        inquiriesContainer.appendChild(item);
+                    });
+                }
+            }
+            
+            if (bookingsContainer) {
+                const pendingBookings = rentals;
+                if (pendingBookings.length === 0) {
+                    bookingsContainer.innerHTML = '<p>No rental bookings yet.</p>';
+                } else {
+                    pendingBookings.forEach(rental => {
+                        const item = document.createElement('div');
+                        item.className = 'listing-item';
+                        item.innerHTML = `
+                            <div class="listing-info">
+                                <h4>Booking #${rental.id}</h4>
+                                <p><strong>Client:</strong> ${rental.userName}</p>
+                                <p><strong>Dates:</strong> ${rental.startDate} to ${rental.endDate}</p>
+                                <p><strong>Location:</strong> ${rental.location}</p>
+                                <p><strong>Insurance:</strong> ${rental.insurance}</p>
+                                <p><strong>Status:</strong> ${rental.status.toUpperCase()}</p>
+                            </div>
+                            <div class="listing-actions">
+                                <button class="btn" onclick="approveAdminBooking(${rental.id})">Mark Approved</button>
+                                <button class="btn btn-danger" onclick="rejectAdminBooking(${rental.id})">Reject</button>
+                            </div>
+                        `;
+                        bookingsContainer.appendChild(item);
+                    });
+                }
+            }
+        }
+
+        function approveAdminBooking(bookingId) {
+            const idx = rentals.findIndex(r => r.id === bookingId);
+            if (idx !== -1) {
+                rentals[idx].status = 'approved';
+                localStorage.setItem('encrypted_rentals', JSON.stringify(rentals));
+                loadAdminCommunications();
+                showNotification('Booking approved.', 'success');
+            }
+        }
+
+        function rejectAdminBooking(bookingId) {
+            const idx = rentals.findIndex(r => r.id === bookingId);
+            if (idx !== -1) {
+                rentals.splice(idx, 1);
+                localStorage.setItem('encrypted_rentals', JSON.stringify(rentals));
+                loadAdminCommunications();
+                showNotification('Booking rejected and removed.', 'success');
+            }
+        }
+
         function loadUserManagement() {
             const container = document.getElementById('user-management');
             if (!container) return;
@@ -7171,6 +7391,7 @@
             document.getElementById('engagement-rate').textContent = `${userEngagement}%`;
             document.getElementById('approval-rate').textContent = `${approvalRate}%`;
             document.getElementById('satisfaction-rate').textContent = '4.8/5';
+            try { renderAdminCharts(); } catch (e) {}
         }
 
         // ENHANCED RENTAL APPROVAL SYSTEM
@@ -7506,6 +7727,8 @@
             currentUser = null;
             localStorage.removeItem('encrypted_currentUser');
             clearTimeout(sessionTimer);
+            const timerDisplay = document.getElementById('session-timer');
+            if (timerDisplay) timerDisplay.style.display = 'none';
             updateUserInterface();
             showSection('home');
             showNotification('You have been logged out successfully.', 'info');
@@ -7659,6 +7882,12 @@
             
             // Add active class to clicked tab
             event.target.classList.add('active');
+            if (tabName === 'communications') {
+                loadAdminCommunications();
+            }
+            if (tabName === 'reports') {
+                try { renderAdminCharts(); } catch (e) {}
+            }
         }
 
         function generateReports() {
@@ -7687,6 +7916,30 @@
                 XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(usersData), 'Users');
                 XLSX.writeFile(wb, 'agas_reports.xlsx');
 
+                let listingsCanvas = document.getElementById('chart-listings');
+                let engagementCanvas = document.getElementById('chart-engagement');
+                let distributionCanvas = document.getElementById('chart-distribution');
+                let legendEl = document.getElementById('chart-legend');
+                let tooltipEl = document.getElementById('chart-tooltip');
+                let holder = null;
+                if (!listingsCanvas || !engagementCanvas || !distributionCanvas) {
+                    holder = document.createElement('div');
+                    holder.style.position = 'fixed';
+                    holder.style.left = '-9999px';
+                    holder.style.top = '-9999px';
+                    document.body.appendChild(holder);
+                    if (!listingsCanvas) { listingsCanvas = document.createElement('canvas'); listingsCanvas.id = 'chart-listings'; listingsCanvas.width = 640; listingsCanvas.height = 280; holder.appendChild(listingsCanvas); }
+                    if (!engagementCanvas) { engagementCanvas = document.createElement('canvas'); engagementCanvas.id = 'chart-engagement'; engagementCanvas.width = 640; engagementCanvas.height = 280; holder.appendChild(engagementCanvas); }
+                    if (!distributionCanvas) { distributionCanvas = document.createElement('canvas'); distributionCanvas.id = 'chart-distribution'; distributionCanvas.width = 640; distributionCanvas.height = 320; holder.appendChild(distributionCanvas); }
+                    if (!legendEl) { legendEl = document.createElement('div'); legendEl.id = 'chart-legend'; holder.appendChild(legendEl); }
+                    if (!tooltipEl) { tooltipEl = document.createElement('div'); tooltipEl.id = 'chart-tooltip'; holder.appendChild(tooltipEl); }
+                }
+                try { renderAdminCharts(); } catch (e) {}
+                const listingsImg = listingsCanvas ? listingsCanvas.toDataURL('image/png') : '';
+                const engagementImg = engagementCanvas ? engagementCanvas.toDataURL('image/png') : '';
+                const distributionImg = distributionCanvas ? distributionCanvas.toDataURL('image/png') : '';
+                if (holder) { document.body.removeChild(holder); }
+
                 const carsRows = cars.map(c => `
                     <tr>
                         <td>${c.id || ''}</td>
@@ -7710,18 +7963,40 @@
                     </tr>
                 `).join('');
 
-                const htmlDoc = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>AGAS Reports</title></head><body>
-                    <h1>AGAS LUXE DRIVE Reports</h1>
-                    <h2>Cars</h2>
-                    <table border="1" cellspacing="0" cellpadding="5">
-                        <tr><th>ID</th><th>Make</th><th>Model</th><th>Year</th><th>Price</th><th>Mileage</th><th>Location</th><th>Status</th></tr>
-                        ${carsRows}
-                    </table>
-                    <h2>Users</h2>
-                    <table border="1" cellspacing="0" cellpadding="5">
-                        <tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th><th>Joined</th></tr>
-                        ${usersRows}
-                    </table>
+                let chartsHtml = '';
+                if (listingsImg) chartsHtml += `<h3 style="margin-top:20px">Listings Overview</h3><img src="${listingsImg}" alt="Listings Overview" style="max-width:700px;border-radius:10px">`;
+                if (engagementImg) chartsHtml += `<h3 style="margin-top:20px">Engagement Trend</h3><img src="${engagementImg}" alt="Engagement Trend" style="max-width:700px;border-radius:10px">`;
+                if (distributionImg) chartsHtml += `<h3 style="margin-top:20px">Distribution</h3><img src="${distributionImg}" alt="Distribution" style="max-width:700px;border-radius:10px">`;
+
+                const reportDate = new Date().toLocaleString();
+                const companyLogoUrl = localStorage.getItem('companyLogoUrl') || '';
+                const coverImage = 'https://uploads.audi-mediacenter.com/system/production/media/125899/images/ed977bc29fd369ea4a5c2b6998ab027d9972703b/A243788_web_960.jpg?1730706355';
+                const htmlDoc = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>AGAS Executive Report</title></head><body style="font-family:Segoe UI, Arial, sans-serif; color:#222;">
+                    <div style="padding:20px;background:linear-gradient(135deg,#1b1b1b,#2a7ade);color:#fff;border-bottom:4px solid #FFC107;display:flex;align-items:center;gap:16px;">
+                        ${companyLogoUrl ? `<img src="${companyLogoUrl}" alt="AGAS Logo" style="height:60px;border-radius:8px;box-shadow:0 6px 16px rgba(0,0,0,0.2)">` : ''}
+                        <div>
+                            <h1 style="margin:0;font-size:34px;letter-spacing:0.5px">AGAS LUXE DRIVE</h1>
+                            <p style="margin:6px 0 0;font-size:16px;">Executive Report</p>
+                            <p style="margin:4px 0 0;font-size:12px;opacity:0.9">Generated: ${reportDate}</p>
+                        </div>
+                    </div>
+                    <div style="text-align:center;padding:24px">
+                        <img src="${coverImage}" alt="Cover" style="max-width:760px;border-radius:14px;box-shadow:0 12px 30px rgba(0,0,0,0.2)">
+                    </div>
+                    <div style="padding:0 24px">
+                        <h2>Cars</h2>
+                        <table border="1" cellspacing="0" cellpadding="5" style="border-collapse:collapse;">
+                            <tr><th>ID</th><th>Make</th><th>Model</th><th>Year</th><th>Price</th><th>Mileage</th><th>Location</th><th>Status</th></tr>
+                            ${carsRows}
+                        </table>
+                        <h2 style="margin-top:24px">Users</h2>
+                        <table border="1" cellspacing="0" cellpadding="5" style="border-collapse:collapse;">
+                            <tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th><th>Joined</th></tr>
+                            ${usersRows}
+                        </table>
+                        <h2 style="margin-top:24px">Charts</h2>
+                        ${chartsHtml}
+                    </div>
                 </body></html>`;
 
                 const blob = new Blob([htmlDoc], { type: 'application/msword' });
@@ -7754,3 +8029,4 @@
     </script>
 </body>
 </html>
+    
