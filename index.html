@@ -5670,10 +5670,11 @@
             let changed = false;
             const dupIndex = testimonials.findIndex(t => typeof t.userName === 'string' && /michael\.?\s*k/i.test(t.userName));
             const anotherDup = testimonials.findIndex((t, i) => i !== dupIndex && typeof t.userName === 'string' && /michael\.?\s*k/i.test(t.userName));
-            if (dupIndex !== -1 && anotherDup !== -1) {
-                testimonials[anotherDup].userName = 'Alex G';
-                testimonials[anotherDup].title = testimonials[anotherDup].title || 'Delighted with AGAS experience';
-                testimonials[anotherDup].content = 'I had specific questions about performance and warranty on a performance sedan. The AGAS team didn’t rush me—they walked me through specs, financing, and delivery timing with real transparency. The car arrived exactly as described, and the follow‑up after purchase felt genuinely thoughtful. I’d trust them again for my next upgrade.';
+            if (dupIndex !== -1) {
+                const targetIndex = (anotherDup !== -1) ? anotherDup : dupIndex;
+                testimonials[targetIndex].userName = 'Peter M';
+                testimonials[targetIndex].title = testimonials[targetIndex].title || 'Delighted with AGAS experience';
+                testimonials[targetIndex].content = 'I had specific questions about performance and warranty on a performance sedan. The AGAS team didn’t rush me—they walked me through specs, financing, and delivery timing with real transparency. The car arrived exactly as described, and the follow‑up after purchase felt genuinely thoughtful. I’d trust them again for my next upgrade.';
                 changed = true;
             }
             const genericPhrases = [/great service/i, /highly recommend/i, /very good/i, /nice/i, /amazing company/i, /fast and reliable/i];
