@@ -2580,9 +2580,9 @@
                         <div class="rating-card">
                             <div class="rating-header">
                                 <div class="rating-user">
-                                    <div class="rating-avatar">MK</div>
+                                    <div class="rating-avatar">PM</div>
                                     <div>
-                                        <strong>Michael K.</strong>
+                                        <strong>Peter M.</strong>
                                         <div class="rating-stars">
                                             <span class="star filled">★</span>
                                             <span class="star filled">★</span>
@@ -2675,13 +2675,72 @@
                             <p>Secure transactions guaranteed</p>
                         </div>
                     </div>
-                    
-                    
-                </div>
+                    </div>
+                </section>
             </section>
-        </section>
 
-        <!-- Listings Section -->
+        
+<!-- Stats Section -->
+<section id="stats-section" style="padding: 80px 0; background-color: var(--light);">
+    <div class="container">
+        <h2 style="text-align: center; font-size: 32px; font-weight: 700; margin-bottom: 10px; color: var(--dark);">
+            Proven Growth. Real Results.
+        </h2>
+        <p style="text-align: center; font-size: 18px; color: var(--dark); margin-bottom: 50px;">
+            We're building trust and delivering verified luxury experiences backed by real performance metrics.
+        </p>
+
+        <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 40px;">
+
+            <div style="text-align: center;">
+                <h3 class="count-up" data-target="4200" style="font-size: 42px; font-weight: 700; color: var(--primary);">0</h3>
+                <p style="font-size: 16px; color: var(--gray);">Luxury Vehicles Verified</p>
+            </div>
+
+            <div style="text-align: center;">
+                <h3 style="font-size: 42px; font-weight: 700; color: var(--primary);">98.6%</h3>
+                <p style="font-size: 16px; color: var(--gray);">Buyer Satisfaction Rate</p>
+            </div>
+
+            <div style="text-align: center;">
+                <h3 style="font-size: 42px; font-weight: 700; color: var(--primary);">120+</h3>
+                <p style="font-size: 16px; color: var(--gray);">Trusted Dealership Partners</p>
+            </div>
+
+            <div style="text-align: center;">
+                <h3 style="font-size: 42px; font-weight: 700; color: var(--primary);">3+ Years</h3>
+                <p style="font-size: 16px; color: var(--gray);">Industry Experience</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script>
+    // Animation for the 4,200+ counter
+    const counters = document.querySelectorAll('.count-up');
+    const speed = 120;
+
+    counters.forEach(counter => {
+        const updateCount = () => {
+            const target = +counter.getAttribute('data-target');
+            const count = +counter.innerText;
+
+            const increment = target / speed;
+
+            if (count < target) {
+                counter.innerText = Math.ceil(count + increment);
+                setTimeout(updateCount, 20);
+            } else {
+                counter.innerText = target.toLocaleString() + "+";
+            }
+        };
+        updateCount();
+    });
+</script>
+
+
+<!-- Listings Section -->
         <section id="listings-section" style="display: none; padding: 100px 0 80px;">
             <div class="container">
                 <div class="section-title">
