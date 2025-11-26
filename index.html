@@ -2472,7 +2472,7 @@
                     </div>
                     
                     <div style="text-align: center; margin-top: 40px;">
-                        <a class="btn" onclick="showSection('listings')">View All 247 Listings</a>
+                        <a id="view-all-link" class="btn" onclick="showSection('listings')">View All Listings</a>
                     </div>
                 </div>
             </section>
@@ -4437,7 +4437,9 @@
         };
 
         // Enhanced sample data with competitive pricing and correct images
-        if (cars.length === 0) {
+        const DATA_VERSION = '2025-11-27-car-seed-003';
+        const storedVersion = localStorage.getItem('agas_data_version');
+        if (cars.length === 0 || storedVersion !== DATA_VERSION) {
             cars = [
                 {
                     id: 1,
@@ -5011,6 +5013,7 @@
                 }
             ];
             localStorage.setItem('encrypted_cars', JSON.stringify(cars));
+            localStorage.setItem('agas_data_version', DATA_VERSION);
         }
 
         // Enhanced rental fleet with competitive pricing
@@ -6174,6 +6177,11 @@
             loadRentalFleet();
             setupEventListeners();
             updateUserInterface();
+            const viewAll = document.getElementById('view-all-link');
+            if (viewAll) {
+                const count = cars.filter(c => c.status === 'approved').length;
+                viewAll.textContent = `View All ${count} Listings`;
+            }
             
             // Initialize new features
             initializeDarkMode();
