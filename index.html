@@ -4634,15 +4634,113 @@
             
             // Default contextual response
             return {
-                message: "I'm here to assist with all your luxury automotive needs. How can I help you today?",
+                message: "I'm your AGAS AI Concierge. I can navigate the site, open contact or inquiry forms, and guide purchases, rentals, or sales. What would you like to do?",
                 options: [
-                    "Buy a luxury vehicle",
-                    "Sell my car",
-                    "Rent a premium car",
-                    "Learn about verification",
-                    "Contact support"
+                    "Show available luxury vehicles",
+                    "Browse rental fleet",
+                    "View premium brands",
+                    "Contact support",
+                    "Generate reports"
                 ]
             };
+        }
+
+        // Navigation helpers
+        function revealSection(id) {
+            const el = document.getElementById(id);
+            if (!el) return false;
+            el.style.display = '';
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            return true;
+        }
+        function goToSection(id) { return revealSection(id); }
+        function openContact() {
+            const ok = revealSection('contact-section');
+            const form = document.getElementById('contact-form');
+            if (form) form.scrollIntoView({ behavior: 'smooth' });
+            return ok;
+        }
+        function openInquiryForCurrentCar() {
+            if (typeof currentCarInquiry === 'number' && currentCarInquiry) {
+                showInquiryModal(currentCarInquiry);
+                return true;
+            }
+            return false;
+        }
+        function extractFiltersFromMessage(raw) {
+            const m = raw.toLowerCase();
+            let make = '';
+            if (m.includes('mercedes') || m.includes('benz')) make = 'Mercedes-Benz';
+            else if (m.includes('bmw')) make = 'BMW';
+            else if (m.includes('range rover') || m.includes('land rover')) make = 'Range Rover';
+            else if (m.includes('toyota')) make = 'Toyota';
+            else if (m.includes('porsche')) make = 'Porsche';
+            let priceMax = null;
+            const match = m.match(/\$?\s*(\d+(?:\.\d+)?)\s*(k|m|million|thousand)?/);
+            if (match) {
+                const num = parseFloat(match[1]);
+                const unit = match[2] || '';
+                if (unit.startsWith('m')) priceMax = Math.round(num * 1000000);
+                else if (unit && (unit.startsWith('k') || unit.startsWith('th'))) priceMax = Math.round(num * 1000);
+                else priceMax = Math.round(num);
+            }
+            return { make, priceMax };
+        }
+        function applyAIListingsFilter(make, priceMax) {
+            try {
+                let list = cars.filter(car => car.status === 'approved');
+                if (make) list = list.filter(car => String(car.make).toLowerCase().includes(make.toLowerCase()));
+                if (priceMax) list = list.filter(car => Number(car.price) <= Number(priceMax));
+                const allContainer = document.getElementById('all-car-listings');
+                const featuredContainer = document.getElementById('car-listings');
+                if (allContainer) {
+                    allContainer.innerHTML = '';
+                    list.forEach(car => { allContainer.appendChild(createCarCard(car, true)); });
+                    goToSection('listings-section');
+                } else if (featuredContainer) {
+                    featuredContainer.innerHTML = '';
+                    list.slice(0, 4).forEach(car => { featuredContainer.appendChild(createCarCard(car)); });
+                    goToSection('featured-vehicles');
+                }
+                if (list.length > 0) showNotification(`Found ${list.length} matching vehicles.`, 'success');
+                else showNotification('No matching vehicles found.', 'warning');
+                return true;
+            } catch (e) { return false; }
+        }
+        function performAIAction(rawMessage) {
+            const m = rawMessage.toLowerCase();
+            const f = extractFiltersFromMessage(rawMessage);
+            if (f.make || f.priceMax) {
+                return applyAIListingsFilter(f.make, f.priceMax);
+            }
+            if (m.includes('featured') || m.includes('available luxury') || m.includes('show vehicles')) {
+                return goToSection('featured-vehicles');
+            }
+            if (m.includes('listings') || m.includes('inventory') || m.includes('all vehicles')) {
+                return goToSection('listings-section');
+            }
+            if (m.includes('rental') || m.includes('rent') || m.includes('fleet')) {
+                return goToSection('rentals-section');
+            }
+            if (m.includes('brand') || m.includes('brands') || m.includes('gallery')) {
+                return goToSection('brands-section') || goToSection('brand-gallery-section');
+            }
+            if (m.includes('contact') || m.includes('support') || m.includes('help')) {
+                return openContact();
+            }
+            if (m.includes('test drive') || m.includes('schedule') || m.includes('inspect')) {
+                return openInquiryForCurrentCar() || goToSection('featured-vehicles');
+            }
+            if (m.includes('report')) {
+                try { switchAdminTab('reports'); } catch (e) {}
+                const admin = document.getElementById('admin-section');
+                if (admin) admin.scrollIntoView({ behavior: 'smooth' });
+                return true;
+            }
+            if (m.includes('dark') && m.includes('mode')) {
+                try { toggleDarkMode(); return true; } catch (e) {}
+            }
+            return false;
         }
 
         // Enhanced AI chat functionality
@@ -4670,21 +4768,24 @@
             messagesContainer.appendChild(typingIndicator);
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
             
-            // Simulate AI response with delay
+            // Simulated thinking delay for UX, then act/respond
             setTimeout(() => {
-                // Remove typing indicator
                 const indicator = document.getElementById('typing-indicator');
                 if (indicator) indicator.remove();
-                
-                // Get AI response
+                const acted = performAIAction(message);
+                if (acted) {
+                    const confirm = { sender: 'bot', message: 'Navigating and opening requested section.', options: null };
+                    aiChatMessages.push(confirm);
+                    localStorage.setItem('agas_ai_chat', JSON.stringify(aiChatMessages));
+                    loadAIChatMessages();
+                    return;
+                }
                 const aiResponse = getAIResponse(message);
-                
-                // Add bot message
                 const botMessage = { sender: 'bot', message: aiResponse.message, options: aiResponse.options };
                 aiChatMessages.push(botMessage);
                 localStorage.setItem('agas_ai_chat', JSON.stringify(aiChatMessages));
                 loadAIChatMessages();
-            }, 1500);
+            }, 800);
         }
 
         // Enhanced chat message display with options
@@ -4709,8 +4810,10 @@
                         optionElement.className = 'ai-chat-option';
                         optionElement.textContent = option;
                         optionElement.onclick = function() {
-                            document.getElementById('ai-chat-input').value = option;
-                            sendAIMessage();
+                            if (!performAIAction(option)) {
+                                document.getElementById('ai-chat-input').value = option;
+                                sendAIMessage();
+                            }
                         };
                         optionsContainer.appendChild(optionElement);
                     });
@@ -4731,15 +4834,16 @@
 
         // Initialize EmailJS with your Public Key
         (function() {
-            emailjs.init("imBp65r0TFuSguxAh");
+            emailjs.init("C8eqfETcWvBibFK4l");
             console.log("EmailJS initialized successfully");
         })();
 
         // EmailJS Configuration with your details
         const EMAILJS_CONFIG = {
-            serviceId: 'service_8oy4ofi',
-            otpTemplateId: 'template_b87lmml',
-            resetTemplateId: 'template_5vxqxtq',
+            serviceId: 'service_venw737',
+            otpTemplateId: 'template_au1x1tg',
+            resetTemplateId: 'template_kvc5v1i',
+            welcomeTemplateId: 'template_au1x1tg',
             contactTemplateId: 'template_contact_form',
             inquiryTemplateId: 'template_inquiry_form',
             bulkTemplateId: 'template_bulk_notifications',
@@ -4798,9 +4902,8 @@
                 return { success: true, message: 'OTP sent successfully' };
             } catch (error) {
                 console.error('Failed to send OTP email:', error);
-                // Fallback for development - show OTP in notification
-                showNotification(`OTP Code for ${email}: ${otpCode} (Email service temporarily unavailable - use this code for testing)`, 'warning', 10000);
-                return { success: false, message: 'Email service unavailable - OTP displayed on screen' };
+                showNotification('Failed to send OTP email. Please try again later.', 'error');
+                return { success: false, message: 'Failed to send OTP email' };
             }
         }
 
@@ -4905,7 +5008,7 @@
                 // Using OTP template as welcome template for now
                 const response = await emailjs.send(
                     EMAILJS_CONFIG.serviceId,
-                    EMAILJS_CONFIG.otpTemplateId, // Using OTP template as fallback
+                    EMAILJS_CONFIG.welcomeTemplateId,
                     templateParams
                 );
 
@@ -7559,11 +7662,82 @@
         }
 
         function generateReports() {
-            showNotification('Generating comprehensive reports...', 'info');
-            // In a real application, this would generate PDF/Excel reports
-            setTimeout(() => {
-                showNotification('Reports generated successfully!', 'success');
-            }, 2000);
+            try {
+                const carsData = cars.map(c => ({
+                    ID: c.id,
+                    Make: c.make,
+                    Model: c.model,
+                    Year: c.year,
+                    Price: typeof formatPrice === 'function' ? formatPrice(c.price) : c.price,
+                    Mileage: c.mileage || '',
+                    Location: c.location || '',
+                    Status: c.status || ''
+                }));
+
+                const usersData = (Array.isArray(users) ? users : []).map(u => ({
+                    ID: u.id || '',
+                    Name: ((u.fname || '') + ' ' + (u.lname || '')).trim() || (u.companyName || ''),
+                    Email: u.email || '',
+                    Role: u.role || '',
+                    Joined: u.createdAt ? new Date(u.createdAt).toLocaleDateString() : ''
+                }));
+
+                const wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(carsData), 'Cars');
+                XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(usersData), 'Users');
+                XLSX.writeFile(wb, 'agas_reports.xlsx');
+
+                const carsRows = cars.map(c => `
+                    <tr>
+                        <td>${c.id || ''}</td>
+                        <td>${c.make || ''}</td>
+                        <td>${c.model || ''}</td>
+                        <td>${c.year || ''}</td>
+                        <td>${typeof formatPrice === 'function' ? formatPrice(c.price) : (c.price || '')}</td>
+                        <td>${c.mileage || ''}</td>
+                        <td>${c.location || ''}</td>
+                        <td>${c.status || ''}</td>
+                    </tr>
+                `).join('');
+
+                const usersRows = (Array.isArray(users) ? users : []).map(u => `
+                    <tr>
+                        <td>${u.id || ''}</td>
+                        <td>${(((u.fname || '') + ' ' + (u.lname || '')).trim()) || (u.companyName || '')}</td>
+                        <td>${u.email || ''}</td>
+                        <td>${u.role || ''}</td>
+                        <td>${u.createdAt ? new Date(u.createdAt).toLocaleDateString() : ''}</td>
+                    </tr>
+                `).join('');
+
+                const htmlDoc = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>AGAS Reports</title></head><body>
+                    <h1>AGAS LUXE DRIVE Reports</h1>
+                    <h2>Cars</h2>
+                    <table border="1" cellspacing="0" cellpadding="5">
+                        <tr><th>ID</th><th>Make</th><th>Model</th><th>Year</th><th>Price</th><th>Mileage</th><th>Location</th><th>Status</th></tr>
+                        ${carsRows}
+                    </table>
+                    <h2>Users</h2>
+                    <table border="1" cellspacing="0" cellpadding="5">
+                        <tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th><th>Joined</th></tr>
+                        ${usersRows}
+                    </table>
+                </body></html>`;
+
+                const blob = new Blob([htmlDoc], { type: 'application/msword' });
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = 'agas_reports.doc';
+                document.body.appendChild(a);
+                a.click();
+                URL.revokeObjectURL(a.href);
+                document.body.removeChild(a);
+
+                showNotification('Reports generated: Excel and Word downloaded.', 'success');
+            } catch (err) {
+                console.error('Failed to generate reports', err);
+                showNotification('Failed to generate reports. Please check console for details.', 'error');
+            }
         }
 
         function sendBulkNotifications() {
