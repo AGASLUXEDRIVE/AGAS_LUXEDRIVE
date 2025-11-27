@@ -4437,10 +4437,38 @@
         };
 
         // Enhanced sample data with competitive pricing and correct images
-        const DATA_VERSION = '2025-11-27-car-seed-006';
+        const DATA_VERSION = '2025-11-27-car-seed-007';
         const storedVersion = localStorage.getItem('agas_data_version');
         if (cars.length === 0 || storedVersion !== DATA_VERSION) {
             cars = [
+                {
+                    id: 33,
+                    make: 'Porsche',
+                    model: 'Panamera Turbo Sonderwunsch',
+                    year: 2025,
+                    price: 42000000,
+                    mileage: 1000,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'GT Silver',
+                    condition: 'new',
+                    description: 'Bespoke Sonderwunsch Panamera Turbo with exclusive tailoring and high-performance dynamics.',
+                    images: [
+                        'https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=265939&w=1440&h=812&crop=1&public=1&cs=ada5400799903cd4',
+                        'https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=265942&w=1440&h=812&crop=1&public=1&cs=d3b58a79c3e82cc9',
+                        'https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=265941&w=1440&h=812&crop=1&public=1&cs=fd4f156f2f5b0408',
+                        'https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=265936&w=1440&h=812&crop=1&public=1&cs=72d1a6b82615f978',
+                        'https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=265937&w=1440&h=812&crop=1&public=1&cs=287321f3854c3a5b',
+                        'https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=327345&w=1440&h=812&crop=1&public=1&cs=2fd77826a04a3954',
+                        'https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=327355&w=1440&h=812&crop=1&public=1&cs=67ea65362be77617',
+                        'https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=327352&w=1440&h=812&crop=1&public=1&cs=4bc83ace312d2321',
+                        'https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=327348&w=1440&h=812&crop=1&public=1&cs=515f302ec6e29174'
+                    ],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['Sonderwunsch Bespoke', 'Turbocharged V8', 'Adaptive Air Suspension', 'Rear Axle Steering', 'PCCB', 'Premium Sound']
+                },
                 {
                     id: 1,
                     make: 'Mercedes-Benz',
@@ -5200,9 +5228,10 @@
                     condition: 'new',
                     description: 'High-performance SUV with turbocharged engine and premium features.',
                     images: [
-                        'https://newsroom.porsche.com/.imaging/mte/porsche-templating-theme/image_480x270/dam/pnr/porsche_newsroom/Produkte/Cayenne/Sonstiges/_MG_3885_mittig/jcr:content/_MG_3885_mittig',
-                        'https://newsroom.porsche.com/.imaging/mte/porsche-templating-theme/image_480x270/dam/pnr/porsche_newsroom/Unternehmen/Detailaufnahmen-fuer-Zahlen/b-LM_Unravelled_DB_1798.jpg/jcr:content/b-LM_Unravelled_DB_1798.jpg',
-                        'https://newsroom.porsche.com/.imaging/mte/porsche-templating-theme/image_480x270/dam/pnr/porsche_newsroom/Produkte/Cayenne/in-Barcelona/Aufmacherbild/Cayenne_in_Barca_klein/jcr:content/Cayenne_in_Barca_klein'
+                        'https://newsroom.porsche.com/.imaging/mte/porsche-templating-theme/teaser_720x406x2/dam/pnr/porsche_newsroom/Produkte/Cayenne/Porsche-Cayenne-Platinum-Edition/Galerie/P16_0363_a4_rgb-b.jpg/jcr:content/P16_0363_a3_rgb-b.jpg',
+                        'https://newsroom.porsche.com/.imaging/mte/porsche-templating-theme/teaser_720x406x2/dam/pnr/porsche_newsroom/Produkte/Cayenne/Porsche-Cayenne-Platinum-Edition/Galerie/P16_0362_a4_rgb-b.jpg/jcr:content/P16_0362_a4_rgb-b.jpg',
+                        'https://newsroom.porsche.com/.imaging/mte/porsche-templating-theme/teaser_720x406x2/dam/pnr/porsche_newsroom/Produkte/Cayenne/Porsche-Cayenne-Platinum-Edition/Galerie/P16_0361_a4_rgb-b.jpg/jcr:content/P16_0361_a4_rgb-b.jpg',
+                        'https://newsroom.porsche.com/.imaging/mte/porsche-templating-theme/teaser_720x406x2/dam/pnr/porsche_newsroom/Produkte/Cayenne/Porsche-Cayenne-Platinum-Edition/Galerie/P16_0358_a4_rgb-b.jpg/jcr:content/P16_0358_a4_rgb-b.jpg'
                     ],
                     verified: true,
                     sellerId: 1,
