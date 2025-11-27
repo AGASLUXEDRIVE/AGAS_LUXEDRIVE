@@ -3348,6 +3348,11 @@
                                 <label for="car-images">Upload Images</label>
                                 <input type="file" id="car-images" class="form-control" multiple accept="image/*">
                             </div>
+
+                            <div class="form-group">
+                                <label for="car-image-url">Image URL (optional)</label>
+                                <input type="url" id="car-image-url" class="form-control" placeholder="https://...">
+                            </div>
                             
                             <div class="form-group">
                                 <label for="car-documents">Upload Documents (Logbook, ID, etc.)</label>
@@ -3457,6 +3462,11 @@
                             <div class="form-group">
                                 <label for="rental-image">Upload Image</label>
                                 <input type="file" id="rental-image" class="form-control" accept="image/*">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="rental-image-url">Image URL (optional)</label>
+                                <input type="url" id="rental-image-url" class="form-control" placeholder="https://...">
                             </div>
                             
                             <div class="terms-agreement">
@@ -4200,6 +4210,16 @@
         </div>
     </div>
 
+    <div id="rental-detail-modal" class="modal car-detail-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="rental-detail-title">Rental Details</h3>
+                <button class="close-modal" onclick="closeModal('rental-detail-modal')">&times;</button>
+            </div>
+            <div id="rental-detail-content"></div>
+        </div>
+    </div>
+
     <!-- Quick View Modal -->
     <div id="quick-view-modal" class="modal quick-view-modal">
         <div class="modal-content">
@@ -4305,6 +4325,11 @@
                     <label for="admin-car-images">Upload Images</label>
                     <input type="file" id="admin-car-images" class="form-control" multiple accept="image/*">
                 </div>
+
+                <div class="form-group">
+                    <label for="admin-car-image-url">Image URL (optional)</label>
+                    <input type="url" id="admin-car-image-url" class="form-control" placeholder="https://...">
+                </div>
                 
                 <button type="submit" class="btn" style="width: 100%; margin-top: 20px;">Add Car</button>
             </form>
@@ -4373,6 +4398,11 @@
                     <label for="admin-rental-image">Upload Image</label>
                     <input type="file" id="admin-rental-image" class="form-control" accept="image/*">
                 </div>
+
+                <div class="form-group">
+                    <label for="admin-rental-image-url">Image URL (optional)</label>
+                    <input type="url" id="admin-rental-image-url" class="form-control" placeholder="https://...">
+                </div>
                 
                 <button type="submit" class="btn" style="width: 100%; margin-top: 20px;">Add Rental Car</button>
             </form>
@@ -4438,6 +4468,7 @@
 
         // Enhanced sample data with competitive pricing and correct images
         const DATA_VERSION = '2025-11-27-car-seed-008';
+        const RENTAL_DATA_VERSION = '2025-11-27-rental-seed-001';
         const storedVersion = localStorage.getItem('agas_data_version');
         if (cars.length === 0 || storedVersion !== DATA_VERSION) {
             cars = [
@@ -5308,15 +5339,20 @@
             localStorage.setItem('agas_data_version', DATA_VERSION);
         }
 
-        // Enhanced rental fleet with competitive pricing
-        if (rentalFleet.length === 0) {
+        // Enhanced rental fleet with competitive pricing and image galleries
+        const storedRentalVersion = localStorage.getItem('agas_rental_version');
+        if (rentalFleet.length === 0 || storedRentalVersion !== RENTAL_DATA_VERSION) {
             rentalFleet = [
                 {
                     id: 1,
-                    make: 'Mercedes-Benz',
-                    model: 'S-Class 2023',
-                    type: 'Executive Sedan',
-                    image: 'https://api.media.mercedes-benz.com/jsonapi/image/deliver/9181e1f8-01b1-4440-b994-57314de7b092/3_2_768',
+                    make: 'Porsche',
+                    model: 'Panamera Turbo Sonderwunsch 2025',
+                    type: 'Executive Sport Sedan',
+                    images: [
+                        'https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=265939&w=1440&h=812&crop=1&public=1&cs=ada5400799903cd4',
+                        'https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=265942&w=1440&h=812&crop=1&public=1&cs=d3b58a79c3e82cc9',
+                        'https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=265941&w=1440&h=812&crop=1&public=1&cs=fd4f156f2f5b0408'
+                    ],
                     dailyRate: 42000,
                     weeklyRate: 252000,
                     features: ['Chauffeur Option', 'Full Insurance', 'Airport Delivery', 'WiFi', 'Massage Seats', 'Panoramic Roof'],
@@ -5326,10 +5362,14 @@
                 },
                 {
                     id: 2,
-                    make: 'Range Rover',
-                    model: 'Autobiography 2023',
+                    make: 'Lexus',
+                    model: 'LX 600 2023',
                     type: 'Luxury SUV',
-                    image: 'https://media.production.jlrms.com/styles/hero_crop/s3/2025-08-04/image/21237d82-fb2d-49f9-8b5e-2a78b5c9b476/RRS_SV_Carbon_F34_16x9_8K_SH001_v2_PR.jpg?VersionId=xms9oy1hINgrZny5ygmAB_8oWxISUU4k&h=9ed48596&itok=MoCiWqRT',
+                    images: [
+                        'https://lacddam.lexusasia.com/lexus-v3-blueprint/models/suv/lx/my22/lx-600-fsport/gallery/exterior/lx600-fsport-gallery-ext-04-d.jpg',
+                        'https://lacddam.lexusasia.com/lexus-v3-blueprint/models/suv/lx/my22/lx-600-fsport/gallery/interior/lx-600-fsport-int-gallery-03-d.jpg',
+                        'https://lacddam.lexusasia.com/lexus-v3-blueprint/models/suv/lx/my22/lx-600-fsport/gallery/exterior/lx600-fsport-gallery-ext-03-d.jpg'
+                    ],
                     dailyRate: 52000,
                     weeklyRate: 312000,
                     features: ['7 Seats', 'Off-road Capable', 'Premium Sound', 'Massage Seats', 'Air Suspension', 'Terrain Response'],
@@ -5339,10 +5379,14 @@
                 },
                 {
                     id: 3,
-                    make: 'BMW',
-                    model: '7 Series 2023',
-                    type: 'Luxury Sedan',
-                    image: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+                    make: 'Range Rover',
+                    model: 'Autobiography 2023',
+                    type: 'Luxury SUV',
+                    images: [
+                        'https://jlr.scene7.com/is/image/jlr/L460_22MY_195_GLHD_AUTOBIOGRAPHY_SWB_DX_2560x1440?wid=740&fit=stretch%2C1',
+                        'https://jlr.scene7.com/is/image/jlr/L460_22MY_120_GLHD?wid=740&fit=stretch%2C1',
+                        'https://jlr.scene7.com/is/image/jlr/L46025GL_303103153_011?wid=740&fit=stretch%2C1'
+                    ],
                     dailyRate: 38000,
                     weeklyRate: 228000,
                     features: ['Executive Interior', 'Night Vision', 'Massage Seats', 'B&W Sound', 'Gesture Control', 'Sky Lounge'],
@@ -5352,19 +5396,41 @@
                 },
                 {
                     id: 4,
-                    make: 'Porsche',
-                    model: 'Cayenne Turbo',
-                    type: 'Performance SUV',
-                    image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+                    make: 'Mercedes-Benz',
+                    model: 'Maybach S 580 2023',
+                    type: 'Executive Sedan',
+                    images: [
+                        'https://api.media.mercedes-benz.com/jsonapi/image/deliver/1cdfdf6d-ef2d-4a83-8bdf-d83e8b7d452a/4_3_800',
+                        'https://api.media.mercedes-benz.com/jsonapi/image/deliver/48e1531b-6c9c-4cf5-b0dc-aae4594bd309/4_3_800',
+                        'https://api.media.mercedes-benz.com/jsonapi/image/deliver/fa221e52-fe99-4f40-b008-aa6305598246/4_3_800'
+                    ],
                     dailyRate: 65000,
                     weeklyRate: 390000,
                     features: ['Sport Chrono', 'Premium Package', 'Performance Tires', 'Carbon Interior', 'Adaptive Suspension', 'Sports Exhaust'],
                     available: true,
                     sellerId: 0,
                     status: 'approved'
+                },
+                {
+                    id: 5,
+                    make: 'BMW',
+                    model: '7 Series 2021',
+                    type: 'Luxury Sedan',
+                    images: [
+                        'https://www.bmw.co.ke/content/dam/bmw/common/all-models/7-series/sedan/2022/highlights/bmw-7-series-sedan-gallery-design-01-890.jpg/jcr:content/renditions/cq5dam.resized.img.890.medium.time1719307002536.jpg',
+                        'https://www.bmw.co.ke/content/dam/bmw/common/all-models/7-series/sedan/2022/highlights/bmw-7-series-sedan-gallery-design-02-890.jpg/jcr:content/renditions/cq5dam.resized.img.890.medium.time1719306542069.jpg',
+                        'https://www.bmw.co.ke/content/dam/bmw/common/all-models/7-series/sedan/2022/highlights/bmw-7-series-sedan-gallery-design-03-890.jpg/jcr:content/renditions/cq5dam.resized.img.890.medium.time1719307003909.jpg'
+                    ],
+                    dailyRate: 45000,
+                    weeklyRate: 270000,
+                    features: ['Executive Interior', 'Night Vision', 'Massage Seats', 'B&W Sound', 'Gesture Control', 'Sky Lounge'],
+                    available: true,
+                    sellerId: 0,
+                    status: 'approved'
                 }
             ];
             localStorage.setItem('encrypted_rentalFleet', JSON.stringify(rentalFleet));
+            localStorage.setItem('agas_rental_version', RENTAL_DATA_VERSION);
         }
 
         // Sample notifications
@@ -6812,10 +6878,10 @@
             const content = document.getElementById('car-detail-content');
             content.innerHTML = `
                 <div class="car-detail-images">
-                    <img src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-detail-main-image" id="car-detail-main-image" onerror="handleImageError(this, ${car.id})">
+                    <img src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-detail-main-image" id="car-detail-main-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
                     <div class="car-detail-thumbnails">
                         ${car.images.map((img, index) => `
-                            <img src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" onclick="changeMainImage('${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
+                            <img src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" referrerpolicy="no-referrer" onclick="changeMainImage('${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
                         `).join('')}
                     </div>
                 </div>
@@ -6880,7 +6946,7 @@
             const content = document.getElementById('quick-view-content');
             content.innerHTML = `
                 <div>
-                <img src="${car.images[0]}" alt="${car.make} ${car.model}" style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius);" onerror="handleImageError(this, ${car.id})">
+                <img src="${car.images[0]}" alt="${car.make} ${car.model}" style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius);" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
                 </div>
                 <div>
                     <div class="car-price">${formatPrice(car.price)}</div>
@@ -6917,6 +6983,78 @@
             const currentIndex = imgs.indexOf(el.src);
             const nextIndex = currentIndex >= 0 && currentIndex < imgs.length - 1 ? currentIndex + 1 : 0;
             el.src = imgs[nextIndex] || imageFallbackPlaceholder;
+        }
+
+        function handleRentalImageError(el, rentalId) {
+            const rental = rentalFleet.find(r => r.id === rentalId);
+            const imgs = (rental && Array.isArray(rental.images) && rental.images.length) ? rental.images : (rental && rental.image ? [rental.image] : []);
+            const currentIndex = imgs.indexOf(el.src);
+            const nextIndex = currentIndex >= 0 && currentIndex < imgs.length - 1 ? currentIndex + 1 : 0;
+            el.src = imgs[nextIndex] || imageFallbackPlaceholder;
+        }
+
+        function changeRentalMainImage(rentalId, src) {
+            const img = document.getElementById('rental-main-image-' + rentalId);
+            if (img) img.src = src;
+        }
+
+        function changeRentalDetailMainImage(src) {
+            const img = document.getElementById('rental-detail-main-image');
+            if (img) img.src = src;
+        }
+
+        function showRentalDetailModal(rentalId) {
+            const rental = rentalFleet.find(r => r.id === rentalId);
+            if (!rental) return;
+            document.getElementById('rental-detail-title').textContent = `${rental.make} ${rental.model}`;
+            const dailyRate = currentCurrency === 'kes' ? 
+                `KES ${rental.dailyRate.toLocaleString()}` : 
+                `$${Math.round(rental.dailyRate / exchangeRate)}`;
+            const weeklyRate = currentCurrency === 'kes' ? 
+                `KES ${rental.weeklyRate.toLocaleString()}` : 
+                `$${Math.round(rental.weeklyRate / exchangeRate)}`;
+            const content = document.getElementById('rental-detail-content');
+            content.innerHTML = `
+                <div class="car-detail-images">
+                    <img src="${Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || '')}" alt="${rental.make} ${rental.model}" class="car-detail-main-image" id="rental-detail-main-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleRentalImageError(this, ${rental.id})">
+                    <div class="car-detail-thumbnails">
+                        ${Array.isArray(rental.images) ? rental.images.map((img, index) => `
+                            <img src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" referrerpolicy="no-referrer" onclick="changeRentalDetailMainImage('${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
+                        `).join('') : ''}
+                    </div>
+                </div>
+                <div class="car-detail-specs">
+                    <div class="car-detail-spec">
+                        <div class="car-detail-spec-label">Daily Rate</div>
+                        <div class="car-detail-spec-value">${dailyRate}</div>
+                    </div>
+                    <div class="car-detail-spec">
+                        <div class="car-detail-spec-label">Weekly Rate</div>
+                        <div class="car-detail-spec-value">${weeklyRate}</div>
+                    </div>
+                    <div class="car-detail-spec">
+                        <div class="car-detail-spec-label">Type</div>
+                        <div class="car-detail-spec-value">${rental.type}</div>
+                    </div>
+                    <div class="car-detail-spec">
+                        <div class="car-detail-spec-label">Availability</div>
+                        <div class="car-detail-spec-value">${rental.available ? 'Available' : 'Booked'}</div>
+                    </div>
+                </div>
+                <div style="margin: 20px 0;">
+                    <h4>Features</h4>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                        ${Array.isArray(rental.features) ? rental.features.map(feature => `
+                            <span style="background: var(--light); padding: 8px 15px; border-radius: 20px; font-size: 0.9rem;">${feature}</span>
+                        `).join('') : ''}
+                    </div>
+                </div>
+                <div style="display: flex; gap: 15px; margin-top: 30px;">
+                    <button class="btn" onclick="showRentalModal(); closeModal('rental-detail-modal')" ${!rental.available ? 'disabled' : ''}>${rental.available ? 'Book Securely' : 'Currently Booked'}</button>
+                    <button class="btn btn-outline" onclick="closeModal('rental-detail-modal')">Close</button>
+                </div>
+            `;
+            document.getElementById('rental-detail-modal').style.display = 'flex';
         }
 
         // Currency functions
@@ -6987,7 +7125,7 @@
             card.className = 'car-card';
             card.innerHTML = `
                 <div class="car-badge">${car.verified ? 'VERIFIED' : 'PENDING'}</div>
-                <img src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-image" onerror="handleImageError(this, ${car.id})">
+                <img src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
                 <div class="car-details">
                     <div class="car-price">${formatPrice(car.price)}</div>
                     <h3 class="car-title">${car.make} ${car.model} ${car.year}</h3>
@@ -7038,7 +7176,12 @@
                 rentalCard.className = 'rental-card';
                 rentalCard.innerHTML = `
                     <div class="rental-badge">${rental.available ? 'AVAILABLE' : 'BOOKED'}</div>
-                    <img src="${rental.image}" alt="${rental.make} ${rental.model}" class="rental-image">
+                    <img id="rental-main-image-${rental.id}" src="${Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || '')}" alt="${rental.make} ${rental.model}" class="rental-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleRentalImageError(this, ${rental.id})">
+                    <div class="car-detail-thumbnails">
+                        ${Array.isArray(rental.images) ? rental.images.map((img, index) => `
+                            <img src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" referrerpolicy="no-referrer" onclick="changeRentalMainImage(${rental.id}, '${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
+                        `).join('') : ''}
+                    </div>
                     <div class="rental-details">
                         <h3>${rental.make} ${rental.model}</h3>
                         <p style="color: var(--gray); margin-bottom: 15px;">${rental.type}</p>
@@ -7051,7 +7194,10 @@
                         <ul style="list-style: none; margin-bottom: 20px;">
                             ${rental.features.map(feature => `<li style="margin-bottom: 5px;"><i class="fas fa-check" style="color: var(--success); margin-right: 8px;"></i> ${feature}</li>`).join('')}
                         </ul>
-                        <button class="btn" style="width: 100%;" onclick="showRentalModal()" ${!rental.available ? 'disabled' : ''}>${rental.available ? 'Book Securely' : 'Currently Booked'}</button>
+                        <div style="display: flex; gap: 10px;">
+                            <button class="btn btn-outline" style="flex: 1;" onclick="showRentalDetailModal(${rental.id})">Details</button>
+                            <button class="btn" style="flex: 1;" onclick="showRentalModal()" ${!rental.available ? 'disabled' : ''}>${rental.available ? 'Book Securely' : 'Currently Booked'}</button>
+                        </div>
                     </div>
                 `;
                 container.appendChild(rentalCard);
@@ -7135,8 +7281,10 @@
             const description = document.getElementById('car-description').value;
             
             const imagesInput = document.getElementById('car-images');
+            const imageUrlInput = document.getElementById('car-image-url');
             const documentsInput = document.getElementById('car-documents');
-            const uploadedImages = (imagesInput && imagesInput.files && imagesInput.files.length > 0) ? [URL.createObjectURL(imagesInput.files[0])] : ['https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'];
+            const imageUrl = imageUrlInput ? imageUrlInput.value.trim() : '';
+            const uploadedImages = imageUrl ? [imageUrl] : ['https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'];
             const docs = (documentsInput && documentsInput.files) ? documentsInput.files : [];
             const logbookUrl = docs[0] ? URL.createObjectURL(docs[0]) : 'https://via.placeholder.com/200x120?text=Logbook';
             const idUrl = docs[1] ? URL.createObjectURL(docs[1]) : 'https://via.placeholder.com/200x120?text=ID+Copy';
@@ -7200,13 +7348,15 @@
             const features = document.getElementById('rental-features').value.split(',').map(f => f.trim());
             const description = document.getElementById('rental-description').value;
             
+            const imageUrlInput = document.getElementById('rental-image-url');
+            const imageUrl = imageUrlInput ? imageUrlInput.value.trim() : '';
             const newRental = {
                 id: rentalFleet.length + 1,
                 make,
                 model,
                 year,
                 type,
-                image: 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+                images: [imageUrl || 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'],
                 dailyRate,
                 weeklyRate,
                 features,
@@ -7241,7 +7391,9 @@
             const status = document.getElementById('admin-car-status').value;
             const description = document.getElementById('admin-car-description').value;
             const adminImagesInput = document.getElementById('admin-car-images');
-            const adminUploadedImages = (adminImagesInput && adminImagesInput.files && adminImagesInput.files.length > 0) ? [URL.createObjectURL(adminImagesInput.files[0])] : ['https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'];
+            const adminImageUrlInput = document.getElementById('admin-car-image-url');
+            const adminImageUrl = adminImageUrlInput ? adminImageUrlInput.value.trim() : '';
+            const adminUploadedImages = adminImageUrl ? [adminImageUrl] : ['https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'];
             
             const newCar = {
                 id: cars.length + 1,
@@ -7293,8 +7445,8 @@
             const weeklyRate = parseInt(document.getElementById('admin-rental-weekly-rate').value);
             const features = document.getElementById('admin-rental-features').value.split(',').map(f => f.trim());
             const description = document.getElementById('admin-rental-description').value;
-            const rentalImageInput = document.getElementById('admin-rental-image');
-            const rentalImage = (rentalImageInput && rentalImageInput.files && rentalImageInput.files[0]) ? URL.createObjectURL(rentalImageInput.files[0]) : 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80';
+            const adminImageUrlInput = document.getElementById('admin-rental-image-url');
+            const adminImageUrl = adminImageUrlInput ? adminImageUrlInput.value.trim() : '';
             
             const newRental = {
                 id: rentalFleet.length + 1,
@@ -7302,7 +7454,7 @@
                 model,
                 year,
                 type,
-                image: rentalImage,
+                images: [adminImageUrl || 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'],
                 dailyRate,
                 weeklyRate,
                 features,
@@ -8352,7 +8504,7 @@
                 card.innerHTML = `
                     <div class="recommendation-badge">RECOMMENDED</div>
                     <div class="recommendation-match">${matchScore}% Match</div>
-                    <img src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-image" onerror="handleImageError(this, ${car.id})">
+                    <img src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
                     <div class="car-details">
                         <div class="car-price">${formatPrice(car.price)}</div>
                         <h3 class="car-title">${car.make} ${car.model} ${car.year}</h3>
