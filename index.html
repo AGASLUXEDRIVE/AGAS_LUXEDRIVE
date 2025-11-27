@@ -6878,10 +6878,10 @@
             const content = document.getElementById('car-detail-content');
             content.innerHTML = `
                 <div class="car-detail-images">
-                    <img src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-detail-main-image" id="car-detail-main-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
+                    <img src="${car.images[0]}" data-original-src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-detail-main-image" id="car-detail-main-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
                     <div class="car-detail-thumbnails">
                         ${car.images.map((img, index) => `
-                            <img src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" referrerpolicy="no-referrer" onclick="changeMainImage('${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
+                            <img src="${img}" data-original-src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" referrerpolicy="no-referrer" onclick="changeMainImage('${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
                         `).join('')}
                     </div>
                 </div>
@@ -6946,7 +6946,7 @@
             const content = document.getElementById('quick-view-content');
             content.innerHTML = `
                 <div>
-                <img src="${car.images[0]}" alt="${car.make} ${car.model}" style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius);" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
+                <img src="${car.images[0]}" data-original-src="${car.images[0]}" alt="${car.make} ${car.model}" style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius);" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
                 </div>
                 <div>
                     <div class="car-price">${formatPrice(car.price)}</div>
@@ -6973,34 +6973,42 @@
 
         function changeMainImage(src) {
             const img = document.getElementById('car-detail-main-image');
-            if (img) img.src = src;
+            if (img) { img.src = src; img.setAttribute('data-original-src', src); img.removeAttribute('data-proxy'); }
         }
 
         const imageFallbackPlaceholder = 'https://via.placeholder.com/600x360?text=Image+Unavailable';
         function handleImageError(el, carId) {
             const car = cars.find(c => c.id === carId);
             const imgs = (car && Array.isArray(car.images)) ? car.images : [];
-            const currentIndex = imgs.indexOf(el.src);
+            const original = el.getAttribute('data-original-src') || el.src;
+            const proxied = 'https://images.weserv.nl/?url=' + encodeURIComponent(original);
+            if (el.getAttribute('data-proxy') !== '1') { el.setAttribute('data-proxy','1'); el.src = proxied; return; }
+            const currentIndex = imgs.indexOf(original);
             const nextIndex = currentIndex >= 0 && currentIndex < imgs.length - 1 ? currentIndex + 1 : 0;
-            el.src = imgs[nextIndex] || imageFallbackPlaceholder;
+            const next = imgs[nextIndex];
+            if (next) { el.removeAttribute('data-proxy'); el.setAttribute('data-original-src', next); el.src = next; } else { el.src = imageFallbackPlaceholder; }
         }
 
         function handleRentalImageError(el, rentalId) {
             const rental = rentalFleet.find(r => r.id === rentalId);
             const imgs = (rental && Array.isArray(rental.images) && rental.images.length) ? rental.images : (rental && rental.image ? [rental.image] : []);
-            const currentIndex = imgs.indexOf(el.src);
+            const original = el.getAttribute('data-original-src') || el.src;
+            const proxied = 'https://images.weserv.nl/?url=' + encodeURIComponent(original);
+            if (el.getAttribute('data-proxy') !== '1') { el.setAttribute('data-proxy','1'); el.src = proxied; return; }
+            const currentIndex = imgs.indexOf(original);
             const nextIndex = currentIndex >= 0 && currentIndex < imgs.length - 1 ? currentIndex + 1 : 0;
-            el.src = imgs[nextIndex] || imageFallbackPlaceholder;
+            const next = imgs[nextIndex];
+            if (next) { el.removeAttribute('data-proxy'); el.setAttribute('data-original-src', next); el.src = next; } else { el.src = imageFallbackPlaceholder; }
         }
 
         function changeRentalMainImage(rentalId, src) {
             const img = document.getElementById('rental-main-image-' + rentalId);
-            if (img) img.src = src;
+            if (img) { img.src = src; img.setAttribute('data-original-src', src); img.removeAttribute('data-proxy'); }
         }
 
         function changeRentalDetailMainImage(src) {
             const img = document.getElementById('rental-detail-main-image');
-            if (img) img.src = src;
+            if (img) { img.src = src; img.setAttribute('data-original-src', src); img.removeAttribute('data-proxy'); }
         }
 
         function showRentalDetailModal(rentalId) {
@@ -7016,10 +7024,10 @@
             const content = document.getElementById('rental-detail-content');
             content.innerHTML = `
                 <div class="car-detail-images">
-                    <img src="${Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || '')}" alt="${rental.make} ${rental.model}" class="car-detail-main-image" id="rental-detail-main-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleRentalImageError(this, ${rental.id})">
+                    <img src="${Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || '')}" data-original-src="${Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || '')}" alt="${rental.make} ${rental.model}" class="car-detail-main-image" id="rental-detail-main-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleRentalImageError(this, ${rental.id})">
                     <div class="car-detail-thumbnails">
                         ${Array.isArray(rental.images) ? rental.images.map((img, index) => `
-                            <img src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" referrerpolicy="no-referrer" onclick="changeRentalDetailMainImage('${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
+                            <img src="${img}" data-original-src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" referrerpolicy="no-referrer" onclick="changeRentalDetailMainImage('${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
                         `).join('') : ''}
                     </div>
                 </div>
@@ -7125,7 +7133,7 @@
             card.className = 'car-card';
             card.innerHTML = `
                 <div class="car-badge">${car.verified ? 'VERIFIED' : 'PENDING'}</div>
-                <img src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
+                <img src="${car.images[0]}" data-original-src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
                 <div class="car-details">
                     <div class="car-price">${formatPrice(car.price)}</div>
                     <h3 class="car-title">${car.make} ${car.model} ${car.year}</h3>
@@ -7176,10 +7184,10 @@
                 rentalCard.className = 'rental-card';
                 rentalCard.innerHTML = `
                     <div class="rental-badge">${rental.available ? 'AVAILABLE' : 'BOOKED'}</div>
-                    <img id="rental-main-image-${rental.id}" src="${Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || '')}" alt="${rental.make} ${rental.model}" class="rental-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleRentalImageError(this, ${rental.id})">
+                    <img id="rental-main-image-${rental.id}" src="${Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || '')}" data-original-src="${Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || '')}" alt="${rental.make} ${rental.model}" class="rental-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleRentalImageError(this, ${rental.id})">
                     <div class="car-detail-thumbnails">
                         ${Array.isArray(rental.images) ? rental.images.map((img, index) => `
-                            <img src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" referrerpolicy="no-referrer" onclick="changeRentalMainImage(${rental.id}, '${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
+                            <img src="${img}" data-original-src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" referrerpolicy="no-referrer" onclick="changeRentalMainImage(${rental.id}, '${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
                         `).join('') : ''}
                     </div>
                     <div class="rental-details">
