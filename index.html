@@ -6754,10 +6754,10 @@
             const content = document.getElementById('car-detail-content');
             content.innerHTML = `
                 <div class="car-detail-images">
-                    <img src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-detail-main-image" id="car-detail-main-image">
+                    <img src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-detail-main-image" id="car-detail-main-image" onerror="handleImageError(this, ${car.id})">
                     <div class="car-detail-thumbnails">
                         ${car.images.map((img, index) => `
-                            <img src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" onclick="changeMainImage('${img}')">
+                            <img src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" onclick="changeMainImage('${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
                         `).join('')}
                     </div>
                 </div>
@@ -6822,7 +6822,7 @@
             const content = document.getElementById('quick-view-content');
             content.innerHTML = `
                 <div>
-                    <img src="${car.images[0]}" alt="${car.make} ${car.model}" style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius);">
+                <img src="${car.images[0]}" alt="${car.make} ${car.model}" style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius);" onerror="handleImageError(this, ${car.id})">
                 </div>
                 <div>
                     <div class="car-price">${formatPrice(car.price)}</div>
@@ -6848,7 +6848,17 @@
         }
 
         function changeMainImage(src) {
-            document.getElementById('car-detail-main-image').src = src;
+            const img = document.getElementById('car-detail-main-image');
+            if (img) img.src = src;
+        }
+
+        const imageFallbackPlaceholder = 'https://via.placeholder.com/600x360?text=Image+Unavailable';
+        function handleImageError(el, carId) {
+            const car = cars.find(c => c.id === carId);
+            const imgs = (car && Array.isArray(car.images)) ? car.images : [];
+            const currentIndex = imgs.indexOf(el.src);
+            const nextIndex = currentIndex >= 0 && currentIndex < imgs.length - 1 ? currentIndex + 1 : 0;
+            el.src = imgs[nextIndex] || imageFallbackPlaceholder;
         }
 
         // Currency functions
@@ -6911,7 +6921,7 @@
             card.className = 'car-card';
             card.innerHTML = `
                 <div class="car-badge">${car.verified ? 'VERIFIED' : 'PENDING'}</div>
-                <img src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-image">
+                <img src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-image" onerror="handleImageError(this, ${car.id})">
                 <div class="car-details">
                     <div class="car-price">${formatPrice(car.price)}</div>
                     <h3 class="car-title">${car.make} ${car.model} ${car.year}</h3>
@@ -8276,7 +8286,7 @@
                 card.innerHTML = `
                     <div class="recommendation-badge">RECOMMENDED</div>
                     <div class="recommendation-match">${matchScore}% Match</div>
-                    <img src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-image">
+                    <img src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-image" onerror="handleImageError(this, ${car.id})">
                     <div class="car-details">
                         <div class="car-price">${formatPrice(car.price)}</div>
                         <h3 class="car-title">${car.make} ${car.model} ${car.year}</h3>
