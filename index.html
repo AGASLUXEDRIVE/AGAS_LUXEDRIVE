@@ -4,6 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGAS LUXE DRIVE | Premium Luxury Automotive Marketplace</title>
+    <meta name="description" content="AGAS LUXE DRIVE offers verified luxury car sales and premium rentals. Explore Range Rover, Land Cruiser, Mercedes, BMW, and more. Secure inquiries, bookings, and seller listings.">
+    <meta name="keywords" content="Luxury cars, Range Rover, Land Cruiser, Mercedes, BMW, premium rentals, Nairobi, verified listings, AGAS LUXE DRIVE">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#1a365d">
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="preconnect" href="https://images.weserv.nl">
+    <link rel="preconnect" href="https://docs.google.com">
+    <meta property="og:title" content="AGAS LUXE DRIVE | Verified Luxury Cars & Premium Rentals">
+    <meta property="og:description" content="Discover verified luxury vehicles and premium rentals. Make inquiries, book rentals, and list cars securely.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1535732820275-9ffd998cac22?q=80&w=1200&auto=format&fit=crop">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AGAS LUXE DRIVE | Verified Luxury Cars & Premium Rentals">
+    <meta name="twitter:description" content="Explore curated luxury vehicles, secure inquiries and premium rentals.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1535732820275-9ffd998cac22?q=80&w=1200&auto=format&fit=crop">
     <!-- Updated Favicon with ALD Logo -->
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231a365d'/><text x='50' y='65' font-family='Arial, sans-serif' font-size='48' font-weight='bold' fill='white' text-anchor='middle'>ALD</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -4263,9 +4278,9 @@
         </div>
     </div>
 
-    <div class="quick-inquiry-fab" onclick="showGFormModal()">Quick Inquiry</div>
+    <div class="quick-inquiry-fab" onclick="showGFormModal()" role="button" aria-label="Open Quick Inquiry Form">Quick Inquiry</div>
     <!-- Rental Booking Modal -->
-    <div class="rental-inquiry-fab" onclick="showRentalGFormModal()">Rental Inquiry</div>
+    <div class="rental-inquiry-fab" onclick="showRentalGFormModal()" role="button" aria-label="Open Rental Inquiry Form">Rental Inquiry</div>
     <div id="rental-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -5933,6 +5948,7 @@
             localStorage.setItem('lead_queue', JSON.stringify(rest));
         }
         window.addEventListener('load', () => { processLeadQueue(); });
+        window.addEventListener('DOMContentLoaded', () => { injectCanonical(); injectStructuredData(); });
 
         async function diagnoseLeadPipeline() {
             const testContact = { name: 'Diagnostics', email: 'diag@example.com', subject: 'Lead Diagnostics', message: `Site: ${location.hostname}` };
@@ -5949,6 +5965,58 @@
             showNotification(`Lead pipeline status\nEmailJS: ${emailOk ? 'OK' : 'Fail'}\nGoogle Forms: ${gformOk ? 'OK' : 'Not configured/blocked'}\nWebhooks: ${webhookOk ? 'OK' : 'Not configured/blocked'}`, (emailOk || gformOk || webhookOk) ? 'info' : 'warning');
             if (!gformOk) console.warn('Google Forms not configured: set GOOGLE_FORMS.contact.url and field entry ids.');
             if (!(LEAD_WEBHOOKS.contact && LEAD_WEBHOOKS.contact.length)) console.warn('Webhook endpoints not configured: add URLs to LEAD_WEBHOOKS.contact.');
+        }
+
+        function injectCanonical() {
+            const link = document.createElement('link');
+            link.rel = 'canonical';
+            link.href = location.origin + location.pathname;
+            document.head.appendChild(link);
+        }
+
+        function injectStructuredData() {
+            const org = {
+                '@context': 'https://schema.org',
+                '@type': 'Organization',
+                'name': 'AGAS LUXE DRIVE',
+                'url': location.origin + location.pathname,
+                'logo': 'https://images.unsplash.com/photo-1535732820275-9ffd998cac22?q=80&w=800&auto=format&fit=crop',
+                'email': 'mailto:agasluxedrive@gmail.com',
+                'address': { '@type': 'PostalAddress', 'addressLocality': 'Nairobi', 'addressCountry': 'KE' }
+            };
+            const website = {
+                '@context': 'https://schema.org',
+                '@type': 'WebSite',
+                'name': 'AGAS LUXE DRIVE',
+                'url': location.origin,
+                'potentialAction': {
+                    '@type': 'SearchAction',
+                    'target': location.origin + location.pathname + '?q={search_term_string}',
+                    'query-input': 'required name=search_term_string'
+                }
+            };
+            const vehicles = (Array.isArray(cars) ? cars.filter(c => c.verified && c.status === 'approved') : []).slice(0, 12).map(c => ({
+                '@type': 'Product',
+                'name': `${c.make} ${c.model} ${c.year}`,
+                'description': c.description,
+                'image': (Array.isArray(c.images) && c.images.length ? c.images[0] : undefined),
+                'brand': { '@type': 'Brand', 'name': c.make },
+                'offers': {
+                    '@type': 'Offer',
+                    'price': c.price,
+                    'priceCurrency': 'USD',
+                    'availability': 'https://schema.org/InStock'
+                }
+            }));
+            const itemList = {
+                '@context': 'https://schema.org',
+                '@type': 'ItemList',
+                'itemListElement': vehicles.map((v, i) => ({ '@type': 'ListItem', 'position': i + 1, 'item': v }))
+            };
+            const script = document.createElement('script');
+            script.type = 'application/ld+json';
+            script.textContent = JSON.stringify([org, website, itemList]);
+            document.head.appendChild(script);
         }
 
         // Notification System
