@@ -2786,7 +2786,7 @@
         <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 40px;">
 
             <div style="text-align: center;">
-                <h3 class="count-up" data-target="4200" style="font-size: 42px; font-weight: 700; color: var(--primary);">0</h3>
+                <h3 class="count-up" data-target="1200" style="font-size: 42px; font-weight: 700; color: var(--primary);">0</h3>
                 <p style="font-size: 16px; color: var(--gray);">Luxury Vehicles Verified</p>
             </div>
 
@@ -7304,7 +7304,7 @@
                     </div>
                 </div>
                 <div style="display: flex; gap: 15px; margin-top: 30px;">
-                    <button class="btn" onclick="showRentalModal(); closeModal('rental-detail-modal')" ${!rental.available ? 'disabled' : ''}>${rental.available ? 'Book Securely' : 'Currently Booked'}</button>
+                    <button class="btn" onclick="showRentalGFormModal(); closeModal('rental-detail-modal')" ${!rental.available ? 'disabled' : ''}>${rental.available ? 'Book Securely' : 'Currently Booked'}</button>
                     <button class="btn btn-outline" onclick="closeModal('rental-detail-modal')">Close</button>
                 </div>
             `;
@@ -7450,7 +7450,7 @@
                         </ul>
                         <div style="display: flex; gap: 10px;">
                             <button class="btn btn-outline" style="flex: 1;" onclick="showRentalDetailModal(${rental.id})">Details</button>
-                            <button class="btn" style="flex: 1;" onclick="showRentalModal()" ${!rental.available ? 'disabled' : ''}>${rental.available ? 'Book Securely' : 'Currently Booked'}</button>
+                            <button class="btn" style="flex: 1;" onclick="showRentalGFormModal()" ${!rental.available ? 'disabled' : ''}>${rental.available ? 'Book Securely' : 'Currently Booked'}</button>
                         </div>
                     </div>
                 `;
