@@ -2555,7 +2555,7 @@
                     
                     <div style="text-align: center; margin-top: 40px;">
                         <a class="btn btn-accent" onclick="showRentalModal()">Book Luxury Rental</a>
-                        <a class="btn btn-outline" style="margin-left: 15px;" onclick="showCorporateServicesModal()">Corporate Rental Inquiry</a>
+                <a class="btn btn-outline" style="margin-left: 15px;" onclick="triggerCorporateInquiry()">Corporate Rental Inquiry</a>
                     </div>
                 </div>
             </section>
@@ -4207,7 +4207,7 @@
             </div>
             <div style="text-align: center; margin-top: 20px;">
                 <p>Contact our corporate team for customized solutions</p>
-                <a class="btn" onclick="closeModal('corporate-services-modal'); showSection('contact');">Contact Corporate Team</a>
+                <a class="btn" onclick="closeModal('corporate-services-modal'); triggerCorporateInquiry()">Contact Corporate Team</a>
             </div>
         </div>
     </div>
@@ -5949,6 +5949,7 @@
         }
         window.addEventListener('load', () => { processLeadQueue(); });
         window.addEventListener('DOMContentLoaded', () => { injectCanonical(); injectStructuredData(); });
+        window.addEventListener('load', () => { applyCompetitivePricing(); try { loadCarListings(); } catch(e){} try { loadRentalFleet(); } catch(e){} });
 
         async function diagnoseLeadPipeline() {
             const testContact = { name: 'Diagnostics', email: 'diag@example.com', subject: 'Lead Diagnostics', message: `Site: ${location.hostname}` };
@@ -6017,6 +6018,37 @@
             script.type = 'application/ld+json';
             script.textContent = JSON.stringify([org, website, itemList]);
             document.head.appendChild(script);
+        }
+
+        function applyCompetitivePricing() {
+            const now = new Date().getFullYear();
+            const brandAdj = { 'Porsche': -0.06, 'Range Rover': -0.05, 'Land Rover': -0.05, 'Mercedes-Benz': -0.05, 'BMW': -0.04, 'Audi': -0.04, 'Toyota': -0.03, 'Lexus': -0.04 };
+            if (Array.isArray(cars)) {
+                cars = cars.map(c => {
+                    const age = Math.max(0, now - (c.year || now));
+                    const ageFactor = c.condition === 'new' ? 1 - Math.min(0.04, age * 0.01) : 1 - Math.min(0.25, age * 0.04);
+                    const b = (brandAdj[c.make] || -0.03);
+                    const base = Number(c.price || 0);
+                    const target = Math.max(0, Math.round(base * ageFactor * (1 + b)));
+                    c.price = target || base;
+                    return c;
+                });
+                localStorage.setItem('encrypted_cars', JSON.stringify(cars));
+            }
+            if (Array.isArray(rentalFleet)) {
+                rentalFleet = rentalFleet.map(r => {
+                    const year = parseInt(String((r.model || '').match(/\d{4}/)?.[0] || now));
+                    const age = Math.max(0, now - year);
+                    const typeAdj = r.type && r.type.toLowerCase().includes('suv') ? -0.05 : -0.04;
+                    const baseDaily = Number(r.dailyRate || 0);
+                    const ageFactor = 1 - Math.min(0.20, age * 0.03);
+                    const daily = Math.max(0, Math.round(baseDaily * ageFactor * (1 + typeAdj)));
+                    r.dailyRate = daily || baseDaily;
+                    r.weeklyRate = Math.max(0, Math.round((r.dailyRate || baseDaily) * 6));
+                    return r;
+                });
+                localStorage.setItem('encrypted_rentalFleet', JSON.stringify(rentalFleet));
+            }
         }
 
         // Notification System
@@ -7075,6 +7107,11 @@
         }
         function showRentalGFormModal() {
             document.getElementById('rental-gform-modal').style.display = 'flex';
+        }
+        function triggerCorporateInquiry() {
+            const payload = { id: Date.now(), source: 'corporate', page: location.pathname, createdAt: new Date().toISOString() };
+            sendLead('inquiry', payload);
+            showGFormModal();
         }
 
         // Show car details modal
