@@ -3593,6 +3593,7 @@
                         <button class="btn" onclick="showAdminAddRentalModal()">Add Rental Car</button>
                         <button class="btn" onclick="document.getElementById('company-logo-input').click()">Set Company Logo</button>
                         <input type="file" id="company-logo-input" accept="image/*" style="display:none">
+                        <button class="btn btn-outline" onclick="diagnoseLeadPipeline()">Test Lead Pipeline</button>
                     </div>
                     
                 <div class="dashboard-stats">
@@ -5887,6 +5888,23 @@
             localStorage.setItem('lead_queue', JSON.stringify(rest));
         }
         window.addEventListener('load', () => { processLeadQueue(); });
+
+        async function diagnoseLeadPipeline() {
+            const testContact = { name: 'Diagnostics', email: 'diag@example.com', subject: 'Lead Diagnostics', message: `Site: ${location.hostname}` };
+            let emailOk = false, webhookOk = false, gformOk = false;
+            try {
+                const r = await sendBulkNotificationEmail(EMAILJS_CONFIG.fromEmail, 'Lead Diagnostics', `Host: ${location.hostname} | Time: ${new Date().toLocaleString()}`);
+                emailOk = !!(r && r.success);
+            } catch (e) {}
+            try { gformOk = await postGoogleForm('contact', testContact); } catch (e) { gformOk = false; }
+            try {
+                const urls = LEAD_WEBHOOKS.contact || [];
+                for (const u of urls) { if (await postJson(u, { type: 'diagnostic', payload: testContact })) { webhookOk = true; break; } }
+            } catch (e) { webhookOk = false; }
+            showNotification(`Lead pipeline status\nEmailJS: ${emailOk ? 'OK' : 'Fail'}\nGoogle Forms: ${gformOk ? 'OK' : 'Not configured/blocked'}\nWebhooks: ${webhookOk ? 'OK' : 'Not configured/blocked'}`, (emailOk || gformOk || webhookOk) ? 'info' : 'warning');
+            if (!gformOk) console.warn('Google Forms not configured: set GOOGLE_FORMS.contact.url and field entry ids.');
+            if (!(LEAD_WEBHOOKS.contact && LEAD_WEBHOOKS.contact.length)) console.warn('Webhook endpoints not configured: add URLs to LEAD_WEBHOOKS.contact.');
+        }
 
         // Notification System
         function showNotification(message, type = 'info', duration = 5000) {
