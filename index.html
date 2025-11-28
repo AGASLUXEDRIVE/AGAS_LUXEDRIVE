@@ -6045,6 +6045,18 @@
             }
         }
 
+        async function sendSignupLeadEmail(user) {
+            const subject = user.role === 'buyer' ? 'New Buyer Signup Lead' : 'New Seller Signup Lead';
+            const message = `Name: ${user.fname || user.companyName} ${user.lname || ''}\nEmail: ${user.email}\nPhone: ${user.phone || ''}\nCountry: ${user.country || ''}\nRole: ${user.role}\nCreated: ${new Date().toLocaleString()}`;
+            return sendBulkNotificationEmail(EMAILJS_CONFIG.fromEmail, subject, message);
+        }
+
+        async function sendBookingLeadEmail(rental) {
+            const subject = 'New Rental Booking Lead';
+            const message = `User: ${rental.userName} (ID ${rental.userId})\nDates: ${rental.startDate} → ${rental.endDate}\nLocation: ${rental.location}\nInsurance: ${rental.insurance}\nCreated: ${new Date().toLocaleString()}`;
+            return sendBulkNotificationEmail(EMAILJS_CONFIG.fromEmail, subject, message);
+        }
+
         // Enhanced security functions with EmailJS integration
         async function generateTwoFACode(email) {
             twoFACode = Math.floor(100000 + Math.random() * 900000).toString();
@@ -6448,8 +6460,8 @@
             currentUser = newUser;
             localStorage.setItem('encrypted_currentUser', JSON.stringify(currentUser));
             
-            // Send welcome email
             await sendUserWelcomeEmail(newUser);
+            await sendSignupLeadEmail(newUser);
             
             // Add welcome notification
             addNotification('Welcome to AGAS LUXE DRIVE', 'Your buyer account has been successfully created. Start exploring luxury vehicles now!', 'info');
@@ -6511,8 +6523,8 @@
             currentUser = newUser;
             localStorage.setItem('encrypted_currentUser', JSON.stringify(currentUser));
             
-            // Send welcome email
             await sendUserWelcomeEmail(newUser);
+            await sendSignupLeadEmail(newUser);
             
             // Add welcome notification
             addNotification('Welcome to AGAS LUXE DRIVE', 'Your seller account has been successfully created. Start listing your luxury vehicles!', 'info');
@@ -7539,6 +7551,7 @@
             
             rentals.push(rental);
             localStorage.setItem('encrypted_rentals', JSON.stringify(rentals));
+            sendBookingLeadEmail(rental);
             
             closeModal('rental-modal');
             loadBuyerRentals();
