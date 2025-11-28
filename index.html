@@ -6956,6 +6956,19 @@
             document.getElementById('inquiry-modal').style.display = 'flex';
         }
 
+        function triggerCardInquiry(carId) {
+            const car = cars.find(c => c.id === carId);
+            const payload = {
+                id: Date.now(),
+                carId,
+                carName: car ? `${car.make} ${car.model} ${car.year}` : `Car ${carId}`,
+                source: 'featured-card',
+                date: new Date().toISOString()
+            };
+            sendLead('inquiry', payload);
+            showGFormModal();
+        }
+
         function showRentalModal() {
             document.getElementById('rental-modal').style.display = 'flex';
         }
@@ -7036,7 +7049,7 @@
                 </div>
                 
                 <div style="display: flex; gap: 15px; margin-top: 30px;">
-                    <button class="btn" onclick="showInquiryModal(${car.id}); closeModal('car-detail-modal')">Make Inquiry</button>
+                    <button class="btn" onclick="triggerCardInquiry(${car.id}); closeModal('car-detail-modal')">Make Inquiry</button>
                     <button class="btn btn-outline" onclick="closeModal('car-detail-modal')">Close</button>
                 </div>
             `;
@@ -7071,7 +7084,7 @@
                     </div>
                     <div style="display: flex; gap: 10px; margin-top: 20px;">
                         <button class="btn" style="flex: 1;" onclick="showCarDetailModal(${car.id}); closeModal('quick-view-modal')">View Details</button>
-                        <button class="btn btn-outline" style="flex: 1;" onclick="showInquiryModal(${car.id}); closeModal('quick-view-modal')">Inquire</button>
+                        <button class="btn btn-outline" style="flex: 1;" onclick="triggerCardInquiry(${car.id}); closeModal('quick-view-modal')">Inquire</button>
                     </div>
                 </div>
             `;
@@ -7263,7 +7276,7 @@
                     <div style="display: flex; gap: 10px;">
                         <button class="btn btn-outline" style="flex: 1;" onclick="showQuickViewModal(${car.id})">Quick View</button>
                         ${showInquire ? 
-                            `<button class="btn" style="flex: 1;" onclick="showInquiryModal(${car.id})">Inquire</button>` :
+                            `<button class="btn" style="flex: 1;" onclick="triggerCardInquiry(${car.id})">Inquire</button>` :
                             `<button class="btn" style="flex: 1;" onclick="showCarDetailModal(${car.id})">Details</button>`
                         }
                     </div>
@@ -8636,7 +8649,7 @@
                         <p>${car.description.substring(0, 80)}...</p>
                         <div style="display: flex; gap: 10px; margin-top: 15px;">
                             <button class="btn btn-outline" style="flex: 1;" onclick="showQuickViewModal(${car.id})">Quick View</button>
-                            <button class="btn" style="flex: 1;" onclick="showInquiryModal(${car.id})">Inquire</button>
+                            <button class="btn" style="flex: 1;" onclick="triggerCardInquiry(${car.id})">Inquire</button>
                         </div>
                     </div>
                 `;
