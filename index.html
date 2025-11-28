@@ -5849,6 +5849,45 @@
             fromName: 'AGAS LUXE DRIVE'
         };
 
+        const LEAD_WEBHOOKS = { contact: [], inquiry: [], signup: [], booking: [] };
+        const GOOGLE_FORMS = {
+            contact: { url: '', fields: { name: '', email: '', subject: '', message: '' } },
+            inquiry: { url: '', fields: { carName: '', name: '', email: '', phone: '', message: '' } },
+            signup: { url: '', fields: { role: '', fname: '', lname: '', companyName: '', email: '', phone: '', country: '' } },
+            booking: { url: '', fields: { userName: '', startDate: '', endDate: '', location: '', insurance: '' } }
+        };
+        async function postGoogleForm(type, payload) {
+            const cfg = GOOGLE_FORMS[type];
+            if (!cfg || !cfg.url) return false;
+            const fd = new FormData();
+            Object.keys(cfg.fields).forEach(k => { const id = cfg.fields[k]; if (id) fd.append(id, payload[k] || ''); });
+            try { await fetch(cfg.url, { method: 'POST', mode: 'no-cors', body: fd }); return true; } catch (e) { return false; }
+        }
+        async function postJson(url, data) {
+            const r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+            return r.ok;
+        }
+        async function sendLead(type, payload) {
+            const urls = LEAD_WEBHOOKS[type] || [];
+            let ok = false;
+            try { if (await postGoogleForm(type, payload)) ok = true; } catch (e) {}
+            for (const u of urls) { try { if (await postJson(u, { type, payload })) ok = true; } catch (e) {} }
+            if (!ok) {
+                const q = JSON.parse(localStorage.getItem('lead_queue') || '[]');
+                q.push({ type, payload, time: Date.now() });
+                localStorage.setItem('lead_queue', JSON.stringify(q));
+            }
+            return ok;
+        }
+        async function processLeadQueue() {
+            const q = JSON.parse(localStorage.getItem('lead_queue') || '[]');
+            if (!q.length) return;
+            const rest = [];
+            for (const item of q) { const ok = await sendLead(item.type, item.payload); if (!ok) rest.push(item); }
+            localStorage.setItem('lead_queue', JSON.stringify(rest));
+        }
+        window.addEventListener('load', () => { processLeadQueue(); });
+
         // Notification System
         function showNotification(message, type = 'info', duration = 5000) {
             const container = document.getElementById('notification-container');
@@ -6462,6 +6501,7 @@
             
             await sendUserWelcomeEmail(newUser);
             await sendSignupLeadEmail(newUser);
+            sendLead('signup', newUser);
             
             // Add welcome notification
             addNotification('Welcome to AGAS LUXE DRIVE', 'Your buyer account has been successfully created. Start exploring luxury vehicles now!', 'info');
@@ -6525,6 +6565,7 @@
             
             await sendUserWelcomeEmail(newUser);
             await sendSignupLeadEmail(newUser);
+            sendLead('signup', newUser);
             
             // Add welcome notification
             addNotification('Welcome to AGAS LUXE DRIVE', 'Your seller account has been successfully created. Start listing your luxury vehicles!', 'info');
@@ -7236,6 +7277,7 @@
             const email = document.getElementById('contact-email').value;
             const subject = document.getElementById('contact-subject').value;
             const message = document.getElementById('contact-message').value;
+            sendLead('contact', { name, email, subject, message });
             
             // Send email via EmailJS
             sendContactEmail(name, email, subject, message)
@@ -7271,6 +7313,7 @@
             inquiries.push(inquiry);
             localStorage.setItem('encrypted_inquiries', JSON.stringify(inquiries));
             
+            sendLead('inquiry', inquiry);
             sendInquiryEmail(currentCarInquiry, name, email, phone, message)
                 .then(result => {
                     closeModal('inquiry-modal');
@@ -7552,6 +7595,7 @@
             rentals.push(rental);
             localStorage.setItem('encrypted_rentals', JSON.stringify(rentals));
             sendBookingLeadEmail(rental);
+            sendLead('booking', rental);
             
             closeModal('rental-modal');
             loadBuyerRentals();
