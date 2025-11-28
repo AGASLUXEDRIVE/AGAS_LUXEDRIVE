@@ -37,22 +37,21 @@
             --transition: all 0.3s ease;
         }
 
-        /* Dark Mode Variables - IMPROVED FOR BETTER READABILITY */
         .dark-mode {
-            --primary: #3b82f6;
-            --primary-dark: #1e40af;
-            --primary-light: #60a5fa;
+            --primary: #4f8cff;
+            --primary-dark: #1e3a8a;
+            --primary-light: #6aa0ff;
             --secondary: #ef4444;
             --secondary-dark: #dc2626;
-            --accent: #f59e0b;
-            --accent-dark: #d97706;
-            --light: #1e293b;
-            --dark: #f8fafc;
-            --gray: #94a3b8;
-            --gray-light: #334155;
-            --white: #0f172a;
+            --accent: #d4af37;
+            --accent-dark: #b38b24;
+            --light: #101b2d;
+            --dark: #e6edf6;
+            --gray: #a5b4c3;
+            --gray-light: #172033;
+            --white: #0b1220;
             --footer-bg: var(--light);
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+            --shadow: 0 16px 40px rgba(0, 0, 0, 0.55), 0 6px 16px rgba(0, 0, 0, 0.4);
         }
 
         * {
@@ -2039,6 +2038,12 @@
                 right: -20px;
             }
         }
+        .dark-mode header { background: linear-gradient(180deg, color-mix(in srgb, var(--white) 86%, transparent), color-mix(in srgb, var(--white) 92%, transparent)); box-shadow: var(--shadow); }
+        .dark-mode .hero { background: linear-gradient(135deg, rgba(10,16,27,0.86), rgba(12,20,34,0.92)), url('https://images.unsplash.com/photo-1535732820275-9ffd998cac22?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'); background-size: cover; background-position: center; }
+        .dark-mode .btn { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #ffffff; box-shadow: var(--shadow); border: 1px solid color-mix(in srgb, var(--primary) 40%, var(--white)); }
+        .dark-mode .btn:hover { filter: brightness(1.06); transform: translateY(-2px); }
+        .dark-mode .car-card { background: linear-gradient(180deg, color-mix(in srgb, var(--white) 96%, transparent), color-mix(in srgb, var(--white) 88%, transparent)); border: 1px solid rgba(255,255,255,0.06); box-shadow: var(--shadow); }
+        .dark-mode .rental-card { background: linear-gradient(180deg, color-mix(in srgb, var(--white) 96%, transparent), color-mix(in srgb, var(--white) 88%, transparent)); border: 1px solid rgba(255,255,255,0.06); box-shadow: var(--shadow); }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
