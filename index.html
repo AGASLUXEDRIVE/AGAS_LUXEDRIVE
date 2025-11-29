@@ -1228,16 +1228,14 @@
             font-weight: 600;
         }
 
-        .gform-modal .modal-content { width: 92%; max-width: 760px; max-height: 88vh; padding: 0; background: linear-gradient(180deg, #ffffff, #f7f7f7); background: linear-gradient(180deg, color-mix(in srgb, var(--white) 96%, transparent), color-mix(in srgb, var(--white) 88%, transparent)); box-shadow: var(--shadow); border: 1px solid rgba(255,255,255,0.06); }
+        .gform-modal .modal-content { position: relative; width: 92%; max-width: 760px; max-height: 88vh; padding: 0; background: linear-gradient(180deg, #ffffff, #f7f7f7); background: linear-gradient(180deg, color-mix(in srgb, var(--white) 96%, transparent), color-mix(in srgb, var(--white) 88%, transparent)); box-shadow: var(--shadow); border: 1px solid rgba(255,255,255,0.06); }
         .gform-modal .modal-header { padding: 18px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); background: linear-gradient(135deg, var(--primary), var(--accent)); background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--accent) 22%, var(--primary))); color: #ffffff; }
         .gform-modal .modal-title { letter-spacing: 0.3px; }
         .gform-toolbar { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px 16px; background: color-mix(in srgb, var(--white) 94%, transparent); border-bottom: 1px solid rgba(0,0,0,0.06); }
         .gform-chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 999px; font-size: 0.85rem; background: color-mix(in srgb, var(--light) 92%, transparent); color: var(--dark); border: 1px solid rgba(0,0,0,0.06); }
         .gform-chip i { color: var(--primary); }
-        .gform-loader { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,0.08); backdrop-filter: blur(4px); z-index: 2; }
-        .gform-loader.active { display: flex; }
-        .gform-loader .loading { width: 22px; height: 22px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.6); border-top-color: #fff; animation: spin 0.8s linear infinite; }
-        .gform-loader span { margin-left: 10px; color: var(--dark); font-weight: 600; }
+        .gform-preload { position: fixed; left: -9999px; top: -9999px; width: 12px; height: 12px; opacity: 0; pointer-events: none; border: 0; }
+        .gform-mask { position: absolute; left: 0; right: 0; bottom: 0; height: 22px; background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--white) 80%, transparent)); }
         .gform-iframe { display: block; width: 100%; height: 700px; border: 0; }
         @media (max-width: 576px) { .gform-iframe { height: 540px; } }
         .gform-iframe-rental { height: 820px; }
@@ -4480,10 +4478,11 @@
                 <button class="close-modal" onclick="closeModal('gform-modal')">&times;</button>
             </div>
             <div class="gform-toolbar" id="gform-toolbar"></div>
-            <div class="gform-loader" id="gform-loader"><div class="loading"></div><span>Preparing form…</span></div>
             <iframe class="gform-iframe" src="https://docs.google.com/forms/d/e/1FAIpQLSeCBE2cCwmNWM4ckmn2NSZHOTjRgb9-TFak1a--DaZaFpR4kw/viewform?embedded=true" allow="clipboard-write; encrypted-media"></iframe>
+            <div class="gform-mask"></div>
         </div>
     </div>
+    <iframe id="gform-preload" class="gform-preload" src="https://docs.google.com/forms/d/e/1FAIpQLSeCBE2cCwmNWM4ckmn2NSZHOTjRgb9-TFak1a--DaZaFpR4kw/viewform?embedded=true" loading="eager" aria-hidden="true"></iframe>
     <div id="rental-gform-modal" class="modal gform-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -7267,10 +7266,8 @@
         function showGFormModal(payload) {
             const modal = document.getElementById('gform-modal');
             const iframe = modal.querySelector('.gform-iframe');
-            const loader = document.getElementById('gform-loader');
             const toolbar = document.getElementById('gform-toolbar');
             modal.style.display = 'flex';
-            if (loader) loader.classList.add('active');
             if (toolbar) {
                 toolbar.innerHTML = '';
                 if (payload && (payload.name || payload.email || payload.phone || payload.carName)) {
@@ -7282,8 +7279,19 @@
                     toolbar.innerHTML = `<div class="gform-chip"><i class='fas fa-info-circle'></i>Fill your inquiry details below</div>`;
                 }
             }
-            prefillGFormIframe('inquiry', payload);
-            iframe.onload = function() { if (loader) loader.classList.remove('active'); };
+            const fields = (GOOGLE_FORMS['inquiry'] && GOOGLE_FORMS['inquiry'].fields) || {};
+            const hasIds = Object.values(fields).some(Boolean);
+            if (hasIds) {
+                prefillGFormIframe('inquiry', payload);
+            } else {
+                const preload = document.getElementById('gform-preload');
+                if (preload) {
+                    const cloned = preload.cloneNode(true);
+                    cloned.id = '';
+                    cloned.className = 'gform-iframe';
+                    iframe.replaceWith(cloned);
+                }
+            }
         }
 
         function prefillGFormIframe(type, payload) {
