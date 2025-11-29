@@ -696,8 +696,8 @@
 
         .partner-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 24px; margin-top: 30px; align-items: center; }
         .partner-item { display: grid; gap: 10px; justify-items: center; padding: 16px; border: 1px solid rgba(0,0,0,0.06); border-radius: 14px; background: color-mix(in srgb, var(--light) 92%, transparent); box-shadow: var(--shadow); }
-        .partner-item img { width: 80px; height: 80px; object-fit: contain; filter: grayscale(100%); opacity: 0.85; transition: var(--transition); }
-        .partner-item:hover img { filter: grayscale(0%); opacity: 1; }
+        .partner-item img { width: 80px; height: 80px; aspect-ratio: 1 / 1; object-fit: contain; filter: grayscale(80%); opacity: 0.92; transition: opacity 200ms ease, transform 200ms ease; backface-visibility: hidden; will-change: opacity, transform; }
+        .partner-item:hover img { filter: grayscale(80%); opacity: 1; transform: translateY(-2px); }
         .partner-name { font-weight: 700; font-size: 0.95rem; color: var(--dark); text-align: center; }
 
         /* ===== BRANDS SHOWCASE ===== */
@@ -834,6 +834,8 @@
             height: 200px;
             width: 100%;
             object-fit: cover;
+            backface-visibility: hidden;
+            will-change: transform;
         }
 
         .car-details {
@@ -924,6 +926,8 @@
             height: 200px;
             width: 100%;
             object-fit: cover;
+            backface-visibility: hidden;
+            will-change: transform;
         }
 
         .rental-details {
@@ -2370,27 +2374,27 @@
                     
                 <div class="partner-grid">
                         <div class="partner-item">
-                            <img src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.seeklogo.com%2Flogo-png%2F35%2F1%2Fnational-transport-and-safety-authority-ntsa-logo-png_seeklogo-358947.png&output=webp" alt="NTSA" referrerpolicy="no-referrer" decoding="async" loading="lazy" onerror="this.src='https://via.placeholder.com/80x80?text=NTSA'">
+                            <img src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.seeklogo.com%2Flogo-png%2F35%2F1%2Fnational-transport-and-safety-authority-ntsa-logo-png_seeklogo-358947.png&output=webp" alt="NTSA" width="80" height="80" referrerpolicy="no-referrer" decoding="async" loading="lazy" fetchpriority="low" onerror="this.src='https://via.placeholder.com/80x80?text=NTSA'">
                             <div class="partner-name">NTSA</div>
                         </div>
                         <div class="partner-item">
-                            <img src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.seeklogo.com%2Flogo-png%2F18%2F1%2Fthe-aa-logo-png_seeklogo-188271.png&output=webp" alt="AA Kenya" referrerpolicy="no-referrer" decoding="async" loading="lazy" onerror="this.src='https://via.placeholder.com/80x80?text=AA'">
+                            <img src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.seeklogo.com%2Flogo-png%2F18%2F1%2Fthe-aa-logo-png_seeklogo-188271.png&output=webp" alt="AA Kenya" width="80" height="80" referrerpolicy="no-referrer" decoding="async" loading="lazy" fetchpriority="low" onerror="this.src='https://via.placeholder.com/80x80?text=AA'">
                             <div class="partner-name">AA Kenya</div>
                         </div>
                         <div class="partner-item">
-                            <img src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.seeklogo.com%2Flogo-png%2F45%2F1%2Fkra-logo-png_seeklogo-456419.png&output=webp" alt="KRA" referrerpolicy="no-referrer" decoding="async" loading="lazy" onerror="this.src='https://via.placeholder.com/80x80?text=KRA'">
+                            <img src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.seeklogo.com%2Flogo-png%2F45%2F1%2Fkra-logo-png_seeklogo-456419.png&output=webp" alt="KRA" width="80" height="80" referrerpolicy="no-referrer" decoding="async" loading="lazy" fetchpriority="low" onerror="this.src='https://via.placeholder.com/80x80?text=KRA'">
                             <div class="partner-name">Kenya Revenue Authority</div>
                         </div>
                         <div class="partner-item">
-                            <img src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.seeklogo.com%2Flogo-png%2F36%2F1%2Fhertz-logo-png_seeklogo-367396.png&output=webp" alt="Hertz" referrerpolicy="no-referrer" decoding="async" loading="lazy" onerror="this.src='https://via.placeholder.com/80x80?text=Hertz'">
+                            <img src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.seeklogo.com%2Flogo-png%2F36%2F1%2Fhertz-logo-png_seeklogo-367396.png&output=webp" alt="Hertz" width="80" height="80" referrerpolicy="no-referrer" decoding="async" loading="lazy" fetchpriority="low" onerror="this.src='https://via.placeholder.com/80x80?text=Hertz'">
                             <div class="partner-name">Hertz</div>
                         </div>
                         <div class="partner-item">
-                            <img src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.seeklogo.com%2Flogo-png%2F9%2F1%2Fmercedes-benz-logo-png_seeklogo-91084.png&output=webp" alt="Mercedes-Benz" referrerpolicy="no-referrer" decoding="async" loading="lazy" onerror="this.src='https://via.placeholder.com/80x80?text=Mercedes'">
+                            <img src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.seeklogo.com%2Flogo-png%2F9%2F1%2Fmercedes-benz-logo-png_seeklogo-91084.png&output=webp" alt="Mercedes-Benz" width="80" height="80" referrerpolicy="no-referrer" decoding="async" loading="lazy" fetchpriority="low" onerror="this.src='https://via.placeholder.com/80x80?text=Mercedes'">
                             <div class="partner-name">Mercedes-Benz</div>
                         </div>
                         <div class="partner-item">
-                            <img src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.seeklogo.com%2Flogo-png%2F17%2F1%2Fbmw-logo-png_seeklogo-170616.png&output=webp" alt="BMW" referrerpolicy="no-referrer" decoding="async" loading="lazy" onerror="this.src='https://via.placeholder.com/80x80?text=BMW'">
+                            <img src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.seeklogo.com%2Flogo-png%2F17%2F1%2Fbmw-logo-png_seeklogo-170616.png&output=webp" alt="BMW" width="80" height="80" referrerpolicy="no-referrer" decoding="async" loading="lazy" fetchpriority="low" onerror="this.src='https://via.placeholder.com/80x80?text=BMW'">
                             <div class="partner-name">BMW</div>
                         </div>
                 </div>
@@ -7291,10 +7295,10 @@
             const content = document.getElementById('car-detail-content');
             content.innerHTML = `
                 <div class="car-detail-images">
-                    <img src="${car.images[0]}" data-original-src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-detail-main-image" id="car-detail-main-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
+                    <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(car.images[0]) + '&output=webp'}" data-original-src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-detail-main-image" id="car-detail-main-image" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
                     <div class="car-detail-thumbnails">
                         ${car.images.map((img, index) => `
-                            <img src="${img}" data-original-src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" referrerpolicy="no-referrer" onclick="changeMainImage('${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
+                            <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(img) + '&output=webp'}" data-original-src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" decoding="async" referrerpolicy="no-referrer" onclick="changeMainImage('${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
                         `).join('')}
                     </div>
                 </div>
@@ -7365,7 +7369,7 @@
             const content = document.getElementById('quick-view-content');
             content.innerHTML = `
                 <div>
-                <img src="${car.images[0]}" data-original-src="${car.images[0]}" alt="${car.make} ${car.model}" style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius);" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
+                <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(car.images[0]) + '&output=webp'}" data-original-src="${car.images[0]}" alt="${car.make} ${car.model}" style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius);" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
                 </div>
                 <div>
                     <div class="car-price">${formatPrice(car.price)}</div>
@@ -7405,7 +7409,7 @@
             const car = cars.find(c => c.id === carId);
             const imgs = (car && Array.isArray(car.images)) ? car.images : [];
             const original = el.getAttribute('data-original-src') || el.src;
-            const proxied = 'https://images.weserv.nl/?url=' + encodeURIComponent(original);
+            const proxied = 'https://images.weserv.nl/?url=' + encodeURIComponent(original) + '&output=webp';
             if (el.getAttribute('data-proxy') !== '1') { el.setAttribute('data-proxy','1'); el.src = proxied; return; }
             const currentIndex = imgs.indexOf(original);
             const nextIndex = currentIndex >= 0 && currentIndex < imgs.length - 1 ? currentIndex + 1 : 0;
@@ -7557,7 +7561,7 @@
             card.className = 'car-card';
             card.innerHTML = `
                 <div class="car-badge">${car.verified ? 'VERIFIED' : 'PENDING'}</div>
-                <img src="${car.images[0]}" data-original-src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
+                <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(car.images[0]) + '&output=webp'}" data-original-src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-image" width="600" height="360" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
                 <div class="car-details">
                     <div class="car-price">${formatPrice(car.price)}</div>
                     <h3 class="car-title">${car.make} ${car.model} ${car.year}</h3>
@@ -8951,7 +8955,7 @@
                 card.innerHTML = `
                     <div class="recommendation-badge">RECOMMENDED</div>
                     <div class="recommendation-match">${matchScore}% Match</div>
-                    <img src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
+                    <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(car.images[0]) + '&output=webp'}" alt="${car.make} ${car.model}" class="car-image" width="600" height="360" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
                     <div class="car-details">
                         <div class="car-price">${formatPrice(car.price)}</div>
                         <h3 class="car-title">${car.make} ${car.model} ${car.year}</h3>
