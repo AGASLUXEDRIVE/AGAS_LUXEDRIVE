@@ -2259,7 +2259,6 @@
                     </button>
                     
                     <a href="#" class="btn btn-outline" onclick="showProfileSelection()" aria-label="Sign Up"><i class="fas fa-user-plus"></i>Sign Up</a>
-                    <a href="#" class="btn btn-accent" onclick="showRentalGFormModal()" aria-label="Reserve"><i class="fas fa-calendar-check"></i>Reserve</a>
                     <a href="#" class="btn" onclick="openConciergeModal()" aria-label="Concierge"><i class="fas fa-headset"></i>Concierge</a>
                 </div>
 
@@ -2298,7 +2297,6 @@
         <div class="cta-menu-header">Quick Actions</div>
         <div class="cta-menu-list">
             <div class="cta-item" onclick="showProfileSelection(); closeCTAMenu()"><i class="fas fa-user-plus"></i><span>Sign Up</span></div>
-            <div class="cta-item" onclick="showRentalGFormModal(); closeCTAMenu()"><i class="fas fa-calendar-check"></i><span>Reserve</span></div>
             <div class="cta-item" onclick="openConciergeModal(); closeCTAMenu()"><i class="fas fa-headset"></i><span>Concierge</span></div>
         </div>
     </div>
@@ -4551,6 +4549,7 @@
                 <div class="concierge-options">
                     <button class="btn btn-accent" onclick="conciergeQuickInquiry()"><i class="fas fa-paper-plane" style="margin-right:8px;"></i>Quick Inquiry</button>
                     <button class="btn" onclick="conciergeChat()"><i class="fas fa-comments" style="margin-right:8px;"></i>Chat Now</button>
+                    <button class="btn" onclick="conciergeReserve()"><i class="fas fa-calendar-check" style="margin-right:8px;"></i>Reserve</button>
                 </div>
             </div>
         </div>
@@ -7191,11 +7190,18 @@
         function toggleCTAMenu() {
             const m = document.getElementById('cta-menu');
             const b = document.getElementById('cta-menu-backdrop');
+            const headerEl = document.querySelector('header');
+            if (headerEl && m) {
+                const h = headerEl.offsetHeight || 60;
+                m.style.top = (h + 10) + 'px';
+            }
             const isActive = m.classList.contains('active');
             if (isActive) {
                 m.classList.remove('active');
                 b.classList.remove('active');
             } else {
+                const navLinks = document.querySelector('.nav-links');
+                if (navLinks) navLinks.classList.remove('active');
                 m.classList.add('active');
                 b.classList.add('active');
             }
@@ -7206,6 +7212,7 @@
             m.classList.remove('active');
             b.classList.remove('active');
         }
+        window.addEventListener('resize', function(){ if (window.innerWidth > 768) closeCTAMenu(); });
 
         // Section navigation
         function showSection(section) {
@@ -9337,6 +9344,10 @@
             closeModal('concierge-modal');
             showSection('contact');
             setTimeout(function(){ initializeContactChat(); const input = document.getElementById('contact-chat-input'); if (input) input.focus(); }, 150);
+        }
+        function conciergeReserve() {
+            closeModal('concierge-modal');
+            showRentalGFormModal();
         }
 
         let contactChatStep = 0;
