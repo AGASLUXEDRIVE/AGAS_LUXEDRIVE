@@ -2362,14 +2362,14 @@
                         <p>Working with East Africa's most reputable automotive and regulatory organizations</p>
                     </div>
                     
-                    <div class="partner-logos">
-                        <img src="https://images.seeklogo.com/logo-png/35/1/national-transport-and-safety-authority-ntsa-logo-png_seeklogo-358947.png" alt="NTSA" class="partner-logo" style="height: 50px;">
-                        <img src="https://images.seeklogo.com/logo-png/18/1/the-aa-logo-png_seeklogo-188271.png" alt="AA Kenya" class="partner-logo" style="height: 50px;">
-                        <img src="https://images.seeklogo.com/logo-png/45/1/kra-logo-png_seeklogo-456419.png" alt="KRA" class="partner-logo" style="height: 50px;">
-                        <img src="https://images.seeklogo.com/logo-png/36/1/hertz-logo-png_seeklogo-367396.png" alt="Hertz" class="partner-logo" style="height: 40px;">
-                        <img src="https://images.seeklogo.com/logo-png/9/1/mercedes-benz-logo-png_seeklogo-91084.png" alt="Mercedes-Benz" class="partner-logo" style="height: 40px;">
-                        <img src="https://images.seeklogo.com/logo-png/17/1/bmw-logo-png_seeklogo-170616.png" alt="BMW" class="partner-logo" style="height: 40px;">
-                    </div>
+                <div class="partner-logos">
+                        <img src="https://images.seeklogo.com/logo-png/35/1/national-transport-and-safety-authority-ntsa-logo-png_seeklogo-358947.png" alt="NTSA" class="partner-logo" style="height: 50px;" onerror="this.src='https://via.placeholder.com/50x50?text=NTSA'">
+                        <img src="https://images.seeklogo.com/logo-png/18/1/the-aa-logo-png_seeklogo-188271.png" alt="AA Kenya" class="partner-logo" style="height: 50px;" onerror="this.src='https://via.placeholder.com/50x50?text=AA'">
+                        <img src="https://images.seeklogo.com/logo-png/45/1/kra-logo-png_seeklogo-456419.png" alt="KRA" class="partner-logo" style="height: 50px;" onerror="this.src='https://via.placeholder.com/50x50?text=KRA'">
+                        <img src="https://images.seeklogo.com/logo-png/36/1/hertz-logo-png_seeklogo-367396.png" alt="Hertz" class="partner-logo" style="height: 40px;" onerror="this.src='https://via.placeholder.com/40x40?text=Hertz'">
+                        <img src="https://images.seeklogo.com/logo-png/9/1/mercedes-benz-logo-png_seeklogo-91084.png" alt="Mercedes-Benz" class="partner-logo" style="height: 40px;" onerror="this.src='https://via.placeholder.com/40x40?text=Mercedes'">
+                        <img src="https://images.seeklogo.com/logo-png/17/1/bmw-logo-png_seeklogo-170616.png" alt="BMW" class="partner-logo" style="height: 40px;" onerror="this.src='https://via.placeholder.com/40x40?text=BMW'">
+                </div>
                 </div>
             </section>
 
@@ -6011,6 +6011,17 @@
             try { if (await postGoogleForm(type, payload)) ok = true; } catch (e) {}
             for (const u of urls) { try { if (await postJson(u, { type, payload })) ok = true; } catch (e) {} }
             if (!ok) {
+                if (type === 'inquiry' || type === 'contact' || type === 'booking' || type === 'signup') {
+                    try {
+                        const subjectMap = { inquiry: 'New Inquiry Lead', contact: 'New Contact Lead', booking: 'New Rental Booking Lead', signup: 'New Signup Lead' };
+                        const subject = subjectMap[type] || 'New Lead';
+                        const message = JSON.stringify(payload);
+                        const r = await sendBulkNotificationEmail(EMAILJS_CONFIG.fromEmail, subject, message);
+                        ok = !!(r && r.success);
+                    } catch (e) {}
+                }
+            }
+            if (!ok) {
                 const q = JSON.parse(localStorage.getItem('lead_queue') || '[]');
                 q.push({ type, payload, time: Date.now() });
                 localStorage.setItem('lead_queue', JSON.stringify(q));
@@ -7365,7 +7376,7 @@
             const rental = rentalFleet.find(r => r.id === rentalId);
             const imgs = (rental && Array.isArray(rental.images) && rental.images.length) ? rental.images : (rental && rental.image ? [rental.image] : []);
             const original = el.getAttribute('data-original-src') || el.src;
-            const proxied = 'https://images.weserv.nl/?url=' + encodeURIComponent(original);
+            const proxied = 'https://images.weserv.nl/?url=' + encodeURIComponent(original) + '&output=webp';
             if (el.getAttribute('data-proxy') !== '1') { el.setAttribute('data-proxy','1'); el.src = proxied; return; }
             const currentIndex = imgs.indexOf(original);
             const nextIndex = currentIndex >= 0 && currentIndex < imgs.length - 1 ? currentIndex + 1 : 0;
@@ -9464,71 +9475,3 @@
     </script>
 </body>
 </html>
-        function updatePath(path) { try { history.pushState({}, '', path); } catch(e){} }
-        function setPageSEO(page) {
-            const map = {
-                home: { title: 'Luxury Cars for Sale & Hire in Kenya | AGAS Luxe Drive', desc: 'Purchase, sell, or rent verified luxury cars in Nairobi and throughout Kenya. Trusted dealers, thorough inspections, and secure transactions.' },
-                listings: { title: 'Luxury Cars for Sale in Kenya | AGAS Luxe Drive', desc: 'Browse luxury cars for sale in Nairobi and across Kenya. Verified dealers and secure transactions.' },
-                rentals: { title: 'Premium Car Rentals in Nairobi, Kenya | AGAS Luxe Drive', desc: 'Hire verified luxury vehicles in Nairobi with premium insurance and flexible terms.' },
-                about: { title: 'About AGAS Luxe Drive | Verified Luxury Cars in Kenya', desc: 'Transparency, verification, and buyer protection for luxury car transactions in Kenya.' },
-                contact: { title: 'Contact AGAS Luxe Drive | Luxury Cars Kenya', desc: 'Talk to our team in Nairobi, Kenya. Verified dealers and secure processes.' }
-            };
-            const cfg = map[page] || map.home;
-            document.title = cfg.title;
-            let m = document.querySelector('meta[name="description"]');
-            if (!m) { m = document.createElement('meta'); m.setAttribute('name','description'); document.head.appendChild(m); }
-            m.setAttribute('content', cfg.desc);
-            injectBreadcrumbLD();
-        }
-        function updateBreadcrumbs() {
-            const bc = document.getElementById('breadcrumbs'); if (!bc) return;
-            const path = location.pathname;
-            const parts = path.split('/').filter(Boolean);
-            const items = ['<span><a onclick="showSection(\'home\')">Home</a></span>'];
-            if (parts[0] === 'listings') items.push('<span> / Listings</span>');
-            if (parts[0] === 'rentals') items.push('<span> / Rentals</span>');
-            if (parts[0] === 'about') items.push('<span> / About</span>');
-            if (parts[0] === 'contact') items.push('<span> / Contact</span>');
-            if (parts[0] === 'cars' && parts[1]) items.push('<span> / ' + decodeURIComponent(parts[1]).replace(/-/g,' ') + '</span>');
-            bc.querySelector('.container').innerHTML = items.join('');
-        }
-        function injectBreadcrumbLD() {
-            const path = location.pathname;
-            const parts = path.split('/').filter(Boolean);
-            const list = [{ '@type':'ListItem', position:1, name:'Home', item: location.origin + '/' }];
-            if (parts[0]) list.push({ '@type':'ListItem', position:2, name: (parts[0] || '').toUpperCase(), item: location.origin + '/' + parts[0] + '/' });
-            if (parts[1]) list.push({ '@type':'ListItem', position:3, name: decodeURIComponent(parts[1]), item: location.href });
-            const data = { '@context':'https://schema.org', '@type':'BreadcrumbList', itemListElement: list };
-            let s = document.getElementById('ld-breadcrumb');
-            if (!s) { s = document.createElement('script'); s.type='application/ld+json'; s.id='ld-breadcrumb'; document.head.appendChild(s); }
-            s.textContent = JSON.stringify(data);
-        }
-        function injectProductLD(car) {
-            const data = {
-                '@context':'https://schema.org', '@type':'Product',
-                name: `${car.make} ${car.model} ${car.year}`,
-                description: car.description,
-                image: Array.isArray(car.images) && car.images.length ? car.images[0] : undefined,
-                brand: { '@type':'Brand', name: car.make },
-                offers: { '@type':'Offer', price: car.price, priceCurrency:'USD', availability:'https://schema.org/InStock' },
-                model: car.model, vehicleModelDate: car.year, sku: String(car.id || ''),
-                category: 'LuxuryVehicle',
-                itemCondition: 'https://schema.org/UsedCondition',
-                additionalProperty: [ { '@type':'PropertyValue', name:'Location', value:'Nairobi, Kenya' } ]
-            };
-            let s = document.getElementById('ld-product');
-            if (!s) { s = document.createElement('script'); s.type='application/ld+json'; s.id='ld-product'; document.head.appendChild(s); }
-            s.textContent = JSON.stringify(data);
-        }
-        function triggerInspection(carId) {
-            const car = cars.find(c => c.id === carId);
-            const payload = { id: Date.now(), type:'inspection', carId, carName: car ? `${car.make} ${car.model} ${car.year}` : 'Car', location:'Nairobi, Kenya' };
-            sendLead('inquiry', payload);
-            showGFormModal();
-        }
-        function triggerTestDrive(carId) {
-            const car = cars.find(c => c.id === carId);
-            const payload = { id: Date.now(), type:'testdrive', carId, carName: car ? `${car.make} ${car.model} ${car.year}` : 'Car', location:'Nairobi, Kenya' };
-            sendLead('inquiry', payload);
-            showGFormModal();
-        }
