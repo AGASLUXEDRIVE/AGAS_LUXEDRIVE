@@ -2105,7 +2105,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <!-- SEO meta & structured data -->
-<meta name="description" content="AGAS LUXE DRIVE — East Africa's premium luxury automotive marketplace. Buy, sell, and rent verified luxury vehicles.">
+<meta name="description" content="Luxury Cars for Sale & Hire in Kenya | AGAS Luxe Drive. Purchase, sell, or rent verified luxury cars in Nairobi and throughout Kenya. Trusted dealers, thorough inspections, and secure transactions.">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"AutoDealer","name":"AGAS LUXE DRIVE","url":"/","description":"Premium luxury vehicle marketplace in East Africa."}
 </script>
@@ -2187,6 +2187,11 @@
             </nav>
         </div>
     </header>
+    <nav id="breadcrumbs" style="background: color-mix(in srgb, var(--light) 92%, transparent); border-bottom: 1px solid rgba(0,0,0,0.06);">
+        <div class="container" style="padding: 8px 0; font-size: 0.95rem; color: var(--gray);">
+            <span><a onclick="showSection('home')">Home</a></span>
+        </div>
+    </nav>
 
     <!-- Notification Center -->
     <div class="notification-center" id="notification-center">
@@ -2557,7 +2562,7 @@
             <section id="rentals-section" class="lux-section">
                 <div class="container">
                     <div class="section-title">
-                        <h2>Premium Car Rental Fleet</h2>
+                        <h1>Premium Car Rental Fleet in Nairobi, Kenya</h1>
                         <p>Experience luxury with our exclusive short-term rental collection</p>
                     </div>
                     
@@ -2909,7 +2914,7 @@
         <section id="listings-section" class="lux-section" style="display: none; padding: 100px 0 80px;">
             <div class="container">
                 <div class="section-title">
-                    <h2>All Luxury Car Listings</h2>
+                    <h1>Luxury Cars for Sale in Kenya</h1>
                     <p>Browse our complete collection of verified luxury vehicles</p>
                 </div>
                 
@@ -3060,7 +3065,7 @@
         <section id="about-section" class="lux-section" style="display: none; padding: 100px 0;">
             <div class="container">
                 <div class="section-title">
-                    <h2>About AGAS LUXE DRIVE</h2>
+                    <h1>About AGAS LUXE DRIVE</h1>
                     <p>Your trusted partner in luxury car transactions</p>
                 </div>
                 
@@ -3106,7 +3111,7 @@
         <section id="contact-section" class="lux-section" style="display: none; padding: 100px 0;">
             <div class="container">
                 <div class="section-title">
-                    <h2>Contact Us</h2>
+                    <h1>Contact Us</h1>
                     <p>Get in touch with our team for any inquiries</p>
                 </div>
                 
@@ -6022,6 +6027,33 @@
         window.addEventListener('load', () => { processLeadQueue(); });
         window.addEventListener('DOMContentLoaded', () => { injectCanonical(); injectStructuredData(); });
         window.addEventListener('load', () => { applyCompetitivePricing(); try { loadCarListings(); } catch(e){} try { loadRentalFleet(); } catch(e){} });
+        function optimizeImagesWebP() {
+            document.querySelectorAll('img').forEach(img => {
+                const orig = img.getAttribute('data-original-src') || img.src;
+                if (!orig) return;
+                if (/\.(webp)(\?|$)/i.test(orig)) return;
+                const proxied = 'https://images.weserv.nl/?url=' + encodeURIComponent(orig) + '&output=webp';
+                img.src = proxied;
+                img.loading = 'lazy';
+            });
+        }
+        window.addEventListener('load', optimizeImagesWebP);
+        function initAnalyticsFromStorage() {
+            try {
+                const id = localStorage.getItem('ga_measurement_id');
+                if (!id) return;
+                const s1 = document.createElement('script'); s1.async = true; s1.src = 'https://www.googletagmanager.com/gtag/js?id=' + id; document.head.appendChild(s1);
+                const s2 = document.createElement('script'); s2.text = "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config','" + id + "');"; document.head.appendChild(s2);
+            } catch(e){}
+        }
+        function injectGSCVerification() {
+            const token = localStorage.getItem('gsc_verification_token');
+            if (!token) return;
+            let m = document.querySelector('meta[name="google-site-verification"]');
+            if (!m) { m = document.createElement('meta'); m.setAttribute('name','google-site-verification'); document.head.appendChild(m); }
+            m.setAttribute('content', token);
+        }
+        window.addEventListener('DOMContentLoaded', () => { initAnalyticsFromStorage(); injectGSCVerification(); });
 
         async function diagnoseLeadPipeline() {
             const testContact = { name: 'Diagnostics', email: 'diag@example.com', subject: 'Lead Diagnostics', message: `Site: ${location.hostname}` };
@@ -7049,23 +7081,34 @@
             // Show selected section
             if (section === 'home') {
                 document.getElementById('home-section').style.display = 'block';
+                setPageSEO('home');
+                updatePath('/');
             } else if (section === 'listings') {
                 document.getElementById('listings-section').style.display = 'block';
                 loadCarListings();
+                setPageSEO('listings');
+                updatePath('/listings');
             } else if (section === 'rentals') {
                 document.getElementById('home-section').style.display = 'block';
                 setTimeout(() => {
                     document.getElementById('rentals-section').scrollIntoView({ behavior: 'smooth' });
                 }, 100);
+                setPageSEO('rentals');
+                updatePath('/rentals');
             } else if (section === 'about') {
                 document.getElementById('about-section').style.display = 'block';
+                setPageSEO('about');
+                updatePath('/about');
             } else if (section === 'contact') {
                 document.getElementById('contact-section').style.display = 'block';
+                setPageSEO('contact');
+                updatePath('/contact');
             }
             
             // Close mobile menu if open
             document.querySelector('.nav-links').classList.remove('active');
             ensureSingletonLayout();
+            updateBreadcrumbs();
         }
 
         // Brand gallery function
@@ -7250,8 +7293,14 @@
                     <button class="btn btn-outline" onclick="closeModal('car-detail-modal')">Close</button>
                 </div>
             `;
+            optimizeImagesWebP();
             
             document.getElementById('car-detail-modal').style.display = 'flex';
+            const slug = `${car.make} ${car.model} ${car.year} Nairobi Kenya`.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$|--+/g,'-');
+            updatePath('/cars/' + slug);
+            setPageSEO('listings');
+            injectProductLD(car);
+            updateBreadcrumbs();
         }
 
         // Quick view modal for cars
@@ -7287,6 +7336,11 @@
             `;
             
             document.getElementById('quick-view-modal').style.display = 'flex';
+            const slug = `${car.make} ${car.model} ${car.year} Nairobi Kenya`.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$|--+/g,'-');
+            updatePath('/cars/' + slug);
+            setPageSEO('listings');
+            injectProductLD(car);
+            updateBreadcrumbs();
         }
 
         function changeMainImage(src) {
@@ -7476,6 +7530,11 @@
                             `<button class="btn" style="flex: 1;" onclick="triggerCardInquiry(${car.id})">Inquire</button>` :
                             `<button class="btn" style="flex: 1;" onclick="showCarDetailModal(${car.id})">Details</button>`
                         }
+                    </div>
+                    <div style="display:flex; gap:10px; margin-top:10px;">
+                        <a class="btn btn-outline" style="flex:1;" href="https://wa.me/254115230532?text=${encodeURIComponent('I\'m interested in ' + car.make + ' ' + car.model + ' ' + car.year + ' from AGAS Luxe Drive')}" target="_blank">WhatsApp Seller</a>
+                        <button class="btn btn-outline" style="flex:1;" onclick="triggerInspection(${car.id})">Request Inspection</button>
+                        <button class="btn btn-outline" style="flex:1;" onclick="triggerTestDrive(${car.id})">Book Test Drive</button>
                     </div>
                 </div>
             `;
@@ -9405,3 +9464,71 @@
     </script>
 </body>
 </html>
+        function updatePath(path) { try { history.pushState({}, '', path); } catch(e){} }
+        function setPageSEO(page) {
+            const map = {
+                home: { title: 'Luxury Cars for Sale & Hire in Kenya | AGAS Luxe Drive', desc: 'Purchase, sell, or rent verified luxury cars in Nairobi and throughout Kenya. Trusted dealers, thorough inspections, and secure transactions.' },
+                listings: { title: 'Luxury Cars for Sale in Kenya | AGAS Luxe Drive', desc: 'Browse luxury cars for sale in Nairobi and across Kenya. Verified dealers and secure transactions.' },
+                rentals: { title: 'Premium Car Rentals in Nairobi, Kenya | AGAS Luxe Drive', desc: 'Hire verified luxury vehicles in Nairobi with premium insurance and flexible terms.' },
+                about: { title: 'About AGAS Luxe Drive | Verified Luxury Cars in Kenya', desc: 'Transparency, verification, and buyer protection for luxury car transactions in Kenya.' },
+                contact: { title: 'Contact AGAS Luxe Drive | Luxury Cars Kenya', desc: 'Talk to our team in Nairobi, Kenya. Verified dealers and secure processes.' }
+            };
+            const cfg = map[page] || map.home;
+            document.title = cfg.title;
+            let m = document.querySelector('meta[name="description"]');
+            if (!m) { m = document.createElement('meta'); m.setAttribute('name','description'); document.head.appendChild(m); }
+            m.setAttribute('content', cfg.desc);
+            injectBreadcrumbLD();
+        }
+        function updateBreadcrumbs() {
+            const bc = document.getElementById('breadcrumbs'); if (!bc) return;
+            const path = location.pathname;
+            const parts = path.split('/').filter(Boolean);
+            const items = ['<span><a onclick="showSection(\'home\')">Home</a></span>'];
+            if (parts[0] === 'listings') items.push('<span> / Listings</span>');
+            if (parts[0] === 'rentals') items.push('<span> / Rentals</span>');
+            if (parts[0] === 'about') items.push('<span> / About</span>');
+            if (parts[0] === 'contact') items.push('<span> / Contact</span>');
+            if (parts[0] === 'cars' && parts[1]) items.push('<span> / ' + decodeURIComponent(parts[1]).replace(/-/g,' ') + '</span>');
+            bc.querySelector('.container').innerHTML = items.join('');
+        }
+        function injectBreadcrumbLD() {
+            const path = location.pathname;
+            const parts = path.split('/').filter(Boolean);
+            const list = [{ '@type':'ListItem', position:1, name:'Home', item: location.origin + '/' }];
+            if (parts[0]) list.push({ '@type':'ListItem', position:2, name: (parts[0] || '').toUpperCase(), item: location.origin + '/' + parts[0] + '/' });
+            if (parts[1]) list.push({ '@type':'ListItem', position:3, name: decodeURIComponent(parts[1]), item: location.href });
+            const data = { '@context':'https://schema.org', '@type':'BreadcrumbList', itemListElement: list };
+            let s = document.getElementById('ld-breadcrumb');
+            if (!s) { s = document.createElement('script'); s.type='application/ld+json'; s.id='ld-breadcrumb'; document.head.appendChild(s); }
+            s.textContent = JSON.stringify(data);
+        }
+        function injectProductLD(car) {
+            const data = {
+                '@context':'https://schema.org', '@type':'Product',
+                name: `${car.make} ${car.model} ${car.year}`,
+                description: car.description,
+                image: Array.isArray(car.images) && car.images.length ? car.images[0] : undefined,
+                brand: { '@type':'Brand', name: car.make },
+                offers: { '@type':'Offer', price: car.price, priceCurrency:'USD', availability:'https://schema.org/InStock' },
+                model: car.model, vehicleModelDate: car.year, sku: String(car.id || ''),
+                category: 'LuxuryVehicle',
+                itemCondition: 'https://schema.org/UsedCondition',
+                additionalProperty: [ { '@type':'PropertyValue', name:'Location', value:'Nairobi, Kenya' } ]
+            };
+            let s = document.getElementById('ld-product');
+            if (!s) { s = document.createElement('script'); s.type='application/ld+json'; s.id='ld-product'; document.head.appendChild(s); }
+            s.textContent = JSON.stringify(data);
+        }
+        function triggerInspection(carId) {
+            const car = cars.find(c => c.id === carId);
+            const payload = { id: Date.now(), type:'inspection', carId, carName: car ? `${car.make} ${car.model} ${car.year}` : 'Car', location:'Nairobi, Kenya' };
+            sendLead('inquiry', payload);
+            showGFormModal();
+        }
+        function triggerTestDrive(carId) {
+            const car = cars.find(c => c.id === carId);
+            const payload = { id: Date.now(), type:'testdrive', carId, carName: car ? `${car.make} ${car.model} ${car.year}` : 'Car', location:'Nairobi, Kenya' };
+            sendLead('inquiry', payload);
+            showGFormModal();
+        }
