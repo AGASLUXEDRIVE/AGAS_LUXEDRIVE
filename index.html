@@ -4758,7 +4758,7 @@
         };
 
         // Enhanced sample data with competitive pricing and correct images
-        const DATA_VERSION = '2025-11-27-car-seed-009';
+        const DATA_VERSION = '2025-11-27-car-seed-010';
         const RENTAL_DATA_VERSION = '2025-11-27-rental-seed-001';
         const storedVersion = localStorage.getItem('agas_data_version');
         if (cars.length === 0 || storedVersion !== DATA_VERSION) {
@@ -5624,6 +5624,531 @@
                         insurance: 'https://via.placeholder.com/200x120?text=Insurance',
                         inspection: 'https://via.placeholder.com/200x120?text=Inspection'
                     }
+                },
+                {
+                    id: 101,
+                    make: 'Lexus',
+                    model: 'RX 450h',
+                    year: 2020,
+                    yearRange: '2018–2022',
+                    priceRange: 'KES 5,500,000 – 8,000,000',
+                    price: 5500000,
+                    mileage: 25000,
+                    transmission: 'automatic',
+                    fuel: 'hybrid',
+                    color: 'Pearl White',
+                    condition: 'used',
+                    description: 'Hybrid luxury SUV — leather interior, premium comfort, fuel-efficient hybrid.',
+                    images: [
+                        'https://source.unsplash.com/1600x900/?lexus,rx',
+                        'https://source.unsplash.com/1600x900/?lexus,suv',
+                        'https://source.unsplash.com/1600x900/?lexus,interior',
+                        'https://source.unsplash.com/1600x900/?lexus,hybrid'
+                    ],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['Hybrid Drive', 'Leather Interior', 'Premium Comfort', 'Adaptive Cruise']
+                },
+                {
+                    id: 102,
+                    make: 'Toyota',
+                    model: 'Land Cruiser Prado TX-L',
+                    year: 2019,
+                    yearRange: '2017–2021',
+                    priceRange: 'KES 6,800,000 – 9,500,000',
+                    price: 6800000,
+                    mileage: 38000,
+                    transmission: 'automatic',
+                    fuel: 'diesel',
+                    color: 'Graphite',
+                    condition: 'used',
+                    description: 'Reliable 4x4 with KDSS, premium interior, and multi-terrain drive.',
+                    images: [
+                        'https://source.unsplash.com/1600x900/?toyota,prado',
+                        'https://source.unsplash.com/1600x900/?prado,interior',
+                        'https://source.unsplash.com/1600x900/?landcruiser,prado',
+                        'https://source.unsplash.com/1600x900/?toyota,suv'
+                    ],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['KDSS', 'Crawl Control', 'Multi‑Terrain Monitor', 'Leather Interior']
+                },
+                {
+                    id: 103,
+                    make: 'Honda',
+                    model: 'CR‑V',
+                    year: 2020,
+                    yearRange: '2019–2022',
+                    priceRange: 'KES 3,400,000 – 4,900,000',
+                    price: 3400000,
+                    mileage: 30000,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Modern Steel',
+                    condition: 'used',
+                    description: 'Comfortable family SUV with Honda Sensing and spacious interior.',
+                    images: [
+                        'https://source.unsplash.com/1600x900/?honda,crv',
+                        'https://source.unsplash.com/1600x900/?honda,interior',
+                        'https://source.unsplash.com/1600x900/?honda,suv',
+                        'https://source.unsplash.com/1600x900/?crv,honda'
+                    ],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['Honda Sensing', 'Adaptive Cruise', 'Leather Seats', 'Lane Keep Assist']
+                },
+                {
+                    id: 104,
+                    make: 'Toyota',
+                    model: 'Harrier',
+                    year: 2019,
+                    yearRange: '2018–2021',
+                    priceRange: 'KES 3,800,000 – 5,500,000',
+                    price: 3800000,
+                    mileage: 32000,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Pearl White',
+                    condition: 'used',
+                    description: 'Stylish crossover with premium interior and Toyota Safety Sense.',
+                    images: [
+                        'https://source.unsplash.com/1600x900/?toyota,harrier',
+                        'https://source.unsplash.com/1600x900/?harrier,toyota',
+                        'https://source.unsplash.com/1600x900/?toyota,interior',
+                        'https://source.unsplash.com/1600x900/?toyota,crossover'
+                    ],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['Toyota Safety Sense', 'Premium Sound', 'Panoramic Roof', 'LED Headlights']
+                },
+                {
+                    id: 105,
+                    make: 'Mazda',
+                    model: 'CX‑5',
+                    year: 2019,
+                    yearRange: '2018–2022',
+                    priceRange: 'KES 3,200,000 – 4,500,000',
+                    price: 3200000,
+                    mileage: 34000,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Soul Red',
+                    condition: 'used',
+                    description: 'Popular SUV with Skyactiv technology and premium cabin.',
+                    images: [
+                        'https://source.unsplash.com/1600x900/?mazda,cx5',
+                        'https://source.unsplash.com/1600x900/?mazda,interior',
+                        'https://source.unsplash.com/1600x900/?mazda,suv',
+                        'https://source.unsplash.com/1600x900/?cx5,mazda'
+                    ],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['Skyactiv', 'Leather Interior', 'Adaptive Cruise', 'Heads‑Up Display']
+                },
+                {
+                    id: 106,
+                    make: 'Subaru',
+                    model: 'Forester',
+                    year: 2020,
+                    yearRange: '2019–2022',
+                    priceRange: 'KES 3,000,000 – 4,500,000',
+                    price: 3000000,
+                    mileage: 35000,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Crystal White Pearl',
+                    condition: 'used',
+                    description: 'AWD reliability with EyeSight driver assist and roomy interior.',
+                    images: [
+                        'https://source.unsplash.com/1600x900/?subaru,forester',
+                        'https://source.unsplash.com/1600x900/?subaru,interior',
+                        'https://source.unsplash.com/1600x900/?subaru,suv',
+                        'https://source.unsplash.com/1600x900/?forester,subaru'
+                    ],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['Symmetrical AWD', 'EyeSight', 'X‑Mode', 'Premium Sound']
+                },
+                {
+                    id: 107,
+                    make: 'Nissan',
+                    model: 'X‑Trail',
+                    year: 2019,
+                    yearRange: '2018–2021',
+                    priceRange: 'KES 2,600,000 – 3,800,000',
+                    price: 2600000,
+                    mileage: 42000,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Gun Metallic',
+                    condition: 'used',
+                    description: 'Dependable crossover with ProPILOT Assist and versatile seating.',
+                    images: [
+                        'https://source.unsplash.com/1600x900/?nissan,xtrail',
+                        'https://source.unsplash.com/1600x900/?nissan,interior',
+                        'https://source.unsplash.com/1600x900/?nissan,suv',
+                        'https://source.unsplash.com/1600x900/?xtrail,nissan'
+                    ],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['ProPILOT Assist', 'Leather Seats', 'Panoramic Roof', 'Intelligent 4x4']
+                },
+                {
+                    id: 108,
+                    make: 'Toyota',
+                    model: 'RAV4',
+                    year: 2020,
+                    yearRange: '2019–2022',
+                    priceRange: 'KES 3,400,000 – 4,800,000',
+                    price: 3400000,
+                    mileage: 31000,
+                    transmission: 'automatic',
+                    fuel: 'hybrid',
+                    color: 'Urban Khaki',
+                    condition: 'used',
+                    description: 'Efficient hybrid SUV with Toyota Safety Sense and roomy cargo.',
+                    images: [
+                        'https://source.unsplash.com/1600x900/?toyota,rav4',
+                        'https://source.unsplash.com/1600x900/?rav4,toyota',
+                        'https://source.unsplash.com/1600x900/?toyota,interior',
+                        'https://source.unsplash.com/1600x900/?toyota,hybrid'
+                    ],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['Hybrid Drive', 'Toyota Safety Sense', 'Adaptive Cruise', 'Roof Rails']
+                },
+                {
+                    id: 109,
+                    make: 'Toyota',
+                    model: 'Hilux',
+                    year: 2018,
+                    yearRange: '2017–2021',
+                    priceRange: 'KES 3,500,000 – 5,000,000',
+                    price: 3500000,
+                    mileage: 52000,
+                    transmission: 'automatic',
+                    fuel: 'diesel',
+                    color: 'Glacier White',
+                    condition: 'used',
+                    description: 'Tough double-cab pickup, 4x4, reliable for Kenyan terrains.',
+                    images: [
+                        'https://source.unsplash.com/1600x900/?toyota,hilux',
+                        'https://source.unsplash.com/1600x900/?hilux,toyota',
+                        'https://source.unsplash.com/1600x900/?pickup,toyota',
+                        'https://source.unsplash.com/1600x900/?toyota,4x4'
+                    ],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['4x4', 'Diff Lock', 'Bed Liner', 'Tow Package']
+                },
+                {
+                    id: 110,
+                    make: 'Toyota',
+                    model: 'Crown',
+                    year: 2019,
+                    yearRange: '2018–2021',
+                    priceRange: 'KES 3,800,000 – 5,400,000',
+                    price: 3800000,
+                    mileage: 37000,
+                    transmission: 'automatic',
+                    fuel: 'hybrid',
+                    color: 'Black',
+                    condition: 'used',
+                    description: 'Executive sedan with hybrid efficiency and premium comfort.',
+                    images: [
+                        'https://source.unsplash.com/1600x900/?toyota,crown',
+                        'https://source.unsplash.com/1600x900/?toyota,sedan',
+                        'https://source.unsplash.com/1600x900/?crown,toyota',
+                        'https://source.unsplash.com/1600x900/?toyota,interior'
+                    ],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['Hybrid Drive', 'Leather Interior', 'Adaptive Cruise', 'Premium Sound']
+                },
+                {
+                    id: 111,
+                    make: 'Lexus',
+                    model: 'NX 300h',
+                    year: 2019,
+                    yearRange: '2018–2022',
+                    priceRange: 'KES 4,200,000 – 6,000,000',
+                    price: 4200000,
+                    mileage: 32000,
+                    transmission: 'automatic',
+                    fuel: 'hybrid',
+                    color: 'Sonic Titanium',
+                    condition: 'used',
+                    description: 'Compact luxury hybrid SUV with premium cabin and reliability.',
+                    images: [
+                        'https://source.unsplash.com/1600x900/?lexus,nx',
+                        'https://source.unsplash.com/1600x900/?lexus,interior',
+                        'https://source.unsplash.com/1600x900/?lexus,suv',
+                        'https://source.unsplash.com/1600x900/?nx,lexus'
+                    ],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['Hybrid Drive', 'Leather Interior', 'Adaptive Cruise', 'LED Headlights']
+                },
+                {
+                    id: 112,
+                    make: 'Mercedes-Benz',
+                    model: 'GLC 300',
+                    year: 2020,
+                    yearRange: '2019–2022',
+                    priceRange: 'KES 6,500,000 – 9,000,000',
+                    price: 6500000,
+                    mileage: 28000,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Selenite Grey',
+                    condition: 'used',
+                    description: 'Luxury compact SUV with MBUX and advanced safety features.',
+                    images: [
+                        'https://source.unsplash.com/1600x900/?mercedes,glc',
+                        'https://source.unsplash.com/1600x900/?mercedes,interior',
+                        'https://source.unsplash.com/1600x900/?glc,mercedes',
+                        'https://source.unsplash.com/1600x900/?mercedes,suv'
+                    ],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['MBUX', 'Adaptive Cruise', 'Panoramic Roof', 'Premium Sound']
+                },
+                {
+                    id: 113,
+                    make: 'Mercedes-Benz',
+                    model: 'GLS 450',
+                    year: 2020,
+                    yearRange: '2019–2022',
+                    priceRange: 'KES 11,000,000 – 15,000,000',
+                    price: 11000000,
+                    mileage: 26000,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Obsidian Black',
+                    condition: 'used',
+                    description: 'Full-size luxury SUV with AIRMATIC and 7-seat comfort.',
+                    images: [
+                        'https://source.unsplash.com/1600x900/?mercedes,gls',
+                        'https://source.unsplash.com/1600x900/?gls,mercedes',
+                        'https://source.unsplash.com/1600x900/?mercedes,interior',
+                        'https://source.unsplash.com/1600x900/?mercedes,suv'
+                    ],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['AIRMATIC', '7 Seats', 'Premium Sound', 'Ambient Lighting']
+                },
+                {
+                    id: 114,
+                    make: 'BMW',
+                    model: 'X5 xDrive40i',
+                    year: 2020,
+                    yearRange: '2019–2022',
+                    priceRange: 'KES 8,000,000 – 12,000,000',
+                    price: 8000000,
+                    mileage: 30000,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Black Sapphire',
+                    condition: 'used',
+                    description: 'Premium SUV with xDrive, panoramic roof, and luxury cabin.',
+                    images: [
+                        'https://source.unsplash.com/1600x900/?bmw,x5',
+                        'https://source.unsplash.com/1600x900/?x5,bmw',
+                        'https://source.unsplash.com/1600x900/?bmw,interior',
+                        'https://source.unsplash.com/1600x900/?bmw,suv'
+                    ],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['xDrive', 'Panoramic Roof', 'Ambient Lighting', 'Premium Sound']
+                },
+                {
+                    id: 115,
+                    make: 'BMW',
+                    model: '5 Series 530i',
+                    year: 2019,
+                    yearRange: '2018–2021',
+                    priceRange: 'KES 5,500,000 – 8,000,000',
+                    price: 5500000,
+                    mileage: 38000,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Alpine White',
+                    condition: 'used',
+                    description: 'Executive sedan with driver assistance and premium interior.',
+                    images: [
+                        'https://source.unsplash.com/1600x900/?bmw,5series',
+                        'https://source.unsplash.com/1600x900/?bmw,sedan',
+                        'https://source.unsplash.com/1600x900/?bmw,interior',
+                        'https://source.unsplash.com/1600x900/?530i,bmw'
+                    ],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['Driver Assistance', 'Leather Interior', 'Adaptive Cruise', 'Premium Sound']
+                },
+                {
+                    id: 116,
+                    make: 'Audi',
+                    model: 'Q5',
+                    year: 2019,
+                    yearRange: '2019–2022',
+                    priceRange: 'KES 5,000,000 – 7,500,000',
+                    price: 5000000,
+                    mileage: 36000,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Glacier White',
+                    condition: 'used',
+                    description: 'Quattro compact SUV with premium materials and technology.',
+                    images: [
+                        'https://source.unsplash.com/1600x900/?audi,q5',
+                        'https://source.unsplash.com/1600x900/?q5,audi',
+                        'https://source.unsplash.com/1600x900/?audi,interior',
+                        'https://source.unsplash.com/1600x900/?audi,suv'
+                    ],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['Quattro', 'Virtual Cockpit', 'Adaptive Cruise', 'Panoramic Roof']
+                },
+                {
+                    id: 117,
+                    make: 'Audi',
+                    model: 'A6',
+                    year: 2019,
+                    yearRange: '2018–2021',
+                    priceRange: 'KES 5,500,000 – 8,500,000',
+                    price: 5500000,
+                    mileage: 37000,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Mythos Black',
+                    condition: 'used',
+                    description: 'Executive sedan with Quattro and modern tech.',
+                    images: [
+                        'https://source.unsplash.com/1600x900/?audi,a6',
+                        'https://source.unsplash.com/1600x900/?audi,sedan',
+                        'https://source.unsplash.com/1600x900/?audi,interior',
+                        'https://source.unsplash.com/1600x900/?a6,audi'
+                    ],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['Quattro', 'Virtual Cockpit', 'Leather Interior', 'Premium Sound']
+                },
+                {
+                    id: 118,
+                    make: 'Volkswagen',
+                    model: 'Tiguan',
+                    year: 2019,
+                    yearRange: '2018–2021',
+                    priceRange: 'KES 3,500,000 – 5,000,000',
+                    price: 3500000,
+                    mileage: 38000,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Deep Black Pearl',
+                    condition: 'used',
+                    description: 'Compact SUV with 4Motion and premium interior.',
+                    images: [
+                        'https://source.unsplash.com/1600x900/?volkswagen,tiguan',
+                        'https://source.unsplash.com/1600x900/?vw,tiguan',
+                        'https://source.unsplash.com/1600x900/?tiguan,interior',
+                        'https://source.unsplash.com/1600x900/?vw,suv'
+                    ],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['4Motion', 'Leather Interior', 'Digital Cockpit', 'Adaptive Cruise']
+                },
+                {
+                    id: 119,
+                    make: 'Porsche',
+                    model: 'Macan',
+                    year: 2019,
+                    yearRange: '2018–2021',
+                    priceRange: 'KES 9,000,000 – 12,500,000',
+                    price: 9000000,
+                    mileage: 30000,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Jet Black',
+                    condition: 'used',
+                    description: 'Compact performance SUV with premium dynamics and interior.',
+                    images: [
+                        'https://source.unsplash.com/1600x900/?porsche,macan',
+                        'https://source.unsplash.com/1600x900/?macan,porsche',
+                        'https://source.unsplash.com/1600x900/?porsche,interior',
+                        'https://source.unsplash.com/1600x900/?porsche,suv'
+                    ],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['PASM', 'Sport Chrono', 'Leather Interior', 'Premium Sound']
+                },
+                {
+                    id: 120,
+                    make: 'Range Rover',
+                    model: 'Vogue',
+                    year: 2018,
+                    yearRange: '2017–2021',
+                    priceRange: 'KES 10,000,000 – 16,000,000',
+                    price: 10000000,
+                    mileage: 45000,
+                    transmission: 'automatic',
+                    fuel: 'diesel',
+                    color: 'Santorini Black',
+                    condition: 'used',
+                    description: 'Luxury SUV with Terrain Response and executive comfort.',
+                    images: [
+                        'https://source.unsplash.com/1600x900/?range-rover,vogue',
+                        'https://source.unsplash.com/1600x900/?range-rover,interior',
+                        'https://source.unsplash.com/1600x900/?range-rover,suv',
+                        'https://source.unsplash.com/1600x900/?landrover,vogue'
+                    ],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['Terrain Response', 'Air Suspension', 'Meridian Sound', 'Leather Interior']
+                },
+                {
+                    id: 121,
+                    make: 'Toyota',
+                    model: 'Alphard Executive Lounge',
+                    year: 2018,
+                    yearRange: '2017–2021',
+                    priceRange: 'KES 6,500,000 – 9,000,000',
+                    price: 6500000,
+                    mileage: 48000,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Pearl White',
+                    condition: 'used',
+                    description: 'Luxury MPV with captain seats, premium comfort, and space.',
+                    images: [
+                        'https://source.unsplash.com/1600x900/?toyota,alphard',
+                        'https://source.unsplash.com/1600x900/?alphard,toyota',
+                        'https://source.unsplash.com/1600x900/?alphard,interior',
+                        'https://source.unsplash.com/1600x900/?toyota,mpv'
+                    ],
+                    verified: true,
+                    sellerId: 1,
+                    status: 'approved',
+                    features: ['Captain Seats', 'Premium Sound', 'Ambient Lighting', 'Executive Comfort']
                 }
             ];
             localStorage.setItem('encrypted_cars', JSON.stringify(cars));
@@ -7415,7 +7940,7 @@
             const car = cars.find(c => c.id === carId);
             if (!car) return;
             
-            document.getElementById('car-detail-title').textContent = `${car.make} ${car.model} ${car.year}`;
+            document.getElementById('car-detail-title').textContent = `${car.make} ${car.model} ${car.yearRange || car.year}`;
             
             const content = document.getElementById('car-detail-content');
             content.innerHTML = `
@@ -7431,7 +7956,7 @@
                 <div class="car-detail-specs">
                     <div class="car-detail-spec">
                         <div class="car-detail-spec-label">Price</div>
-                        <div class="car-detail-spec-value">${formatPrice(car.price)}</div>
+                        <div class="car-detail-spec-value">${car.priceRange ? car.priceRange : formatPrice(car.price)}</div>
                     </div>
                     <div class="car-detail-spec">
                         <div class="car-detail-spec-label">Mileage</div>
@@ -7484,7 +8009,7 @@
             const car = cars.find(c => c.id === carId);
             if (!car) return;
             
-            document.getElementById('quick-view-title').textContent = `${car.make} ${car.model} ${car.year}`;
+            document.getElementById('quick-view-title').textContent = `${car.make} ${car.model} ${car.yearRange || car.year}`;
             
             const content = document.getElementById('quick-view-content');
             content.innerHTML = `
@@ -7492,7 +8017,7 @@
                 <img src="${car.images[0]}" data-original-src="${car.images[0]}" alt="${car.make} ${car.model}" style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius);" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
                 </div>
                 <div>
-                    <div class="car-price">${formatPrice(car.price)}</div>
+                    <div class="car-price">${car.priceRange ? car.priceRange : formatPrice(car.price)}</div>
                     <div class="car-specs">
                         <span><i class="fas fa-tachometer-alt"></i> ${car.mileage.toLocaleString()} km</span>
                         <span><i class="fas fa-gas-pump"></i> ${car.fuel}</span>
@@ -7679,8 +8204,8 @@
                 <div class="car-badge">${car.verified ? 'VERIFIED' : 'PENDING'}</div>
                 <img src="${car.images[0]}" data-original-src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
                 <div class="car-details">
-                    <div class="car-price">${formatPrice(car.price)}</div>
-                    <h3 class="car-title">${car.make} ${car.model} ${car.year}</h3>
+                <div class="car-price">${car.priceRange ? car.priceRange : formatPrice(car.price)}</div>
+                <h3 class="car-title">${car.make} ${car.model} (${car.yearRange || car.year})</h3>
                     <div class="car-specs">
                         <span><i class="fas fa-tachometer-alt"></i> ${car.mileage.toLocaleString()} km</span>
                         <span><i class="fas fa-gas-pump"></i> ${car.fuel}</span>
