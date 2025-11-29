@@ -262,18 +262,18 @@
 
         .auth-buttons {
             display: flex;
-            gap: 12px;
+            gap: 8px;
             align-items: center;
             flex-wrap: wrap;
         }
+
+        .auth-buttons .btn { padding: 8px 14px; font-size: 0.92rem; border-radius: 12px; }
 
         @media (max-width: 768px) {
             .auth-buttons .btn { padding: 10px 18px; }
         }
         @media (max-width: 576px) {
-            .auth-buttons { flex-direction: column; align-items: stretch; gap: 10px; }
-            .auth-buttons .btn { width: 100%; justify-content: center; }
-            .auth-buttons .btn i { font-size: 1.2rem; }
+            .auth-buttons .btn { display: none; }
         }
 
         .user-menu {
@@ -309,7 +309,6 @@
             color: var(--dark);
         }
 
-        /* ===== CTA MENU (Mobile) ===== */
         .cta-menu { position: fixed; right: 16px; top: 70px; z-index: 1001; width: 86%; max-width: 420px; border-radius: 16px; box-shadow: var(--shadow); border: 1px solid rgba(0,0,0,0.06); background: linear-gradient(135deg, color-mix(in srgb, var(--white) 96%, transparent), color-mix(in srgb, var(--white) 88%, transparent)); overflow: hidden; transform: translateX(110%); opacity: 0; transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1), opacity 200ms ease; pointer-events: none; }
         .cta-menu.active { transform: translateX(0); opacity: 1; pointer-events: auto; }
         .cta-menu-header { padding: 12px 16px; background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--accent) 24%, var(--primary))); color: #fff; font-weight: 700; }
@@ -2256,8 +2255,8 @@
                     </button>
                     
                     <a href="#" class="btn btn-outline" onclick="showProfileSelection()" aria-label="Sign Up"><i class="fas fa-user-plus"></i>Sign Up</a>
-                    <a href="#" class="btn btn-accent" onclick="showRentalGFormModal()" aria-label="Reserve Your Luxe Experience"><i class="fas fa-calendar-check"></i>Reserve Your Luxe Experience</a>
-                    <a href="#" class="btn" onclick="openConciergeModal()" aria-label="Connect With Our Concierge"><i class="fas fa-headset"></i>Connect With Our Concierge</a>
+                    <a href="#" class="btn btn-accent" onclick="showRentalGFormModal()" aria-label="Reserve"><i class="fas fa-calendar-check"></i>Reserve</a>
+                    <a href="#" class="btn" onclick="openConciergeModal()" aria-label="Concierge"><i class="fas fa-headset"></i>Concierge</a>
                 </div>
 
                 <div class="user-menu" id="user-menu" style="display: none;">
@@ -2295,8 +2294,8 @@
         <div class="cta-menu-header">Quick Actions</div>
         <div class="cta-menu-list">
             <div class="cta-item" onclick="showProfileSelection(); closeCTAMenu()"><i class="fas fa-user-plus"></i><span>Sign Up</span></div>
-            <div class="cta-item" onclick="showRentalGFormModal(); closeCTAMenu()"><i class="fas fa-calendar-check"></i><span>Reserve Your Luxe Experience</span></div>
-            <div class="cta-item" onclick="openConciergeModal(); closeCTAMenu()"><i class="fas fa-headset"></i><span>Connect With Our Concierge</span></div>
+            <div class="cta-item" onclick="showRentalGFormModal(); closeCTAMenu()"><i class="fas fa-calendar-check"></i><span>Reserve</span></div>
+            <div class="cta-item" onclick="openConciergeModal(); closeCTAMenu()"><i class="fas fa-headset"></i><span>Concierge</span></div>
         </div>
     </div>
 
