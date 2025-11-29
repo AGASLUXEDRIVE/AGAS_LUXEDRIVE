@@ -1240,6 +1240,9 @@
         @media (max-width: 576px) { .gform-iframe { height: 540px; } }
         .gform-iframe-rental { height: 820px; }
         @media (max-width: 576px) { .gform-iframe-rental { height: 600px; } }
+        .concierge-body { padding: 18px 22px; }
+        .concierge-options { display: flex; gap: 12px; }
+        .concierge-options .btn { flex: 1; }
         .quick-inquiry-fab { position: fixed; left: 22px; bottom: 22px; z-index: 950; padding: 12px 16px; border-radius: 999px; font-weight: 600; cursor: pointer; box-shadow: var(--shadow); background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #ffffff; border: 1px solid color-mix(in srgb, var(--primary) 40%, var(--white)); }
         .quick-inquiry-fab:hover { filter: brightness(1.06); transform: translateY(-1px); }
         @media (min-width: 768px) { .quick-inquiry-fab { right: 30px; left: auto; bottom: 100px; } }
@@ -2223,7 +2226,8 @@
                     </button>
                     
                     <a href="#" class="btn btn-outline" onclick="showProfileSelection()">Sign Up</a>
-                    <a href="#" class="btn" onclick="showLoginModal()">Login</a>
+                    <a href="#" class="btn btn-accent" onclick="showRentalGFormModal()" aria-label="Reserve Your Luxe Experience"><i class="fas fa-calendar-check" style="margin-right:8px;"></i>Reserve Your Luxe Experience</a>
+                    <a href="#" class="btn" onclick="openConciergeModal()" aria-label="Connect With Our Concierge"><i class="fas fa-headset" style="margin-right:8px;"></i>Connect With Our Concierge</a>
                 </div>
 
                 <div class="user-menu" id="user-menu" style="display: none;">
@@ -3993,6 +3997,7 @@
                         <li><a href="#" onclick="showSection('about')">Verification Process</a></li>
                         <li><a href="#">Buyer Protection</a></li>
                         <li><a>Rental Terms</a></li>
+                        <li><a href="/agas-office" style="opacity: 0.7;">Staff Access</a></li>
                     </ul>
                 </div>
                 
@@ -4039,7 +4044,7 @@
                 Don't have an account? <a href="#" onclick="closeModal('login-modal'); showProfileSelection();">Sign Up</a>
             </p>
             <p style="text-align: center; margin-top: 10px;">
-                <a href="#" onclick="closeModal('login-modal'); showAdminLoginModal();">Enterprise Admin Login</a>
+                <span style="opacity: 0.7;">For staff login, use the footer link.</span>
             </p>
         </div>
     </div>
@@ -4490,6 +4495,22 @@
                 <button class="close-modal" onclick="closeModal('rental-gform-modal')">&times;</button>
             </div>
             <iframe class="gform-iframe gform-iframe-rental" src="https://docs.google.com/forms/d/e/1FAIpQLSeV5udBycRfByFkdD5zDKU5qtd1NqzE_gRJUShS-IFXjO1AHw/viewform?embedded=true" allow="clipboard-write; encrypted-media"></iframe>
+        </div>
+    </div>
+
+    <div id="concierge-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Concierge Assistance</h3>
+                <button class="close-modal" onclick="closeModal('concierge-modal')">&times;</button>
+            </div>
+            <div class="concierge-body">
+                <div style="margin-bottom:14px;">Choose how you want to proceed</div>
+                <div class="concierge-options">
+                    <button class="btn btn-accent" onclick="conciergeQuickInquiry()"><i class="fas fa-paper-plane" style="margin-right:8px;"></i>Quick Inquiry</button>
+                    <button class="btn" onclick="conciergeChat()"><i class="fas fa-comments" style="margin-right:8px;"></i>Chat Now</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -6929,6 +6950,9 @@
             loadAIRecommendations();
             ensureAudiRS3Listing();
             sanitizeTestimonials();
+            if (window.location.pathname.endsWith('/agas-office')) {
+                showAdminLoginModal();
+            }
             const logoInput = document.getElementById('company-logo-input');
             if (logoInput) {
                 logoInput.addEventListener('change', function(e) {
@@ -9234,6 +9258,24 @@
         // AI Chat Implementation
         function initializeAIChat() {
             loadAIChatMessages();
+        }
+
+        let conciergePayload = null;
+        function openConciergeModal() {
+            conciergePayload = { carName: 'Concierge', name: currentUser ? `${currentUser.fname || ''} ${currentUser.lname || ''}`.trim() : '', email: currentUser ? currentUser.email : '', phone: currentUser ? currentUser.phone : '', message: 'Concierge assistance request' };
+            document.getElementById('concierge-modal').style.display = 'flex';
+        }
+        function conciergeQuickInquiry() {
+            const payload = conciergePayload || { carName: 'Concierge' };
+            sendLead('inquiry', payload);
+            closeModal('concierge-modal');
+            showGFormModal(payload);
+        }
+        function conciergeChat() {
+            const payload = conciergePayload || { carName: 'Concierge' };
+            closeModal('concierge-modal');
+            showSection('contact');
+            setTimeout(function(){ initializeContactChat(); const input = document.getElementById('contact-chat-input'); if (input) input.focus(); }, 150);
         }
 
         let contactChatStep = 0;
