@@ -319,7 +319,7 @@
         .cta-item:hover { filter: brightness(1.04); transform: translateY(-1px); }
         .cta-menu-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.15); backdrop-filter: blur(2px); z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 180ms ease; }
         .cta-menu-backdrop.active { opacity: 1; pointer-events: auto; }
-        @media (max-width: 576px) { .mobile-menu-btn { display: inline-flex; } }
+        @media (max-width: 768px) { .mobile-menu-btn { display: inline-flex; } }
 
         /* ===== DARK MODE TOGGLE ===== */
         .dark-mode-toggle {
@@ -7171,7 +7171,7 @@
 
         // Mobile menu toggle
         function toggleMobileMenu() {
-            if (window.innerWidth <= 576) {
+            if (window.innerWidth <= 768) {
                 toggleCTAMenu();
                 return;
             }
