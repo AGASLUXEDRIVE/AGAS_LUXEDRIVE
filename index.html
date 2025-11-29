@@ -121,21 +121,21 @@
         .btn {
             display: inline-block;
             padding: 12px 28px;
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            border: none;
+            border: 1px solid color-mix(in srgb, var(--primary) 40%, var(--white));
             border-radius: var(--radius);
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
             text-decoration: none;
+            box-shadow: var(--shadow);
         }
 
         .btn:hover {
-            background-color: var(--primary-dark);
+            filter: brightness(1.06);
             transform: translateY(-2px);
-            box-shadow: var(--shadow);
         }
 
         .btn-outline {
@@ -182,6 +182,7 @@
             z-index: 1000;
             transition: var(--transition);
         }
+        .premium-header { background: linear-gradient(135deg, color-mix(in srgb, var(--white) 92%, transparent), color-mix(in srgb, var(--accent) 8%, var(--white))); border-bottom: 1px solid rgba(0,0,0,0.06); }
 
         .navbar {
             display: flex;
@@ -798,7 +799,8 @@
         }
 
         .car-card {
-            background-color: var(--white);
+            background: linear-gradient(180deg, color-mix(in srgb, var(--white) 96%, transparent), color-mix(in srgb, var(--white) 88%, transparent));
+            border: 1px solid rgba(0,0,0,0.06);
             border-radius: var(--radius);
             overflow: hidden;
             box-shadow: var(--shadow);
@@ -2103,7 +2105,7 @@
     <div id="notification-container"></div>
 
     <!-- Header & Navigation -->
-    <header>
+    <header class="premium-header">
         <div class="container">
             <nav class="navbar">
                 <a href="#" class="logo" onclick="showSection('home')">
@@ -2536,7 +2538,7 @@
             </section>
 
             <!-- Car Rentals Section -->
-            <section id="rentals-section">
+            <section id="rentals-section" class="lux-section">
                 <div class="container">
                     <div class="section-title">
                         <h2>Premium Car Rental Fleet</h2>
@@ -2888,7 +2890,7 @@
 
 
 <!-- Listings Section -->
-        <section id="listings-section" style="display: none; padding: 100px 0 80px;">
+        <section id="listings-section" class="lux-section" style="display: none; padding: 100px 0 80px;">
             <div class="container">
                 <div class="section-title">
                     <h2>All Luxury Car Listings</h2>
@@ -2955,7 +2957,7 @@
         </section>
 
         <!-- Brand Gallery Section -->
-        <section id="brand-gallery-section" style="display: none; padding: 100px 0;">
+        <section id="brand-gallery-section" class="lux-section" style="display: none; padding: 100px 0;">
             <div class="container">
                 <div class="section-title">
                     <h2>Luxury Brand Gallery</h2>
@@ -3039,7 +3041,7 @@
         </section>
 
         <!-- About Section -->
-        <section id="about-section" style="display: none; padding: 100px 0;">
+        <section id="about-section" class="lux-section" style="display: none; padding: 100px 0;">
             <div class="container">
                 <div class="section-title">
                     <h2>About AGAS LUXE DRIVE</h2>
@@ -3085,7 +3087,7 @@
         </section>
 
         <!-- Contact Section -->
-        <section id="contact-section" style="display: none; padding: 100px 0;">
+        <section id="contact-section" class="lux-section" style="display: none; padding: 100px 0;">
             <div class="container">
                 <div class="section-title">
                     <h2>Contact Us</h2>
