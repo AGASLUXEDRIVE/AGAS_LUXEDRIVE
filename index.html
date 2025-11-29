@@ -2832,6 +2832,60 @@
     });
 </script>
 
+<section id="payments-section" class="payment-section">
+    <div class="container">
+        <div class="payment-header fade-in">
+            <div class="payment-subtitle">Secure · Global · Flexible</div>
+            <div class="payment-title">Accepted Payment Options</div>
+        </div>
+
+        <div class="payment-category fade-in">Crypto Payments</div>
+        <div class="payment-row">
+            <div class="payment-tile fade-in" role="button" aria-label="Pay with Bitcoin" onclick="requestPayment('crypto','Bitcoin')"><div class="payment-icon"><i class="fab fa-bitcoin"></i></div><div class="payment-label">Bitcoin (BTC)</div></div>
+            <div class="payment-tile fade-in" role="button" aria-label="Pay with Ethereum" onclick="requestPayment('crypto','Ethereum')"><div class="payment-icon"><i class="fab fa-ethereum"></i></div><div class="payment-label">Ethereum (ETH)</div></div>
+            <div class="payment-tile fade-in" role="button" aria-label="Pay with USDT" onclick="requestPayment('crypto','USDT')"><div class="payment-icon"><i class="fas fa-coins"></i></div><div class="payment-label">USDT</div></div>
+            <div class="payment-tile fade-in" role="button" aria-label="Pay with USDC" onclick="requestPayment('crypto','USDC')"><div class="payment-icon"><i class="fas fa-circle"></i></div><div class="payment-label">USDC</div></div>
+            <div class="payment-tile fade-in" role="button" aria-label="Pay with Binance Pay" onclick="requestPayment('crypto','Binance Pay')"><div class="payment-icon"><i class="fas fa-shield-alt"></i></div><div class="payment-label">Binance Pay</div></div>
+            <div class="payment-tile fade-in" role="button" aria-label="Pay with Coinbase Commerce" onclick="requestPayment('crypto','Coinbase Commerce')"><div class="payment-icon"><i class="fas fa-store"></i></div><div class="payment-label">Coinbase Commerce</div></div>
+        </div>
+
+        <div class="payment-category fade-in">Bank Transfers</div>
+        <div class="payment-row">
+            <div class="payment-tile fade-in" role="button" aria-label="KCB Bank" onclick="requestPayment('bank','KCB Bank')"><div class="payment-icon"><i class="fas fa-university"></i></div><div class="payment-label">KCB Bank</div></div>
+            <div class="payment-tile fade-in" role="button" aria-label="Equity Bank" onclick="requestPayment('bank','Equity Bank')"><div class="payment-icon"><i class="fas fa-university"></i></div><div class="payment-label">Equity Bank</div></div>
+            <div class="payment-tile fade-in" role="button" aria-label="I&M Bank" onclick="requestPayment('bank','I&M Bank')"><div class="payment-icon"><i class="fas fa-university"></i></div><div class="payment-label">I&M Bank</div></div>
+            <div class="payment-tile fade-in" role="button" aria-label="Co-operative Bank" onclick="requestPayment('bank','Co-operative Bank')"><div class="payment-icon"><i class="fas fa-university"></i></div><div class="payment-label">Co-operative Bank</div></div>
+            <div class="payment-tile fade-in" role="button" aria-label="Absa Bank" onclick="requestPayment('bank','Absa Bank')"><div class="payment-icon"><i class="fas fa-university"></i></div><div class="payment-label">Absa Bank</div></div>
+        </div>
+
+        <div class="payment-category fade-in">Mobile Money</div>
+        <div class="payment-row">
+            <div class="payment-tile fade-in" role="button" aria-label="MPesa" onclick="requestPayment('mobile','MPesa')"><div class="payment-icon"><i class="fas fa-mobile-alt"></i></div><div class="payment-label">MPesa</div></div>
+            <div class="payment-tile fade-in" role="button" aria-label="Airtel Money" onclick="requestPayment('mobile','Airtel Money')"><div class="payment-icon"><i class="fas fa-mobile-alt"></i></div><div class="payment-label">Airtel Money</div></div>
+        </div>
+
+        <div class="payment-category fade-in">Cards</div>
+        <div class="payment-row">
+            <div class="payment-tile fade-in" role="button" aria-label="Visa" onclick="requestPayment('card','Visa')"><div class="payment-icon"><i class="fab fa-cc-visa"></i></div><div class="payment-label">Visa</div></div>
+            <div class="payment-tile fade-in" role="button" aria-label="Mastercard" onclick="requestPayment('card','Mastercard')"><div class="payment-icon"><i class="fab fa-cc-mastercard"></i></div><div class="payment-label">Mastercard</div></div>
+            <div class="payment-tile fade-in" role="button" aria-label="American Express" onclick="requestPayment('card','Amex')"><div class="payment-icon"><i class="fab fa-cc-amex"></i></div><div class="payment-label">Amex</div></div>
+        </div>
+
+        <div style="display:flex; justify-content:center; margin-top:26px;">
+            <button class="btn" onclick="requestPayment('request','Payment Link')">Request Payment Link</button>
+        </div>
+    </div>
+</section>
+
+<script>
+    (function(){
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('#payments-section .fade-in').forEach(el => io.observe(el));
+    })();
+</script>
+
 
 <!-- Listings Section -->
         <section id="listings-section" style="display: none; padding: 100px 0 80px;">
@@ -7517,6 +7571,12 @@
                 });
         }
 
+        function requestPayment(category, method) {
+            const payload = { id: Date.now(), category, method, page: location.pathname, createdAt: new Date().toISOString() };
+            sendLead('payment', payload);
+            showGFormModal();
+        }
+
         function handleAddCar(e) {
             e.preventDefault();
             if (!currentUser) {
@@ -9328,3 +9388,19 @@
 </body>
 </html>
     
+        .payment-section { background: linear-gradient(180deg, color-mix(in srgb, var(--white) 92%, transparent), color-mix(in srgb, var(--white) 86%, transparent)); padding: 40px 0; }
+        .payment-header { text-align: center; margin-bottom: 28px; }
+        .payment-title { font-size: 32px; font-weight: 800; color: var(--dark); letter-spacing: 0.4px; }
+        .payment-subtitle { color: var(--gray); font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; }
+        .payment-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+        .payment-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 12px; }
+        .payment-tile { display: flex; align-items: center; gap: 12px; padding: 16px 18px; border-radius: 16px; background: color-mix(in srgb, var(--light) 88%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--gray-light)); box-shadow: var(--shadow); cursor: pointer; transition: transform 220ms ease, filter 220ms ease, background-color 220ms ease; }
+        .payment-tile:hover { transform: translateY(-2px); filter: brightness(1.04); }
+        .payment-icon { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 10px; background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent-dark) 36%, var(--accent))); color: #fff; }
+        .payment-label { font-weight: 700; color: var(--dark); }
+        .payment-category { margin-top: 26px; font-size: 18px; font-weight: 700; color: var(--dark); display: flex; align-items: center; gap: 8px; }
+        .payment-category::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 30%, transparent); }
+        .fade-in { opacity: 0; transform: translateY(8px) scale(0.99); filter: blur(2px); transition: opacity 500ms ease, transform 500ms ease, filter 500ms ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        .dark-mode .payment-section { background: linear-gradient(180deg, color-mix(in srgb, var(--white) 86%, transparent), color-mix(in srgb, var(--white) 76%, transparent)); }
+        .dark-mode .payment-tile { background: color-mix(in srgb, var(--light) 92%, transparent); border-color: color-mix(in srgb, var(--accent) 28%, var(--gray-light)); }
