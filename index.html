@@ -182,7 +182,7 @@
             z-index: 1000;
             transition: var(--transition);
         }
-        .premium-header { background: linear-gradient(135deg, color-mix(in srgb, var(--white) 92%, transparent), color-mix(in srgb, var(--accent) 8%, var(--white))); border-bottom: 1px solid rgba(0,0,0,0.06); }
+        .premium-header { background: linear-gradient(135deg, #f8fafc, #eceff1); background: linear-gradient(135deg, color-mix(in srgb, var(--white) 92%, transparent), color-mix(in srgb, var(--accent) 8%, var(--white))); border-bottom: 1px solid rgba(0,0,0,0.06); }
 
         .navbar {
             display: flex;
@@ -799,6 +799,7 @@
         }
 
         .car-card {
+            background: linear-gradient(180deg, #ffffff, #f7f7f7);
             background: linear-gradient(180deg, color-mix(in srgb, var(--white) 96%, transparent), color-mix(in srgb, var(--white) 88%, transparent));
             border: 1px solid rgba(0,0,0,0.06);
             border-radius: var(--radius);
@@ -1168,8 +1169,8 @@
             font-weight: 600;
         }
 
-        .gform-modal .modal-content { width: 92%; max-width: 760px; max-height: 88vh; padding: 0; background: linear-gradient(180deg, color-mix(in srgb, var(--white) 96%, transparent), color-mix(in srgb, var(--white) 88%, transparent)); box-shadow: var(--shadow); border: 1px solid rgba(255,255,255,0.06); }
-        .gform-modal .modal-header { padding: 18px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--accent) 22%, var(--primary))); color: #ffffff; }
+        .gform-modal .modal-content { width: 92%; max-width: 760px; max-height: 88vh; padding: 0; background: linear-gradient(180deg, #ffffff, #f7f7f7); background: linear-gradient(180deg, color-mix(in srgb, var(--white) 96%, transparent), color-mix(in srgb, var(--white) 88%, transparent)); box-shadow: var(--shadow); border: 1px solid rgba(255,255,255,0.06); }
+        .gform-modal .modal-header { padding: 18px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); background: linear-gradient(135deg, var(--primary), var(--accent)); background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--accent) 22%, var(--primary))); color: #ffffff; }
         .gform-modal .modal-title { letter-spacing: 0.3px; }
         .gform-iframe { display: block; width: 100%; height: 700px; border: 0; }
         @media (max-width: 576px) { .gform-iframe { height: 540px; } }
@@ -1186,27 +1187,27 @@
         @media (max-width: 576px) { .rental-inquiry-fab { left: 18px; bottom: 70px; } }
         .ai-open .rental-inquiry-fab { left: 22px; bottom: 100px; }
         .ai-chat-toggle { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border: 1px solid color-mix(in srgb, var(--primary) 40%, var(--white)); }
-        .ai-chat-header { background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--accent) 22%, var(--primary))); }
+        .ai-chat-header { background: linear-gradient(135deg, var(--primary), var(--accent)); background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--accent) 22%, var(--primary))); }
         .ai-chat-container { border: 1px solid rgba(255,255,255,0.08); box-shadow: var(--shadow); }
-        .dark-mode .gform-modal .modal-content { background: linear-gradient(180deg, color-mix(in srgb, var(--white) 90%, transparent), color-mix(in srgb, var(--white) 80%, transparent)); border: 1px solid rgba(255,255,255,0.08); }
-        .dark-mode .gform-modal .modal-header { background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--accent) 28%, var(--primary))); color: #ffffff; }
+        .dark-mode .gform-modal .modal-content { background: linear-gradient(180deg, #f1f5f9, #e2e8f0); background: linear-gradient(180deg, color-mix(in srgb, var(--white) 90%, transparent), color-mix(in srgb, var(--white) 80%, transparent)); border: 1px solid rgba(255,255,255,0.08); }
+        .dark-mode .gform-modal .modal-header { background: linear-gradient(135deg, var(--primary), var(--accent)); background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--accent) 28%, var(--primary))); color: #ffffff; }
         .dark-mode .quick-inquiry-fab { box-shadow: var(--shadow); }
-        .payment-section { background: linear-gradient(180deg, color-mix(in srgb, var(--white) 92%, transparent), color-mix(in srgb, var(--white) 86%, transparent)); padding: 40px 0; }
+        .payment-section { background: linear-gradient(180deg, #ffffff, #f7f7f7); background: linear-gradient(180deg, color-mix(in srgb, var(--white) 92%, transparent), color-mix(in srgb, var(--white) 86%, transparent)); padding: 40px 0; }
         .payment-header { text-align: center; margin-bottom: 28px; }
         .payment-title { font-size: 32px; font-weight: 800; color: var(--dark); letter-spacing: 0.4px; }
         .payment-subtitle { color: var(--gray); font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; }
         .payment-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
         .payment-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 12px; }
-        .payment-tile { display: flex; align-items: center; gap: 12px; padding: 16px 18px; border-radius: 16px; background: color-mix(in srgb, var(--light) 88%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--gray-light)); box-shadow: var(--shadow); cursor: pointer; transition: transform 220ms ease, filter 220ms ease, background-color 220ms ease; }
+        .payment-tile { display: flex; align-items: center; gap: 12px; padding: 16px 18px; border-radius: 16px; background: var(--light); background: color-mix(in srgb, var(--light) 88%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--gray-light)); box-shadow: var(--shadow); cursor: pointer; transition: transform 220ms ease, filter 220ms ease, background-color 220ms ease; }
         .payment-tile:hover { transform: translateY(-2px); filter: brightness(1.04); }
-        .payment-icon { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 10px; background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent-dark) 36%, var(--accent))); color: #fff; }
+        .payment-icon { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 10px; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent-dark) 36%, var(--accent))); color: #fff; }
         .payment-label { font-weight: 700; color: var(--dark); }
         .payment-category { margin-top: 26px; font-size: 18px; font-weight: 700; color: var(--dark); display: flex; align-items: center; gap: 8px; }
-        .payment-category::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 30%, transparent); }
+        .payment-category::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px rgba(0,0,0,0.04); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 30%, transparent); }
         .fade-in { opacity: 0; transform: translateY(8px) scale(0.99); filter: blur(2px); transition: opacity 500ms ease, transform 500ms ease, filter 500ms ease; }
         .fade-in.visible { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-        .dark-mode .payment-section { background: linear-gradient(180deg, color-mix(in srgb, var(--white) 86%, transparent), color-mix(in srgb, var(--white) 76%, transparent)); }
-        .dark-mode .payment-tile { background: color-mix(in srgb, var(--light) 92%, transparent); border-color: color-mix(in srgb, var(--accent) 28%, var(--gray-light)); }
+        .dark-mode .payment-section { background: linear-gradient(180deg, #f1f5f9, #e2e8f0); background: linear-gradient(180deg, color-mix(in srgb, var(--white) 86%, transparent), color-mix(in srgb, var(--white) 76%, transparent)); }
+        .dark-mode .payment-tile { background: var(--light); background: color-mix(in srgb, var(--light) 92%, transparent); border-color: color-mix(in srgb, var(--accent) 28%, var(--gray-light)); }
 
         .close-modal {
             background: none;
@@ -2104,8 +2105,7 @@
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<!-- SEO meta & structured data -->
-<meta name="description" content="AGAS LUXE DRIVE — East Africa's premium luxury automotive marketplace. Buy, sell, and rent verified luxury vehicles.">
+<!-- SEO structured data -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"AutoDealer","name":"AGAS LUXE DRIVE","url":"/","description":"Premium luxury vehicle marketplace in East Africa."}
 </script>
@@ -2133,12 +2133,12 @@
                 </a>
                 
                 <ul class="nav-links">
-                    <li><a onclick="showSection('home')">Home</a></li>
-                    <li><a onclick="showSection('listings')">Buy Cars</a></li>
-                    <li><a onclick="showSection('rentals')">Rent Cars</a></li>
-                    <li><a onclick="showBrandGallery()">Brands</a></li>
-                    <li><a onclick="showSection('about')">About</a></li>
-                    <li><a onclick="showSection('contact')">Contact</a></li>
+                    <li><a href="#" onclick="showSection('home')">Home</a></li>
+                    <li><a href="#" onclick="showSection('listings')">Buy Cars</a></li>
+                    <li><a href="#" onclick="showSection('rentals')">Rent Cars</a></li>
+                    <li><a href="#" onclick="showBrandGallery()">Brands</a></li>
+                    <li><a href="#" onclick="showSection('about')">About</a></li>
+                    <li><a href="#" onclick="showSection('contact')">Contact</a></li>
                 </ul>
                 
                 <div class="auth-buttons" id="auth-buttons">
@@ -2153,8 +2153,8 @@
                         <span class="notification-badge" id="notification-count">3</span>
                     </button>
                     
-                    <a class="btn btn-outline" onclick="showProfileSelection()">Sign Up</a>
-                    <a class="btn" onclick="showLoginModal()">Login</a>
+                    <a href="#" class="btn btn-outline" onclick="showProfileSelection()">Sign Up</a>
+                    <a href="#" class="btn" onclick="showLoginModal()">Login</a>
                 </div>
 
                 <div class="user-menu" id="user-menu" style="display: none;">
@@ -2177,8 +2177,8 @@
                         </div>
                     </div>
                     <!-- Added Admin Dashboard button -->
-                    <a class="btn btn-outline" id="admin-dashboard-btn" style="display: none;" onclick="showAdminPanel()">Admin Dashboard</a>
-                    <a class="btn btn-outline" onclick="logout()">Logout</a>
+                    <a href="#" class="btn btn-outline" id="admin-dashboard-btn" style="display: none;" onclick="showAdminPanel()">Admin Dashboard</a>
+                    <a href="#" class="btn btn-outline" onclick="logout()">Logout</a>
                 </div>
                 
                 <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
@@ -2238,9 +2238,9 @@
                     <h1>East Africa's Premier Luxury Automotive Platform</h1>
                     <p>Verified sellers, premium rentals, enterprise security, and complete buyer protection. Your luxury automotive journey starts here.</p>
                     <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 30px;">
-                        <a class="btn btn-accent" onclick="showSection('listings')">Buy Luxury Cars</a>
-                        <a class="btn btn-outline" style="background: rgba(255,255,255,0.2); color: white; border-color: white;" onclick="showSection('rentals')">Rent Premium Cars</a>
-                        <a class="btn" style="background: var(--success);" onclick="showProfileSelection()">Sell Your Car</a>
+                        <a href="#" class="btn btn-accent" onclick="showSection('listings')">Buy Luxury Cars</a>
+                        <a href="#" class="btn btn-outline" style="background: rgba(255,255,255,0.2); color: white; border-color: white;" onclick="showSection('rentals')">Rent Premium Cars</a>
+                        <a href="#" class="btn" style="background: var(--success);" onclick="showProfileSelection()">Sell Your Car</a>
                     </div>
                 </div>
             </section>
@@ -2534,7 +2534,7 @@
                     </div>
                     
                     <div style="text-align: center; margin-top: 40px;">
-                        <a id="view-all-link" class="btn" onclick="showSection('listings')">View All Listings</a>
+                        <a href="#" id="view-all-link" class="btn" onclick="showSection('listings')">View All Listings</a>
                     </div>
                 </div>
             </section>
@@ -2572,8 +2572,8 @@
                     </div>
                     
                     <div style="text-align: center; margin-top: 40px;">
-                        <a class="btn btn-accent" onclick="showRentalModal()">Book Luxury Rental</a>
-                <a class="btn btn-outline" style="margin-left: 15px;" onclick="triggerCorporateInquiry()">Corporate Rental Inquiry</a>
+                        <a href="#" class="btn btn-accent" onclick="showRentalModal()">Book Luxury Rental</a>
+                <a href="#" class="btn btn-outline" style="margin-left: 15px;" onclick="triggerCorporateInquiry()">Corporate Rental Inquiry</a>
                     </div>
                 </div>
             </section>
@@ -3051,7 +3051,7 @@
                 <div style="text-align: center; margin-top: 50px;">
                     <h3>Can't Find Your Preferred Brand?</h3>
                     <p style="max-width: 600px; margin: 15px auto;">We continuously expand our luxury brand portfolio. Contact us for special requests or exclusive brand inquiries.</p>
-                    <a class="btn btn-accent" onclick="showSection('contact')">Request Special Brand</a>
+                    <a href="#" class="btn btn-accent" onclick="showSection('contact')">Request Special Brand</a>
                 </div>
             </div>
         </section>
@@ -3169,7 +3169,7 @@
                 <div class="dashboard-nav">
                     <h2>Buyer Dashboard</h2>
                     <div class="dashboard-nav-actions">
-                        <a class="btn btn-outline" onclick="showSection('home')">Back to Home</a>
+                        <a href="#" class="btn btn-outline" onclick="showSection('home')">Back to Home</a>
                     </div>
                 </div>
                 
@@ -3203,7 +3203,7 @@
                 <div class="dashboard-content">
                     <div id="inquiries-tab" class="tab-content active">
                         <div class="breadcrumb">
-                            <a onclick="switchBuyerTab('inquiries')">My Inquiries</a>
+                            <a href="#" onclick="switchBuyerTab('inquiries')">My Inquiries</a>
                         </div>
                         <h3>My Car Inquiries</h3>
                         <div id="buyer-inquiries-list">
@@ -3213,7 +3213,7 @@
                     
                     <div id="rentals-tab" class="tab-content">
                         <div class="breadcrumb">
-                            <a onclick="switchBuyerTab('rentals')">My Rental Bookings</a>
+                            <a href="#" onclick="switchBuyerTab('rentals')">My Rental Bookings</a>
                         </div>
                         <h3>My Rental Bookings</h3>
                         <div id="buyer-rentals-list">
@@ -3223,7 +3223,7 @@
                     
                     <div id="testimonials-tab" class="tab-content">
                         <div class="breadcrumb">
-                            <a onclick="switchBuyerTab('testimonials')">My Testimonials</a>
+                            <a href="#" onclick="switchBuyerTab('testimonials')">My Testimonials</a>
                         </div>
                         <h3>My Testimonials</h3>
                         <div id="buyer-testimonials-list">
@@ -3247,7 +3247,7 @@
                     
                     <div id="ratings-tab" class="tab-content">
                         <div class="breadcrumb">
-                            <a onclick="switchBuyerTab('ratings')">My Ratings</a>
+                            <a href="#" onclick="switchBuyerTab('ratings')">My Ratings</a>
                         </div>
                         <h3>My Ratings</h3>
                         <div id="buyer-ratings-list">
@@ -3257,7 +3257,7 @@
                     
                     <div id="profile-tab" class="tab-content">
                         <div class="breadcrumb">
-                            <a onclick="switchBuyerTab('profile')">Profile Settings</a>
+                            <a href="#" onclick="switchBuyerTab('profile')">Profile Settings</a>
                         </div>
                         <h3>Profile Settings</h3>
                         <form id="buyer-profile-form">
@@ -3336,7 +3336,7 @@
                 <div class="dashboard-nav">
                     <h2>Seller Dashboard</h2>
                     <div class="dashboard-nav-actions">
-                        <a class="btn btn-outline" onclick="showSection('home')">Back to Home</a>
+                        <a href="#" class="btn btn-outline" onclick="showSection('home')">Back to Home</a>
                     </div>
                 </div>
                 
@@ -3372,7 +3372,7 @@
                 <div class="dashboard-content">
                     <div id="my-listings-tab" class="tab-content active">
                         <div class="breadcrumb">
-                            <a onclick="switchSellerTab('my-listings')">My Car Listings</a>
+                            <a href="#" onclick="switchSellerTab('my-listings')">My Car Listings</a>
                         </div>
                         <h3>My Car Listings</h3>
                         <div id="seller-listings-list">
@@ -3382,7 +3382,7 @@
                     
                     <div id="add-listing-tab" class="tab-content">
                         <div class="breadcrumb">
-                            <a onclick="switchSellerTab('add-listing')">List a New Car</a>
+                            <a href="#" onclick="switchSellerTab('add-listing')">List a New Car</a>
                         </div>
                         <h3>List a New Car</h3>
                         <form id="add-car-form">
@@ -3511,7 +3511,7 @@
                     
                     <div id="rental-listings-tab" class="tab-content">
                         <div class="breadcrumb">
-                            <a onclick="switchSellerTab('rental-listings')">My Rental Listings</a>
+                            <a href="#" onclick="switchSellerTab('rental-listings')">My Rental Listings</a>
                         </div>
                         <h3>My Rental Listings</h3>
                         <div id="seller-rental-listings">
@@ -3521,7 +3521,7 @@
                     
                     <div id="add-rental-tab" class="tab-content">
                         <div class="breadcrumb">
-                            <a onclick="switchSellerTab('add-rental')">Add a Car for Rental</a>
+                            <a href="#" onclick="switchSellerTab('add-rental')">Add a Car for Rental</a>
                         </div>
                         <h3>Add a Car for Rental</h3>
                         <form id="add-rental-form">
@@ -3598,7 +3598,7 @@
                     
                     <div id="inquiries-tab" class="tab-content">
                         <div class="breadcrumb">
-                            <a onclick="switchSellerTab('inquiries')">Inquiries About My Cars</a>
+                            <a href="#" onclick="switchSellerTab('inquiries')">Inquiries About My Cars</a>
                         </div>
                         <h3>Inquiries About My Cars</h3>
                         <div id="seller-inquiries-list">
@@ -3608,7 +3608,7 @@
 
                     <div id="ratings-tab" class="tab-content">
                         <div class="breadcrumb">
-                            <a onclick="switchSellerTab('ratings')">Ratings Received</a>
+                            <a href="#" onclick="switchSellerTab('ratings')">Ratings Received</a>
                         </div>
                         <h3>Ratings Received</h3>
                         <div id="seller-ratings-list">
@@ -3618,7 +3618,7 @@
 
                     <div id="profile-tab" class="tab-content">
                         <div class="breadcrumb">
-                            <a onclick="switchSellerTab('profile')">Company Profile</a>
+                            <a href="#" onclick="switchSellerTab('profile')">Company Profile</a>
                         </div>
                         <h3>Company Profile</h3>
                         <form id="seller-profile-form">
@@ -3749,7 +3749,7 @@
                 <div class="dashboard-content">
                     <div id="pending-tab" class="tab-content active">
                         <div class="breadcrumb">
-                            <a onclick="switchAdminTab('pending')">Pending Approvals</a>
+                            <a href="#" onclick="switchAdminTab('pending')">Pending Approvals</a>
                         </div>
                         <h3>Pending Car Listings</h3>
                         <div class="pending-listings" id="pending-listings">
@@ -3764,7 +3764,7 @@
                     
                     <div id="verified-tab" class="tab-content">
                         <div class="breadcrumb">
-                            <a onclick="switchAdminTab('verified')">Verified Listings</a>
+                            <a href="#" onclick="switchAdminTab('verified')">Verified Listings</a>
                         </div>
                         <h3>Verified Car Listings</h3>
                         <div id="verified-listings">
@@ -3775,7 +3775,7 @@
                     <!-- ENHANCED RENTAL MANAGEMENT TAB -->
                     <div id="rentals-tab" class="tab-content">
                         <div class="breadcrumb">
-                            <a onclick="switchAdminTab('rentals')">Rental Management</a>
+                            <a href="#" onclick="switchAdminTab('rentals')">Rental Management</a>
                         </div>
                         <h3>Verified Rental Listings</h3>
                         <div id="verified-rentals">
@@ -3790,7 +3790,7 @@
 
                     <div id="communications-tab" class="tab-content">
                         <div class="breadcrumb">
-                            <a onclick="switchAdminTab('communications')">Communications</a>
+                            <a href="#" onclick="switchAdminTab('communications')">Communications</a>
                         </div>
                         <h3>Client Inquiries</h3>
                         <div id="admin-inquiries-list"></div>
@@ -3800,7 +3800,7 @@
                     
                     <div id="users-tab" class="tab-content">
                         <div class="breadcrumb">
-                            <a onclick="switchAdminTab('users')">User Management</a>
+                            <a href="#" onclick="switchAdminTab('users')">User Management</a>
                         </div>
                         <h3>User Management</h3>
                         <div id="user-management">
@@ -3810,7 +3810,7 @@
 
                     <div id="testimonials-tab" class="tab-content">
                         <div class="breadcrumb">
-                            <a onclick="switchAdminTab('testimonials')">Testimonial Approvals</a>
+                            <a href="#" onclick="switchAdminTab('testimonials')">Testimonial Approvals</a>
                         </div>
                         <h3>Testimonial Approvals</h3>
                         <div id="testimonial-approvals">
@@ -3820,7 +3820,7 @@
 
                     <div id="reports-tab" class="tab-content">
                         <div class="breadcrumb">
-                            <a onclick="switchAdminTab('reports')">Analytics & Reports</a>
+                            <a href="#" onclick="switchAdminTab('reports')">Analytics & Reports</a>
                         </div>
                         <h3>Analytics & Reports</h3>
                         <div class="dashboard-stats">
@@ -3897,21 +3897,21 @@
                 <div class="footer-column">
                     <h3>Enterprise Services</h3>
                     <ul class="footer-links">
-                        <li><a onclick="showSection('home'); setTimeout(() => document.getElementById('featured-vehicles').scrollIntoView({ behavior: 'smooth' }), 100);">Luxury Vehicle Sales</a></li>
-                        <li><a onclick="showSection('rentals')">Premium Rentals</a></li>
-                        <li><a onclick="showProfileSelection()">Sell Your Vehicle</a></li>
-                        <li><a onclick="showBrandGallery()">Brand Showcase</a></li>
-                        <li><a onclick="showCorporateServicesModal()">Corporate Services</a></li>
+                        <li><a href="#" onclick="showSection('home'); setTimeout(() => document.getElementById('featured-vehicles').scrollIntoView({ behavior: 'smooth' }), 100);">Luxury Vehicle Sales</a></li>
+                        <li><a href="#" onclick="showSection('rentals')">Premium Rentals</a></li>
+                        <li><a href="#" onclick="showProfileSelection()">Sell Your Vehicle</a></li>
+                        <li><a href="#" onclick="showBrandGallery()">Brand Showcase</a></li>
+                        <li><a href="#" onclick="showCorporateServicesModal()">Corporate Services</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Security & Support</h3>
                     <ul class="footer-links">
-                        <li><a onclick="showSection('contact')">24/7 Support</a></li>
-                        <li><a onclick="showPasswordResetModal()">Password Reset</a></li>
-                        <li><a onclick="showSection('about')">Verification Process</a></li>
-                        <li><a>Buyer Protection</a></li>
+                        <li><a href="#" onclick="showSection('contact')">24/7 Support</a></li>
+                        <li><a href="#" onclick="showPasswordResetModal()">Password Reset</a></li>
+                        <li><a href="#" onclick="showSection('about')">Verification Process</a></li>
+                        <li><a href="#">Buyer Protection</a></li>
                         <li><a>Rental Terms</a></li>
                     </ul>
                 </div>
@@ -3953,13 +3953,13 @@
                 <button type="submit" class="btn" style="width: 100%; margin-top: 20px;">Secure Login</button>
             </form>
             <p style="text-align: center; margin-top: 15px;">
-                <a onclick="closeModal('login-modal'); showPasswordResetModal();">Forgot Password?</a>
+                <a href="#" onclick="closeModal('login-modal'); showPasswordResetModal();">Forgot Password?</a>
             </p>
             <p style="text-align: center; margin-top: 15px;">
-                Don't have an account? <a onclick="closeModal('login-modal'); showProfileSelection();">Sign Up</a>
+                Don't have an account? <a href="#" onclick="closeModal('login-modal'); showProfileSelection();">Sign Up</a>
             </p>
             <p style="text-align: center; margin-top: 10px;">
-                <a onclick="closeModal('login-modal'); showAdminLoginModal();">Enterprise Admin Login</a>
+                <a href="#" onclick="closeModal('login-modal'); showAdminLoginModal();">Enterprise Admin Login</a>
             </p>
         </div>
     </div>
@@ -4071,7 +4071,7 @@
                 <button type="submit" class="btn" style="width: 100%; margin-top: 20px;">Create Buyer Account</button>
             </form>
             <p style="text-align: center; margin-top: 15px;">
-                Already have an account? <a onclick="closeModal('buyer-signup-modal'); showLoginModal();">Login here</a>
+                Already have an account? <a href="#" onclick="closeModal('buyer-signup-modal'); showLoginModal();">Login here</a>
             </p>
         </div>
     </div>
@@ -4150,7 +4150,7 @@
                 <button type="submit" class="btn" style="width: 100%; margin-top: 20px;">Create Seller Account</button>
             </form>
             <p style="text-align: center; margin-top: 15px;">
-                Already have an account? <a onclick="closeModal('seller-signup-modal'); showLoginModal();">Login here</a>
+                Already have an account? <a href="#" onclick="closeModal('seller-signup-modal'); showLoginModal();">Login here</a>
             </p>
         </div>
     </div>
@@ -4174,10 +4174,10 @@
                 <button type="submit" class="btn" style="width: 100%; margin-top: 20px;">Login as Admin</button>
             </form>
             <p style="text-align: center; margin-top: 15px;">
-                <a onclick="closeModal('admin-login-modal'); showLoginModal();">User Login</a>
+                <a href="#" onclick="closeModal('admin-login-modal'); showLoginModal();">User Login</a>
             </p>
             <p style="text-align: center; margin-top: 10px; font-size: 0.8rem; color: var(--gray);">
-                <a onclick="showAdminPasswordResetInfo()" style="cursor: pointer;">Admin Password Reset</a>
+                <a href="#" onclick="showAdminPasswordResetInfo()" style="cursor: pointer;">Admin Password Reset</a>
             </p>
         </div>
     </div>
@@ -4202,7 +4202,7 @@
             </div>
             <button type="button" class="btn" style="width: 100%; margin-top: 20px;" onclick="verifyTwoFactor()">Verify & Login</button>
             <p style="text-align: center; margin-top: 15px;">
-                <a onclick="resendTwoFACode()">Resend Code</a>
+                <a href="#" onclick="resendTwoFACode()">Resend Code</a>
             </p>
         </div>
     </div>
@@ -4279,7 +4279,7 @@
             </div>
             <div style="text-align: center; margin-top: 20px;">
                 <p>Contact our corporate team for customized solutions</p>
-                <a class="btn" onclick="closeModal('corporate-services-modal'); triggerCorporateInquiry()">Contact Corporate Team</a>
+                <a href="#" class="btn" onclick="closeModal('corporate-services-modal'); triggerCorporateInquiry()">Contact Corporate Team</a>
             </div>
         </div>
     </div>
@@ -9405,3 +9405,4 @@
     </script>
 </body>
 </html>
+
