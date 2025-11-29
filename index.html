@@ -4358,7 +4358,7 @@
     <div class="quick-inquiry-fab" onclick="showGFormModal()" role="button" aria-label="Open Quick Inquiry Form">Quick Inquiry</div>
     <!-- Rental Booking Modal -->
     <div class="rental-inquiry-fab" onclick="showRentalGFormModal()" role="button" aria-label="Open Rental Inquiry Form">Rental Inquiry</div>
-    <a class="whatsapp-fab" href="https://wa.me/254747117817?text=Hello%20AGAS%20Luxe%20Drive,%20I%20have%20a%20quick%20inquiry" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <a class="whatsapp-fab" href="https://wa.me/254747117817" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
         <i class="fab fa-whatsapp"></i>
         WhatsApp
     </a>
@@ -9418,7 +9418,10 @@
             const el = document.querySelector('.whatsapp-fab');
             if (!el) return;
             const base = 'https://wa.me/254747117817?text=';
-            el.href = base + encodeURIComponent(msg);
+            const href = base + encodeURIComponent(msg);
+            if (el.dataset.msg === msg) return;
+            el.dataset.msg = msg;
+            el.href = href;
         }
         function updateWhatsAppForCar(car) {
             if (!car) { setWhatsAppFabMessage('Hello AGAS Luxe Drive, I have a quick inquiry'); return; }
@@ -9431,7 +9434,7 @@
             const weekly = currentCurrency === 'kes' ? `KES ${rental.weeklyRate.toLocaleString()}/week` : `$${Math.round(rental.weeklyRate / exchangeRate)}/week`;
             setWhatsAppFabMessage(`Hello AGAS Luxe Drive — I’d like to book ${rental.make} ${rental.model}. Rates: ${daily}, ${weekly}. Status: ${rental.available ? 'Available' : 'Booked'}. Link: ${location.href}`);
         }
-        document.addEventListener('DOMContentLoaded', function(){ setWhatsAppFabMessage('Hello AGAS Luxe Drive, I have a quick inquiry'); });
+        document.addEventListener('DOMContentLoaded', function(){ setWhatsAppFabMessage('Hello AGAS Luxe Drive — I’d like to speak with an advisor about a premium vehicle.'); });
     </script>
 </body>
 </html>
