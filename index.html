@@ -2911,6 +2911,11 @@
             <div class="payment-tile fade-in" role="button" aria-label="Airtel Money" onclick="requestPayment('mobile','Airtel Money')"><div class="payment-icon"><i class="fas fa-mobile-alt"></i></div><div class="payment-label">Airtel Money</div></div>
         </div>
 
+        <div class="payment-category fade-in">Digital Wallets</div>
+        <div class="payment-row">
+            <div class="payment-tile fade-in" role="button" aria-label="PayPal" onclick="requestPayment('wallet','PayPal')"><div class="payment-icon"><i class="fab fa-paypal"></i></div><div class="payment-label">PayPal</div></div>
+        </div>
+
         <div class="payment-category fade-in">Cards</div>
         <div class="payment-row">
             <div class="payment-tile fade-in" role="button" aria-label="Visa" onclick="requestPayment('card','Visa')"><div class="payment-icon"><i class="fab fa-cc-visa"></i></div><div class="payment-label">Visa</div></div>
@@ -6011,7 +6016,7 @@
             fromName: 'AGAS LUXE DRIVE'
         };
 
-        const LEAD_WEBHOOKS = { contact: [], inquiry: [], signup: [], booking: [] };
+        const LEAD_WEBHOOKS = { contact: [], inquiry: [], signup: [], booking: [], payment: [] };
         const GOOGLE_FORMS = {
             contact: { url: '', fields: { name: '', email: '', subject: '', message: '' } },
             inquiry: { url: '', fields: { carName: '', name: '', email: '', phone: '', message: '' } },
@@ -6035,7 +6040,7 @@
             try { if (await postGoogleForm(type, payload)) ok = true; } catch (e) {}
             for (const u of urls) { try { if (await postJson(u, { type, payload })) ok = true; } catch (e) {} }
             if (!ok) {
-                if (type === 'inquiry' || type === 'contact' || type === 'booking' || type === 'signup') {
+                if (type === 'inquiry' || type === 'contact' || type === 'booking' || type === 'signup' || type === 'payment') {
                     try {
                         const subjectMap = { inquiry: 'New Inquiry Lead', contact: 'New Contact Lead', booking: 'New Rental Booking Lead', signup: 'New Signup Lead' };
                         const subject = subjectMap[type] || 'New Lead';
