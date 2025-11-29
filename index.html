@@ -126,8 +126,10 @@
         }
 
         .btn {
-            display: inline-block;
-            padding: 12px 28px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             border: 1px solid color-mix(in srgb, var(--primary) 40%, var(--white));
@@ -157,11 +159,14 @@
         }
 
         .btn-accent {
-            background-color: var(--accent);
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--white));
         }
 
+        .btn i { font-size: 1.05rem; }
+
         .btn-accent:hover {
-            background-color: var(--accent-dark);
+            filter: brightness(1.06);
         }
 
         .btn-danger {
@@ -257,8 +262,18 @@
 
         .auth-buttons {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             align-items: center;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .auth-buttons .btn { padding: 10px 18px; }
+        }
+        @media (max-width: 576px) {
+            .auth-buttons { flex-direction: column; align-items: stretch; gap: 10px; }
+            .auth-buttons .btn { width: 100%; justify-content: center; }
+            .auth-buttons .btn i { font-size: 1.2rem; }
         }
 
         .user-menu {
@@ -1128,6 +1143,9 @@
 
         .footer-links li {
             margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .footer-links a {
@@ -2225,9 +2243,9 @@
                         <span class="notification-badge" id="notification-count">3</span>
                     </button>
                     
-                    <a href="#" class="btn btn-outline" onclick="showProfileSelection()">Sign Up</a>
-                    <a href="#" class="btn btn-accent" onclick="showRentalGFormModal()" aria-label="Reserve Your Luxe Experience"><i class="fas fa-calendar-check" style="margin-right:8px;"></i>Reserve Your Luxe Experience</a>
-                    <a href="#" class="btn" onclick="openConciergeModal()" aria-label="Connect With Our Concierge"><i class="fas fa-headset" style="margin-right:8px;"></i>Connect With Our Concierge</a>
+                    <a href="#" class="btn btn-outline" onclick="showProfileSelection()" aria-label="Sign Up"><i class="fas fa-user-plus"></i>Sign Up</a>
+                    <a href="#" class="btn btn-accent" onclick="showRentalGFormModal()" aria-label="Reserve Your Luxe Experience"><i class="fas fa-calendar-check"></i>Reserve Your Luxe Experience</a>
+                    <a href="#" class="btn" onclick="openConciergeModal()" aria-label="Connect With Our Concierge"><i class="fas fa-headset"></i>Connect With Our Concierge</a>
                 </div>
 
                 <div class="user-menu" id="user-menu" style="display: none;">
