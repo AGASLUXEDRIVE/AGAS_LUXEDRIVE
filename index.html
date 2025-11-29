@@ -6064,7 +6064,7 @@
         const LEAD_WEBHOOKS = { contact: [], inquiry: [], signup: [], booking: [] };
         const GOOGLE_FORMS = {
             contact: { url: '', fields: { name: '', email: '', subject: '', message: '' } },
-            inquiry: { url: '', fields: { carName: '', name: '', email: '', phone: '', message: '' } },
+            inquiry: { url: 'https://docs.google.com/forms/d/e/1FAIpQLSeCBE2cCwmNWM4ckmn2NSZHOTjRgb9-TFak1a--DaZaFpR4kw/formResponse', fields: { carName: '', name: '', email: '', phone: '', message: '' } },
             signup: { url: '', fields: { role: '', fname: '', lname: '', companyName: '', email: '', phone: '', country: '' } },
             booking: { url: '', fields: { userName: '', startDate: '', endDate: '', location: '', insurance: '' } }
         };
@@ -7620,7 +7620,9 @@
             const email = document.getElementById('contact-email').value;
             const subject = document.getElementById('contact-subject').value;
             const message = document.getElementById('contact-message').value;
-            sendLead('contact', { name, email, subject, message });
+            const payload = { carName: 'General Inquiry', name, email, phone: '', message: `[Subject] ${subject}\n${message}` };
+            sendLead('inquiry', payload);
+            showGFormModal();
             
             // Send email via EmailJS
             sendContactEmail(name, email, subject, message)
@@ -9207,7 +9209,7 @@
             if (contactChatStep === 3) {
                 contactChatData.message = v;
                 const payload = { carName: 'General Inquiry', name: contactChatData.name, email: contactChatData.email, phone: contactChatData.phone, message: contactChatData.message };
-                sendLead('inquiry', payload).then(function(ok){ addContactChatBot(ok ? 'Thanks! Your inquiry has been submitted.' : 'Saved. We will process your inquiry shortly.'); showNotification('Inquiry submitted via Chat', ok ? 'success' : 'info'); });
+                sendLead('inquiry', payload).then(function(ok){ addContactChatBot(ok ? 'Thanks! Your inquiry has been submitted.' : 'Saved. We will process your inquiry shortly.'); showNotification('Inquiry submitted via Chat', ok ? 'success' : 'info'); showGFormModal(); });
                 contactChatStep = 4;
                 return;
             }
