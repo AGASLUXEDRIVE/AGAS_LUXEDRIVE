@@ -639,6 +639,10 @@
             color: white;
             padding: 80px 0;
         }
+        .advantages .section-title h2 { color: #fff; letter-spacing: 0.5px; font-weight: 800; text-shadow: 0 6px 18px rgba(0,0,0,0.22); position: relative; }
+        .advantages .section-title h2::after { content: ""; display: block; width: 160px; height: 3px; margin: 14px auto 0; border-radius: 2px; background: linear-gradient(90deg, #d69e2e, #b78c1a); box-shadow: 0 6px 16px rgba(0,0,0,0.18); }
+        @media (max-width: 576px) { .advantages .section-title h2::after { width: 120px; } }
+        .advantages .section-title p { color: rgba(255,255,255,0.85); font-weight: 500; }
 
         .advantage-grid {
             display: grid;
@@ -2298,8 +2302,8 @@
             <section class="advantages">
                 <div class="container">
                     <div class="section-title">
-                        <h2 style="color: white;">Why AGAS LUXE DRIVE Dominates The Market</h2>
-                        <p style="color: rgba(255,255,255,0.8);">We offer what others don't - complete enterprise solutions for luxury automotive transactions</p>
+                        <h2>The AGAS LUXE DRIVE Difference</h2>
+                        <p>Refined solutions for today’s luxury automotive experience.</p>
                     </div>
                     
                     <div class="advantage-grid">
