@@ -2363,12 +2363,12 @@
                     </div>
                     
                 <div class="partner-logos">
-                        <img src="https://images.seeklogo.com/logo-png/35/1/national-transport-and-safety-authority-ntsa-logo-png_seeklogo-358947.png" alt="NTSA" class="partner-logo" style="height: 50px;" onerror="this.src='https://via.placeholder.com/50x50?text=NTSA'">
-                        <img src="https://images.seeklogo.com/logo-png/18/1/the-aa-logo-png_seeklogo-188271.png" alt="AA Kenya" class="partner-logo" style="height: 50px;" onerror="this.src='https://via.placeholder.com/50x50?text=AA'">
-                        <img src="https://images.seeklogo.com/logo-png/45/1/kra-logo-png_seeklogo-456419.png" alt="KRA" class="partner-logo" style="height: 50px;" onerror="this.src='https://via.placeholder.com/50x50?text=KRA'">
-                        <img src="https://images.seeklogo.com/logo-png/36/1/hertz-logo-png_seeklogo-367396.png" alt="Hertz" class="partner-logo" style="height: 40px;" onerror="this.src='https://via.placeholder.com/40x40?text=Hertz'">
-                        <img src="https://images.seeklogo.com/logo-png/9/1/mercedes-benz-logo-png_seeklogo-91084.png" alt="Mercedes-Benz" class="partner-logo" style="height: 40px;" onerror="this.src='https://via.placeholder.com/40x40?text=Mercedes'">
-                        <img src="https://images.seeklogo.com/logo-png/17/1/bmw-logo-png_seeklogo-170616.png" alt="BMW" class="partner-logo" style="height: 40px;" onerror="this.src='https://via.placeholder.com/40x40?text=BMW'">
+                        <img src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.seeklogo.com%2Flogo-png%2F35%2F1%2Fnational-transport-and-safety-authority-ntsa-logo-png_seeklogo-358947.png&output=webp" alt="NTSA" class="partner-logo" style="height: 50px;" referrerpolicy="no-referrer" decoding="async" loading="lazy" onerror="this.src='https://via.placeholder.com/50x50?text=NTSA'">
+                        <img src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.seeklogo.com%2Flogo-png%2F18%2F1%2Fthe-aa-logo-png_seeklogo-188271.png&output=webp" alt="AA Kenya" class="partner-logo" style="height: 50px;" referrerpolicy="no-referrer" decoding="async" loading="lazy" onerror="this.src='https://via.placeholder.com/50x50?text=AA'">
+                        <img src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.seeklogo.com%2Flogo-png%2F45%2F1%2Fkra-logo-png_seeklogo-456419.png&output=webp" alt="KRA" class="partner-logo" style="height: 50px;" referrerpolicy="no-referrer" decoding="async" loading="lazy" onerror="this.src='https://via.placeholder.com/50x50?text=KRA'">
+                        <img src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.seeklogo.com%2Flogo-png%2F36%2F1%2Fhertz-logo-png_seeklogo-367396.png&output=webp" alt="Hertz" class="partner-logo" style="height: 40px;" referrerpolicy="no-referrer" decoding="async" loading="lazy" onerror="this.src='https://via.placeholder.com/40x40?text=Hertz'">
+                        <img src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.seeklogo.com%2Flogo-png%2F9%2F1%2Fmercedes-benz-logo-png_seeklogo-91084.png&output=webp" alt="Mercedes-Benz" class="partner-logo" style="height: 40px;" referrerpolicy="no-referrer" decoding="async" loading="lazy" onerror="this.src='https://via.placeholder.com/40x40?text=Mercedes'">
+                        <img src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.seeklogo.com%2Flogo-png%2F17%2F1%2Fbmw-logo-png_seeklogo-170616.png&output=webp" alt="BMW" class="partner-logo" style="height: 40px;" referrerpolicy="no-referrer" decoding="async" loading="lazy" onerror="this.src='https://via.placeholder.com/40x40?text=BMW'">
                 </div>
                 </div>
             </section>
@@ -7236,6 +7236,18 @@
         }
         function triggerCorporateInquiry() {
             const payload = { id: Date.now(), source: 'corporate', page: location.pathname, createdAt: new Date().toISOString() };
+            sendLead('inquiry', payload);
+            showGFormModal();
+        }
+        function triggerInspection(carId) {
+            const car = cars.find(c => c.id === carId);
+            const payload = { id: Date.now(), type: 'inspection', carId, carName: car ? `${car.make} ${car.model} ${car.year}` : `Car ${carId}`, location: 'Nairobi, Kenya', date: new Date().toISOString() };
+            sendLead('inquiry', payload);
+            showGFormModal();
+        }
+        function triggerTestDrive(carId) {
+            const car = cars.find(c => c.id === carId);
+            const payload = { id: Date.now(), type: 'testdrive', carId, carName: car ? `${car.make} ${car.model} ${car.year}` : `Car ${carId}`, location: 'Nairobi, Kenya', date: new Date().toISOString() };
             sendLead('inquiry', payload);
             showGFormModal();
         }
