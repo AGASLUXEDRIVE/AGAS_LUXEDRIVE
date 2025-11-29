@@ -104,7 +104,7 @@
             margin-bottom: 50px;
         }
 
-        .section-title h1, .section-title h2 {
+        .section-title h2 {
             font-size: 2.5rem;
             margin-bottom: 15px;
             color: var(--dark);
@@ -694,12 +694,6 @@
             opacity: 1;
         }
 
-        .partner-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 24px; margin-top: 30px; align-items: center; }
-        .partner-item { display: grid; gap: 10px; justify-items: center; padding: 16px; border: 1px solid rgba(0,0,0,0.06); border-radius: 14px; background: color-mix(in srgb, var(--light) 92%, transparent); box-shadow: var(--shadow); }
-        .partner-item img { width: 80px; height: 80px; aspect-ratio: 1 / 1; object-fit: contain; filter: grayscale(80%); opacity: 0.92; transition: opacity 200ms ease, transform 200ms ease; backface-visibility: hidden; will-change: opacity, transform; }
-        .partner-item:hover img { filter: grayscale(80%); opacity: 1; transform: translateY(-2px); }
-        .partner-name { font-weight: 700; font-size: 0.95rem; color: var(--dark); text-align: center; }
-
         /* ===== BRANDS SHOWCASE ===== */
         .brands-showcase {
             background: var(--light);
@@ -834,8 +828,6 @@
             height: 200px;
             width: 100%;
             object-fit: cover;
-            backface-visibility: hidden;
-            will-change: transform;
         }
 
         .car-details {
@@ -926,8 +918,6 @@
             height: 200px;
             width: 100%;
             object-fit: cover;
-            backface-visibility: hidden;
-            will-change: transform;
         }
 
         .rental-details {
@@ -2115,7 +2105,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <!-- SEO meta & structured data -->
-<meta name="description" content="Luxury Cars for Sale & Hire in Kenya | AGAS Luxe Drive. Purchase, sell, or rent verified luxury cars in Nairobi and throughout Kenya. Trusted dealers, thorough inspections, and secure transactions.">
+<meta name="description" content="AGAS LUXE DRIVE — East Africa's premium luxury automotive marketplace. Buy, sell, and rent verified luxury vehicles.">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"AutoDealer","name":"AGAS LUXE DRIVE","url":"/","description":"Premium luxury vehicle marketplace in East Africa."}
 </script>
@@ -2197,11 +2187,6 @@
             </nav>
         </div>
     </header>
-    <nav id="breadcrumbs" style="background: color-mix(in srgb, var(--light) 92%, transparent); border-bottom: 1px solid rgba(0,0,0,0.06);">
-        <div class="container" style="padding: 8px 0; font-size: 0.95rem; color: var(--gray);">
-            <span><a onclick="showSection('home')">Home</a></span>
-        </div>
-    </nav>
 
     <!-- Notification Center -->
     <div class="notification-center" id="notification-center">
@@ -2372,32 +2357,14 @@
                         <p>Working with East Africa's most reputable automotive and regulatory organizations</p>
                     </div>
                     
-                <div class="partner-grid">
-                        <div class="partner-item">
-                            <img src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.seeklogo.com%2Flogo-png%2F35%2F1%2Fnational-transport-and-safety-authority-ntsa-logo-png_seeklogo-358947.png&output=webp" alt="NTSA" width="80" height="80" referrerpolicy="no-referrer" decoding="async" loading="lazy" fetchpriority="low" onerror="this.src='https://via.placeholder.com/80x80?text=NTSA'">
-                            <div class="partner-name">NTSA</div>
-                        </div>
-                        <div class="partner-item">
-                            <img src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.seeklogo.com%2Flogo-png%2F18%2F1%2Fthe-aa-logo-png_seeklogo-188271.png&output=webp" alt="AA Kenya" width="80" height="80" referrerpolicy="no-referrer" decoding="async" loading="lazy" fetchpriority="low" onerror="this.src='https://via.placeholder.com/80x80?text=AA'">
-                            <div class="partner-name">AA Kenya</div>
-                        </div>
-                        <div class="partner-item">
-                            <img src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.seeklogo.com%2Flogo-png%2F45%2F1%2Fkra-logo-png_seeklogo-456419.png&output=webp" alt="KRA" width="80" height="80" referrerpolicy="no-referrer" decoding="async" loading="lazy" fetchpriority="low" onerror="this.src='https://via.placeholder.com/80x80?text=KRA'">
-                            <div class="partner-name">Kenya Revenue Authority</div>
-                        </div>
-                        <div class="partner-item">
-                            <img src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.seeklogo.com%2Flogo-png%2F36%2F1%2Fhertz-logo-png_seeklogo-367396.png&output=webp" alt="Hertz" width="80" height="80" referrerpolicy="no-referrer" decoding="async" loading="lazy" fetchpriority="low" onerror="this.src='https://via.placeholder.com/80x80?text=Hertz'">
-                            <div class="partner-name">Hertz</div>
-                        </div>
-                        <div class="partner-item">
-                            <img src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.seeklogo.com%2Flogo-png%2F9%2F1%2Fmercedes-benz-logo-png_seeklogo-91084.png&output=webp" alt="Mercedes-Benz" width="80" height="80" referrerpolicy="no-referrer" decoding="async" loading="lazy" fetchpriority="low" onerror="this.src='https://via.placeholder.com/80x80?text=Mercedes'">
-                            <div class="partner-name">Mercedes-Benz</div>
-                        </div>
-                        <div class="partner-item">
-                            <img src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.seeklogo.com%2Flogo-png%2F17%2F1%2Fbmw-logo-png_seeklogo-170616.png&output=webp" alt="BMW" width="80" height="80" referrerpolicy="no-referrer" decoding="async" loading="lazy" fetchpriority="low" onerror="this.src='https://via.placeholder.com/80x80?text=BMW'">
-                            <div class="partner-name">BMW</div>
-                        </div>
-                </div>
+                    <div class="partner-logos">
+                        <img src="https://images.seeklogo.com/logo-png/35/1/national-transport-and-safety-authority-ntsa-logo-png_seeklogo-358947.png" alt="NTSA" class="partner-logo" style="height: 50px;">
+                        <img src="https://images.seeklogo.com/logo-png/18/1/the-aa-logo-png_seeklogo-188271.png" alt="AA Kenya" class="partner-logo" style="height: 50px;">
+                        <img src="https://images.seeklogo.com/logo-png/45/1/kra-logo-png_seeklogo-456419.png" alt="KRA" class="partner-logo" style="height: 50px;">
+                        <img src="https://images.seeklogo.com/logo-png/36/1/hertz-logo-png_seeklogo-367396.png" alt="Hertz" class="partner-logo" style="height: 40px;">
+                        <img src="https://images.seeklogo.com/logo-png/9/1/mercedes-benz-logo-png_seeklogo-91084.png" alt="Mercedes-Benz" class="partner-logo" style="height: 40px;">
+                        <img src="https://images.seeklogo.com/logo-png/17/1/bmw-logo-png_seeklogo-170616.png" alt="BMW" class="partner-logo" style="height: 40px;">
+                    </div>
                 </div>
             </section>
 
@@ -2590,7 +2557,7 @@
             <section id="rentals-section" class="lux-section">
                 <div class="container">
                     <div class="section-title">
-                        <h1>Premium Car Rental Fleet in Nairobi, Kenya</h1>
+                        <h2>Premium Car Rental Fleet</h2>
                         <p>Experience luxury with our exclusive short-term rental collection</p>
                     </div>
                     
@@ -2915,11 +2882,6 @@
             <div class="payment-tile fade-in" role="button" aria-label="Airtel Money" onclick="requestPayment('mobile','Airtel Money')"><div class="payment-icon"><i class="fas fa-mobile-alt"></i></div><div class="payment-label">Airtel Money</div></div>
         </div>
 
-        <div class="payment-category fade-in">Digital Wallets</div>
-        <div class="payment-row">
-            <div class="payment-tile fade-in" role="button" aria-label="PayPal" onclick="requestPayment('wallet','PayPal')"><div class="payment-icon"><i class="fab fa-paypal"></i></div><div class="payment-label">PayPal</div></div>
-        </div>
-
         <div class="payment-category fade-in">Cards</div>
         <div class="payment-row">
             <div class="payment-tile fade-in" role="button" aria-label="Visa" onclick="requestPayment('card','Visa')"><div class="payment-icon"><i class="fab fa-cc-visa"></i></div><div class="payment-label">Visa</div></div>
@@ -2947,7 +2909,7 @@
         <section id="listings-section" class="lux-section" style="display: none; padding: 100px 0 80px;">
             <div class="container">
                 <div class="section-title">
-                    <h1>Luxury Cars for Sale in Kenya</h1>
+                    <h2>All Luxury Car Listings</h2>
                     <p>Browse our complete collection of verified luxury vehicles</p>
                 </div>
                 
@@ -3098,13 +3060,13 @@
         <section id="about-section" class="lux-section" style="display: none; padding: 100px 0;">
             <div class="container">
                 <div class="section-title">
-                    <h1>About AGAS LUXE DRIVE</h1>
+                    <h2>About AGAS LUXE DRIVE</h2>
                     <p>Your trusted partner in luxury car transactions</p>
                 </div>
                 
                 <div class="steps">
                     <div class="step">
-                        <div class="step-icon" style="background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent-dark) 36%, var(--accent))); color: #fff;">
+                        <div class="step-icon" style="background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent-dark) 36%, var(--accent)); color: #fff);">
                             <i class="fas fa-bullseye"></i>
                         </div>
                         <h3>Our Mission</h3>
@@ -3112,7 +3074,7 @@
                     </div>
                     
                     <div class="step">
-                        <div class="step-icon" style="background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent-dark) 36%, var(--accent))); color: #fff;">
+                        <div class="step-icon" style="background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent-dark) 36%, var(--accent)); color: #fff);">
                             <i class="fas fa-shield-alt"></i>
                         </div>
                         <h3>Verification Process</h3>
@@ -3120,7 +3082,7 @@
                     </div>
                     
                     <div class="step">
-                        <div class="step-icon" style="background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent-dark) 36%, var(--accent))); color: #fff;">
+                        <div class="step-icon" style="background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent-dark) 36%, var(--accent)); color: #fff);">
                             <i class="fas fa-hand-holding-heart"></i>
                         </div>
                         <h3>Buyer Protection</h3>
@@ -3144,13 +3106,13 @@
         <section id="contact-section" class="lux-section" style="display: none; padding: 100px 0;">
             <div class="container">
                 <div class="section-title">
-                    <h1>Contact Us</h1>
+                    <h2>Contact Us</h2>
                     <p>Get in touch with our team for any inquiries</p>
                 </div>
                 
                 <div class="steps">
                     <div class="step">
-                        <div class="step-icon" style="background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent-dark) 36%, var(--accent))); color: #fff;">
+                        <div class="step-icon" style="background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent-dark) 36%, var(--accent)); color: #fff);">
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
                         <h3>Visit Us</h3>
@@ -3158,7 +3120,7 @@
                     </div>
                     
                     <div class="step">
-                        <div class="step-icon" style="background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent-dark) 36%, var(--accent))); color: #fff;">
+                        <div class="step-icon" style="background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent-dark) 36%, var(--accent)); color: #fff);">
                             <i class="fas fa-phone"></i>
                         </div>
                         <h3>Call Us</h3>
@@ -3166,7 +3128,7 @@
                     </div>
                     
                     <div class="step">
-                        <div class="step-icon" style="background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent-dark) 36%, var(--accent))); color: #fff;">
+                        <div class="step-icon" style="background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent-dark) 36%, var(--accent)); color: #fff);">
                             <i class="fas fa-envelope"></i>
                         </div>
                         <h3>Email Us</h3>
@@ -3935,22 +3897,22 @@
                 <div class="footer-column">
                     <h3>Enterprise Services</h3>
                     <ul class="footer-links">
-                        <li><a href="#" role="button" onclick="showSection('home'); setTimeout(() => document.getElementById('featured-vehicles').scrollIntoView({ behavior: 'smooth' }), 100);">Luxury Vehicle Sales</a></li>
-                        <li><a href="#" role="button" onclick="showSection('rentals')">Premium Rentals</a></li>
-                        <li><a href="#" role="button" onclick="showProfileSelection()">Sell Your Vehicle</a></li>
-                        <li><a href="#" role="button" onclick="showBrandGallery()">Brand Showcase</a></li>
-                        <li><a href="#" role="button" onclick="showCorporateServicesModal()">Corporate Services</a></li>
+                        <li><a onclick="showSection('home'); setTimeout(() => document.getElementById('featured-vehicles').scrollIntoView({ behavior: 'smooth' }), 100);">Luxury Vehicle Sales</a></li>
+                        <li><a onclick="showSection('rentals')">Premium Rentals</a></li>
+                        <li><a onclick="showProfileSelection()">Sell Your Vehicle</a></li>
+                        <li><a onclick="showBrandGallery()">Brand Showcase</a></li>
+                        <li><a onclick="showCorporateServicesModal()">Corporate Services</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Security & Support</h3>
                     <ul class="footer-links">
-                        <li><a href="#" role="button" onclick="showSection('contact')">24/7 Support</a></li>
-                        <li><a href="#" role="button" onclick="showPasswordResetModal()">Password Reset</a></li>
-                        <li><a href="#" role="button" onclick="showSection('about')">Verification Process</a></li>
-                        <li><a href="#" role="link">Buyer Protection</a></li>
-                        <li><a href="#" role="link">Rental Terms</a></li>
+                        <li><a onclick="showSection('contact')">24/7 Support</a></li>
+                        <li><a onclick="showPasswordResetModal()">Password Reset</a></li>
+                        <li><a onclick="showSection('about')">Verification Process</a></li>
+                        <li><a>Buyer Protection</a></li>
+                        <li><a>Rental Terms</a></li>
                     </ul>
                 </div>
                 
@@ -3967,7 +3929,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 AGAS LUXE DRIVE ENTERPRISE LIMITED. All rights reserved. | <a href="#" role="link">Enterprise Privacy Policy</a> | <a href="#" role="link">Terms of Service</a> | <a href="#" role="link">Security Protocol</a></p>
+                <p>&copy; 2025 AGAS LUXE DRIVE ENTERPRISE LIMITED. All rights reserved. | <a>Enterprise Privacy Policy</a> | <a>Terms of Service</a> | <a>Security Protocol</a></p>
             </div>
         </div>
     </footer>
@@ -6020,7 +5982,7 @@
             fromName: 'AGAS LUXE DRIVE'
         };
 
-        const LEAD_WEBHOOKS = { contact: [], inquiry: [], signup: [], booking: [], payment: [] };
+        const LEAD_WEBHOOKS = { contact: [], inquiry: [], signup: [], booking: [] };
         const GOOGLE_FORMS = {
             contact: { url: '', fields: { name: '', email: '', subject: '', message: '' } },
             inquiry: { url: '', fields: { carName: '', name: '', email: '', phone: '', message: '' } },
@@ -6044,17 +6006,6 @@
             try { if (await postGoogleForm(type, payload)) ok = true; } catch (e) {}
             for (const u of urls) { try { if (await postJson(u, { type, payload })) ok = true; } catch (e) {} }
             if (!ok) {
-                if (type === 'inquiry' || type === 'contact' || type === 'booking' || type === 'signup' || type === 'payment') {
-                    try {
-                        const subjectMap = { inquiry: 'New Inquiry Lead', contact: 'New Contact Lead', booking: 'New Rental Booking Lead', signup: 'New Signup Lead' };
-                        const subject = subjectMap[type] || 'New Lead';
-                        const message = JSON.stringify(payload);
-                        const r = await sendBulkNotificationEmail(EMAILJS_CONFIG.fromEmail, subject, message);
-                        ok = !!(r && r.success);
-                    } catch (e) {}
-                }
-            }
-            if (!ok) {
                 const q = JSON.parse(localStorage.getItem('lead_queue') || '[]');
                 q.push({ type, payload, time: Date.now() });
                 localStorage.setItem('lead_queue', JSON.stringify(q));
@@ -6071,33 +6022,6 @@
         window.addEventListener('load', () => { processLeadQueue(); });
         window.addEventListener('DOMContentLoaded', () => { injectCanonical(); injectStructuredData(); });
         window.addEventListener('load', () => { applyCompetitivePricing(); try { loadCarListings(); } catch(e){} try { loadRentalFleet(); } catch(e){} });
-        function optimizeImagesWebP() {
-            document.querySelectorAll('img').forEach(img => {
-                const orig = img.getAttribute('data-original-src') || img.src;
-                if (!orig) return;
-                if (/\.(webp)(\?|$)/i.test(orig)) return;
-                const proxied = 'https://images.weserv.nl/?url=' + encodeURIComponent(orig) + '&output=webp';
-                img.src = proxied;
-                img.loading = 'lazy';
-            });
-        }
-        window.addEventListener('load', optimizeImagesWebP);
-        function initAnalyticsFromStorage() {
-            try {
-                const id = localStorage.getItem('ga_measurement_id');
-                if (!id) return;
-                const s1 = document.createElement('script'); s1.async = true; s1.src = 'https://www.googletagmanager.com/gtag/js?id=' + id; document.head.appendChild(s1);
-                const s2 = document.createElement('script'); s2.text = "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config','" + id + "');"; document.head.appendChild(s2);
-            } catch(e){}
-        }
-        function injectGSCVerification() {
-            const token = localStorage.getItem('gsc_verification_token');
-            if (!token) return;
-            let m = document.querySelector('meta[name="google-site-verification"]');
-            if (!m) { m = document.createElement('meta'); m.setAttribute('name','google-site-verification'); document.head.appendChild(m); }
-            m.setAttribute('content', token);
-        }
-        window.addEventListener('DOMContentLoaded', () => { initAnalyticsFromStorage(); injectGSCVerification(); });
 
         async function diagnoseLeadPipeline() {
             const testContact = { name: 'Diagnostics', email: 'diag@example.com', subject: 'Lead Diagnostics', message: `Site: ${location.hostname}` };
@@ -7125,34 +7049,23 @@
             // Show selected section
             if (section === 'home') {
                 document.getElementById('home-section').style.display = 'block';
-                setPageSEO('home');
-                updatePath('/');
             } else if (section === 'listings') {
                 document.getElementById('listings-section').style.display = 'block';
                 loadCarListings();
-                setPageSEO('listings');
-                updatePath('/listings');
             } else if (section === 'rentals') {
                 document.getElementById('home-section').style.display = 'block';
                 setTimeout(() => {
                     document.getElementById('rentals-section').scrollIntoView({ behavior: 'smooth' });
                 }, 100);
-                setPageSEO('rentals');
-                updatePath('/rentals');
             } else if (section === 'about') {
                 document.getElementById('about-section').style.display = 'block';
-                setPageSEO('about');
-                updatePath('/about');
             } else if (section === 'contact') {
                 document.getElementById('contact-section').style.display = 'block';
-                setPageSEO('contact');
-                updatePath('/contact');
             }
             
             // Close mobile menu if open
             document.querySelector('.nav-links').classList.remove('active');
             ensureSingletonLayout();
-            updateBreadcrumbs();
         }
 
         // Brand gallery function
@@ -7272,18 +7185,6 @@
             sendLead('inquiry', payload);
             showGFormModal();
         }
-        function triggerInspection(carId) {
-            const car = cars.find(c => c.id === carId);
-            const payload = { id: Date.now(), type: 'inspection', carId, carName: car ? `${car.make} ${car.model} ${car.year}` : `Car ${carId}`, location: 'Nairobi, Kenya', date: new Date().toISOString() };
-            sendLead('inquiry', payload);
-            showGFormModal();
-        }
-        function triggerTestDrive(carId) {
-            const car = cars.find(c => c.id === carId);
-            const payload = { id: Date.now(), type: 'testdrive', carId, carName: car ? `${car.make} ${car.model} ${car.year}` : `Car ${carId}`, location: 'Nairobi, Kenya', date: new Date().toISOString() };
-            sendLead('inquiry', payload);
-            showGFormModal();
-        }
 
         // Show car details modal
         function showCarDetailModal(carId) {
@@ -7295,10 +7196,10 @@
             const content = document.getElementById('car-detail-content');
             content.innerHTML = `
                 <div class="car-detail-images">
-                    <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(car.images[0]) + '&output=webp'}" data-original-src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-detail-main-image" id="car-detail-main-image" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
+                    <img src="${car.images[0]}" data-original-src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-detail-main-image" id="car-detail-main-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
                     <div class="car-detail-thumbnails">
                         ${car.images.map((img, index) => `
-                            <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(img) + '&output=webp'}" data-original-src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" decoding="async" referrerpolicy="no-referrer" onclick="changeMainImage('${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
+                            <img src="${img}" data-original-src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" referrerpolicy="no-referrer" onclick="changeMainImage('${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
                         `).join('')}
                     </div>
                 </div>
@@ -7349,14 +7250,8 @@
                     <button class="btn btn-outline" onclick="closeModal('car-detail-modal')">Close</button>
                 </div>
             `;
-            optimizeImagesWebP();
             
             document.getElementById('car-detail-modal').style.display = 'flex';
-            const slug = `${car.make} ${car.model} ${car.year} Nairobi Kenya`.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$|--+/g,'-');
-            updatePath('/cars/' + slug);
-            setPageSEO('listings');
-            injectProductLD(car);
-            updateBreadcrumbs();
         }
 
         // Quick view modal for cars
@@ -7369,7 +7264,7 @@
             const content = document.getElementById('quick-view-content');
             content.innerHTML = `
                 <div>
-                <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(car.images[0]) + '&output=webp'}" data-original-src="${car.images[0]}" alt="${car.make} ${car.model}" style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius);" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
+                <img src="${car.images[0]}" data-original-src="${car.images[0]}" alt="${car.make} ${car.model}" style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius);" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
                 </div>
                 <div>
                     <div class="car-price">${formatPrice(car.price)}</div>
@@ -7392,11 +7287,6 @@
             `;
             
             document.getElementById('quick-view-modal').style.display = 'flex';
-            const slug = `${car.make} ${car.model} ${car.year} Nairobi Kenya`.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$|--+/g,'-');
-            updatePath('/cars/' + slug);
-            setPageSEO('listings');
-            injectProductLD(car);
-            updateBreadcrumbs();
         }
 
         function changeMainImage(src) {
@@ -7409,7 +7299,7 @@
             const car = cars.find(c => c.id === carId);
             const imgs = (car && Array.isArray(car.images)) ? car.images : [];
             const original = el.getAttribute('data-original-src') || el.src;
-            const proxied = 'https://images.weserv.nl/?url=' + encodeURIComponent(original) + '&output=webp';
+            const proxied = 'https://images.weserv.nl/?url=' + encodeURIComponent(original);
             if (el.getAttribute('data-proxy') !== '1') { el.setAttribute('data-proxy','1'); el.src = proxied; return; }
             const currentIndex = imgs.indexOf(original);
             const nextIndex = currentIndex >= 0 && currentIndex < imgs.length - 1 ? currentIndex + 1 : 0;
@@ -7421,7 +7311,7 @@
             const rental = rentalFleet.find(r => r.id === rentalId);
             const imgs = (rental && Array.isArray(rental.images) && rental.images.length) ? rental.images : (rental && rental.image ? [rental.image] : []);
             const original = el.getAttribute('data-original-src') || el.src;
-            const proxied = 'https://images.weserv.nl/?url=' + encodeURIComponent(original) + '&output=webp';
+            const proxied = 'https://images.weserv.nl/?url=' + encodeURIComponent(original);
             if (el.getAttribute('data-proxy') !== '1') { el.setAttribute('data-proxy','1'); el.src = proxied; return; }
             const currentIndex = imgs.indexOf(original);
             const nextIndex = currentIndex >= 0 && currentIndex < imgs.length - 1 ? currentIndex + 1 : 0;
@@ -7452,10 +7342,10 @@
             const content = document.getElementById('rental-detail-content');
             content.innerHTML = `
                 <div class="car-detail-images">
-                    <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || '')) + '&output=webp'}" data-original-src="${Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || '')}" alt="${rental.make} ${rental.model}" class="car-detail-main-image" id="rental-detail-main-image" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="handleRentalImageError(this, ${rental.id})">
+                    <img src="${Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || '')}" data-original-src="${Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || '')}" alt="${rental.make} ${rental.model}" class="car-detail-main-image" id="rental-detail-main-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleRentalImageError(this, ${rental.id})">
                     <div class="car-detail-thumbnails">
                         ${Array.isArray(rental.images) ? rental.images.map((img, index) => `
-                            <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(img) + '&output=webp'}" data-original-src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" decoding="async" referrerpolicy="no-referrer" onclick="changeRentalDetailMainImage('${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
+                            <img src="${img}" data-original-src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" referrerpolicy="no-referrer" onclick="changeRentalDetailMainImage('${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
                         `).join('') : ''}
                     </div>
                 </div>
@@ -7561,7 +7451,7 @@
             card.className = 'car-card';
             card.innerHTML = `
                 <div class="car-badge">${car.verified ? 'VERIFIED' : 'PENDING'}</div>
-                <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(car.images[0]) + '&output=webp'}" data-original-src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-image" width="600" height="360" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
+                <img src="${car.images[0]}" data-original-src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
                 <div class="car-details">
                     <div class="car-price">${formatPrice(car.price)}</div>
                     <h3 class="car-title">${car.make} ${car.model} ${car.year}</h3>
@@ -7586,11 +7476,6 @@
                             `<button class="btn" style="flex: 1;" onclick="triggerCardInquiry(${car.id})">Inquire</button>` :
                             `<button class="btn" style="flex: 1;" onclick="showCarDetailModal(${car.id})">Details</button>`
                         }
-                    </div>
-                    <div style="display:flex; gap:10px; margin-top:10px;">
-                        <a class="btn btn-outline" style="flex:1;" href="https://wa.me/254115230532?text=${encodeURIComponent('I\'m interested in ' + car.make + ' ' + car.model + ' ' + car.year + ' from AGAS Luxe Drive')}" target="_blank">WhatsApp Seller</a>
-                        <button class="btn btn-outline" style="flex:1;" onclick="triggerInspection(${car.id})">Request Inspection</button>
-                        <button class="btn btn-outline" style="flex:1;" onclick="triggerTestDrive(${car.id})">Book Test Drive</button>
                     </div>
                 </div>
             `;
@@ -7617,10 +7502,10 @@
                 rentalCard.className = 'rental-card';
                 rentalCard.innerHTML = `
                     <div class="rental-badge">${rental.available ? 'AVAILABLE' : 'BOOKED'}</div>
-                    <img id="rental-main-image-${rental.id}" src="${'https://images.weserv.nl/?url=' + encodeURIComponent(Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || '')) + '&output=webp'}" data-original-src="${Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || '')}" alt="${rental.make} ${rental.model}" class="rental-image" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="handleRentalImageError(this, ${rental.id})">
+                    <img id="rental-main-image-${rental.id}" src="${Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || '')}" data-original-src="${Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || '')}" alt="${rental.make} ${rental.model}" class="rental-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleRentalImageError(this, ${rental.id})">
                     <div class="car-detail-thumbnails">
                         ${Array.isArray(rental.images) ? rental.images.map((img, index) => `
-                            <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(img) + '&output=webp'}" data-original-src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" decoding="async" referrerpolicy="no-referrer" onclick="changeRentalMainImage(${rental.id}, '${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
+                            <img src="${img}" data-original-src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" referrerpolicy="no-referrer" onclick="changeRentalMainImage(${rental.id}, '${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
                         `).join('') : ''}
                     </div>
                     <div class="rental-details">
@@ -8955,7 +8840,7 @@
                 card.innerHTML = `
                     <div class="recommendation-badge">RECOMMENDED</div>
                     <div class="recommendation-match">${matchScore}% Match</div>
-                    <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(car.images[0]) + '&output=webp'}" alt="${car.make} ${car.model}" class="car-image" width="600" height="360" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
+                    <img src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
                     <div class="car-details">
                         <div class="car-price">${formatPrice(car.price)}</div>
                         <h3 class="car-title">${car.make} ${car.model} ${car.year}</h3>
