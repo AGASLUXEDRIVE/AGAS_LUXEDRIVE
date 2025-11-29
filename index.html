@@ -1186,6 +1186,11 @@
         @media (min-width: 768px) { .rental-inquiry-fab { left: 22px; bottom: 100px; } }
         @media (max-width: 576px) { .rental-inquiry-fab { left: 18px; bottom: 70px; } }
         .ai-open .rental-inquiry-fab { left: 22px; bottom: 100px; }
+        .whatsapp-fab { position: fixed; left: 22px; bottom: 160px; z-index: 950; display: inline-flex; align-items: center; gap: 8px; padding: 12px 16px; border-radius: 999px; font-weight: 600; cursor: pointer; box-shadow: var(--shadow); background: linear-gradient(135deg, #25D366, #128C7E); color: #ffffff; border: 1px solid rgba(0,0,0,0.06); text-decoration: none; }
+        .whatsapp-fab i { font-size: 1.1rem; }
+        .whatsapp-fab:hover { filter: brightness(1.06); transform: translateY(-1px); }
+        @media (min-width: 768px) { .whatsapp-fab { left: 22px; bottom: 160px; } }
+        @media (max-width: 576px) { .whatsapp-fab { left: 18px; bottom: 130px; } }
         .ai-chat-toggle { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border: 1px solid color-mix(in srgb, var(--primary) 40%, var(--white)); }
         .ai-chat-header { background: linear-gradient(135deg, var(--primary), var(--accent)); background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--accent) 22%, var(--primary))); }
         .ai-chat-container { border: 1px solid rgba(255,255,255,0.08); box-shadow: var(--shadow); }
@@ -4353,6 +4358,10 @@
     <div class="quick-inquiry-fab" onclick="showGFormModal()" role="button" aria-label="Open Quick Inquiry Form">Quick Inquiry</div>
     <!-- Rental Booking Modal -->
     <div class="rental-inquiry-fab" onclick="showRentalGFormModal()" role="button" aria-label="Open Rental Inquiry Form">Rental Inquiry</div>
+    <a class="whatsapp-fab" href="https://wa.me/254115230532?text=Hello%20AGAS%20Luxe%20Drive,%20I%20have%20a%20quick%20inquiry" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+        WhatsApp
+    </a>
     <div id="rental-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -7154,6 +7163,7 @@
                 source: 'featured-card',
                 date: new Date().toISOString()
             };
+            updateWhatsAppForCar(car);
             sendLead('inquiry', payload);
             showGFormModal();
         }
@@ -7252,6 +7262,7 @@
             `;
             
             document.getElementById('car-detail-modal').style.display = 'flex';
+            updateWhatsAppForCar(car);
         }
 
         // Quick view modal for cars
@@ -7381,6 +7392,7 @@
                 </div>
             `;
             document.getElementById('rental-detail-modal').style.display = 'flex';
+            updateWhatsAppForRental(rental);
         }
 
         // Currency functions
@@ -9402,7 +9414,24 @@
                 sendBulkNotificationsToUsers(subject, message);
             }
         }
+        function setWhatsAppFabMessage(msg) {
+            const el = document.querySelector('.whatsapp-fab');
+            if (!el) return;
+            const base = 'https://wa.me/254115230532?text=';
+            el.href = base + encodeURIComponent(msg);
+        }
+        function updateWhatsAppForCar(car) {
+            if (!car) { setWhatsAppFabMessage('Hello AGAS Luxe Drive, I have a quick inquiry'); return; }
+            const price = typeof car.price !== 'undefined' ? `Price ${formatPrice(car.price)}` : '';
+            setWhatsAppFabMessage(`Hello AGAS Luxe Drive — I’m interested in ${car.make} ${car.model} ${car.year}. ${price}. Link: ${location.href}`);
+        }
+        function updateWhatsAppForRental(rental) {
+            if (!rental) { setWhatsAppFabMessage('Hello AGAS Luxe Drive, I have a rental inquiry'); return; }
+            const daily = currentCurrency === 'kes' ? `KES ${rental.dailyRate.toLocaleString()}/day` : `$${Math.round(rental.dailyRate / exchangeRate)}/day`;
+            const weekly = currentCurrency === 'kes' ? `KES ${rental.weeklyRate.toLocaleString()}/week` : `$${Math.round(rental.weeklyRate / exchangeRate)}/week`;
+            setWhatsAppFabMessage(`Hello AGAS Luxe Drive — I’d like to book ${rental.make} ${rental.model}. Rates: ${daily}, ${weekly}. Status: ${rental.available ? 'Available' : 'Booked'}. Link: ${location.href}`);
+        }
+        document.addEventListener('DOMContentLoaded', function(){ setWhatsAppFabMessage('Hello AGAS Luxe Drive, I have a quick inquiry'); });
     </script>
 </body>
 </html>
-
