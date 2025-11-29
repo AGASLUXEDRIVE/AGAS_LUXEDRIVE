@@ -318,6 +318,8 @@
         .cta-item:hover { filter: brightness(1.04); transform: translateY(-1px); }
         .cta-menu-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.15); backdrop-filter: blur(2px); z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 180ms ease; }
         .cta-menu-backdrop.active { opacity: 1; pointer-events: auto; }
+        .dark-mode .cta-menu { background: linear-gradient(135deg, color-mix(in srgb, var(--white) 88%, transparent), color-mix(in srgb, var(--white) 80%, transparent)); border: 1px solid rgba(255,255,255,0.08); }
+        .dark-mode .cta-item { background: color-mix(in srgb, var(--light) 88%, transparent); color: var(--dark); border: 1px solid rgba(255,255,255,0.08); }
         @media (max-width: 768px) { .mobile-menu-btn { display: inline-flex; } }
 
         /* ===== DARK MODE TOGGLE ===== */
@@ -1292,7 +1294,9 @@
         .ai-chat-container { border: 1px solid rgba(255,255,255,0.08); box-shadow: var(--shadow); }
         .dark-mode .gform-modal .modal-content { background: linear-gradient(180deg, #f1f5f9, #e2e8f0); background: linear-gradient(180deg, color-mix(in srgb, var(--white) 90%, transparent), color-mix(in srgb, var(--white) 80%, transparent)); border: 1px solid rgba(255,255,255,0.08); }
         .dark-mode .gform-modal .modal-header { background: linear-gradient(135deg, var(--primary), var(--accent)); background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--accent) 28%, var(--primary))); color: #ffffff; }
-        .dark-mode .quick-inquiry-fab { box-shadow: var(--shadow); }
+        .dark-mode .quick-inquiry-fab { box-shadow: var(--shadow); background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 52%, var(--white)), color-mix(in srgb, var(--primary-dark) 48%, var(--white))); border: 1px solid rgba(255,255,255,0.08); }
+        .dark-mode .rental-inquiry-fab { background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 50%, var(--white)), color-mix(in srgb, var(--primary) 46%, var(--white))); border: 1px solid rgba(255,255,255,0.08); }
+        .dark-mode .whatsapp-fab { background: linear-gradient(135deg, color-mix(in srgb, #25D366 56%, var(--white)), color-mix(in srgb, #128C7E 52%, var(--white))); border: 1px solid rgba(255,255,255,0.06); }
         .payment-section { background: linear-gradient(180deg, #ffffff, #f7f7f7); background: linear-gradient(180deg, color-mix(in srgb, var(--white) 92%, transparent), color-mix(in srgb, var(--white) 86%, transparent)); padding: 40px 0; }
         .payment-header { text-align: center; margin-bottom: 28px; }
         .payment-title { font-size: 32px; font-weight: 800; color: var(--dark); letter-spacing: 0.4px; }
