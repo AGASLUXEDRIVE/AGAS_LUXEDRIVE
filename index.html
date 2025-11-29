@@ -474,6 +474,48 @@
             display: flex;
         }
 
+        .contact-chat {
+            max-width: 720px;
+            margin: 40px auto 0;
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            border: 1px solid color-mix(in srgb, var(--accent) 16%, var(--white));
+            background: linear-gradient(135deg, color-mix(in srgb, var(--white) 96%, transparent), color-mix(in srgb, var(--white) 88%, transparent));
+            overflow: hidden;
+        }
+        .contact-chat-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--accent) 24%, var(--primary)));
+            color: #fff;
+        }
+        .contact-chat-title { font-weight: 700; letter-spacing: 0.4px; }
+        .contact-chat-messages {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 16px;
+            max-height: 420px;
+            overflow-y: auto;
+            background: color-mix(in srgb, var(--light) 92%, transparent);
+        }
+        .contact-chat-msg { max-width: 80%; padding: 10px 14px; border-radius: 16px; font-size: 0.95rem; line-height: 1.5; }
+        .contact-chat-msg.bot { align-self: flex-start; background: var(--gray-light); color: var(--dark); border-bottom-left-radius: 6px; }
+        .contact-chat-msg.user { align-self: flex-end; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; border-bottom-right-radius: 6px; }
+        .contact-chat-input {
+            display: flex;
+            gap: 10px;
+            padding: 14px 16px;
+            border-top: 1px solid color-mix(in srgb, var(--accent) 16%, var(--white));
+            background: var(--white);
+        }
+        .contact-chat-input input { flex: 1; padding: 12px 14px; border: 1px solid var(--gray-light); border-radius: 16px; background: var(--white); color: var(--dark); }
+        .contact-chat-input button { width: 44px; height: 44px; border-radius: 50%; border: 0; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #fff; display: grid; place-items: center; box-shadow: var(--shadow); }
+        .dark-mode .contact-chat { background: linear-gradient(135deg, color-mix(in srgb, var(--white) 88%, transparent), color-mix(in srgb, var(--white) 80%, transparent)); }
+        .dark-mode .contact-chat-messages { background: color-mix(in srgb, var(--light) 88%, transparent); }
+
         .ai-chat-header {
             padding: 15px 20px;
             background-color: var(--primary);
@@ -2991,6 +3033,17 @@
                 <div class="car-grid" id="all-car-listings">
                     <!-- All car listings will be dynamically loaded here -->
                 </div>
+                <div class="contact-chat" id="contact-chat">
+                    <div class="contact-chat-header">
+                        <div class="contact-chat-title">Premium Chat</div>
+                        <div><i class="fas fa-shield-alt"></i></div>
+                    </div>
+                    <div class="contact-chat-messages" id="contact-chat-messages"></div>
+                    <div class="contact-chat-input">
+                        <input type="text" id="contact-chat-input" placeholder="Type here...">
+                        <button id="contact-chat-send" title="Send"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -3146,7 +3199,7 @@
                             <i class="fas fa-phone"></i>
                         </div>
                         <h3>Call Us</h3>
-                        <p>+254 747 117 817</p>
+                        <p>0115230532</p>
                     </div>
                     
                     <div class="step">
@@ -3942,7 +3995,7 @@
                     <h3>Contact Enterprise</h3>
                     <ul class="footer-links">
                         <li><i class="fas fa-map-marker-alt"></i> Westlands, Nairobi, Kenya</li>
-                        <li><i class="fas fa-phone"></i> 011 523 0532</li>
+                        <li><i class="fas fa-phone"></i> 0115230532</li>
                         <li><i class="fas fa-envelope"></i> agasluxedrive@gmail.com</li>
                         <li><i class="fab fa-whatsapp"></i> +254 747 117 817</li>
                         <li><i class="fas fa-clock"></i> 24/7 Enterprise Support</li>
@@ -6864,6 +6917,7 @@
             initializeDarkMode();
             initializeNotificationCenter();
             initializeAIChat();
+            initializeContactChat();
             loadAIRecommendations();
             ensureAudiRS3Listing();
             sanitizeTestimonials();
@@ -9127,6 +9181,37 @@
         // AI Chat Implementation
         function initializeAIChat() {
             loadAIChatMessages();
+        }
+
+        let contactChatStep = 0;
+        const contactChatData = { name: '', email: '', phone: '', message: '' };
+        function initializeContactChat() {
+            const box = document.getElementById('contact-chat');
+            if (!box) return;
+            const msgs = document.getElementById('contact-chat-messages');
+            const input = document.getElementById('contact-chat-input');
+            const send = document.getElementById('contact-chat-send');
+            msgs.innerHTML = '';
+            addContactChatBot(`Hi! I can help with inquiries. What's your name?`);
+            send.onclick = handleContactChatSend;
+            input.onkeydown = function(e){ if(e.key==='Enter'){ e.preventDefault(); handleContactChatSend(); }};
+        }
+        function addContactChatBot(text){ const m = document.createElement('div'); m.className='contact-chat-msg bot'; m.textContent=text; document.getElementById('contact-chat-messages').appendChild(m); scrollContactChat(); }
+        function addContactChatUser(text){ const m = document.createElement('div'); m.className='contact-chat-msg user'; m.textContent=text; document.getElementById('contact-chat-messages').appendChild(m); scrollContactChat(); }
+        function scrollContactChat(){ const c=document.getElementById('contact-chat-messages'); if(c) c.scrollTop=c.scrollHeight; }
+        function handleContactChatSend(){ const input = document.getElementById('contact-chat-input'); const v=(input.value||'').trim(); if(!v) return; addContactChatUser(v); input.value=''; proceedContactChat(v); }
+        function proceedContactChat(v){
+            if (contactChatStep === 0) { contactChatData.name = v; addContactChatBot(`Great, ${v}. What's your email?`); contactChatStep = 1; return; }
+            if (contactChatStep === 1) { contactChatData.email = v; addContactChatBot(`Thanks. What's your phone number?`); contactChatStep = 2; return; }
+            if (contactChatStep === 2) { contactChatData.phone = v; addContactChatBot(`Tell me briefly what you need.`); contactChatStep = 3; return; }
+            if (contactChatStep === 3) {
+                contactChatData.message = v;
+                const payload = { carName: 'General Inquiry', name: contactChatData.name, email: contactChatData.email, phone: contactChatData.phone, message: contactChatData.message };
+                sendLead('inquiry', payload).then(function(ok){ addContactChatBot(ok ? 'Thanks! Your inquiry has been submitted.' : 'Saved. We will process your inquiry shortly.'); showNotification('Inquiry submitted via Chat', ok ? 'success' : 'info'); });
+                contactChatStep = 4;
+                return;
+            }
+            addContactChatBot('You can send another message or update details.');
         }
 
         function toggleAIChat() {
