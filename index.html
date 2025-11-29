@@ -6699,7 +6699,17 @@
         }
         window.addEventListener('load', () => { processLeadQueue(); });
         window.addEventListener('DOMContentLoaded', () => { injectCanonical(); injectStructuredData(); });
-        window.addEventListener('load', () => { applyCompetitivePricing(); try { loadCarListings(); } catch(e){} try { loadRentalFleet(); } catch(e){} });
+        function normalizeAllImages() {
+            function p(u) { try { return 'https://images.weserv.nl/?url=' + encodeURIComponent(u); } catch(_) { return u; } }
+            const hosts = new Set(['uploads.audi-mediacenter.com','api.media.mercedes-benz.com','mediapool.bmwgroup.com','jlr.scene7.com','media.production.jlrms.com','uploads.vw-mms.de','r3.previews.aprimo.com','toyotagazooracing.com','porschepictures.flowcenter.de','newsroom.porsche.com','source.unsplash.com','images.unsplash.com']);
+            cars = cars.map(c => {
+                const imgs = Array.isArray(c.images) ? c.images : [];
+                const mapped = imgs.map(u => { try { const h = new URL(u).hostname; return hosts.has(h) ? p(u) : u; } catch(_) { return u; } });
+                return Object.assign({}, c, { images: mapped });
+            });
+            localStorage.setItem('encrypted_cars', JSON.stringify(cars));
+        }
+        window.addEventListener('load', () => { normalizeAllImages(); applyCompetitivePricing(); try { loadCarListings(); } catch(e){} try { loadRentalFleet(); } catch(e){} });
 
         async function diagnoseLeadPipeline() {
             const testContact = { name: 'Diagnostics', email: 'diag@example.com', subject: 'Lead Diagnostics', message: `Site: ${location.hostname}` };
@@ -7948,7 +7958,7 @@
                     <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(car.images[0])}" data-original-src="${car.images[0]}" data-proxy="1" data-img-index="0" alt="${car.make} ${car.model}" class="car-detail-main-image" id="car-detail-main-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
                     <div class="car-detail-thumbnails">
                         ${car.images.map((img, index) => `
-                            <img src="${img}" data-original-src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" referrerpolicy="no-referrer" onclick="changeMainImage('${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
+                            <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(img)}" data-original-src="${img}" data-proxy="1" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" referrerpolicy="no-referrer" onclick="changeMainImage('${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
                         `).join('')}
                     </div>
                 </div>
@@ -8119,7 +8129,7 @@
                     <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || ''))}" data-original-src="${Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || '')}" data-proxy="1" data-img-index="0" alt="${rental.make} ${rental.model}" class="car-detail-main-image" id="rental-detail-main-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleRentalImageError(this, ${rental.id})">
                     <div class="car-detail-thumbnails">
                         ${Array.isArray(rental.images) ? rental.images.map((img, index) => `
-                            <img src="${img}" data-original-src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" referrerpolicy="no-referrer" onclick="changeRentalDetailMainImage('${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
+                            <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(img)}" data-original-src="${img}" data-proxy="1" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" referrerpolicy="no-referrer" onclick="changeRentalDetailMainImage('${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
                         `).join('') : ''}
                     </div>
                 </div>
