@@ -309,6 +309,18 @@
             color: var(--dark);
         }
 
+        /* ===== CTA MENU (Mobile) ===== */
+        .cta-menu { position: fixed; right: 16px; top: 70px; z-index: 1001; width: 86%; max-width: 420px; border-radius: 16px; box-shadow: var(--shadow); border: 1px solid rgba(0,0,0,0.06); background: linear-gradient(135deg, color-mix(in srgb, var(--white) 96%, transparent), color-mix(in srgb, var(--white) 88%, transparent)); overflow: hidden; transform: translateX(110%); opacity: 0; transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1), opacity 200ms ease; pointer-events: none; }
+        .cta-menu.active { transform: translateX(0); opacity: 1; pointer-events: auto; }
+        .cta-menu-header { padding: 12px 16px; background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--accent) 24%, var(--primary))); color: #fff; font-weight: 700; }
+        .cta-menu-list { padding: 10px; display: grid; gap: 10px; }
+        .cta-item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 12px; background: color-mix(in srgb, var(--light) 92%, transparent); color: var(--dark); border: 1px solid rgba(0,0,0,0.06); cursor: pointer; }
+        .cta-item i { color: var(--primary); font-size: 1.2rem; }
+        .cta-item:hover { filter: brightness(1.04); transform: translateY(-1px); }
+        .cta-menu-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.15); backdrop-filter: blur(2px); z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 180ms ease; }
+        .cta-menu-backdrop.active { opacity: 1; pointer-events: auto; }
+        @media (max-width: 576px) { .mobile-menu-btn { display: inline-flex; } }
+
         /* ===== DARK MODE TOGGLE ===== */
         .dark-mode-toggle {
             background: none;
@@ -2278,6 +2290,15 @@
             </nav>
         </div>
     </header>
+    <div id="cta-menu-backdrop" class="cta-menu-backdrop" onclick="closeCTAMenu()"></div>
+    <div id="cta-menu" class="cta-menu" role="menu" aria-label="Quick Actions">
+        <div class="cta-menu-header">Quick Actions</div>
+        <div class="cta-menu-list">
+            <div class="cta-item" onclick="showProfileSelection(); closeCTAMenu()"><i class="fas fa-user-plus"></i><span>Sign Up</span></div>
+            <div class="cta-item" onclick="showRentalGFormModal(); closeCTAMenu()"><i class="fas fa-calendar-check"></i><span>Reserve Your Luxe Experience</span></div>
+            <div class="cta-item" onclick="openConciergeModal(); closeCTAMenu()"><i class="fas fa-headset"></i><span>Connect With Our Concierge</span></div>
+        </div>
+    </div>
 
     <!-- Notification Center -->
     <div class="notification-center" id="notification-center">
@@ -7150,18 +7171,37 @@
 
         // Mobile menu toggle
         function toggleMobileMenu() {
+            if (window.innerWidth <= 576) {
+                toggleCTAMenu();
+                return;
+            }
             const navLinks = document.querySelector('.nav-links');
             navLinks.classList.toggle('active');
-            
-            // Auto-close when clicking a link (for mobile)
             if (navLinks.classList.contains('active')) {
                 const links = navLinks.querySelectorAll('a');
                 links.forEach(link => {
-                    link.addEventListener('click', () => {
-                        navLinks.classList.remove('active');
-                    });
+                    link.addEventListener('click', () => { navLinks.classList.remove('active'); });
                 });
             }
+        }
+
+        function toggleCTAMenu() {
+            const m = document.getElementById('cta-menu');
+            const b = document.getElementById('cta-menu-backdrop');
+            const isActive = m.classList.contains('active');
+            if (isActive) {
+                m.classList.remove('active');
+                b.classList.remove('active');
+            } else {
+                m.classList.add('active');
+                b.classList.add('active');
+            }
+        }
+        function closeCTAMenu() {
+            const m = document.getElementById('cta-menu');
+            const b = document.getElementById('cta-menu-backdrop');
+            m.classList.remove('active');
+            b.classList.remove('active');
         }
 
         // Section navigation
