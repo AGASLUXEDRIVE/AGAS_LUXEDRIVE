@@ -4041,7 +4041,7 @@
                         <li><a href="#" onclick="showSection('about')">Verification Process</a></li>
                         <li><a href="#">Buyer Protection</a></li>
                         <li><a>Rental Terms</a></li>
-                        <li><a href="/agas-office" style="opacity: 0.7;">Staff Access</a></li>
+                        <li><a href="#" style="opacity: 0.9;" onclick="showAdminLoginModal()">Staff Access</a></li>
                     </ul>
                 </div>
                 
@@ -8275,20 +8275,14 @@
             let idxAttr = el.getAttribute('data-img-index');
             let idx = typeof idxAttr === 'string' ? parseInt(idxAttr, 10) : imgs.indexOf(original);
             if (isNaN(idx) || idx < 0) idx = 0;
-            const triedProxy = el.getAttribute('data-proxy') === '1';
-            if (!triedProxy) {
-                el.setAttribute('data-proxy','1');
-                el.setAttribute('data-original-src', imgs[idx]);
-                el.src = 'https://images.weserv.nl/?url=' + encodeURIComponent(imgs[idx]);
-                return;
-            }
-            el.removeAttribute('data-proxy');
+            // Always use proxy; advance to next image on error
             idx += 1;
             if (idx >= imgs.length) { el.removeAttribute('onerror'); el.src = imageFallbackPlaceholder; return; }
             const next = imgs[idx];
             el.setAttribute('data-img-index', String(idx));
             el.setAttribute('data-original-src', next);
-            el.src = next;
+            el.setAttribute('data-proxy','1');
+            el.src = 'https://images.weserv.nl/?url=' + encodeURIComponent(next);
         }
 
         function handleRentalImageError(el, rentalId) {
@@ -8299,20 +8293,14 @@
             let idxAttr = el.getAttribute('data-img-index');
             let idx = typeof idxAttr === 'string' ? parseInt(idxAttr, 10) : imgs.indexOf(original);
             if (isNaN(idx) || idx < 0) idx = 0;
-            const triedProxy = el.getAttribute('data-proxy') === '1';
-            if (!triedProxy) {
-                el.setAttribute('data-proxy','1');
-                el.setAttribute('data-original-src', imgs[idx]);
-                el.src = 'https://images.weserv.nl/?url=' + encodeURIComponent(imgs[idx]);
-                return;
-            }
-            el.removeAttribute('data-proxy');
+            // Always use proxy; advance to next image on error
             idx += 1;
             if (idx >= imgs.length) { el.removeAttribute('onerror'); el.src = imageFallbackPlaceholder; return; }
             const next = imgs[idx];
             el.setAttribute('data-img-index', String(idx));
             el.setAttribute('data-original-src', next);
-            el.src = next;
+            el.setAttribute('data-proxy','1');
+            el.src = 'https://images.weserv.nl/?url=' + encodeURIComponent(next);
         }
 
         function changeRentalMainImage(rentalId, src) {
