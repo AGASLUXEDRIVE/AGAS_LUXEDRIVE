@@ -8310,7 +8310,11 @@
 
         function changeMainImage(src) {
             const img = document.getElementById('car-detail-main-image');
-            if (img) { img.src = src; img.setAttribute('data-original-src', src); img.removeAttribute('data-proxy'); }
+            if (img) {
+                img.setAttribute('data-original-src', src);
+                img.setAttribute('data-proxy', '1');
+                img.src = 'https://images.weserv.nl/?url=' + encodeURIComponent(src);
+            }
         }
 
         const imageFallbackPlaceholder = 'https://via.placeholder.com/600x360?text=Image+Unavailable';
@@ -8364,12 +8368,20 @@
 
         function changeRentalMainImage(rentalId, src) {
             const img = document.getElementById('rental-main-image-' + rentalId);
-            if (img) { img.src = src; img.setAttribute('data-original-src', src); img.removeAttribute('data-proxy'); }
+            if (img) {
+                img.setAttribute('data-original-src', src);
+                img.setAttribute('data-proxy', '1');
+                img.src = 'https://images.weserv.nl/?url=' + encodeURIComponent(src);
+            }
         }
 
         function changeRentalDetailMainImage(src) {
             const img = document.getElementById('rental-detail-main-image');
-            if (img) { img.src = src; img.setAttribute('data-original-src', src); img.removeAttribute('data-proxy'); }
+            if (img) {
+                img.setAttribute('data-original-src', src);
+                img.setAttribute('data-proxy', '1');
+                img.src = 'https://images.weserv.nl/?url=' + encodeURIComponent(src);
+            }
         }
 
         function showRentalDetailModal(rentalId) {
@@ -9886,7 +9898,7 @@
                 card.innerHTML = `
                     <div class="recommendation-badge">RECOMMENDED</div>
                     <div class="recommendation-match">${matchScore}% Match</div>
-                    <img src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
+                    <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(car.images[0])}" data-original-src="${car.images[0]}" data-proxy="1" data-img-index="0" alt="${car.make} ${car.model}" class="car-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
                     <div class="car-details">
                         <div class="car-price">${formatPrice(car.price)}</div>
                         <h3 class="car-title">${car.make} ${car.model} ${car.year}</h3>
