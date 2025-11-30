@@ -6896,7 +6896,8 @@
             });
             localStorage.setItem('encrypted_cars', JSON.stringify(cars));
         }
-        window.addEventListener('load', () => { normalizeAllImages(); applyCompetitivePricing(); try { loadCarListings(); } catch(e){} try { loadRentalFleet(); } catch(e){} });
+        window.addEventListener('load', () => { normalizeAllImages(); applyCompetitivePricing(); try { loadCarListings(); } catch(e){} try { loadRentalFleet(); } catch(e){} try { verifyImageAssets(); } catch(e){} });
+        window.addEventListener('error', (e) => { try { showNotification(`Runtime error: ${e.message || 'Unknown error'}`, 'error', 7000); } catch(_) {} });
 
         async function diagnoseLeadPipeline() {
             const testContact = { name: 'Diagnostics', email: 'diag@example.com', subject: 'Lead Diagnostics', message: `Site: ${location.hostname}` };
