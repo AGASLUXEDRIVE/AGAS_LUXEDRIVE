@@ -4712,9 +4712,6 @@
             email: 'agasluxedrive@gmail.com',
             twoFASecret: 'AGAS2025SECURE'
         };
-        const staffAccounts = [
-            { username: 'staff', password: 'AGAS@staff2025', email: 'agasluxedrive@gmail.com' }
-        ];
 
         // Security configuration
         const SECURITY_CONFIG = {
@@ -6702,17 +6699,7 @@
         }
         window.addEventListener('load', () => { processLeadQueue(); });
         window.addEventListener('DOMContentLoaded', () => { injectCanonical(); injectStructuredData(); });
-        function normalizeAllImages() {
-            function p(u) { try { return 'https://images.weserv.nl/?url=' + encodeURIComponent(u); } catch(_) { return u; } }
-            const hosts = new Set(['uploads.audi-mediacenter.com','api.media.mercedes-benz.com','mediapool.bmwgroup.com','jlr.scene7.com','media.production.jlrms.com','uploads.vw-mms.de','r3.previews.aprimo.com','toyotagazooracing.com','porschepictures.flowcenter.de','newsroom.porsche.com','source.unsplash.com','images.unsplash.com']);
-            cars = cars.map(c => {
-                const imgs = Array.isArray(c.images) ? c.images : [];
-                const mapped = imgs.map(u => { try { const h = new URL(u).hostname; return hosts.has(h) ? p(u) : u; } catch(_) { return u; } });
-                return Object.assign({}, c, { images: mapped });
-            });
-            localStorage.setItem('encrypted_cars', JSON.stringify(cars));
-        }
-        window.addEventListener('load', () => { normalizeAllImages(); applyCompetitivePricing(); try { loadCarListings(); } catch(e){} try { loadRentalFleet(); } catch(e){} });
+        window.addEventListener('load', () => { applyCompetitivePricing(); try { loadCarListings(); } catch(e){} try { loadRentalFleet(); } catch(e){} });
 
         async function diagnoseLeadPipeline() {
             const testContact = { name: 'Diagnostics', email: 'diag@example.com', subject: 'Lead Diagnostics', message: `Site: ${location.hostname}` };
@@ -7142,7 +7129,7 @@
 
         // Resend 2FA code with EmailJS
         async function resendTwoFACode() {
-            const target = (currentUser && (currentUser.role === 'admin' || currentUser.role === 'staff')) ? (currentUser.email || adminAccount.email) : (currentUser && currentUser.email ? currentUser.email : adminAccount.email);
+            const target = (currentUser && currentUser.role === 'admin') ? adminAccount.email : (currentUser && currentUser.email ? currentUser.email : adminAccount.email);
             await generateTwoFACode(target);
             showNotification('New 2FA code sent to your email.', 'success');
         }
@@ -7204,14 +7191,9 @@
                 return;
             }
             
-            const isAdmin = username === adminAccount.username && password === adminAccount.password;
-            const staff = staffAccounts.find(acc => acc.username === username && acc.password === password);
-            if (isAdmin) {
+            if (username === adminAccount.username && password === adminAccount.password) {
                 closeModal('admin-login-modal');
                 completeAdminLogin();
-            } else if (staff) {
-                closeModal('admin-login-modal');
-                completeStaffLogin(staff);
             } else {
                 showNotification(`Invalid credentials. ${SECURITY_CONFIG.maxLoginAttempts - loginAttempts[attemptKey]} attempts remaining.`, 'error');
             }
@@ -7237,23 +7219,6 @@
             addNotification('Admin Login', 'You have successfully logged in as administrator.', 'security');
         }
 
-        function completeStaffLogin(staff) {
-            currentUser = {
-                id: 0,
-                fname: 'Enterprise',
-                lname: 'Staff',
-                email: staff.email || adminAccount.email,
-                role: 'staff',
-                permissions: ['admin_panel']
-            };
-            localStorage.setItem('encrypted_currentUser', JSON.stringify(currentUser));
-            startSessionTimer();
-            showAdminPanel();
-            updateUserInterface();
-            showNotification('Staff login successful. Admin panel access granted.', 'success');
-            addNotification('Staff Login', 'You have successfully logged in as staff.', 'security');
-        }
-
         // Enhanced user authentication
         function handleLogin(e) {
             e.preventDefault();
@@ -7263,7 +7228,7 @@
             const user = users.find(u => u.email === email && u.password === password);
             
             if (user) {
-                if (user.role === 'admin' || user.role === 'staff') {
+                if (user.role === 'admin') {
                     showNotification('Please use Enterprise Admin Login for secure access.', 'warning');
                     closeModal('login-modal');
                     showAdminLoginModal();
@@ -7278,7 +7243,7 @@
                 // Add notification for user
                 addNotification('Welcome Back', 'You have successfully logged in to your account.', 'info');
                 
-                if (user.role === 'admin' || user.role === 'staff') {
+                if (user.role === 'admin') {
                     showAdminPanel();
                 } else if (user.role === 'seller') {
                     showSellerDashboard();
@@ -7305,7 +7270,8 @@
                 authButtons.style.display = 'none';
                 userMenu.style.display = 'flex';
                 
-                if (currentUser.role === 'admin' || currentUser.role === 'staff') {
+                // Show admin dashboard button if user is admin
+                if (currentUser.role === 'admin') {
                     adminDashboardBtn.style.display = 'block';
                 } else {
                     adminDashboardBtn.style.display = 'none';
@@ -7316,10 +7282,6 @@
                     userAvatar.textContent = 'A';
                     userName.textContent = 'Admin';
                     userBadges.innerHTML = '<span class="user-badge badge-corporate">Enterprise Admin</span>';
-                } else if (currentUser.role === 'staff') {
-                    userAvatar.textContent = 'S';
-                    userName.textContent = 'Staff';
-                    userBadges.innerHTML = '<span class="user-badge badge-corporate">Enterprise Staff</span>';
                 } else if (currentUser.role === 'seller') {
                     userAvatar.textContent = currentUser.companyName ? currentUser.companyName.charAt(0) : 'S';
                     userName.textContent = currentUser.companyName || 'Seller';
@@ -7379,7 +7341,7 @@
         // Profile selection
         function showProfileSelection() {
             if (currentUser) {
-                if (currentUser.role === 'admin' || currentUser.role === 'staff') {
+                if (currentUser.role === 'admin') {
                     showAdminPanel();
                 } else if (currentUser.role === 'seller') {
                     showSellerDashboard();
@@ -7583,7 +7545,7 @@
             // Check if user is already logged in
             if (currentUser) {
                 startSessionTimer();
-                if (currentUser.role === 'admin' || currentUser.role === 'staff') {
+                if (currentUser.role === 'admin') {
                     showAdminPanel();
                 } else if (currentUser.role === 'seller') {
                     showSellerDashboard();
@@ -7847,7 +7809,7 @@
         // Modal functions
         function showLoginModal() {
             if (currentUser) {
-                if (currentUser.role === 'admin' || currentUser.role === 'staff') {
+                if (currentUser.role === 'admin') {
                     showAdminPanel();
                 } else if (currentUser.role === 'seller') {
                     showSellerDashboard();
@@ -7983,10 +7945,10 @@
             const content = document.getElementById('car-detail-content');
             content.innerHTML = `
                 <div class="car-detail-images">
-                    <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(car.images[0])}" data-original-src="${car.images[0]}" data-proxy="1" data-img-index="0" alt="${car.make} ${car.model}" class="car-detail-main-image" id="car-detail-main-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
+                    <img src="${car.images[0]}" data-original-src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-detail-main-image" id="car-detail-main-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
                     <div class="car-detail-thumbnails">
                         ${car.images.map((img, index) => `
-                            <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(img)}" data-original-src="${img}" data-proxy="1" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" referrerpolicy="no-referrer" onclick="changeMainImage('${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
+                            <img src="${img}" data-original-src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" referrerpolicy="no-referrer" onclick="changeMainImage('${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
                         `).join('')}
                     </div>
                 </div>
@@ -8052,7 +8014,7 @@
             const content = document.getElementById('quick-view-content');
             content.innerHTML = `
                 <div>
-                <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(car.images[0])}" data-original-src="${car.images[0]}" data-proxy="1" data-img-index="0" alt="${car.make} ${car.model}" style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius);" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
+                <img src="${car.images[0]}" data-original-src="${car.images[0]}" alt="${car.make} ${car.model}" style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius);" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
                 </div>
                 <div>
                     <div class="car-price">${car.priceRange ? car.priceRange : formatPrice(car.price)}</div>
@@ -8086,49 +8048,25 @@
         function handleImageError(el, carId) {
             const car = cars.find(c => c.id === carId);
             const imgs = (car && Array.isArray(car.images)) ? car.images : [];
-            if (!imgs.length) { el.removeAttribute('onerror'); el.src = imageFallbackPlaceholder; return; }
-            const original = el.getAttribute('data-original-src') || imgs[0];
-            let idxAttr = el.getAttribute('data-img-index');
-            let idx = typeof idxAttr === 'string' ? parseInt(idxAttr, 10) : imgs.indexOf(original);
-            if (isNaN(idx) || idx < 0) idx = 0;
-            const triedProxy = el.getAttribute('data-proxy') === '1';
-            if (!triedProxy) {
-                el.setAttribute('data-proxy','1');
-                el.setAttribute('data-original-src', imgs[idx]);
-                el.src = 'https://images.weserv.nl/?url=' + encodeURIComponent(imgs[idx]);
-                return;
-            }
-            el.removeAttribute('data-proxy');
-            idx += 1;
-            if (idx >= imgs.length) { el.removeAttribute('onerror'); el.src = imageFallbackPlaceholder; return; }
-            const next = imgs[idx];
-            el.setAttribute('data-img-index', String(idx));
-            el.setAttribute('data-original-src', next);
-            el.src = next;
+            const original = el.getAttribute('data-original-src') || el.src;
+            const proxied = 'https://images.weserv.nl/?url=' + encodeURIComponent(original);
+            if (el.getAttribute('data-proxy') !== '1') { el.setAttribute('data-proxy','1'); el.src = proxied; return; }
+            const currentIndex = imgs.indexOf(original);
+            const nextIndex = currentIndex >= 0 && currentIndex < imgs.length - 1 ? currentIndex + 1 : 0;
+            const next = imgs[nextIndex];
+            if (next) { el.removeAttribute('data-proxy'); el.setAttribute('data-original-src', next); el.src = next; } else { el.src = imageFallbackPlaceholder; }
         }
 
         function handleRentalImageError(el, rentalId) {
             const rental = rentalFleet.find(r => r.id === rentalId);
             const imgs = (rental && Array.isArray(rental.images) && rental.images.length) ? rental.images : (rental && rental.image ? [rental.image] : []);
-            if (!imgs.length) { el.removeAttribute('onerror'); el.src = imageFallbackPlaceholder; return; }
-            const original = el.getAttribute('data-original-src') || imgs[0];
-            let idxAttr = el.getAttribute('data-img-index');
-            let idx = typeof idxAttr === 'string' ? parseInt(idxAttr, 10) : imgs.indexOf(original);
-            if (isNaN(idx) || idx < 0) idx = 0;
-            const triedProxy = el.getAttribute('data-proxy') === '1';
-            if (!triedProxy) {
-                el.setAttribute('data-proxy','1');
-                el.setAttribute('data-original-src', imgs[idx]);
-                el.src = 'https://images.weserv.nl/?url=' + encodeURIComponent(imgs[idx]);
-                return;
-            }
-            el.removeAttribute('data-proxy');
-            idx += 1;
-            if (idx >= imgs.length) { el.removeAttribute('onerror'); el.src = imageFallbackPlaceholder; return; }
-            const next = imgs[idx];
-            el.setAttribute('data-img-index', String(idx));
-            el.setAttribute('data-original-src', next);
-            el.src = next;
+            const original = el.getAttribute('data-original-src') || el.src;
+            const proxied = 'https://images.weserv.nl/?url=' + encodeURIComponent(original);
+            if (el.getAttribute('data-proxy') !== '1') { el.setAttribute('data-proxy','1'); el.src = proxied; return; }
+            const currentIndex = imgs.indexOf(original);
+            const nextIndex = currentIndex >= 0 && currentIndex < imgs.length - 1 ? currentIndex + 1 : 0;
+            const next = imgs[nextIndex];
+            if (next) { el.removeAttribute('data-proxy'); el.setAttribute('data-original-src', next); el.src = next; } else { el.src = imageFallbackPlaceholder; }
         }
 
         function changeRentalMainImage(rentalId, src) {
@@ -8154,10 +8092,10 @@
             const content = document.getElementById('rental-detail-content');
             content.innerHTML = `
                 <div class="car-detail-images">
-                    <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || ''))}" data-original-src="${Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || '')}" data-proxy="1" data-img-index="0" alt="${rental.make} ${rental.model}" class="car-detail-main-image" id="rental-detail-main-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleRentalImageError(this, ${rental.id})">
+                    <img src="${Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || '')}" data-original-src="${Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || '')}" alt="${rental.make} ${rental.model}" class="car-detail-main-image" id="rental-detail-main-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleRentalImageError(this, ${rental.id})">
                     <div class="car-detail-thumbnails">
                         ${Array.isArray(rental.images) ? rental.images.map((img, index) => `
-                            <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(img)}" data-original-src="${img}" data-proxy="1" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" referrerpolicy="no-referrer" onclick="changeRentalDetailMainImage('${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
+                            <img src="${img}" data-original-src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" referrerpolicy="no-referrer" onclick="changeRentalDetailMainImage('${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
                         `).join('') : ''}
                     </div>
                 </div>
@@ -8264,7 +8202,7 @@
             card.className = 'car-card';
             card.innerHTML = `
                 <div class="car-badge">${car.verified ? 'VERIFIED' : 'PENDING'}</div>
-                <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(car.images[0])}" data-original-src="${car.images[0]}" data-proxy="1" data-img-index="0" alt="${car.make} ${car.model}" class="car-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
+                <img src="${car.images[0]}" data-original-src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
                 <div class="car-details">
                 <div class="car-price">${car.priceRange ? car.priceRange : formatPrice(car.price)}</div>
                 <h3 class="car-title">${car.make} ${car.model} (${car.yearRange || car.year})</h3>
@@ -8315,7 +8253,7 @@
                 rentalCard.className = 'rental-card';
                 rentalCard.innerHTML = `
                     <div class="rental-badge">${rental.available ? 'AVAILABLE' : 'BOOKED'}</div>
-                    <img id="rental-main-image-${rental.id}" src="${'https://images.weserv.nl/?url=' + encodeURIComponent(Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || ''))}" data-original-src="${Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || '')}" data-proxy="1" data-img-index="0" alt="${rental.make} ${rental.model}" class="rental-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleRentalImageError(this, ${rental.id})">
+                    <img id="rental-main-image-${rental.id}" src="${Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || '')}" data-original-src="${Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || '')}" alt="${rental.make} ${rental.model}" class="rental-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleRentalImageError(this, ${rental.id})">
                     <div class="car-detail-thumbnails">
                         ${Array.isArray(rental.images) ? rental.images.map((img, index) => `
                             <img src="${img}" data-original-src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" referrerpolicy="no-referrer" onclick="changeRentalMainImage(${rental.id}, '${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
