@@ -4728,6 +4728,7 @@
         let rentals = JSON.parse(localStorage.getItem('encrypted_rentals')) || [];
         let testimonials = JSON.parse(localStorage.getItem('encrypted_testimonials')) || [];
         let rentalFleet = JSON.parse(localStorage.getItem('encrypted_rentalFleet')) || [];
+        let deletedCarIds = JSON.parse(localStorage.getItem('encrypted_deleted_car_ids')) || [];
         let ratings = JSON.parse(localStorage.getItem('encrypted_ratings')) || [];
         let transactions = JSON.parse(localStorage.getItem('encrypted_transactions')) || [];
         let currentUser = JSON.parse(localStorage.getItem('encrypted_currentUser')) || null;
@@ -6310,9 +6311,15 @@
                     features: ['4x4', 'Wildtrak Package', 'Tow Assist', 'Infotainment']
                 }
             ];
+            cars = cars.filter(c => !deletedCarIds.includes(c.id));
             localStorage.setItem('encrypted_cars', JSON.stringify(cars));
             localStorage.setItem('agas_data_version', DATA_VERSION);
         }
+        else {
+            cars = cars.filter(c => !deletedCarIds.includes(c.id));
+        }
+        inquiries = inquiries.filter(i => !deletedCarIds.includes(i.carId));
+        localStorage.setItem('encrypted_inquiries', JSON.stringify(inquiries));
 
         // Enhanced rental fleet with competitive pricing and image galleries
         const storedRentalVersion = localStorage.getItem('agas_rental_version');
@@ -8495,7 +8502,7 @@
                     <img id="rental-main-image-${rental.id}" src="${'https://images.weserv.nl/?url=' + encodeURIComponent(Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || ''))}" data-original-src="${Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || '')}" data-proxy="1" data-img-index="0" alt="${rental.make} ${rental.model}" class="rental-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleRentalImageError(this, ${rental.id})">
                     <div class="car-detail-thumbnails">
                         ${Array.isArray(rental.images) ? rental.images.map((img, index) => `
-                            <img src="${img}" data-original-src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" referrerpolicy="no-referrer" onclick="changeRentalMainImage(${rental.id}, '${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
+                            <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(img)}" data-original-src="${img}" data-proxy="1" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" referrerpolicy="no-referrer" onclick="changeRentalMainImage(${rental.id}, '${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
                         `).join('') : ''}
                     </div>
                     <div class="rental-details">
@@ -9832,7 +9839,7 @@
                 card.innerHTML = `
                     <div class="recommendation-badge">RECOMMENDED</div>
                     <div class="recommendation-match">${matchScore}% Match</div>
-                    <img src="${car.images[0]}" alt="${car.make} ${car.model}" class="car-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
+                    <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(car.images[0])}" data-original-src="${car.images[0]}" data-proxy="1" data-img-index="0" alt="${car.make} ${car.model}" class="car-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleImageError(this, ${car.id})">
                     <div class="car-details">
                         <div class="car-price">${formatPrice(car.price)}</div>
                         <h3 class="car-title">${car.make} ${car.model} ${car.year}</h3>
@@ -10180,6 +10187,10 @@
             const carIndex = cars.findIndex(c => c.id === carId);
             if (carIndex !== -1) {
                 cars.splice(carIndex, 1);
+                deletedCarIds = Array.from(new Set([...(Array.isArray(deletedCarIds)?deletedCarIds:[]), carId]));
+                localStorage.setItem('encrypted_deleted_car_ids', JSON.stringify(deletedCarIds));
+                inquiries = inquiries.filter(i => i.carId !== carId);
+                localStorage.setItem('encrypted_inquiries', JSON.stringify(inquiries));
                 localStorage.setItem('encrypted_cars', JSON.stringify(cars));
                 loadPendingListings();
                 showNotification('Car listing rejected and removed.', 'success');
@@ -10190,6 +10201,10 @@
             const carIndex = cars.findIndex(c => c.id === carId);
             if (carIndex !== -1) {
                 cars.splice(carIndex, 1);
+                deletedCarIds = Array.from(new Set([...(Array.isArray(deletedCarIds)?deletedCarIds:[]), carId]));
+                localStorage.setItem('encrypted_deleted_car_ids', JSON.stringify(deletedCarIds));
+                inquiries = inquiries.filter(i => i.carId !== carId);
+                localStorage.setItem('encrypted_inquiries', JSON.stringify(inquiries));
                 localStorage.setItem('encrypted_cars', JSON.stringify(cars));
                 loadVerifiedListings();
                 showNotification('Car listing removed successfully.', 'success');
@@ -10210,6 +10225,10 @@
             const carIndex = cars.findIndex(c => c.id === carId);
             if (carIndex !== -1) {
                 cars.splice(carIndex, 1);
+                deletedCarIds = Array.from(new Set([...(Array.isArray(deletedCarIds)?deletedCarIds:[]), carId]));
+                localStorage.setItem('encrypted_deleted_car_ids', JSON.stringify(deletedCarIds));
+                inquiries = inquiries.filter(i => i.carId !== carId);
+                localStorage.setItem('encrypted_inquiries', JSON.stringify(inquiries));
                 localStorage.setItem('encrypted_cars', JSON.stringify(cars));
                 loadSellerListings();
                 showNotification('Car listing deleted successfully.', 'success');
