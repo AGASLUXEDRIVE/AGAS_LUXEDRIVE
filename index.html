@@ -4712,6 +4712,9 @@
             email: 'agasluxedrive@gmail.com',
             twoFASecret: 'AGAS2025SECURE'
         };
+        const staffAccounts = [
+            { username: 'staff', password: 'AGAS@staff2025', email: 'agasluxedrive@gmail.com' }
+        ];
 
         // Security configuration
         const SECURITY_CONFIG = {
@@ -7139,7 +7142,7 @@
 
         // Resend 2FA code with EmailJS
         async function resendTwoFACode() {
-            const target = (currentUser && currentUser.role === 'admin') ? adminAccount.email : (currentUser && currentUser.email ? currentUser.email : adminAccount.email);
+            const target = (currentUser && (currentUser.role === 'admin' || currentUser.role === 'staff')) ? (currentUser.email || adminAccount.email) : (currentUser && currentUser.email ? currentUser.email : adminAccount.email);
             await generateTwoFACode(target);
             showNotification('New 2FA code sent to your email.', 'success');
         }
@@ -7201,9 +7204,14 @@
                 return;
             }
             
-            if (username === adminAccount.username && password === adminAccount.password) {
+            const isAdmin = username === adminAccount.username && password === adminAccount.password;
+            const staff = staffAccounts.find(acc => acc.username === username && acc.password === password);
+            if (isAdmin) {
                 closeModal('admin-login-modal');
                 completeAdminLogin();
+            } else if (staff) {
+                closeModal('admin-login-modal');
+                completeStaffLogin(staff);
             } else {
                 showNotification(`Invalid credentials. ${SECURITY_CONFIG.maxLoginAttempts - loginAttempts[attemptKey]} attempts remaining.`, 'error');
             }
@@ -7229,6 +7237,23 @@
             addNotification('Admin Login', 'You have successfully logged in as administrator.', 'security');
         }
 
+        function completeStaffLogin(staff) {
+            currentUser = {
+                id: 0,
+                fname: 'Enterprise',
+                lname: 'Staff',
+                email: staff.email || adminAccount.email,
+                role: 'staff',
+                permissions: ['admin_panel']
+            };
+            localStorage.setItem('encrypted_currentUser', JSON.stringify(currentUser));
+            startSessionTimer();
+            showAdminPanel();
+            updateUserInterface();
+            showNotification('Staff login successful. Admin panel access granted.', 'success');
+            addNotification('Staff Login', 'You have successfully logged in as staff.', 'security');
+        }
+
         // Enhanced user authentication
         function handleLogin(e) {
             e.preventDefault();
@@ -7238,7 +7263,7 @@
             const user = users.find(u => u.email === email && u.password === password);
             
             if (user) {
-                if (user.role === 'admin') {
+                if (user.role === 'admin' || user.role === 'staff') {
                     showNotification('Please use Enterprise Admin Login for secure access.', 'warning');
                     closeModal('login-modal');
                     showAdminLoginModal();
@@ -7253,7 +7278,7 @@
                 // Add notification for user
                 addNotification('Welcome Back', 'You have successfully logged in to your account.', 'info');
                 
-                if (user.role === 'admin') {
+                if (user.role === 'admin' || user.role === 'staff') {
                     showAdminPanel();
                 } else if (user.role === 'seller') {
                     showSellerDashboard();
@@ -7280,8 +7305,7 @@
                 authButtons.style.display = 'none';
                 userMenu.style.display = 'flex';
                 
-                // Show admin dashboard button if user is admin
-                if (currentUser.role === 'admin') {
+                if (currentUser.role === 'admin' || currentUser.role === 'staff') {
                     adminDashboardBtn.style.display = 'block';
                 } else {
                     adminDashboardBtn.style.display = 'none';
@@ -7292,6 +7316,10 @@
                     userAvatar.textContent = 'A';
                     userName.textContent = 'Admin';
                     userBadges.innerHTML = '<span class="user-badge badge-corporate">Enterprise Admin</span>';
+                } else if (currentUser.role === 'staff') {
+                    userAvatar.textContent = 'S';
+                    userName.textContent = 'Staff';
+                    userBadges.innerHTML = '<span class="user-badge badge-corporate">Enterprise Staff</span>';
                 } else if (currentUser.role === 'seller') {
                     userAvatar.textContent = currentUser.companyName ? currentUser.companyName.charAt(0) : 'S';
                     userName.textContent = currentUser.companyName || 'Seller';
@@ -7351,7 +7379,7 @@
         // Profile selection
         function showProfileSelection() {
             if (currentUser) {
-                if (currentUser.role === 'admin') {
+                if (currentUser.role === 'admin' || currentUser.role === 'staff') {
                     showAdminPanel();
                 } else if (currentUser.role === 'seller') {
                     showSellerDashboard();
@@ -7555,7 +7583,7 @@
             // Check if user is already logged in
             if (currentUser) {
                 startSessionTimer();
-                if (currentUser.role === 'admin') {
+                if (currentUser.role === 'admin' || currentUser.role === 'staff') {
                     showAdminPanel();
                 } else if (currentUser.role === 'seller') {
                     showSellerDashboard();
@@ -7819,7 +7847,7 @@
         // Modal functions
         function showLoginModal() {
             if (currentUser) {
-                if (currentUser.role === 'admin') {
+                if (currentUser.role === 'admin' || currentUser.role === 'staff') {
                     showAdminPanel();
                 } else if (currentUser.role === 'seller') {
                     showSellerDashboard();
