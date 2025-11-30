@@ -4759,13 +4759,13 @@
         };
 
         // Enhanced sample data with competitive pricing and correct images
-        const DATA_VERSION = '2025-11-30-car-seed-012';
-        const RENTAL_DATA_VERSION = '2025-11-30-rental-seed-002';
+        const DATA_VERSION = '2025-11-30-car-seed-013';
+        const RENTAL_DATA_VERSION = '2025-11-30-rental-seed-003';
         const storedVersion = localStorage.getItem('agas_data_version');
         if (cars.length === 0 || storedVersion !== DATA_VERSION) {
             cars = [
                 {
-                    id: 33,
+                    id: 201,
                     make: 'Porsche',
                     model: 'Panamera Turbo Sonderwunsch',
                     year: 2025,
@@ -4775,55 +4775,542 @@
                     fuel: 'petrol',
                     color: 'GT Silver',
                     condition: 'new',
-                    description: 'Bespoke Sonderwunsch Panamera Turbo with exclusive tailoring and high-performance dynamics.',
+                    description: 'Bespoke Panamera Turbo with exclusive Sonderwunsch tailoring and high-performance dynamics.',
                     images: [
                         'https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=265939&w=1440&h=812&crop=1&public=1&cs=ada5400799903cd4',
                         'https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=265942&w=1440&h=812&crop=1&public=1&cs=d3b58a79c3e82cc9',
                         'https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=265941&w=1440&h=812&crop=1&public=1&cs=fd4f156f2f5b0408',
-                        'https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=265936&w=1440&h=812&crop=1&public=1&cs=72d1a6b82615f978',
-                        'https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=265937&w=1440&h=812&crop=1&public=1&cs=287321f3854c3a5b',
-                        'https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=327345&w=1440&h=812&crop=1&public=1&cs=2fd77826a04a3954',
-                        'https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=327355&w=1440&h=812&crop=1&public=1&cs=67ea65362be77617',
-                        'https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=327352&w=1440&h=812&crop=1&public=1&cs=4bc83ace312d2321',
-                        'https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=327348&w=1440&h=812&crop=1&public=1&cs=515f302ec6e29174'
+                        'https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=327355&w=1440&h=812&crop=1&public=1&cs=67ea65362be77617'
                     ],
                     verified: true,
-                    sellerId: 1,
+                    sellerId: 0,
                     status: 'approved',
-                    features: ['Sonderwunsch Bespoke', 'Turbocharged V8', 'Adaptive Air Suspension', 'Rear Axle Steering', 'PCCB', 'Premium Sound']
+                    features: ['Sonderwunsch', 'Turbo V8', 'Adaptive Air', 'Rear Axle Steering', 'PCCB', 'Premium Sound']
                 },
                 {
-                    id: 1,
-                    make: 'Mercedes-Benz',
-                    model: 'GLE 350d 4MATIC',
-                    year: 2022,
-                    price: 16800000,
-                    mileage: 8500,
+                    id: 202,
+                    make: 'Range Rover',
+                    model: 'Autobiography',
+                    year: 2023,
+                    price: 28500000,
+                    mileage: 7500,
                     transmission: 'automatic',
                     fuel: 'diesel',
-                    color: 'Selenite Grey',
+                    color: 'Santorini Black',
                     condition: 'new',
-                    description: 'AMG performance SUV with premium package, sport exhaust, and advanced driver assistance. Low mileage, one owner.',
+                    description: 'Top specification Autobiography with executive seating, advanced terrain response, and premium audio.',
                     images: [
-                        'https://www.mbusa.com/content/dam/mb-nafta/us/myco/my26/gle-class/gle-suv/gallery/series/models-gallery/2026-GLE350W4-SUV-GAL-08-DR.jpg',
-                        'https://www.mbusa.com/content/dam/mb-nafta/us/myco/my26/gle-class/gle-suv/gallery/series/models-gallery/2026-GLE350W4-SUV-GAL-07-DR.jpg',
-                        'https://www.mbusa.com/content/dam/mb-nafta/us/myco/my26/gle-class/gle-suv/gallery/series/models-gallery/2026-GLE350W4-SUV-GAL-02-DR.jpg',
-                        'https://www.mbusa.com/content/dam/mb-nafta/us/myco/my26/gle-class/gle-suv/gallery/series/models-gallery/2026-GLE350W4-SUV-GAL-12-DR.jpg',
-                        'https://www.mbusa.com/content/dam/mb-nafta/us/myco/my26/gle-class/gle-suv/gallery/series/models-gallery/2026-GLE350W4-SUV-GAL-09-DR.jpg',
-                        'https://www.mbusa.com/content/dam/mb-nafta/us/myco/my26/gle-class/gle-suv/gallery/series/models-gallery/2026-GLE350W4-SUV-GAL-11-DR.jpg',
-                        'https://www.mbusa.com/content/dam/mb-nafta/us/myco/my26/gle-class/gle-suv/gallery/series/models-gallery/2026-GLE350W4-SUV-GAL-05-DR.jpg'
+                        'https://jlr.scene7.com/is/image/jlr/L460_22MY_195_GLHD_AUTOBIOGRAPHY_SWB_DX_2560x1440?wid=740&fit=stretch%2C1',
+                        'https://jlr.scene7.com/is/image/jlr/L460_22MY_120_GLHD?wid=740&fit=stretch%2C1',
+                        'https://jlr.scene7.com/is/image/jlr/L46025GL_303103153_011?wid=740&fit=stretch%2C1',
+                        'https://jlr.scene7.com/is/image/jlr/L46024GL_303101569_007?wid=740&fit=stretch%2C1'
                     ],
                     verified: true,
-                    sellerId: 1,
+                    sellerId: 0,
                     status: 'approved',
-                    features: ['AMG Performance', 'Sport Exhaust', 'Premium Package', 'Panoramic Roof', 'Burmester Sound', 'AMG Dynamic Select'],
-                    kycDocuments: {
-                        logbook: 'https://via.placeholder.com/200x120?text=Logbook',
-                        id: 'https://via.placeholder.com/200x120?text=ID+Copy',
-                        insurance: 'https://via.placeholder.com/200x120?text=Insurance',
-                        inspection: 'https://via.placeholder.com/200x120?text=Inspection'
-                    }
+                    features: ['Executive Seats', 'Terrain Response', 'Meridian Sound', 'Air Suspension']
                 },
+                {
+                    id: 203,
+                    make: 'Mercedes-Benz',
+                    model: 'S-Class',
+                    year: 2023,
+                    price: 32000000,
+                    mileage: 6000,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Obsidian Black',
+                    condition: 'new',
+                    description: 'Flagship executive sedan with advanced luxury and driver assistance.',
+                    images: [
+                        'https://api.media.mercedes-benz.com/jsonapi/image/deliver/07965391-d79b-48d5-b5b8-1b7cd7c90b05/600',
+                        'https://api.media.mercedes-benz.com/jsonapi/image/deliver/dffdbf3f-b4be-4c3c-8bde-993d5dcb0484/600',
+                        'https://api.media.mercedes-benz.com/jsonapi/image/deliver/cf73908d-012e-4b0a-b398-92892ff73268/600',
+                        'https://api.media.mercedes-benz.com/jsonapi/image/deliver/3d00bbf8-7c28-4df1-b465-c77126d7c6ce/600'
+                    ],
+                    verified: true,
+                    sellerId: 0,
+                    status: 'approved',
+                    features: ['AIRMATIC', 'Rear Massage Seats', 'Burmester 4D', 'Ambient Lighting']
+                },
+                {
+                    id: 204,
+                    make: 'BMW',
+                    model: 'X5 M Competition',
+                    year: 2021,
+                    price: 18500000,
+                    mileage: 12000,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Black Sapphire',
+                    condition: 'used',
+                    description: 'High-performance SUV with twin-turbo V8, M xDrive, adaptive suspension, and track-focused tuning.',
+                    images: [
+                        'https://bmw.scene7.com/is/image/BMW/f95_carousel-columns_exterior_ambientlightstrip:3to2?fmt=webp&wid=1024&hei=683',
+                        'https://bmw.scene7.com/is/image/BMW/f95_carousel-columns_interior_steeringwheel:3to2?fmt=webp&wid=1024&hei=683',
+                        'https://bmw.scene7.com/is/image/BMW/f95_carousel-columns_driving-dynamic_m60xdrive_msportbrake:3to2?fmt=webp&wid=1024&hei=683',
+                        'https://bmw.scene7.com/is/image/BMW/f95_carousel-columns_driving-dynamic_m60xdrive_activesteering:3to2?fmt=webp&wid=1024&hei=683'
+                    ],
+                    verified: true,
+                    sellerId: 0,
+                    status: 'approved',
+                    features: ['Twin‑Turbo V8', 'M xDrive', 'Adaptive M Suspension', 'Carbon Fiber Trim']
+                },
+                {
+                    id: 205,
+                    make: 'Audi',
+                    model: 'Q7',
+                    year: 2022,
+                    price: 18000000,
+                    mileage: 14000,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Daytona Grey',
+                    condition: 'used',
+                    description: 'Premium 7-seater SUV with Quattro and advanced driver assistance.',
+                    images: [
+                        'https://uploads.audi-mediacenter.com/system/production/media/81775/images/2f40371a045f0fbe7cad56b0688c594b01d75ad7/A199658_web_640.jpg?1698383405',
+                        'https://uploads.audi-mediacenter.com/system/production/media/81798/images/70afe1592e5bdd333b20ec6a48f00bf13c9d799d/A199681_web_960.jpg?1698383560',
+                        'https://uploads.audi-mediacenter.com/system/production/media/122635/images/a91b87b34dec9418eb1b74cbb4e1c2fd46a0380b/A240557_web_640.jpg?1733133186'
+                    ],
+                    verified: true,
+                    sellerId: 0,
+                    status: 'approved',
+                    features: ['Quattro', 'Virtual Cockpit', 'Adaptive Cruise', 'Leather Interior']
+                },
+                {
+                    id: 206,
+                    make: 'Toyota',
+                    model: 'Land Cruiser 300',
+                    year: 2023,
+                    price: 21500000,
+                    mileage: 3500,
+                    transmission: 'automatic',
+                    fuel: 'diesel',
+                    color: 'Pearl White',
+                    condition: 'new',
+                    description: 'Top-of-the-line LC300 with luxury features. KDSS, crawl control, premium interior. Under warranty.',
+                    images: [
+                        'https://www.toyotakenya.ke/media/gamme/modeles/images/c1cadbc142f293d065ae3b73f26b2552.png',
+                        'https://www.toyotakenya.ke/media/gamme/modeles/images/899ed375436549772106cd9ab1b0e810.png',
+                        'https://www.toyotakenya.ke/media/gamme/modeles/images/9f66e7616c8526ab180c16e2cfb20ff0.png',
+                        'https://www.toyotakenya.ke/media/gamme/modeles/images/d2cd38d8ceb569111ed404b038555973.png'
+                    ],
+                    verified: true,
+                    sellerId: 0,
+                    status: 'approved',
+                    features: ['V8 Engine', 'KDSS', 'Crawl Control', 'Premium Interior']
+                },
+                {
+                    id: 207,
+                    make: 'Lexus',
+                    model: 'RX 450h',
+                    year: 2020,
+                    price: 5500000,
+                    mileage: 25000,
+                    transmission: 'automatic',
+                    fuel: 'hybrid',
+                    color: 'Pearl White',
+                    condition: 'used',
+                    description: 'Hybrid luxury SUV with efficient powertrain and premium interior.',
+                    images: [
+                        'https://tmna.assetscs.toyota.com/is/image/lexusaemcs/lexus/images/models/rx/2026/gallery/lexus-rx-ext-gallery-5-mobile-960x540-LEX-RXH-MY25-0010.jpg?wid=960&hei=540',
+                        'https://tmna.assetscs.toyota.com/is/image/lexusaemcs/lexus/images/models/rx/2026/gallery/lexus-rx-ext-gallery-8-mobile-960x540-LEX-RXV-MY23-0004.jpg?wid=960&hei=540',
+                        'https://tmna.assetscs.toyota.com/is/image/lexusaemcs/lexus/images/models/rx/2026/gallery/lexus-rx-int-gallery-1-mobile-960x540-LEX-RXH-MY26-0002.04.jpg?wid=960&hei=540'
+                    ],
+                    verified: true,
+                    sellerId: 0,
+                    status: 'approved',
+                    features: ['Hybrid Drive', 'Leather Interior', 'Adaptive Cruise']
+                },
+                {
+                    id: 208,
+                    make: 'Toyota',
+                    model: 'RAV4 Hybrid',
+                    year: 2020,
+                    price: 3400000,
+                    mileage: 31000,
+                    transmission: 'automatic',
+                    fuel: 'hybrid',
+                    color: 'Urban Khaki',
+                    condition: 'used',
+                    description: 'Efficient hybrid SUV with Toyota Safety Sense and roomy cargo.',
+                    images: [
+                        'https://tmna.aemassets.toyota.com/is/image/toyota/toyota/vehicles/2025/rav4/gallery/RHV_MY25_0004_V001_desktop.png?wid=600&fmt=jpg&fit=crop',
+                        'https://tmna.aemassets.toyota.com/is/image/toyota/toyota/vehicles/2025/rav4/gallery/RHV_MY23_0005_V002_desktop.png?wid=600&fmt=jpg&fit=crop',
+                        'https://tmna.aemassets.toyota.com/is/image/toyota/toyota/vehicles/2025/rav4/gallery/RHV_MY25_0009_V001_desktop.png?wid=600&fmt=jpg&fit=crop'
+                    ],
+                    verified: true,
+                    sellerId: 0,
+                    status: 'approved',
+                    features: ['Hybrid Drive', 'Toyota Safety Sense', 'Adaptive Cruise']
+                },
+                {
+                    id: 209,
+                    make: 'Land Rover',
+                    model: 'Discovery 5',
+                    year: 2024,
+                    price: 8000000,
+                    mileage: 18000,
+                    transmission: 'automatic',
+                    fuel: 'diesel',
+                    color: 'Eiger Grey',
+                    condition: 'used',
+                    description: 'Premium SUV with advanced capability and versatile interior.',
+                    images: [
+                        'https://jlr.scene7.com/is/image/jlr/L46224GL_303101655_012',
+                        'https://jlr.scene7.com/is/image/jlr/L462_interior_gallery_10?wid=740&fit=stretch%2C1',
+                        'https://jlr.scene7.com/is/image/jlr/L462_23MY_014_GLHD_2560x1440?wid=740&fit=stretch%2C1'
+                    ],
+                    verified: true,
+                    sellerId: 0,
+                    status: 'approved',
+                    features: ['Terrain Response', '7 Seats', 'Premium Interior']
+                },
+                {
+                    id: 210,
+                    make: 'Subaru',
+                    model: 'Forester XT AWD',
+                    year: 2026,
+                    price: 4500000,
+                    mileage: 12000,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Ice Silver',
+                    condition: 'used',
+                    description: 'All-wheel-drive compact SUV with practical interior and safety tech.',
+                    images: [
+                        'https://s7d1.scene7.com/is/image/scomv2/26_FOR_gallery_ext_12?$650w$',
+                        'https://s7d1.scene7.com/is/image/scomv2/26_FOR_gallery_ext_06?$650w$',
+                        'https://s7d1.scene7.com/is/image/scomv2/26_FOR_gallery_int_08?$650w$'
+                    ],
+                    verified: true,
+                    sellerId: 0,
+                    status: 'approved',
+                    features: ['AWD', 'EyeSight', 'Practical Interior', 'Apple CarPlay']
+                },
+                {
+                    id: 211,
+                    make: 'Mitsubishi',
+                    model: 'Outlander PHEV',
+                    year: 2025,
+                    price: 4000000,
+                    mileage: 15000,
+                    transmission: 'automatic',
+                    fuel: 'hybrid',
+                    color: 'Graphite Grey',
+                    condition: 'used',
+                    description: 'Family SUV with efficient PHEV powertrain and modern interior.',
+                    images: [
+                        'https://www.mitsubishicars.com/content/dam/mitsubishi-motors-us/images/siteimages/cars/outlander-phev/my25/gallery/interior/2024-2025-mitsubishi-outlander-phev-interior-seating.jpg?width=140&auto=webp',
+                        'https://www.mitsubishicars.com/content/dam/mitsubishi-motors-us/images/siteimages/cars/outlander-phev/my25/gallery/interior/2024-2025-mitsubishi-outlander-phev-drive-mode-selector.jpg?width=140&auto=webp',
+                        'https://www.mitsubishi-motors.com.au/vehicles/outlander/_jcr_content/article/par/contentblock_1136036_2070446673/par/contentblock_1373066_1418411294/par/image.coreimg.85.992.jpeg/1749192557740/25my-ou-lhd-mv-exterior-a-wheel-1200x1200px.jpeg'
+                    ],
+                    verified: true,
+                    sellerId: 0,
+                    status: 'approved',
+                    features: ['PHEV', 'Drive Modes', 'Infotainment']
+                },
+                {
+                    id: 212,
+                    make: 'Lexus',
+                    model: 'GX460',
+                    year: 2026,
+                    price: 9500000,
+                    mileage: 5000,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Eminent White Pearl',
+                    condition: 'new',
+                    description: 'Luxury 4x4 SUV with robust capability and premium comfort.',
+                    images: [
+                        'https://lexus-cms-media.s3.us-east-2.amazonaws.com/wp-content/uploads/2025/10/2026_Lexus_GX_Luxury_EminentWhitePearl_29-1000x600.jpg',
+                        'https://lexus-cms-media.s3.us-east-2.amazonaws.com/wp-content/uploads/2025/10/2026_Lexus_GX_Luxury_EminentWhitePearl_33-1000x600.jpg',
+                        'https://lexus-cms-media.s3.us-east-2.amazonaws.com/wp-content/uploads/2025/10/2026_Lexus_GX_Luxury_EminentWhitePearl_36-1000x600.jpg'
+                    ],
+                    verified: true,
+                    sellerId: 0,
+                    status: 'approved',
+                    features: ['4x4 Capability', 'Premium Interior', 'Adaptive Suspension']
+                }
+            ];
+            const FRESH_CARS_SEED = [
+                {
+                    id: 201,
+                    make: 'Porsche',
+                    model: 'Panamera Turbo Sonderwunsch',
+                    year: 2025,
+                    price: 42000000,
+                    mileage: 1000,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'GT Silver',
+                    condition: 'new',
+                    description: 'Bespoke Panamera Turbo with exclusive Sonderwunsch tailoring and high-performance dynamics.',
+                    images: [
+                        'https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=265939&w=1440&h=812&crop=1&public=1&cs=ada5400799903cd4',
+                        'https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=265942&w=1440&h=812&crop=1&public=1&cs=d3b58a79c3e82cc9',
+                        'https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=265941&w=1440&h=812&crop=1&public=1&cs=fd4f156f2f5b0408',
+                        'https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?id=327355&w=1440&h=812&crop=1&public=1&cs=67ea65362be77617'
+                    ],
+                    verified: true,
+                    sellerId: 0,
+                    status: 'approved',
+                    features: ['Sonderwunsch', 'Turbo V8', 'Adaptive Air', 'Rear Axle Steering', 'PCCB', 'Premium Sound']
+                },
+                {
+                    id: 202,
+                    make: 'Range Rover',
+                    model: 'Autobiography',
+                    year: 2023,
+                    price: 28500000,
+                    mileage: 7500,
+                    transmission: 'automatic',
+                    fuel: 'diesel',
+                    color: 'Santorini Black',
+                    condition: 'new',
+                    description: 'Top specification Autobiography with executive seating, advanced terrain response, and premium audio.',
+                    images: [
+                        'https://jlr.scene7.com/is/image/jlr/L460_22MY_195_GLHD_AUTOBIOGRAPHY_SWB_DX_2560x1440?wid=740&fit=stretch%2C1',
+                        'https://jlr.scene7.com/is/image/jlr/L460_22MY_120_GLHD?wid=740&fit=stretch%2C1',
+                        'https://jlr.scene7.com/is/image/jlr/L46025GL_303103153_011?wid=740&fit=stretch%2C1',
+                        'https://jlr.scene7.com/is/image/jlr/L46024GL_303101569_007?wid=740&fit=stretch%2C1'
+                    ],
+                    verified: true,
+                    sellerId: 0,
+                    status: 'approved',
+                    features: ['Executive Seats', 'Terrain Response', 'Meridian Sound', 'Air Suspension']
+                },
+                {
+                    id: 203,
+                    make: 'Mercedes-Benz',
+                    model: 'S-Class',
+                    year: 2023,
+                    price: 32000000,
+                    mileage: 6000,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Obsidian Black',
+                    condition: 'new',
+                    description: 'Flagship executive sedan with advanced luxury and driver assistance.',
+                    images: [
+                        'https://api.media.mercedes-benz.com/jsonapi/image/deliver/07965391-d79b-48d5-b5b8-1b7cd7c90b05/600',
+                        'https://api.media.mercedes-benz.com/jsonapi/image/deliver/dffdbf3f-b4be-4c3c-8bde-993d5dcb0484/600',
+                        'https://api.media.mercedes-benz.com/jsonapi/image/deliver/cf73908d-012e-4b0a-b398-92892ff73268/600',
+                        'https://api.media.mercedes-benz.com/jsonapi/image/deliver/3d00bbf8-7c28-4df1-b465-c77126d7c6ce/600'
+                    ],
+                    verified: true,
+                    sellerId: 0,
+                    status: 'approved',
+                    features: ['AIRMATIC', 'Rear Massage Seats', 'Burmester 4D', 'Ambient Lighting']
+                },
+                {
+                    id: 204,
+                    make: 'BMW',
+                    model: 'X5 M Competition',
+                    year: 2021,
+                    price: 18500000,
+                    mileage: 12000,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Black Sapphire',
+                    condition: 'used',
+                    description: 'High-performance SUV with twin-turbo V8, M xDrive, adaptive suspension, and track-focused tuning.',
+                    images: [
+                        'https://bmw.scene7.com/is/image/BMW/f95_carousel-columns_exterior_ambientlightstrip:3to2?fmt=webp&wid=1024&hei=683',
+                        'https://bmw.scene7.com/is/image/BMW/f95_carousel-columns_interior_steeringwheel:3to2?fmt=webp&wid=1024&hei=683',
+                        'https://bmw.scene7.com/is/image/BMW/f95_carousel-columns_driving-dynamic_m60xdrive_msportbrake:3to2?fmt=webp&wid=1024&hei=683',
+                        'https://bmw.scene7.com/is/image/BMW/f95_carousel-columns_driving-dynamic_m60xdrive_activesteering:3to2?fmt=webp&wid=1024&hei=683'
+                    ],
+                    verified: true,
+                    sellerId: 0,
+                    status: 'approved',
+                    features: ['Twin‑Turbo V8', 'M xDrive', 'Adaptive M Suspension', 'Carbon Fiber Trim']
+                },
+                {
+                    id: 205,
+                    make: 'Audi',
+                    model: 'Q7',
+                    year: 2022,
+                    price: 18000000,
+                    mileage: 14000,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Daytona Grey',
+                    condition: 'used',
+                    description: 'Premium 7-seater SUV with Quattro and advanced driver assistance.',
+                    images: [
+                        'https://uploads.audi-mediacenter.com/system/production/media/81775/images/2f40371a045f0fbe7cad56b0688c594b01d75ad7/A199658_web_640.jpg?1698383405',
+                        'https://uploads.audi-mediacenter.com/system/production/media/81798/images/70afe1592e5bdd333b20ec6a48f00bf13c9d799d/A199681_web_960.jpg?1698383560',
+                        'https://uploads.audi-mediacenter.com/system/production/media/122635/images/a91b87b34dec9418eb1b74cbb4e1c2fd46a0380b/A240557_web_640.jpg?1733133186'
+                    ],
+                    verified: true,
+                    sellerId: 0,
+                    status: 'approved',
+                    features: ['Quattro', 'Virtual Cockpit', 'Adaptive Cruise', 'Leather Interior']
+                },
+                {
+                    id: 206,
+                    make: 'Toyota',
+                    model: 'Land Cruiser 300',
+                    year: 2023,
+                    price: 21500000,
+                    mileage: 3500,
+                    transmission: 'automatic',
+                    fuel: 'diesel',
+                    color: 'Pearl White',
+                    condition: 'new',
+                    description: 'Top-of-the-line LC300 with luxury features. KDSS, crawl control, premium interior. Under warranty.',
+                    images: [
+                        'https://www.toyotakenya.ke/media/gamme/modeles/images/c1cadbc142f293d065ae3b73f26b2552.png',
+                        'https://www.toyotakenya.ke/media/gamme/modeles/images/899ed375436549772106cd9ab1b0e810.png',
+                        'https://www.toyotakenya.ke/media/gamme/modeles/images/9f66e7616c8526ab180c16e2cfb20ff0.png',
+                        'https://www.toyotakenya.ke/media/gamme/modeles/images/d2cd38d8ceb569111ed404b038555973.png'
+                    ],
+                    verified: true,
+                    sellerId: 0,
+                    status: 'approved',
+                    features: ['V8 Engine', 'KDSS', 'Crawl Control', 'Premium Interior']
+                },
+                {
+                    id: 207,
+                    make: 'Lexus',
+                    model: 'RX 450h',
+                    year: 2020,
+                    price: 5500000,
+                    mileage: 25000,
+                    transmission: 'automatic',
+                    fuel: 'hybrid',
+                    color: 'Pearl White',
+                    condition: 'used',
+                    description: 'Hybrid luxury SUV with efficient powertrain and premium interior.',
+                    images: [
+                        'https://tmna.assetscs.toyota.com/is/image/lexusaemcs/lexus/images/models/rx/2026/gallery/lexus-rx-ext-gallery-5-mobile-960x540-LEX-RXH-MY25-0010.jpg?wid=960&hei=540',
+                        'https://tmna.assetscs.toyota.com/is/image/lexusaemcs/lexus/images/models/rx/2026/gallery/lexus-rx-ext-gallery-8-mobile-960x540-LEX-RXV-MY23-0004.jpg?wid=960&hei=540',
+                        'https://tmna.assetscs.toyota.com/is/image/lexusaemcs/lexus/images/models/rx/2026/gallery/lexus-rx-int-gallery-1-mobile-960x540-LEX-RXH-MY26-0002.04.jpg?wid=960&hei=540'
+                    ],
+                    verified: true,
+                    sellerId: 0,
+                    status: 'approved',
+                    features: ['Hybrid Drive', 'Leather Interior', 'Adaptive Cruise']
+                },
+                {
+                    id: 208,
+                    make: 'Toyota',
+                    model: 'RAV4 Hybrid',
+                    year: 2020,
+                    price: 3400000,
+                    mileage: 31000,
+                    transmission: 'automatic',
+                    fuel: 'hybrid',
+                    color: 'Urban Khaki',
+                    condition: 'used',
+                    description: 'Efficient hybrid SUV with Toyota Safety Sense and roomy cargo.',
+                    images: [
+                        'https://tmna.aemassets.toyota.com/is/image/toyota/toyota/vehicles/2025/rav4/gallery/RHV_MY25_0004_V001_desktop.png?wid=600&fmt=jpg&fit=crop',
+                        'https://tmna.aemassets.toyota.com/is/image/toyota/toyota/vehicles/2025/rav4/gallery/RHV_MY23_0005_V002_desktop.png?wid=600&fmt=jpg&fit=crop',
+                        'https://tmna.aemassets.toyota.com/is/image/toyota/toyota/vehicles/2025/rav4/gallery/RHV_MY25_0009_V001_desktop.png?wid=600&fmt=jpg&fit=crop'
+                    ],
+                    verified: true,
+                    sellerId: 0,
+                    status: 'approved',
+                    features: ['Hybrid Drive', 'Toyota Safety Sense', 'Adaptive Cruise']
+                },
+                {
+                    id: 209,
+                    make: 'Land Rover',
+                    model: 'Discovery 5',
+                    year: 2024,
+                    price: 8000000,
+                    mileage: 18000,
+                    transmission: 'automatic',
+                    fuel: 'diesel',
+                    color: 'Eiger Grey',
+                    condition: 'used',
+                    description: 'Premium SUV with advanced capability and versatile interior.',
+                    images: [
+                        'https://jlr.scene7.com/is/image/jlr/L46224GL_303101655_012',
+                        'https://jlr.scene7.com/is/image/jlr/L462_interior_gallery_10?wid=740&fit=stretch%2C1',
+                        'https://jlr.scene7.com/is/image/jlr/L462_23MY_014_GLHD_2560x1440?wid=740&fit=stretch%2C1'
+                    ],
+                    verified: true,
+                    sellerId: 0,
+                    status: 'approved',
+                    features: ['Terrain Response', '7 Seats', 'Premium Interior']
+                },
+                {
+                    id: 210,
+                    make: 'Subaru',
+                    model: 'Forester XT AWD',
+                    year: 2026,
+                    price: 4500000,
+                    mileage: 12000,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Ice Silver',
+                    condition: 'used',
+                    description: 'All-wheel-drive compact SUV with practical interior and safety tech.',
+                    images: [
+                        'https://s7d1.scene7.com/is/image/scomv2/26_FOR_gallery_ext_12?$650w$',
+                        'https://s7d1.scene7.com/is/image/scomv2/26_FOR_gallery_ext_06?$650w$',
+                        'https://s7d1.scene7.com/is/image/scomv2/26_FOR_gallery_int_08?$650w$'
+                    ],
+                    verified: true,
+                    sellerId: 0,
+                    status: 'approved',
+                    features: ['AWD', 'EyeSight', 'Practical Interior', 'Apple CarPlay']
+                },
+                {
+                    id: 211,
+                    make: 'Mitsubishi',
+                    model: 'Outlander PHEV',
+                    year: 2025,
+                    price: 4000000,
+                    mileage: 15000,
+                    transmission: 'automatic',
+                    fuel: 'hybrid',
+                    color: 'Graphite Grey',
+                    condition: 'used',
+                    description: 'Family SUV with efficient PHEV powertrain and modern interior.',
+                    images: [
+                        'https://www.mitsubishicars.com/content/dam/mitsubishi-motors-us/images/siteimages/cars/outlander-phev/my25/gallery/interior/2024-2025-mitsubishi-outlander-phev-interior-seating.jpg?width=140&auto=webp',
+                        'https://www.mitsubishicars.com/content/dam/mitsubishi-motors-us/images/siteimages/cars/outlander-phev/my25/gallery/interior/2024-2025-mitsubishi-outlander-phev-drive-mode-selector.jpg?width=140&auto=webp',
+                        'https://www.mitsubishi-motors.com.au/vehicles/outlander/_jcr_content/article/par/contentblock_1136036_2070446673/par/contentblock_1373066_1418411294/par/image.coreimg.85.992.jpeg/1749192557740/25my-ou-lhd-mv-exterior-a-wheel-1200x1200px.jpeg'
+                    ],
+                    verified: true,
+                    sellerId: 0,
+                    status: 'approved',
+                    features: ['PHEV', 'Drive Modes', 'Infotainment']
+                },
+                {
+                    id: 212,
+                    make: 'Lexus',
+                    model: 'GX460',
+                    year: 2026,
+                    price: 9500000,
+                    mileage: 5000,
+                    transmission: 'automatic',
+                    fuel: 'petrol',
+                    color: 'Eminent White Pearl',
+                    condition: 'new',
+                    description: 'Luxury 4x4 SUV with robust capability and premium comfort.',
+                    images: [
+                        'https://lexus-cms-media.s3.us-east-2.amazonaws.com/wp-content/uploads/2025/10/2026_Lexus_GX_Luxury_EminentWhitePearl_29-1000x600.jpg',
+                        'https://lexus-cms-media.s3.us-east-2.amazonaws.com/wp-content/uploads/2025/10/2026_Lexus_GX_Luxury_EminentWhitePearl_33-1000x600.jpg',
+                        'https://lexus-cms-media.s3.us-east-2.amazonaws.com/wp-content/uploads/2025/10/2026_Lexus_GX_Luxury_EminentWhitePearl_36-1000x600.jpg'
+                    ],
+                    verified: true,
+                    sellerId: 0,
+                    status: 'approved',
+                    features: ['4x4 Capability', 'Premium Interior', 'Adaptive Suspension']
+                }
+            ];
+            cars = FRESH_CARS_SEED;
+            cars = cars.filter(c => !deletedCarIds.includes(c.id));
+            localStorage.setItem('encrypted_cars', JSON.stringify(cars));
+        localStorage.setItem('agas_data_version', DATA_VERSION);
+        }
+        
                 {
                     id: 2,
                     make: 'Toyota',
@@ -4832,28 +5319,7 @@
                     price: 21500000,
                     mileage: 3500,
                     transmission: 'automatic',
-                    fuel: 'diesel',
-                    color: 'Pearl White',
-                    condition: 'new',
-                    description: 'Top-of-the-line V8 with all luxury features. KDSS, crawl control, and premium interior. Still under warranty.',
-                    images: [
-                        'https://www.toyotakenya.ke/media/gamme/modeles/images/c1cadbc142f293d065ae3b73f26b2552.png',
-                        'https://www.toyotakenya.ke/media/gamme/modeles/images/899ed375436549772106cd9ab1b0e810.png',
-                        'https://www.toyotakenya.ke/media/gamme/modeles/images/9f66e7616c8526ab180c16e2cfb20ff0.png',
-                        'https://www.toyotakenya.ke/media/gamme/modeles/images/d2cd38d8ceb569111ed404b038555973.png',
-                        'https://www.toyotakenya.ke/media/gamme/modeles/images/377644bfacf70cd0e0b428b19c83e710.png'
-                    ],
-                    verified: true,
-                    sellerId: 1,
-                    status: 'approved',
-                    features: ['V8 Engine', 'KDSS', 'Crawl Control', 'Premium Interior', 'Multi-Terrain Monitor', 'Cooled Seats'],
-                    kycDocuments: {
-                        logbook: 'https://via.placeholder.com/200x120?text=Logbook',
-                        id: 'https://via.placeholder.com/200x120?text=ID+Copy',
-                        insurance: 'https://via.placeholder.com/200x120?text=Insurance',
-                        inspection: 'https://via.placeholder.com/200x120?text=Inspection'
-                    }
-                },
+        
                 {
                     id: 3,
                     make: 'BMW',
@@ -4875,47 +5341,7 @@
                         'https://www.bmwusa.com/content/dam/bmw/marketUS/common/vehicles/2023/my24/7-series/overview/mobile/BMW-MY25-7Series-Overview-Luxury-03-Mobile.jpg.asset.1723842975447.jpg'
                     ],
                     verified: true,
-                    sellerId: 1,
-                    status: 'approved',
-                    features: ['M Sport Package', 'Heads-up Display', 'Premium Package', 'Panoramic Roof', 'Wireless Charging', 'Ambient Lighting'],
-                    kycDocuments: {
-                        logbook: 'https://via.placeholder.com/200x120?text=Logbook',
-                        id: 'https://via.placeholder.com/200x120?text=ID+Copy',
-                        insurance: 'https://via.placeholder.com/200x120?text=Insurance',
-                        inspection: 'https://via.placeholder.com/200x120?text=Inspection'
-                    }
-                },
-                {
-                    id: 4,
-                    make: 'Range Rover',
-                    model: 'Autobiography',
-                    year: 2023,
-                    price: 28500000,
-                    mileage: 7500,
-                    transmission: 'automatic',
-                    fuel: 'diesel',
-                    color: 'Santorini Black',
-                    condition: 'new',
-                    description: 'Top specification Autobiography model with executive seating, advanced terrain response, and premium audio system.',
-                    images: [
-                        'https://jlr.scene7.com/is/image/jlr/L460_22MY_195_GLHD_AUTOBIOGRAPHY_SWB_DX_2560x1440?wid=740&fit=stretch%2C1',
-                        'https://jlr.scene7.com/is/image/jlr/L460_22MY_120_GLHD?wid=740&fit=stretch%2C1',
-                        'https://jlr.scene7.com/is/image/jlr/L46025GL_303103153_011?wid=740&fit=stretch%2C1',
-                        'https://jlr.scene7.com/is/image/jlr/L46024GL_303101569_007?wid=740&fit=stretch%2C1',
-                        'https://jlr.scene7.com/is/image/jlr/L460_22MY_054_GLHD_DX?wid=740&fit=stretch%2C1',
-                        'https://jlr.scene7.com/is/image/jlr/L46026GL_303103150_049?wid=420&fit=stretch%2C1'
-                    ],
-                    verified: true,
-                    sellerId: 1,
-                    status: 'approved',
-                    features: ['Executive Seats', 'Terrain Response', 'Meridian Sound', 'Air Suspension', 'Massage Seats', 'Rear Entertainment'],
-                    kycDocuments: {
-                        logbook: 'https://via.placeholder.com/200x120?text=Logbook',
-                        id: 'https://via.placeholder.com/200x120?text=ID+Copy',
-                        insurance: 'https://via.placeholder.com/200x120?text=Insurance',
-                        inspection: 'https://via.placeholder.com/200x120?text=Inspection'
-                    }
-                },
+        
                 {
                     id: 5,
                     make: 'BMW',
