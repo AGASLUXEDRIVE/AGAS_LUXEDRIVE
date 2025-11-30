@@ -4759,8 +4759,8 @@
         };
 
         // Enhanced sample data with competitive pricing and correct images
-        const DATA_VERSION = '2025-11-30-car-seed-011';
-        const RENTAL_DATA_VERSION = '2025-11-27-rental-seed-001';
+        const DATA_VERSION = '2025-11-30-car-seed-012';
+        const RENTAL_DATA_VERSION = '2025-11-30-rental-seed-002';
         const storedVersion = localStorage.getItem('agas_data_version');
         if (cars.length === 0 || storedVersion !== DATA_VERSION) {
             cars = [
@@ -8263,7 +8263,7 @@
 
         function changeMainImage(src) {
             const img = document.getElementById('car-detail-main-image');
-            if (img) { img.src = src; img.setAttribute('data-original-src', src); img.removeAttribute('data-proxy'); }
+            if (img) { img.src = 'https://images.weserv.nl/?url=' + encodeURIComponent(src); img.setAttribute('data-original-src', src); img.setAttribute('data-proxy','1'); }
         }
 
         const imageFallbackPlaceholder = 'https://via.placeholder.com/600x360?text=Image+Unavailable';
@@ -8305,12 +8305,12 @@
 
         function changeRentalMainImage(rentalId, src) {
             const img = document.getElementById('rental-main-image-' + rentalId);
-            if (img) { img.src = src; img.setAttribute('data-original-src', src); img.removeAttribute('data-proxy'); }
+            if (img) { img.src = 'https://images.weserv.nl/?url=' + encodeURIComponent(src); img.setAttribute('data-original-src', src); img.setAttribute('data-proxy','1'); }
         }
 
         function changeRentalDetailMainImage(src) {
             const img = document.getElementById('rental-detail-main-image');
-            if (img) { img.src = src; img.setAttribute('data-original-src', src); img.removeAttribute('data-proxy'); }
+            if (img) { img.src = 'https://images.weserv.nl/?url=' + encodeURIComponent(src); img.setAttribute('data-original-src', src); img.setAttribute('data-proxy','1'); }
         }
 
         function showRentalDetailModal(rentalId) {
