@@ -6968,7 +6968,54 @@
             });
             localStorage.setItem('encrypted_cars', JSON.stringify(cars));
         }
-        window.addEventListener('load', () => { normalizeAllImages(); applyCompetitivePricing(); try { loadCarListings(); } catch(e){} try { loadRentalFleet(); } catch(e){} });
+        function pruneInvalidCars() {
+            const bad = new Set(['source.unsplash.com','images.unsplash.com','via.placeholder.com']);
+            cars = cars.filter(c => {
+                const imgs = Array.isArray(c.images) ? c.images : [];
+                if (!imgs.length) return false;
+                for (const u of imgs) {
+                    try {
+                        const h = new URL(u).hostname;
+                        if (!bad.has(h)) return true;
+                    } catch (_) {}
+                }
+                return false;
+            });
+            localStorage.setItem('encrypted_cars', JSON.stringify(cars));
+        }
+        function reorderCarImages() {
+            const bad = new Set(['source.unsplash.com','images.unsplash.com','via.placeholder.com']);
+            cars = cars.map(c => {
+                const imgs = Array.isArray(c.images) ? c.images : [];
+                const good = [];
+                const rest = [];
+                for (const u of imgs) {
+                    try {
+                        const h = new URL(u).hostname;
+                        if (bad.has(h)) { rest.push(u); } else { good.push(u); }
+                    } catch (_) { good.push(u); }
+                }
+                return Object.assign({}, c, { images: good.concat(rest) });
+            });
+            localStorage.setItem('encrypted_cars', JSON.stringify(cars));
+        }
+        function reorderRentalImages() {
+            rentalFleet = rentalFleet.map(r => {
+                const imgs = Array.isArray(r.images) ? r.images : (r.image ? [r.image] : []);
+                const good = [];
+                const rest = [];
+                for (const u of imgs) {
+                    try {
+                        const h = new URL(u).hostname;
+                        if (h === 'source.unsplash.com' || h === 'images.unsplash.com' || h === 'via.placeholder.com') { rest.push(u); } else { good.push(u); }
+                    } catch (_) { good.push(u); }
+                }
+                const merged = good.concat(rest);
+                return Object.assign({}, r, { images: merged, image: merged[0] || r.image || '' });
+            });
+            localStorage.setItem('encrypted_rentalFleet', JSON.stringify(rentalFleet));
+        }
+        window.addEventListener('load', () => { normalizeAllImages(); pruneInvalidCars(); reorderCarImages(); reorderRentalImages(); applyCompetitivePricing(); try { loadCarListings(); } catch(e){} try { loadRentalFleet(); } catch(e){} });
 
         async function diagnoseLeadPipeline() {
             const testContact = { name: 'Diagnostics', email: 'diag@example.com', subject: 'Lead Diagnostics', message: `Site: ${location.hostname}` };
@@ -8561,7 +8608,7 @@
                     <img id="rental-main-image-${rental.id}" src="${'https://images.weserv.nl/?url=' + encodeURIComponent(Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || ''))}" data-original-src="${Array.isArray(rental.images) && rental.images.length ? rental.images[0] : (rental.image || '')}" data-proxy="1" data-img-index="0" alt="${rental.make} ${rental.model}" class="rental-image" loading="lazy" referrerpolicy="no-referrer" onerror="handleRentalImageError(this, ${rental.id})">
                     <div class="car-detail-thumbnails">
                         ${Array.isArray(rental.images) ? rental.images.map((img, index) => `
-                            <img src="${img}" data-original-src="${img}" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" referrerpolicy="no-referrer" onclick="changeRentalMainImage(${rental.id}, '${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
+                            <img src="${'https://images.weserv.nl/?url=' + encodeURIComponent(img)}" data-original-src="${img}" data-proxy="1" alt="Thumbnail ${index + 1}" class="car-detail-thumbnail" loading="lazy" referrerpolicy="no-referrer" onclick="changeRentalMainImage(${rental.id}, '${img}')" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image'">
                         `).join('') : ''}
                     </div>
                     <div class="rental-details">
