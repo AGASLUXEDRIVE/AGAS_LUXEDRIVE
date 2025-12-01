@@ -7551,6 +7551,7 @@
             loadRentalFleet();
             setupEventListeners();
             updateUserInterface();
+            if(typeof window.ALD_CARS_READ_URL==='string' && window.ALD_CARS_READ_URL){ refreshCarsFromRemote(); window.addEventListener('focus', refreshCarsFromRemote); var ms=Number(window.ALD_SYNC_INTERVAL_MS)||60000; setInterval(refreshCarsFromRemote, ms); }
             const viewAll = document.getElementById('view-all-link');
             if (viewAll) {
                 const count = cars.filter(c => c.status === 'approved').length;
@@ -9983,6 +9984,9 @@
             }
         }
 
+        async function syncCarDeletion(carId){ try{ const u=typeof window.ALD_CARS_WRITE_URL==='string'?window.ALD_CARS_WRITE_URL:''; if(!u) return; await fetch(u,{ method:'POST', headers:{ 'Content-Type':'application/json' }, body:JSON.stringify({ action:'delete', id:carId }) }); }catch(e){} }
+        async function refreshCarsFromRemote(){ try{ const u=typeof window.ALD_CARS_READ_URL==='string'?window.ALD_CARS_READ_URL:''; if(!u) return; const res=await fetch(u+(u.indexOf('?')>-1?'&':'?')+'ts='+Date.now(),{ cache:'no-store' }); if(!res.ok) return; const data=await res.json(); if(Array.isArray(data)){ cars=data; localStorage.setItem('encrypted_cars', JSON.stringify(cars)); loadCarListings(); loadVerifiedListings(); loadPendingListings(); if(currentUser){ loadSellerListings(); } } }catch(e){} }
+
         function rejectCar(carId) {
             const carIndex = cars.findIndex(c => c.id === carId);
             if (carIndex !== -1) {
@@ -9990,6 +9994,7 @@
                 localStorage.setItem('encrypted_cars', JSON.stringify(cars));
                 loadPendingListings();
                 showNotification('Car listing rejected and removed.', 'success');
+                syncCarDeletion(carId);
             }
         }
 
@@ -10000,9 +10005,11 @@
                 localStorage.setItem('encrypted_cars', JSON.stringify(cars));
                 loadVerifiedListings();
                 showNotification('Car listing removed successfully.', 'success');
+                syncCarDeletion(carId);
             }
         }
 
+        async function syncRentalDeletion(rentalId){ try{ const u=typeof window.ALD_RENTALS_WRITE_URL==='string'?window.ALD_RENTALS_WRITE_URL:''; if(!u) return; await fetch(u,{ method:'POST', headers:{ 'Content-Type':'application/json' }, body:JSON.stringify({ action:'delete', id:rentalId }) }); }catch(e){} }
         function deleteRental(rentalId) {
             const rentalIndex = rentalFleet.findIndex(r => r.id === rentalId);
             if (rentalIndex !== -1) {
@@ -10010,6 +10017,7 @@
                 localStorage.setItem('encrypted_rentalFleet', JSON.stringify(rentalFleet));
                 loadRentalManagement();
                 showNotification('Rental listing deleted successfully.', 'success');
+                syncRentalDeletion(rentalId);
             }
         }
 
@@ -10020,6 +10028,7 @@
                 localStorage.setItem('encrypted_cars', JSON.stringify(cars));
                 loadSellerListings();
                 showNotification('Car listing deleted successfully.', 'success');
+                syncCarDeletion(carId);
             }
         }
 
