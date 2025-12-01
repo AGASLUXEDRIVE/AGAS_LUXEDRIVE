@@ -7549,6 +7549,9 @@
 
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
+            window.ALD_CARS_READ_URL = window.ALD_CARS_READ_URL || '/api/cars/list';
+            window.ALD_CARS_WRITE_URL = window.ALD_CARS_WRITE_URL || '/api/cars/delete';
+            window.ALD_SYNC_INTERVAL_MS = window.ALD_SYNC_INTERVAL_MS || 15000;
             loadCarListings();
             loadRentalFleet();
             setupEventListeners();
@@ -8452,7 +8455,7 @@
                 }
             };
             
-            if(window.__ALD_FIREBASE__){ (async function(){ const imgs = imagesInput && imagesInput.files ? await window.uploadFilesToStorage(imagesInput.files, 'cars', newCar.id) : []; const docUrls = docs && docs.length ? await window.uploadFilesToStorage(docs, 'cars-docs', newCar.id) : []; if(imgs && imgs.length) newCar.images = imgs; if(docUrls && docUrls.length){ logbookUrl = docUrls[0]||logbookUrl; idUrl = docUrls[1]||idUrl; insuranceUrl = docUrls[2]||insuranceUrl; inspectionUrl = docUrls[3]||inspectionUrl; newCar.kycDocuments = { logbook: logbookUrl, id: idUrl, insurance: insuranceUrl, inspection: inspectionUrl }; } await window.addCarRemote(newCar); })(); } else if(window.ALD_USE_VERCEL){ (async function(){ const imgs = imagesInput && imagesInput.files ? await window.uploadImagesToVercelBlob(imagesInput.files, newCar.id) : []; if(imgs && imgs.length) newCar.images = imgs; const docMap = docs && docs.length ? await window.uploadDocumentsToSupabase(docs, newCar.id) : {}; if(docMap && Object.keys(docMap).length){ logbookUrl = docMap.logbook||logbookUrl; idUrl = docMap.id||idUrl; insuranceUrl = docMap.insurance||insuranceUrl; inspectionUrl = docMap.inspection||inspectionUrl; newCar.kycDocuments = { logbook: logbookUrl, id: idUrl, insurance: insuranceUrl, inspection: inspectionUrl }; } await window.createCarViaApi(newCar); })(); }
+            if(window.__ALD_FIREBASE__){ (async function(){ const imgs = imagesInput && imagesInput.files ? await window.uploadFilesToStorage(imagesInput.files, 'cars', newCar.id) : []; const docUrls = docs && docs.length ? await window.uploadFilesToStorage(docs, 'cars-docs', newCar.id) : []; if(imgs && imgs.length) newCar.images = imgs; if(docUrls && docUrls.length){ logbookUrl = docUrls[0]||logbookUrl; idUrl = docUrls[1]||idUrl; insuranceUrl = docUrls[2]||insuranceUrl; inspectionUrl = docUrls[3]||inspectionUrl; newCar.kycDocuments = { logbook: logbookUrl, id: idUrl, insurance: insuranceUrl, inspection: inspectionUrl }; } await window.addCarRemote(newCar); refreshCarsFromRemote(); })(); } else if(window.ALD_USE_VERCEL){ (async function(){ const imgs = imagesInput && imagesInput.files ? await window.uploadImagesToVercelBlob(imagesInput.files, newCar.id) : []; if(imgs && imgs.length) newCar.images = imgs; const docMap = docs && docs.length ? await window.uploadDocumentsToSupabase(docs, newCar.id) : {}; if(docMap && Object.keys(docMap).length){ logbookUrl = docMap.logbook||logbookUrl; idUrl = docMap.id||idUrl; insuranceUrl = docMap.insurance||insuranceUrl; inspectionUrl = docMap.inspection||inspectionUrl; newCar.kycDocuments = { logbook: logbookUrl, id: idUrl, insurance: insuranceUrl, inspection: inspectionUrl }; } await window.createCarViaApi(newCar); refreshCarsFromRemote(); })(); }
             cars.push(newCar);
             localStorage.setItem('encrypted_cars', JSON.stringify(cars));
             try { applyCompetitivePricing(); } catch(e){}
@@ -8561,7 +8564,7 @@
                 }
             };
             
-            if(window.__ALD_FIREBASE__){ (async function(){ const files = adminImagesInput && adminImagesInput.files ? adminImagesInput.files : []; const urls = files.length ? await window.uploadFilesToStorage(files, 'cars', newCar.id) : []; if(urls && urls.length) newCar.images = urls; await window.addCarRemote(newCar); })(); }
+            if(window.__ALD_FIREBASE__){ (async function(){ const files = adminImagesInput && adminImagesInput.files ? adminImagesInput.files : []; const urls = files.length ? await window.uploadFilesToStorage(files, 'cars', newCar.id) : []; if(urls && urls.length) newCar.images = urls; await window.addCarRemote(newCar); refreshCarsFromRemote(); })(); } else if(window.ALD_USE_VERCEL){ (async function(){ const files = adminImagesInput && adminImagesInput.files ? Array.from(adminImagesInput.files) : []; const urls = files.length ? await window.uploadImagesToVercelBlob(files, newCar.id) : []; if(urls && urls.length) newCar.images = urls; await window.createCarViaApi(newCar); refreshCarsFromRemote(); })(); }
             cars.push(newCar);
             localStorage.setItem('encrypted_cars', JSON.stringify(cars));
             
@@ -10361,5 +10364,26 @@
       window.createCarViaApi = async function(car){ try{ await fetch('/api/cars/create', { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify(car) }); }catch(e){} };
       window.createRentalViaApi = async function(rental){ try{ await fetch('/api/rentals/create', { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify(rental) }); }catch(e){} };
     </script>
-</body>
+    <script type="module">
+      import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.43.4/+esm';
+      const cfg = window.ALD_SUPABASE_CONFIG || {};
+      if(cfg && cfg.url && cfg.anonKey){
+        const supa = createClient(cfg.url, cfg.anonKey);
+        const applyCars = (rows)=>{ cars = rows; localStorage.setItem('encrypted_cars', JSON.stringify(cars)); loadCarListings(); loadVerifiedListings(); loadPendingListings(); if(currentUser){ loadSellerListings(); } };
+        supa.channel('cars_ch')
+          .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'cars' }, (payload)=>{ const c = payload.new; const i = cars.findIndex(x=>String(x.id)===String(c.id)); if(i>-1){ cars[i]=c; } else { cars.push(c); } applyCars(cars); })
+          .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'cars' }, (payload)=>{ const c = payload.new; const i = cars.findIndex(x=>String(x.id)===String(c.id)); if(i>-1){ cars[i]=c; } applyCars(cars); })
+          .on('postgres_changes', { event: 'DELETE', schema: 'public', table: 'cars' }, (payload)=>{ const o = payload.old; const i = cars.findIndex(x=>String(x.id)===String(o.id)); if(i>-1){ cars.splice(i,1); } applyCars(cars); })
+          .subscribe();
+        supa.from('cars').select('*').order('id', { ascending: true }).then(({ data })=>{ if(Array.isArray(data)){ applyCars(data); } });
+        const applyRentals = (rows)=>{ rentalFleet = rows; localStorage.setItem('encrypted_rentalFleet', JSON.stringify(rentalFleet)); loadRentalFleet(); loadRentalManagement(); };
+        supa.channel('rentals_ch')
+          .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'rentals' }, (payload)=>{ const r = payload.new; const i = rentalFleet.findIndex(x=>String(x.id)===String(r.id)); if(i>-1){ rentalFleet[i]=r; } else { rentalFleet.push(r); } applyRentals(rentalFleet); })
+          .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'rentals' }, (payload)=>{ const r = payload.new; const i = rentalFleet.findIndex(x=>String(x.id)===String(r.id)); if(i>-1){ rentalFleet[i]=r; } applyRentals(rentalFleet); })
+          .on('postgres_changes', { event: 'DELETE', schema: 'public', table: 'rentals' }, (payload)=>{ const o = payload.old; const i = rentalFleet.findIndex(x=>String(x.id)===String(o.id)); if(i>-1){ rentalFleet.splice(i,1); } applyRentals(rentalFleet); })
+          .subscribe();
+        supa.from('rentals').select('*').order('id', { ascending: true }).then(({ data })=>{ if(Array.isArray(data)){ applyRentals(data); } });
+      }
+    </script>
+  </body>
 </html>
