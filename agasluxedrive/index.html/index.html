@@ -6804,7 +6804,9 @@
                     const ageFactor = 1 - Math.min(0.20, age * 0.03);
                     const daily = Math.max(0, Math.round(baseDaily * ageFactor * (1 + typeAdj)));
                     r.dailyRate = daily || baseDaily;
-                    r.weeklyRate = Math.max(0, Math.round((r.dailyRate || baseDaily) * 6));
+                    const competitiveWeekly = Math.round((r.dailyRate || baseDaily) * 5);
+                    const providedWeekly = Number(r.weeklyRate || 0);
+                    r.weeklyRate = providedWeekly > 0 ? Math.min(providedWeekly, competitiveWeekly) : competitiveWeekly;
                     return r;
                 });
                 localStorage.setItem('encrypted_rentalFleet', JSON.stringify(rentalFleet));
@@ -7201,16 +7203,16 @@
                 return;
             }
             
-            const isAdmin = username === adminAccount.username && password === adminAccount.password;
-            const staff = staffAccounts.find(acc => acc.username === username && acc.password === password);
-            if (isAdmin) {
-                closeModal('admin-login-modal');
-                completeAdminLogin();
-            } else if (staff) {
-                closeModal('admin-login-modal');
-                completeStaffLogin(staff);
-            } else {
-                showNotification(`Invalid credentials. ${SECURITY_CONFIG.maxLoginAttempts - loginAttempts[attemptKey]} attempts remaining.`, 'error');
+            try {
+                const res = await fetch('/api/admin/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username, password }) });
+                if (res.ok) {
+                    closeModal('admin-login-modal');
+                    completeAdminLogin();
+                } else {
+                    showNotification(`Invalid credentials. ${SECURITY_CONFIG.maxLoginAttempts - loginAttempts[attemptKey]} attempts remaining.`, 'error');
+                }
+            } catch (_) {
+                showNotification('Login service unavailable. Please try again.', 'error');
             }
         }
 
@@ -8453,6 +8455,8 @@
             if(window.__ALD_FIREBASE__){ (async function(){ const imgs = imagesInput && imagesInput.files ? await window.uploadFilesToStorage(imagesInput.files, 'cars', newCar.id) : []; const docUrls = docs && docs.length ? await window.uploadFilesToStorage(docs, 'cars-docs', newCar.id) : []; if(imgs && imgs.length) newCar.images = imgs; if(docUrls && docUrls.length){ logbookUrl = docUrls[0]||logbookUrl; idUrl = docUrls[1]||idUrl; insuranceUrl = docUrls[2]||insuranceUrl; inspectionUrl = docUrls[3]||inspectionUrl; newCar.kycDocuments = { logbook: logbookUrl, id: idUrl, insurance: insuranceUrl, inspection: inspectionUrl }; } await window.addCarRemote(newCar); })(); } else if(window.ALD_USE_VERCEL){ (async function(){ const imgs = imagesInput && imagesInput.files ? await window.uploadImagesToVercelBlob(imagesInput.files, newCar.id) : []; if(imgs && imgs.length) newCar.images = imgs; const docMap = docs && docs.length ? await window.uploadDocumentsToSupabase(docs, newCar.id) : {}; if(docMap && Object.keys(docMap).length){ logbookUrl = docMap.logbook||logbookUrl; idUrl = docMap.id||idUrl; insuranceUrl = docMap.insurance||insuranceUrl; inspectionUrl = docMap.inspection||inspectionUrl; newCar.kycDocuments = { logbook: logbookUrl, id: idUrl, insurance: insuranceUrl, inspection: inspectionUrl }; } await window.createCarViaApi(newCar); })(); }
             cars.push(newCar);
             localStorage.setItem('encrypted_cars', JSON.stringify(cars));
+            try { applyCompetitivePricing(); } catch(e){}
+            try { applyCompetitivePricing(); } catch(e){}
             
             // Reset form
             document.getElementById('add-car-form').reset();
@@ -8503,6 +8507,8 @@
             if(window.__ALD_FIREBASE__){ (async function(){ const input = document.getElementById('rental-image'); const f = input && input.files && input.files[0] ? [input.files[0]] : []; const urls = f.length ? await window.uploadFilesToStorage(f, 'rentals', newRental.id) : []; if(urls && urls.length) newRental.images = urls; await window.addRentalRemote(newRental); })(); } else if(window.ALD_USE_VERCEL){ (async function(){ const input = document.getElementById('rental-image'); const f = input && input.files && input.files[0] ? [input.files[0]] : []; const urls = f.length ? await window.uploadImagesToVercelBlob(f, newRental.id) : []; if(urls && urls.length) newRental.images = urls; await window.createRentalViaApi(newRental); })(); }
             rentalFleet.push(newRental);
             localStorage.setItem('encrypted_rentalFleet', JSON.stringify(rentalFleet));
+            try { applyCompetitivePricing(); } catch(e){}
+            try { applyCompetitivePricing(); } catch(e){}
             
             // Reset form
             document.getElementById('add-rental-form').reset();
@@ -9259,6 +9265,29 @@
                 const seller = users.find(u => u.id === car.sellerId);
                 const listing = document.createElement('div');
                 listing.className = 'listing-item';
+                const isAdminUser = currentUser && (currentUser.role === 'admin' || currentUser.role === 'staff');
+                const kycBlock = isAdminUser ? `
+                        <div class="kyc-documents">
+                            <div class="kyc-doc">
+                                <h5>Logbook</h5>
+                                <button class="btn" onclick="openAdminDoc(${car.id}, 'logbook')">View</button>
+                            </div>
+                            <div class="kyc-doc">
+                                <h5>ID Copy</h5>
+                                <button class="btn" onclick="openAdminDoc(${car.id}, 'id')">View</button>
+                            </div>
+                            <div class="kyc-doc">
+                                <h5>Insurance</h5>
+                                <button class="btn" onclick="openAdminDoc(${car.id}, 'insurance')">View</button>
+                            </div>
+                            <div class="kyc-doc">
+                                <h5>Inspection</h5>
+                                <button class="btn" onclick="openAdminDoc(${car.id}, 'inspection')">View</button>
+                            </div>
+                        </div>` : `
+                        <div class="kyc-documents">
+                            <p>Confidential documents are hidden. Admin access required.</p>
+                        </div>`;
                 listing.innerHTML = `
                     <div class="listing-info">
                         <h4>${car.make} ${car.model} ${car.year} - ${formatPrice(car.price)}</h4>
@@ -9267,24 +9296,7 @@
                         <p><strong>Condition:</strong> ${car.condition}</p>
                         <p><strong>VIN:</strong> ${car.vin}</p>
                         <p>${car.description}</p>
-                        <div class="kyc-documents">
-                            <div class="kyc-doc">
-                                <h5>Logbook</h5>
-                                <img src="${car.kycDocuments.logbook}" alt="Logbook">
-                            </div>
-                            <div class="kyc-doc">
-                                <h5>ID Copy</h5>
-                                <img src="${car.kycDocuments.id}" alt="ID Copy">
-                            </div>
-                            <div class="kyc-doc">
-                                <h5>Insurance</h5>
-                                <img src="${car.kycDocuments.insurance}" alt="Insurance">
-                            </div>
-                            <div class="kyc-doc">
-                                <h5>Inspection</h5>
-                                <img src="${car.kycDocuments.inspection}" alt="Inspection">
-                            </div>
-                        </div>
+                        ${kycBlock}
                     </div>
                     <div class="listing-actions">
                         <button class="btn" onclick="approveCar(${car.id})">Approve</button>
@@ -9315,6 +9327,8 @@
                 const seller = users.find(u => u.id === car.sellerId);
                 const listing = document.createElement('div');
                 listing.className = 'listing-item';
+                const isAdminUser = currentUser && (currentUser.role === 'admin' || currentUser.role === 'staff');
+                const adminDocsBtn = isAdminUser ? `<button class="btn" onclick="openAdminDoc(${car.id}, 'logbook')">View Docs</button>` : '';
                 listing.innerHTML = `
                     <div class="listing-info">
                         <h4>${car.make} ${car.model} ${car.year} - ${formatPrice(car.price)}</h4>
@@ -9324,6 +9338,7 @@
                     </div>
                     <div class="listing-actions">
                         <button class="btn btn-danger" onclick="removeCar(${car.id})">Remove</button>
+                        ${adminDocsBtn}
                     </div>
                 `;
                 container.appendChild(listing);
@@ -9969,6 +9984,7 @@
             clearTimeout(sessionTimer);
             const timerDisplay = document.getElementById('session-timer');
             if (timerDisplay) timerDisplay.style.display = 'none';
+            try{ fetch('/api/admin/auth/logout', { method: 'POST' }); }catch(_){ }
             updateUserInterface();
             showSection('home');
             showNotification('You have been logged out successfully.', 'info');
@@ -10012,6 +10028,15 @@
                 if(typeof window.deleteCarRemote==='function'){ window.deleteCarRemote(carId); }
                 syncCarDeletion(carId);
             }
+        }
+
+        function openAdminDoc(carId, docKey) {
+            if (!(currentUser && (currentUser.role === 'admin' || currentUser.role === 'staff'))) {
+                showNotification('Admin access required to view confidential documents.', 'error');
+                return;
+            }
+            const url = '/api/admin/docs/view?carId=' + encodeURIComponent(carId) + '&docKey=' + encodeURIComponent(docKey) + '&expiresIn=600';
+            window.open(url, '_blank', 'noopener');
         }
 
         async function syncRentalDeletion(rentalId){ try{ const u=typeof window.ALD_RENTALS_WRITE_URL==='string'?window.ALD_RENTALS_WRITE_URL:''; if(!u) return; await fetch(u,{ method:'POST', headers:{ 'Content-Type':'application/json' }, body:JSON.stringify({ action:'delete', id:rentalId }) }); }catch(e){} }
