@@ -1,0 +1,10 @@
+{
+  "name": "agasluxedrive",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "dependencies": {
+    "@vercel/blob": "^0.17.0",
+    "@supabase/supabase-js": "^2.46.0"
+  }
+}
